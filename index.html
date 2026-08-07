@@ -148,6 +148,55 @@
             font-weight: 500;
         }
 
+        /* Page switcher — jumps between the three screens */
+        .page-switcher {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .page-switcher select {
+            width: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            background: rgba(59, 130, 246, 0.08);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 6px;
+            color: #f8fafc;
+            font-family: inherit;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            padding: 7px 24px 7px 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-switcher select:hover {
+            border-color: var(--accent-blue);
+            background: rgba(59, 130, 246, 0.16);
+        }
+
+        .page-switcher select:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+        }
+
+        .page-switcher option {
+            background: #0b1121;
+            color: #f8fafc;
+        }
+
+        .page-switcher::after {
+            content: '\25BE';
+            position: absolute;
+            right: 9px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--accent-cyan);
+            font-size: 10px;
+            pointer-events: none;
+        }
+
         .hero-headline {
             font-size: 18px;
             font-weight: 700;
@@ -1970,6 +2019,15 @@
                 </div>
                 <div class="hero-tagline" contenteditable="true">INTELLIGENT MANUFACTURING<br>COLLABORATION PLATFORM</div>
 
+                <!-- Page switcher: all three screens reachable from one dropdown -->
+                <div class="page-switcher">
+                    <select id="pageSwitcher" aria-label="Switch page">
+                        <option value="index.html">Platform Overview</option>
+                        <option value="bajaj.html">Bajaj Auto Dashboard</option>
+                        <option value="supplylink.html">REQ-250801 Workspace</option>
+                    </select>
+                </div>
+
                 <h1 class="hero-headline" contenteditable="true">One Platform. All Parties.<br>Every Process.</h1>
 
                 <p class="hero-description" contenteditable="true">SupplyLink 360 connects OEMs, Suppliers and Sub-Suppliers on a unified AI-powered platform to collaborate, share, track and deliver — smarter, faster and transparently.</p>
@@ -3706,6 +3764,21 @@
                 if (estMenu) estMenu.classList.remove('show');
             }
         });
+
+        // Page switcher — mark the page we're on, then navigate on change
+        (function initPageSwitcher() {
+            const switcher = document.getElementById('pageSwitcher');
+            if (!switcher) return;
+
+            const current = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+            Array.from(switcher.options).forEach(opt => {
+                if (opt.value.toLowerCase() === current) switcher.value = opt.value;
+            });
+
+            switcher.addEventListener('change', function () {
+                if (this.value) window.location.href = this.value;
+            });
+        })();
     </script>
 
 </body>
