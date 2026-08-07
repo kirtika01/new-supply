@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -629,7 +629,8 @@
       margin-top: -6px;
     }
 
-    .pull-teams-card, .nda-card {
+    .pull-teams-card,
+    .nda-card {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -647,29 +648,32 @@
 
     .nda-card:hover {
       transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
     }
 
-    .pull-teams-card .pull-text, .nda-card .nda-text {
+    .pull-teams-card .pull-text,
+    .nda-card .nda-text {
       font-size: 12px;
     }
 
-    .pull-teams-card .pull-text strong, .nda-card .nda-text strong {
+    .pull-teams-card .pull-text strong,
+    .nda-card .nda-text strong {
       font-weight: 600;
       display: block;
       margin-bottom: 2px;
     }
 
-    .pull-teams-card .pull-text span, .nda-card .nda-text span {
+    .pull-teams-card .pull-text span,
+    .nda-card .nda-text span {
       color: #64748b;
       font-size: 11px;
     }
-    
+
     .nda-card .avatars {
       display: flex;
       align-items: center;
     }
-    
+
     .nda-card .avatars .av {
       width: 24px;
       height: 24px;
@@ -683,7 +687,7 @@
       color: #fff;
       margin-left: -8px;
     }
-    
+
     .nda-card .avatars .av:first-child {
       margin-left: 0;
     }
@@ -901,112 +905,555 @@
     }
 
     /* Panel View Dropdown */
-    .panel-view-selector { padding: 10px 14px 6px; }
+    .panel-view-selector {
+      padding: 10px 14px 6px;
+    }
+
     .panel-view-selector select {
-      width: 100%; padding: 7px 10px; border: 1px solid #e2e8f0; border-radius: 8px;
-      font-size: 12px; font-weight: 600; color: #0f172a; background: #f8fafc;
-      outline: none; cursor: pointer; font-family: 'Inter', sans-serif;
+      width: 100%;
+      padding: 7px 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+      background: #f8fafc;
+      outline: none;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
       appearance: auto;
     }
-    .panel-view-selector select:focus { border-color: #93c5fd; }
-    .panel-view { display: none; flex-direction: column; flex: 1; overflow: hidden; }
-    .panel-view.active { display: flex; }
-    .org-chat-list { flex: 1; overflow-y: auto; }
+
+    .panel-view-selector select:focus {
+      border-color: #93c5fd;
+    }
+
+    .panel-view {
+      display: none;
+      flex-direction: column;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .panel-view.active {
+      display: flex;
+    }
+
+    .org-chat-list {
+      flex: 1;
+      overflow-y: auto;
+    }
 
     /* Individual Chats Styles */
-    .ic-header-icons { display: flex; align-items: center; gap: 8px; padding: 4px 14px 8px; }
+    .ic-header-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 14px 8px;
+    }
+
     .ic-header-icons .h-icon {
-      width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center;
-      justify-content: center; color: #64748b; cursor: pointer; transition: all 0.15s;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.15s;
     }
-    .ic-header-icons .h-icon:hover { background: #f1f5f9; color: #2563eb; }
-    .filter-tabs { display: flex; gap: 6px; padding: 0 14px 10px; }
+
+    .ic-header-icons .h-icon:hover {
+      background: #f1f5f9;
+      color: #2563eb;
+    }
+
+    .filter-tabs {
+      display: flex;
+      gap: 6px;
+      padding: 0 14px 10px;
+    }
+
     .filter-tab {
-      padding: 5px 14px; border-radius: 18px; font-size: 11px; font-weight: 600;
-      cursor: pointer; transition: all 0.2s; border: 1px solid #e2e8f0;
-      color: #64748b; background: #fff;
+      padding: 5px 14px;
+      border-radius: 18px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 1px solid #e2e8f0;
+      color: #64748b;
+      background: #fff;
     }
-    .filter-tab:hover { border-color: #93c5fd; color: #2563eb; }
-    .filter-tab.active { background: #2563eb; color: #fff; border-color: #2563eb; }
-    .indiv-chat-list { flex: 1; overflow-y: auto; }
+
+    .filter-tab:hover {
+      border-color: #93c5fd;
+      color: #2563eb;
+    }
+
+    .filter-tab.active {
+      background: #2563eb;
+      color: #fff;
+      border-color: #2563eb;
+    }
+
+    .indiv-chat-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
     .indiv-chat-item {
-      display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px;
-      cursor: pointer; transition: background 0.15s; border-bottom: 1px solid #f1f5f9;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 12px 14px;
+      cursor: pointer;
+      transition: background 0.15s;
+      border-bottom: 1px solid #f1f5f9;
       position: relative;
     }
-    .indiv-chat-item:hover { background: #f8fafc; }
-    .indiv-chat-item.active { background: #eff6ff; }
+
+    .indiv-chat-item:hover {
+      background: #f8fafc;
+    }
+
+    .indiv-chat-item.active {
+      background: #eff6ff;
+    }
+
     .indiv-chat-item .ic-avatar {
-      width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center;
-      justify-content: center; font-weight: 700; font-size: 11px; color: #fff;
-      flex-shrink: 0; margin-top: 2px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 11px;
+      color: #fff;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
-    .indiv-chat-item .ic-body { flex: 1; min-width: 0; }
-    .indiv-chat-item .ic-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1px; min-width: 0; }
-    .indiv-chat-item .ic-email { flex: 1; font-size: 12px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-right: 8px; }
-    .indiv-chat-item .ic-time { font-size: 10px; color: #94a3b8; white-space: nowrap; flex-shrink: 0; margin-left: 8px; }
-    .indiv-chat-item .ic-role { font-size: 10px; color: #94a3b8; margin-bottom: 2px; }
-    .indiv-chat-item .ic-preview { font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    .indiv-chat-item .ic-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .indiv-chat-item .ic-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 1px;
+      min-width: 0;
+    }
+
+    .indiv-chat-item .ic-email {
+      flex: 1;
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      margin-right: 8px;
+    }
+
+    .indiv-chat-item .ic-time {
+      font-size: 10px;
+      color: #94a3b8;
+      white-space: nowrap;
+      flex-shrink: 0;
+      margin-left: 8px;
+    }
+
+    .indiv-chat-item .ic-role {
+      font-size: 10px;
+      color: #94a3b8;
+      margin-bottom: 2px;
+    }
+
+    .indiv-chat-item .ic-preview {
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .indiv-chat-item .ic-badge {
-      position: absolute; right: 14px; bottom: 12px; min-width: 18px; height: 18px;
-      border-radius: 50%; background: #2563eb; color: #fff; font-size: 10px;
-      font-weight: 700; display: flex; align-items: center; justify-content: center;
+      position: absolute;
+      right: 14px;
+      bottom: 12px;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .see-all-link { text-align: center; padding: 12px 14px; border-top: 1px solid #e2e8f0; }
-    .see-all-link a { font-size: 12px; color: #2563eb; font-weight: 600; display: flex; align-items: center; justify-content: center; gap: 4px; cursor: pointer; }
+
+    .see-all-link {
+      text-align: center;
+      padding: 12px 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .see-all-link a {
+      font-size: 12px;
+      color: #2563eb;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      cursor: pointer;
+    }
 
     /* Tab Content Panels */
-    .tab-content-panel { display: none; flex: 1; overflow: hidden; }
-    .tab-content-panel.active { display: flex; }
-    .tab-panel-inner { flex: 1; overflow-y: auto; padding: 24px; background: #f8fafc; }
-    .tab-panel-inner h2 { font-size: 18px; font-weight: 700; color: #0f172a; margin-bottom: 16px; }
-    .tab-panel-inner h3 { font-size: 15px; font-weight: 600; color: #1e293b; margin: 18px 0 10px; }
-    .panel-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 18px; margin-bottom: 16px; }
-    .panel-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
-    .panel-card-header h3 { margin: 0; font-size: 14px; }
-    .panel-table { width: 100%; border-collapse: collapse; font-size: 12px; }
-    .panel-table th { background: #f1f5f9; padding: 10px 12px; text-align: left; font-weight: 600; color: #475569; border-bottom: 2px solid #e2e8f0; white-space: nowrap; }
-    .panel-table td { padding: 10px 12px; border-bottom: 1px solid #f1f5f9; color: #334155; }
-    .panel-table tr:hover td { background: #f8fafc; }
-    .panel-table .status { padding: 3px 10px; border-radius: 12px; font-size: 10px; font-weight: 600; white-space: nowrap; }
-    .panel-table .status.approved { background: #dcfce7; color: #166534; }
-    .panel-table .status.pending { background: #fef9c3; color: #854d0e; }
-    .panel-table .status.rejected { background: #fee2e2; color: #991b1b; }
-    .panel-table .status.in-progress { background: #dbeafe; color: #1e40af; }
-    .panel-table .status.completed { background: #dcfce7; color: #166534; }
-    .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 18px; }
-    .stat-card { background: #fff; border: 1px solid #e2e8f0; border-radius: 10px; padding: 16px; text-align: center; }
-    .stat-card .stat-val { font-size: 24px; font-weight: 700; color: #2563eb; }
-    .stat-card .stat-label { font-size: 11px; color: #64748b; margin-top: 4px; }
-    .timeline-item { display: flex; gap: 14px; padding: 14px 0; border-bottom: 1px solid #f1f5f9; position: relative; }
-    .timeline-item .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: #2563eb; margin-top: 5px; flex-shrink: 0; }
-    .timeline-item .tl-content { flex: 1; }
-    .timeline-item .tl-title { font-size: 13px; font-weight: 600; color: #0f172a; }
-    .timeline-item .tl-desc { font-size: 11px; color: #64748b; margin-top: 2px; }
-    .timeline-item .tl-time { font-size: 10px; color: #94a3b8; flex-shrink: 0; }
-    .doc-item { display: flex; align-items: center; gap: 12px; padding: 12px; background: #fff; border: 1px solid #e2e8f0; border-radius: 8px; margin-bottom: 8px; cursor: pointer; transition: all 0.15s; }
-    .doc-item:hover { border-color: #93c5fd; background: #eff6ff; }
-    .doc-item .doc-icon { width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .doc-item .doc-icon.pdf { background: #fee2e2; color: #dc2626; }
-    .doc-item .doc-icon.xlsx { background: #dcfce7; color: #16a34a; }
-    .doc-item .doc-icon.docx { background: #dbeafe; color: #2563eb; }
-    .doc-item .doc-icon.ppt { background: #fef3c7; color: #d97706; }
-    .doc-item .doc-icon i { font-size: 18px; }
-    .doc-item .doc-meta { flex: 1; min-width: 0; }
-    .doc-item .doc-meta .doc-name { font-size: 12px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .doc-item .doc-meta .doc-info { font-size: 10px; color: #94a3b8; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .doc-item .doc-actions button { padding: 5px 12px; border-radius: 6px; font-size: 11px; font-weight: 600; background: #2563eb; color: #fff; cursor: pointer; transition: background 0.2s; }
-    .doc-item .doc-actions button:hover { background: #1d4ed8; }
-    .process-flow { display: flex; align-items: center; gap: 0; justify-content: center; padding: 20px 0; flex-wrap: wrap; }
-    .pf-step { display: flex; flex-direction: column; align-items: center; gap: 6px; }
-    .pf-step .pf-circle { width: 50px; height: 50px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
-    .pf-step .pf-circle.done { background: #dcfce7; color: #16a34a; }
-    .pf-step .pf-circle.active { background: #dbeafe; color: #2563eb; }
-    .pf-step .pf-circle.pending { background: #f1f5f9; color: #94a3b8; }
-    .pf-step .pf-label { font-size: 10px; color: #475569; font-weight: 600; text-align: center; max-width: 80px; }
-    .pf-step .pf-date { font-size: 9px; color: #94a3b8; }
-    .pf-arrow { font-size: 20px; color: #cbd5e1; margin: 0 8px; margin-bottom: 30px; }
-    .chart-placeholder { background: linear-gradient(135deg, #eff6ff, #f0fdf4); border: 1px dashed #93c5fd; border-radius: 10px; height: 200px; display: flex; align-items: center; justify-content: center; color: #64748b; font-size: 14px; margin-bottom: 16px; }
+    .tab-content-panel {
+      display: none;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .tab-content-panel.active {
+      display: flex;
+    }
+
+    .tab-panel-inner {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      background: #f8fafc;
+    }
+
+    .tab-panel-inner h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+    }
+
+    .tab-panel-inner h3 {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1e293b;
+      margin: 18px 0 10px;
+    }
+
+    .panel-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 16px;
+    }
+
+    .panel-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    .panel-card-header h3 {
+      margin: 0;
+      font-size: 14px;
+    }
+
+    .panel-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .panel-table th {
+      background: #f1f5f9;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 600;
+      color: #475569;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .panel-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #334155;
+    }
+
+    .panel-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .panel-table .status {
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      white-space: nowrap;
+    }
+
+    .panel-table .status.approved {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .panel-table .status.pending {
+      background: #fef9c3;
+      color: #854d0e;
+    }
+
+    .panel-table .status.rejected {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .panel-table .status.in-progress {
+      background: #dbeafe;
+      color: #1e40af;
+    }
+
+    .panel-table .status.completed {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+
+    .stat-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-card .stat-val {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    .stat-card .stat-label {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      padding: 14px 0;
+      border-bottom: 1px solid #f1f5f9;
+      position: relative;
+    }
+
+    .timeline-item .tl-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #2563eb;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+
+    .timeline-item .tl-content {
+      flex: 1;
+    }
+
+    .timeline-item .tl-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .timeline-item .tl-desc {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .timeline-item .tl-time {
+      font-size: 10px;
+      color: #94a3b8;
+      flex-shrink: 0;
+    }
+
+    .doc-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .doc-item:hover {
+      border-color: #93c5fd;
+      background: #eff6ff;
+    }
+
+    .doc-item .doc-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .doc-item .doc-icon.pdf {
+      background: #fee2e2;
+      color: #dc2626;
+    }
+
+    .doc-item .doc-icon.xlsx {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .doc-item .doc-icon.docx {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    .doc-item .doc-icon.ppt {
+      background: #fef3c7;
+      color: #d97706;
+    }
+
+    .doc-item .doc-icon i {
+      font-size: 18px;
+    }
+
+    .doc-item .doc-meta {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .doc-item .doc-meta .doc-name {
+      font-size: 12px;
+      font-weight: 600;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-item .doc-meta .doc-info {
+      font-size: 10px;
+      color: #94a3b8;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-item .doc-actions button {
+      padding: 5px 12px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #2563eb;
+      color: #fff;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .doc-item .doc-actions button:hover {
+      background: #1d4ed8;
+    }
+
+    .process-flow {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      justify-content: center;
+      padding: 20px 0;
+      flex-wrap: wrap;
+    }
+
+    .pf-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pf-step .pf-circle {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .pf-step .pf-circle.done {
+      background: #dcfce7;
+      color: #16a34a;
+    }
+
+    .pf-step .pf-circle.active {
+      background: #dbeafe;
+      color: #2563eb;
+    }
+
+    .pf-step .pf-circle.pending {
+      background: #f1f5f9;
+      color: #94a3b8;
+    }
+
+    .pf-step .pf-label {
+      font-size: 10px;
+      color: #475569;
+      font-weight: 600;
+      text-align: center;
+      max-width: 80px;
+    }
+
+    .pf-step .pf-date {
+      font-size: 9px;
+      color: #94a3b8;
+    }
+
+    .pf-arrow {
+      font-size: 20px;
+      color: #cbd5e1;
+      margin: 0 8px;
+      margin-bottom: 30px;
+    }
+
+    .chart-placeholder {
+      background: linear-gradient(135deg, #eff6ff, #f0fdf4);
+      border: 1px dashed #93c5fd;
+      border-radius: 10px;
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #64748b;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
 
     /* ===== CENTER – CHAT AREA ===== */
     .chat-area {
@@ -1359,6 +1806,7 @@
     .members-list.expanded {
       max-height: 500px;
     }
+
     .members-list .ml-item {
       display: flex;
       align-items: center;
@@ -1648,7 +2096,7 @@
       display: none;
     }
 
-    .access-log-item > div:not(.al-dot) {
+    .access-log-item>div:not(.al-dot) {
       flex: 1;
       min-width: 0;
     }
@@ -1822,37 +2270,208 @@
     .message {
       animation: fadeIn 0.3s ease;
     }
+
     /* Modal Styles */
-    .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(15, 23, 42, 0.6); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(2px); }
-    .modal-overlay.active { display: flex; }
-    .modal-content { background: #fff; width: 480px; max-width: 90%; border-radius: 12px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); overflow: hidden; display: flex; flex-direction: column; }
-    .modal-header { padding: 18px 24px; border-bottom: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; }
-    .modal-header h3 { margin: 0; font-size: 16px; color: #0f172a; }
-    .modal-close { cursor: pointer; color: #64748b; font-size: 18px; transition: color 0.2s; }
-    .modal-close:hover { color: #0f172a; }
-    .modal-body { padding: 24px; max-height: 400px; overflow-y: auto; }
-    .member-list { display: flex; flex-direction: column; gap: 12px; }
-    .member-item { display: flex; align-items: center; gap: 12px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-    .member-item:hover { background: #f8fafc; border-color: #cbd5e1; }
-    .member-item.selected { background: #eff6ff; border-color: #3b82f6; }
-    .member-checkbox { width: 18px; height: 18px; border-radius: 4px; border: 2px solid #cbd5e1; display: flex; align-items: center; justify-content: center; color: transparent; transition: all 0.2s; }
-    .member-item.selected .member-checkbox { background: #3b82f6; border-color: #3b82f6; color: #fff; }
-    .member-info { flex: 1; min-width: 0; }
-    .member-name { font-size: 13px; font-weight: 600; color: #1e293b; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .member-email { font-size: 11px; color: #64748b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .modal-footer { padding: 16px 24px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; background: #f8fafc; }
-    .group-name-input { display: none; flex: 1; margin-right: 16px; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; outline: none; }
-    .group-name-input:focus { border-color: #3b82f6; box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1); }
-    .modal-actions { display: flex; gap: 10px; margin-left: auto; }
-    .btn-outline { padding: 8px 16px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 13px; font-weight: 600; color: #475569; background: #fff; cursor: pointer; transition: all 0.2s; }
-    .btn-outline:hover { background: #f1f5f9; }
-    .btn-primary { padding: 8px 16px; border: none; border-radius: 6px; font-size: 13px; font-weight: 600; color: #fff; background: #2563eb; cursor: pointer; transition: background 0.2s; }
-    .btn-primary:hover { background: #1d4ed8; }
-    .btn-primary:disabled { background: #94a3b8; cursor: not-allowed; }
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: #fff;
+      width: 480px;
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .modal-header h3 {
+      margin: 0;
+      font-size: 16px;
+      color: #0f172a;
+    }
+
+    .modal-close {
+      cursor: pointer;
+      color: #64748b;
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .modal-close:hover {
+      color: #0f172a;
+    }
+
+    .modal-body {
+      padding: 24px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .member-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .member-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .member-item:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .member-item.selected {
+      background: #eff6ff;
+      border-color: #3b82f6;
+    }
+
+    .member-checkbox {
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 2px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: transparent;
+      transition: all 0.2s;
+    }
+
+    .member-item.selected .member-checkbox {
+      background: #3b82f6;
+      border-color: #3b82f6;
+      color: #fff;
+    }
+
+    .member-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .member-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .member-email {
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f8fafc;
+    }
+
+    .group-name-input {
+      display: none;
+      flex: 1;
+      margin-right: 16px;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .group-name-input:focus {
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .btn-outline {
+      padding: 8px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #f1f5f9;
+    }
+
+    .btn-primary {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #fff;
+      background: #2563eb;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-primary:disabled {
+      background: #94a3b8;
+      cursor: not-allowed;
+    }
+
     .req-title-wrapper {
       position: relative;
     }
-    
+
     .req-dropdown-menu {
       position: absolute;
       top: 100%;
@@ -1861,14 +2480,14 @@
       background: #fff;
       border: 1px solid #e2e8f0;
       border-radius: 8px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       margin-top: 8px;
       z-index: 100;
       display: none;
       flex-direction: column;
       overflow: hidden;
     }
-    
+
     .req-dropdown-menu.show {
       display: flex;
     }
@@ -2000,7 +2619,8 @@
         <div class="req-header">
           <div class="req-title-row">
             <div class="req-title-wrapper">
-              <h1 contenteditable="true" onclick="document.getElementById('mainReqDropdown').classList.toggle('show'); event.stopPropagation();">
+              <h1 contenteditable="true"
+                onclick="document.getElementById('mainReqDropdown').classList.toggle('show'); event.stopPropagation();">
                 REQ-250801 - Engine Bracket (Casting)
                 <i class="fas fa-chevron-down" style="font-size: 14px; color: #64748b; margin-top: 2px;"></i>
               </h1>
@@ -2036,7 +2656,8 @@
             <a class="tab-item" href="#" data-tab="tab-timeline">Activity Timeline</a>
             <a class="tab-item" href="#" data-tab="tab-reports">Reports</a>
           </div>
-          <div class="req-subtitle" contenteditable="true">Bajaj Auto Ltd. &nbsp;|&nbsp; Aashita Enterprises &amp; 2 Suppliers</div>
+          <div class="req-subtitle" contenteditable="true">Bajaj Auto Ltd. &nbsp;|&nbsp; Aashita Enterprises &amp; 2
+            Suppliers</div>
 
           <div class="progress-row">
             <div class="right-actions">
@@ -2047,7 +2668,7 @@
                 </div>
                 <button class="pull-teams-btn" onclick="openPullTeamsModal()">Pull Teams</button>
               </div>
-              
+
               <div class="nda-card" onclick="openNdaModal()">
                 <div class="nda-text">
                   <strong contenteditable="true">NDA Status</strong>
@@ -2062,560 +2683,744 @@
             </div>
           </div>
         </div>
-        
+
 
         <!-- Tab: Organization Structured Chat (original content) -->
         <div class="tab-content-panel active" id="tab-org-chat">
-        <div class="content-body">
-          <!-- Left: Chat Panel with Dropdown -->
-          <div class="chat-list-panel">
-            <!-- Dropdown to switch views -->
-            <div class="panel-view-selector">
-              <select id="panelViewSelect">
-                <option value="org-chat">Organisation Structured Chat</option>
-                <option value="indiv-chat">Individual Chats</option>
-              </select>
-            </div>
-
-            <!-- ===== VIEW 1: Organisation Structured Chat ===== -->
-            <div class="panel-view active" id="org-chat">
-              <div class="chat-list-header">
-                <h3 contenteditable="true">Organisation Structured Chat <i class="fas fa-info-circle" style="font-size:11px; color: #94a3b8;"></i></h3>
-                <span class="collapse-btn"><i class="fas fa-angle-double-left"></i></span>
+          <div class="content-body">
+            <!-- Left: Chat Panel with Dropdown -->
+            <div class="chat-list-panel">
+              <!-- Dropdown to switch views -->
+              <div class="panel-view-selector">
+                <select id="panelViewSelect">
+                  <option value="org-chat">Organisation Structured Chat</option>
+                  <option value="indiv-chat">Individual Chats</option>
+                </select>
               </div>
-              <div class="chat-search">
-                <input type="text" placeholder="Search sub chats...">
-              </div>
-              <div class="org-chat-list">
 
-              <div class="chat-item active">
-                <div class="chat-avatar av-blue"><i class="fas fa-file-alt" style="font-size: 14px;"></i></div>
-                <div class="chat-meta">
-                  <div class="chat-name" contenteditable="true">REQ-250801 – Engine Bracket</div>
-                  <div class="chat-desc" contenteditable="true">General Discussion</div>
+              <!-- ===== VIEW 1: Organisation Structured Chat ===== -->
+              <div class="panel-view active" id="org-chat">
+                <div class="chat-list-header">
+                  <h3 contenteditable="true">Organisation Structured Chat <i class="fas fa-info-circle"
+                      style="font-size:11px; color: #94a3b8;"></i></h3>
+                  <span class="collapse-btn"><i class="fas fa-angle-double-left"></i></span>
+                </div>
+                <div class="chat-search">
+                  <input type="text" placeholder="Search sub chats...">
+                </div>
+                <div class="org-chat-list">
+
+                  <div class="chat-item active">
+                    <div class="chat-avatar av-blue"><i class="fas fa-file-alt" style="font-size: 14px;"></i></div>
+                    <div class="chat-meta">
+                      <div class="chat-name" contenteditable="true">REQ-250801 – Engine Bracket</div>
+                      <div class="chat-desc" contenteditable="true">General Discussion</div>
+                    </div>
+                  </div>
+
+                  <div class="chat-section-title"><i class="fas fa-chevron-down"></i> <span contenteditable="true">Bajaj
+                      Auto Ltd. (Internal)</span></div>
+
+                  <div class="member-item">
+                    <div class="m-avatar av-blue">BP</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.planthead@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Plant Head</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-green">BE</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Engineering Head</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-purple">BPu</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Purchaser</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-orange">BA</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.accounts@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Accounts</div>
+                    </div>
+                  </div>
+
+                  <div class="section-divider">---- After RFQ Closure ----</div>
+
+                  <div class="member-item">
+                    <div class="m-avatar av-red">BP</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.production@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Production</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-teal">BQ</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.quality@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Quality</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-indigo">BPl</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.planning@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Planning</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-gray">BS</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">bajaj.store@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Stores</div>
+                    </div>
+                  </div>
+
+                  <div class="chat-section-title"><i class="fas fa-chevron-down"></i> <span
+                      contenteditable="true">Aashita Enterprises (Supplier)</span></div>
+                  <div class="member-item">
+                    <div class="m-avatar av-green">AS</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">aashita.sales@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Sales</div>
+                    </div>
+                  </div>
+                  <div class="member-item">
+                    <div class="m-avatar av-pink">AP</div>
+                    <div class="m-info">
+                      <div class="m-email" contenteditable="true">aashita.production@aashita.ai</div>
+                      <div class="m-role" contenteditable="true">Production</div>
+                    </div>
+                  </div>
+
+                  <div class="chat-section-title"><i class="fas fa-chevron-right"></i> <span contenteditable="true">XYZ
+                      Castings Pvt. Ltd. (Sub-Supplier)</span></div>
                 </div>
               </div>
 
-              <div class="chat-section-title"><i class="fas fa-chevron-down"></i> <span contenteditable="true">Bajaj Auto Ltd. (Internal)</span></div>
-
-              <div class="member-item"><div class="m-avatar av-blue">BP</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.planthead@aashita.ai</div><div class="m-role" contenteditable="true">Plant Head</div></div></div>
-              <div class="member-item"><div class="m-avatar av-green">BE</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div><div class="m-role" contenteditable="true">Engineering Head</div></div></div>
-              <div class="member-item"><div class="m-avatar av-purple">BPu</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.purchaser@aashita.ai</div><div class="m-role" contenteditable="true">Purchaser</div></div></div>
-              <div class="member-item"><div class="m-avatar av-orange">BA</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.accounts@aashita.ai</div><div class="m-role" contenteditable="true">Accounts</div></div></div>
-
-              <div class="section-divider">---- After RFQ Closure ----</div>
-
-              <div class="member-item"><div class="m-avatar av-red">BP</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.production@aashita.ai</div><div class="m-role" contenteditable="true">Production</div></div></div>
-              <div class="member-item"><div class="m-avatar av-teal">BQ</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.quality@aashita.ai</div><div class="m-role" contenteditable="true">Quality</div></div></div>
-              <div class="member-item"><div class="m-avatar av-indigo">BPl</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.planning@aashita.ai</div><div class="m-role" contenteditable="true">Planning</div></div></div>
-              <div class="member-item"><div class="m-avatar av-gray">BS</div><div class="m-info"><div class="m-email" contenteditable="true">bajaj.store@aashita.ai</div><div class="m-role" contenteditable="true">Stores</div></div></div>
-
-              <div class="chat-section-title"><i class="fas fa-chevron-down"></i> <span contenteditable="true">Aashita Enterprises (Supplier)</span></div>
-              <div class="member-item"><div class="m-avatar av-green">AS</div><div class="m-info"><div class="m-email" contenteditable="true">aashita.sales@aashita.ai</div><div class="m-role" contenteditable="true">Sales</div></div></div>
-              <div class="member-item"><div class="m-avatar av-pink">AP</div><div class="m-info"><div class="m-email" contenteditable="true">aashita.production@aashita.ai</div><div class="m-role" contenteditable="true">Production</div></div></div>
-
-              <div class="chat-section-title"><i class="fas fa-chevron-right"></i> <span contenteditable="true">XYZ Castings Pvt. Ltd. (Sub-Supplier)</span></div>
-            </div>
-            </div>
-
-            <!-- ===== VIEW 2: Individual Chats ===== -->
-            <div class="panel-view" id="indiv-chat">
-              <div class="chat-list-header">
-                <h3 contenteditable="true">Individual Chats <i class="fas fa-info-circle" style="font-size:11px; color: #94a3b8;"></i></h3>
-              </div>
-              <div class="ic-header-icons">
-                <span class="h-icon" title="Filter"><i class="fas fa-filter"></i></span>
-                <span class="h-icon" title="Settings"><i class="fas fa-sliders-h"></i></span>
-              </div>
-              <div class="chat-search">
-                <input type="text" placeholder="Search individuals...">
-              </div>
-
-              <!-- Filter Tabs -->
-              <div class="filter-tabs">
-                <span class="filter-tab active" data-filter="all">All</span>
-                <span class="filter-tab" data-filter="bajaj">Bajaj</span>
-                <span class="filter-tab" data-filter="aashita">Aashita</span>
-                <span class="filter-tab" data-filter="unread">Unread</span>
-              </div>
-
-              <!-- Individual Chat List -->
-              <div class="indiv-chat-list">
-                <div class="indiv-chat-item active" data-org="aashita" data-unread="2">
-                  <div class="ic-avatar av-green">AS</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">aashita.sales@aashita.ai</span><span class="ic-time" contenteditable="true">10:32 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Aashita Sales Manager</div>
-                    <div class="ic-preview" contenteditable="true">Thanks for the update.</div>
-                  </div>
-                  <span class="ic-badge">2</span>
+              <!-- ===== VIEW 2: Individual Chats ===== -->
+              <div class="panel-view" id="indiv-chat">
+                <div class="chat-list-header">
+                  <h3 contenteditable="true">Individual Chats <i class="fas fa-info-circle"
+                      style="font-size:11px; color: #94a3b8;"></i></h3>
+                </div>
+                <div class="ic-header-icons">
+                  <span class="h-icon" title="Filter"><i class="fas fa-filter"></i></span>
+                  <span class="h-icon" title="Settings"><i class="fas fa-sliders-h"></i></span>
+                </div>
+                <div class="chat-search">
+                  <input type="text" placeholder="Search individuals...">
                 </div>
 
-                <div class="indiv-chat-item" data-org="bajaj" data-unread="1">
-                  <div class="ic-avatar av-green">BE</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</span><span class="ic-time" contenteditable="true">10:15 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Engineering Head (Bajaj)</div>
-                    <div class="ic-preview" contenteditable="true">Please review the latest drawing.</div>
-                  </div>
-                  <span class="ic-badge">1</span>
+                <!-- Filter Tabs -->
+                <div class="filter-tabs">
+                  <span class="filter-tab active" data-filter="all">All</span>
+                  <span class="filter-tab" data-filter="bajaj">Bajaj</span>
+                  <span class="filter-tab" data-filter="aashita">Aashita</span>
+                  <span class="filter-tab" data-filter="unread">Unread</span>
                 </div>
 
-                <div class="indiv-chat-item" data-org="aashita" data-unread="0">
-                  <div class="ic-avatar av-pink">AP</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">aashita.production@aashita.ai</span><span class="ic-time" contenteditable="true">09:58 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Aashita Production Head</div>
-                    <div class="ic-preview" contenteditable="true">Noted. We will start the trial.</div>
+                <!-- Individual Chat List -->
+                <div class="indiv-chat-list">
+                  <div class="indiv-chat-item active" data-org="aashita" data-unread="2">
+                    <div class="ic-avatar av-green">AS</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">aashita.sales@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">10:32 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Aashita Sales Manager</div>
+                      <div class="ic-preview" contenteditable="true">Thanks for the update.</div>
+                    </div>
+                    <span class="ic-badge">2</span>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="bajaj" data-unread="1">
+                    <div class="ic-avatar av-green">BE</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">bajaj.engineeringhead@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">10:15 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Engineering Head (Bajaj)</div>
+                      <div class="ic-preview" contenteditable="true">Please review the latest drawing.</div>
+                    </div>
+                    <span class="ic-badge">1</span>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="aashita" data-unread="0">
+                    <div class="ic-avatar av-pink">AP</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">aashita.production@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">09:58 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Aashita Production Head</div>
+                      <div class="ic-preview" contenteditable="true">Noted. We will start the trial.</div>
+                    </div>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="bajaj" data-unread="0">
+                    <div class="ic-avatar av-purple">BPu</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">bajaj.purchaser@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">09:45 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Purchaser (Bajaj)</div>
+                      <div class="ic-preview" contenteditable="true">Kindly confirm your quotation.</div>
+                    </div>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="aashita" data-unread="0">
+                    <div class="ic-avatar av-teal">AQ</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">aashita.quality@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">09:30 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Aashita Quality Head</div>
+                      <div class="ic-preview" contenteditable="true">Inspection plan attached.</div>
+                    </div>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="bajaj" data-unread="1">
+                    <div class="ic-avatar av-orange">BA</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">bajaj.accounts@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">09:12 AM</span></div>
+                      <div class="ic-role" contenteditable="true">Accounts (Bajaj)</div>
+                      <div class="ic-preview" contenteditable="true">Payment terms are Net 60.</div>
+                    </div>
+                    <span class="ic-badge">1</span>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="aashita" data-unread="0">
+                    <div class="ic-avatar av-green">AA</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">aashita.accounts@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">Yesterday</span></div>
+                      <div class="ic-role" contenteditable="true">Accounts (Aashita)</div>
+                      <div class="ic-preview" contenteditable="true">Invoice format shared.</div>
+                    </div>
+                  </div>
+
+                  <div class="indiv-chat-item" data-org="bajaj" data-unread="0">
+                    <div class="ic-avatar av-blue">BP</div>
+                    <div class="ic-body">
+                      <div class="ic-top"><span class="ic-email"
+                          contenteditable="true">bajaj.planthead@aashita.ai</span><span class="ic-time"
+                          contenteditable="true">Yesterday</span></div>
+                      <div class="ic-role" contenteditable="true">Plant Head (Bajaj)</div>
+                      <div class="ic-preview" contenteditable="true">Please ensure on-time delivery.</div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="indiv-chat-item" data-org="bajaj" data-unread="0">
-                  <div class="ic-avatar av-purple">BPu</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">bajaj.purchaser@aashita.ai</span><span class="ic-time" contenteditable="true">09:45 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Purchaser (Bajaj)</div>
-                    <div class="ic-preview" contenteditable="true">Kindly confirm your quotation.</div>
-                  </div>
-                </div>
-
-                <div class="indiv-chat-item" data-org="aashita" data-unread="0">
-                  <div class="ic-avatar av-teal">AQ</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">aashita.quality@aashita.ai</span><span class="ic-time" contenteditable="true">09:30 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Aashita Quality Head</div>
-                    <div class="ic-preview" contenteditable="true">Inspection plan attached.</div>
-                  </div>
-                </div>
-
-                <div class="indiv-chat-item" data-org="bajaj" data-unread="1">
-                  <div class="ic-avatar av-orange">BA</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">bajaj.accounts@aashita.ai</span><span class="ic-time" contenteditable="true">09:12 AM</span></div>
-                    <div class="ic-role" contenteditable="true">Accounts (Bajaj)</div>
-                    <div class="ic-preview" contenteditable="true">Payment terms are Net 60.</div>
-                  </div>
-                  <span class="ic-badge">1</span>
-                </div>
-
-                <div class="indiv-chat-item" data-org="aashita" data-unread="0">
-                  <div class="ic-avatar av-green">AA</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">aashita.accounts@aashita.ai</span><span class="ic-time" contenteditable="true">Yesterday</span></div>
-                    <div class="ic-role" contenteditable="true">Accounts (Aashita)</div>
-                    <div class="ic-preview" contenteditable="true">Invoice format shared.</div>
-                  </div>
-                </div>
-
-                <div class="indiv-chat-item" data-org="bajaj" data-unread="0">
-                  <div class="ic-avatar av-blue">BP</div>
-                  <div class="ic-body">
-                    <div class="ic-top"><span class="ic-email" contenteditable="true">bajaj.planthead@aashita.ai</span><span class="ic-time" contenteditable="true">Yesterday</span></div>
-                    <div class="ic-role" contenteditable="true">Plant Head (Bajaj)</div>
-                    <div class="ic-preview" contenteditable="true">Please ensure on-time delivery.</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- See All Link -->
-              <div class="see-all-link">
-                <a href="#" onclick="alert('See all individual chats')">See all individual chats <i class="fas fa-arrow-right" style="font-size: 11px;"></i></a>
-              </div>
-            </div>
-          </div>
-
-          <!-- Center: Chat Messages -->
-          <div class="chat-area">
-            <div class="chat-area-header">
-              <div>
-                <div class="chat-title-section">
-                  <h2 contenteditable="true">Chat: bajaj.purchaser@aashita.ai</h2>
-                  <span class="star-icon"><i class="fas fa-star"></i></span>
-                </div>
-                <div class="chat-subtitle" contenteditable="true">Purchaser &nbsp;•&nbsp; 8 Members</div>
-              </div>
-              <div class="header-actions">
-                <button class="h-btn" title="Copy"><i class="far fa-copy"></i></button>
-                <button class="h-btn" title="Phone"><i class="fas fa-phone"></i></button>
-                <button class="h-btn" title="Members"><i class="fas fa-users"></i></button>
-                <button class="h-btn" title="More"><i class="fas fa-ellipsis-h"></i></button>
-              </div>
-            </div>
-
-            <div class="chat-messages">
-              <!-- Message 1 -->
-              <div class="message">
-                <div class="msg-avatar av-green">BE</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">bajaj.engineeringhead@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">10:15 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Hi team, final drawing (V6) and specifications are
-                    attached for your reference.</div>
-                  <div class="msg-attachments">
-                    <a class="msg-attachment" href="#" onclick="openPdfModal(this); return false;">
-                      <i class="fas fa-file-pdf"></i>
-                      <div class="att-info">
-                        <div class="att-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div>
-                        <div class="att-size" contenteditable="true">2.4 MB</div>
-                      </div>
-                    </a>
-                    <a class="msg-attachment" href="#" onclick="openPdfModal(this); return false;">
-                      <i class="fas fa-file-word"></i>
-                      <div class="att-info">
-                        <div class="att-name" contenteditable="true">Specifications_Rev2.docx</div>
-                        <div class="att-size" contenteditable="true">850 KB</div>
-                      </div>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Message 2 -->
-              <div class="message">
-                <div class="msg-avatar av-green">AS</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">aashita.sales@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">10:21 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Thanks for the update. We have reviewed the drawing and
-                    will share the quotation by EOD.</div>
-                </div>
-              </div>
-
-              <!-- Message 3 -->
-              <div class="message">
-                <div class="msg-avatar av-purple">BPu</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">bajaj.purchaser@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">10:35 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Please confirm the price validity and estimated delivery.
-                  </div>
-                </div>
-              </div>
-
-              <!-- Message 4 -->
-              <div class="message">
-                <div class="msg-avatar av-green">AS</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">aashita.sales@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">10:36 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Price valid for 15 days. Delivery: 15 Sep 2026.</div>
-                </div>
-              </div>
-
-              <!-- Date Divider -->
-              <div class="date-divider"><span contenteditable="true">01 Aug 2026</span></div>
-
-              <!-- System Message -->
-              <div class="system-msg">
-                <div class="sys-text"><i class="fas fa-info-circle"></i> <span contenteditable="true">RFQ has been
-                    closed and PO-78291 has been issued to Aashita Enterprises.</span></div>
-              </div>
-
-              <!-- Highlight Message -->
-              <div class="highlight-msg">
-                <span contenteditable="true">Production &amp; Quality teams can now be pulled into this
-                  workspace.</span>
-                <a href="#" onclick="openViewPulledTeamsModal(); event.preventDefault();">View Pulled Teams</a>
-              </div>
-
-              <!-- Message 5 -->
-              <div class="message">
-                <div class="msg-avatar av-red">BPr</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">bajaj.production@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">09:25 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Hi team, we will start the production plan. Please share
-                    tool trial reports.</div>
-                </div>
-              </div>
-
-              <!-- Message 6 -->
-              <div class="message">
-                <div class="msg-avatar av-pink">AP</div>
-                <div class="msg-content">
-                  <div class="msg-header">
-                    <span class="msg-sender" contenteditable="true">aashita.production@aashita.ai</span>
-                    <span class="msg-time" contenteditable="true">09:27 AM</span>
-                  </div>
-                  <div class="msg-text" contenteditable="true">Tool trial planned on 03 Aug 2026. Reports will follow.
-                  </div>
+                <!-- See All Link -->
+                <div class="see-all-link">
+                  <a href="#" onclick="alert('See all individual chats')">See all individual chats <i
+                      class="fas fa-arrow-right" style="font-size: 11px;"></i></a>
                 </div>
               </div>
             </div>
 
-            <!-- Chat Input -->
-            <div class="chat-input-bar">
-              <input type="text" placeholder="Type a message...">
-              <div class="input-actions">
-                <button title="Attach"><i class="fas fa-paperclip"></i></button>
-                <button title="Emoji"><i class="far fa-smile"></i></button>
-                <button title="GIF"><i class="fas fa-at"></i></button>
-                <button title="Mention"><i class="fas fa-at"></i></button>
-              </div>
-              <button class="send-btn" title="Send" onclick="alert('Message sent!')"><i
-                  class="fas fa-paper-plane"></i></button>
-            </div>
-          </div>
-
-          <!-- Right Panel: Sub Chat Info -->
-          <div class="right-panel">
-            <div class="right-panel-section sub-chat-info">
-              <h4>Sub Chat Info</h4>
-              <div class="sci-header">
-                <div class="sci-avatar">BPu</div>
-                <div class="sci-meta">
-                  <div class="sci-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
-                  <div class="sci-role" contenteditable="true">Purchaser</div>
-                </div>
-              </div>
-              <div class="sci-stats" contenteditable="true">8 Members &nbsp;•&nbsp; Created on 12 Jul 2026</div>
-            </div>
-
-            <div class="right-panel-section">
-              <h4 contenteditable="true">Members (8)</h4>
-              <div class="members-list">
-                <div class="ml-item">
-                  <div class="ml-avatar av-purple">BPu</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Purchaser</div>
-                  </div><span class="ml-tag you">You</span>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-green">BE</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Engineering Head</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-green">AS</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">aashita.sales@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Sales Manager</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-yellow">XY</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">xyz.sales@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Sales Manager</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-orange">Sh</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">sharma.sales@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Sales Manager</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-red">BP</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">bajaj.production@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Production</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-teal">BQ</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">bajaj.quality@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Quality</div>
-                  </div>
-                </div>
-                <div class="ml-item">
-                  <div class="ml-avatar av-orange">BA</div>
-                  <div class="ml-info">
-                    <div class="ml-email" contenteditable="true">bajaj.accounts@aashita.ai</div>
-                    <div class="ml-role" contenteditable="true">Accounts</div>
-                  </div>
-                </div>
-              </div>
-              <div class="view-all-link">
-                <a href="#" id="toggleMembersBtn" onclick="toggleMembersList(event)">View All Members</a>
-              </div>
-            </div>
-
-            <div class="right-panel-section chat-settings">
-              <h4>Chat Settings</h4>
-              <div class="cs-item">
-                <div class="cs-label"><i class="fas fa-bell-slash"></i> <span contenteditable="true">Mute
-                    Notifications</span></div>
-                <div class="toggle" onclick="this.classList.toggle('on')">
-                  <div class="toggle-knob"></div>
-                </div>
-              </div>
-              <div class="cs-item">
-                <div class="cs-label"><i class="fas fa-thumbtack"></i> <span contenteditable="true">Pin this Chat</span>
-                </div>
-                <div class="toggle on" onclick="this.classList.toggle('on')">
-                  <div class="toggle-knob"></div>
-                </div>
-              </div>
-              <div class="cs-item">
-                <div class="cs-label"><i class="fas fa-at"></i> <span contenteditable="true">Only @mentions</span></div>
-                <div class="toggle" onclick="this.classList.toggle('on')">
-                  <div class="toggle-knob"></div>
-                </div>
-              </div>
-              <button class="leave-btn" onclick="alert('Leave Sub Chat')">Leave Sub Chat</button>
-            </div>
-          </div>
-
-          <!-- Far Right: File Security Panel -->
-          <div class="file-security-panel">
-            <div class="fsp-header">
-              <h4><i class="fas fa-check-circle"></i> <span contenteditable="true">File Security &amp;
-                  Traceability</span></h4>
-              <span class="fsp-arrow"><i class="fas fa-chevron-right"></i></span>
-            </div>
-
-            <div class="fsp-file" onclick="openPdfModal(this)" style="cursor: pointer;">
-              <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
-              <div class="file-meta">
-                <div class="file-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div>
-                <div class="file-details" contenteditable="true">2.4 MB • Uploaded on 12 Jul 2026</div>
-              </div>
-            </div>
-
-            <div class="fsp-tags">
-              <span class="tag confidential" contenteditable="true">Confidential</span>
-              <span class="tag bajaj-only" contenteditable="true">Bajaj Only</span>
-            </div>
-
-            <div class="fsp-tabs">
-              <a class="fsp-tab active" href="#">Access Log</a>
-              <a class="fsp-tab" href="#">Forwarding Chain</a>
-              <a class="fsp-tab" href="#">Security</a>
-            </div>
-
-            <div class="access-log">
-              <div class="access-log-item">
-                <div class="al-dot upload"></div>
+            <!-- Center: Chat Messages -->
+            <div class="chat-area">
+              <div class="chat-area-header">
                 <div>
-                  <div class="al-action" contenteditable="true">Uploaded by</div>
-                  <div class="al-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div>
-                  <div class="al-time" contenteditable="true">12 Jul 2026, 10:15 AM</div>
+                  <div class="chat-title-section">
+                    <h2 contenteditable="true">Chat: bajaj.purchaser@aashita.ai</h2>
+                    <span class="star-icon"><i class="fas fa-star"></i></span>
+                  </div>
+                  <div class="chat-subtitle" contenteditable="true">Purchaser &nbsp;•&nbsp; 8 Members</div>
+                </div>
+                <div class="header-actions">
+                  <button class="h-btn" title="Copy"><i class="far fa-copy"></i></button>
+                  <button class="h-btn" title="Phone"><i class="fas fa-phone"></i></button>
+                  <button class="h-btn" title="Members"><i class="fas fa-users"></i></button>
+                  <button class="h-btn" title="More"><i class="fas fa-ellipsis-h"></i></button>
                 </div>
               </div>
-              <div class="access-log-item">
-                <div class="al-dot forward"></div>
-                <div>
-                  <div class="al-action" contenteditable="true">Forwarded to</div>
-                  <div class="al-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
-                  <div class="al-time" contenteditable="true">12 Jul 2026, 10:16 AM</div>
+
+              <div class="chat-messages">
+                <!-- Message 1 -->
+                <div class="message">
+                  <div class="msg-avatar av-green">BE</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">bajaj.engineeringhead@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">10:15 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Hi team, final drawing (V6) and specifications are
+                      attached for your reference.</div>
+                    <div class="msg-attachments">
+                      <a class="msg-attachment" href="#" onclick="openPdfModal(this); return false;">
+                        <i class="fas fa-file-pdf"></i>
+                        <div class="att-info">
+                          <div class="att-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div>
+                          <div class="att-size" contenteditable="true">2.4 MB</div>
+                        </div>
+                      </a>
+                      <a class="msg-attachment" href="#" onclick="openPdfModal(this); return false;">
+                        <i class="fas fa-file-word"></i>
+                        <div class="att-info">
+                          <div class="att-name" contenteditable="true">Specifications_Rev2.docx</div>
+                          <div class="att-size" contenteditable="true">850 KB</div>
+                        </div>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message 2 -->
+                <div class="message">
+                  <div class="msg-avatar av-green">AS</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">aashita.sales@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">10:21 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Thanks for the update. We have reviewed the drawing and
+                      will share the quotation by EOD.</div>
+                  </div>
+                </div>
+
+                <!-- Message 3 -->
+                <div class="message">
+                  <div class="msg-avatar av-purple">BPu</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">bajaj.purchaser@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">10:35 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Please confirm the price validity and estimated
+                      delivery.
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message 4 -->
+                <div class="message">
+                  <div class="msg-avatar av-green">AS</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">aashita.sales@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">10:36 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Price valid for 15 days. Delivery: 15 Sep 2026.</div>
+                  </div>
+                </div>
+
+                <!-- Date Divider -->
+                <div class="date-divider"><span contenteditable="true">01 Aug 2026</span></div>
+
+                <!-- System Message -->
+                <div class="system-msg">
+                  <div class="sys-text"><i class="fas fa-info-circle"></i> <span contenteditable="true">RFQ has been
+                      closed and PO-78291 has been issued to Aashita Enterprises.</span></div>
+                </div>
+
+                <!-- Highlight Message -->
+                <div class="highlight-msg">
+                  <span contenteditable="true">Production &amp; Quality teams can now be pulled into this
+                    workspace.</span>
+                  <a href="#" onclick="openViewPulledTeamsModal(); event.preventDefault();">View Pulled Teams</a>
+                </div>
+
+                <!-- Message 5 -->
+                <div class="message">
+                  <div class="msg-avatar av-red">BPr</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">bajaj.production@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">09:25 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Hi team, we will start the production plan. Please
+                      share
+                      tool trial reports.</div>
+                  </div>
+                </div>
+
+                <!-- Message 6 -->
+                <div class="message">
+                  <div class="msg-avatar av-pink">AP</div>
+                  <div class="msg-content">
+                    <div class="msg-header">
+                      <span class="msg-sender" contenteditable="true">aashita.production@aashita.ai</span>
+                      <span class="msg-time" contenteditable="true">09:27 AM</span>
+                    </div>
+                    <div class="msg-text" contenteditable="true">Tool trial planned on 03 Aug 2026. Reports will follow.
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="access-log-item">
-                <div class="al-dot forward"></div>
-                <div>
-                  <div class="al-action" contenteditable="true">Forwarded to</div>
-                  <div class="al-email" contenteditable="true">aashita.sales@aashita.ai</div>
-                  <div class="al-time" contenteditable="true">12 Jul 2026, 10:22 AM</div>
+
+              <!-- Chat Input -->
+              <div class="chat-input-bar">
+                <input type="text" placeholder="Type a message...">
+                <div class="input-actions">
+                  <button title="Attach"><i class="fas fa-paperclip"></i></button>
+                  <button title="Emoji"><i class="far fa-smile"></i></button>
+                  <button title="GIF"><i class="fas fa-at"></i></button>
+                  <button title="Mention"><i class="fas fa-at"></i></button>
                 </div>
-              </div>
-              <div class="access-log-item">
-                <div class="al-dot forward"></div>
-                <div>
-                  <div class="al-action" contenteditable="true">Forwarded to</div>
-                  <div class="al-email" contenteditable="true">aashita.production@aashita.ai</div>
-                  <div class="al-time" contenteditable="true">12 Jul 2026, 10:25 AM</div>
-                </div>
-              </div>
-              <div class="access-log-item">
-                <div class="al-dot forward"></div>
-                <div>
-                  <div class="al-action" contenteditable="true">Forwarded to</div>
-                  <div class="al-email" contenteditable="true">xyz.sales@aashita.ai</div>
-                  <div class="al-time" contenteditable="true">12 Jul 2026, 11:02 AM</div>
-                </div>
+                <button class="send-btn" title="Send" onclick="alert('Message sent!')"><i
+                    class="fas fa-paper-plane"></i></button>
               </div>
             </div>
 
-            <div class="fsp-downloads">
-              <div>
-                <div class="dl-label" contenteditable="true">Total Downloads</div>
-                <a class="view-link" href="#" onclick="alert('View Full Access Log')">View Full Access Log</a>
+            <!-- Right Panel: Sub Chat Info -->
+            <div class="right-panel">
+              <div class="right-panel-section sub-chat-info">
+                <h4>Sub Chat Info</h4>
+                <div class="sci-header">
+                  <div class="sci-avatar">BPu</div>
+                  <div class="sci-meta">
+                    <div class="sci-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
+                    <div class="sci-role" contenteditable="true">Purchaser</div>
+                  </div>
+                </div>
+                <div class="sci-stats" contenteditable="true">8 Members &nbsp;•&nbsp; Created on 12 Jul 2026</div>
               </div>
-              <div class="dl-count" contenteditable="true">5</div>
+
+              <div class="right-panel-section">
+                <h4 contenteditable="true">Members (8)</h4>
+                <div class="members-list">
+                  <div class="ml-item">
+                    <div class="ml-avatar av-purple">BPu</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Purchaser</div>
+                    </div><span class="ml-tag you">You</span>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-green">BE</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Engineering Head</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-green">AS</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">aashita.sales@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Sales Manager</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-yellow">XY</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">xyz.sales@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Sales Manager</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-orange">Sh</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">sharma.sales@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Sales Manager</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-red">BP</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">bajaj.production@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Production</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-teal">BQ</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">bajaj.quality@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Quality</div>
+                    </div>
+                  </div>
+                  <div class="ml-item">
+                    <div class="ml-avatar av-orange">BA</div>
+                    <div class="ml-info">
+                      <div class="ml-email" contenteditable="true">bajaj.accounts@aashita.ai</div>
+                      <div class="ml-role" contenteditable="true">Accounts</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="view-all-link">
+                  <a href="#" id="toggleMembersBtn" onclick="toggleMembersList(event)">View All Members</a>
+                </div>
+              </div>
+
+              <div class="right-panel-section chat-settings">
+                <h4>Chat Settings</h4>
+                <div class="cs-item">
+                  <div class="cs-label"><i class="fas fa-bell-slash"></i> <span contenteditable="true">Mute
+                      Notifications</span></div>
+                  <div class="toggle" onclick="this.classList.toggle('on')">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-label"><i class="fas fa-thumbtack"></i> <span contenteditable="true">Pin this
+                      Chat</span>
+                  </div>
+                  <div class="toggle on" onclick="this.classList.toggle('on')">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+                <div class="cs-item">
+                  <div class="cs-label"><i class="fas fa-at"></i> <span contenteditable="true">Only @mentions</span>
+                  </div>
+                  <div class="toggle" onclick="this.classList.toggle('on')">
+                    <div class="toggle-knob"></div>
+                  </div>
+                </div>
+                <button class="leave-btn" onclick="alert('Leave Sub Chat')">Leave Sub Chat</button>
+              </div>
             </div>
 
-            <div class="fsp-protection">
-              <h4><i class="fas fa-shield-alt"></i> <span contenteditable="true">File Protection</span></h4>
-              <div class="fp-item"><i class="fas fa-stamp"></i>
-                <div class="fp-label"><span contenteditable="true">Watermarked</span><span contenteditable="true">Bajaj
-                    Auto Ltd. – Confidential</span></div>
+            <!-- Far Right: File Security Panel -->
+            <div class="file-security-panel">
+              <div class="fsp-header">
+                <h4><i class="fas fa-check-circle"></i> <span contenteditable="true">File Security &amp;
+                    Traceability</span></h4>
+                <span class="fsp-arrow"><i class="fas fa-chevron-right"></i></span>
               </div>
-              <div class="fp-item"><i class="fas fa-download"></i>
-                <div class="fp-label"><span contenteditable="true">Download Restriction</span><span
-                    contenteditable="true">Enabled</span></div>
+
+              <div class="fsp-file" onclick="openPdfModal(this)" style="cursor: pointer;">
+                <div class="file-icon"><i class="fas fa-file-pdf"></i></div>
+                <div class="file-meta">
+                  <div class="file-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div>
+                  <div class="file-details" contenteditable="true">2.4 MB • Uploaded on 12 Jul 2026</div>
+                </div>
               </div>
-              <div class="fp-item"><i class="fas fa-camera"></i>
-                <div class="fp-label"><span contenteditable="true">Screenshot Blocking</span><span
-                    contenteditable="true">Enabled</span></div>
+
+              <div class="fsp-tags">
+                <span class="tag confidential" contenteditable="true">Confidential</span>
+                <span class="tag bajaj-only" contenteditable="true">Bajaj Only</span>
               </div>
-              <div class="fp-item"><i class="fas fa-print"></i>
-                <div class="fp-label"><span contenteditable="true">Print Restriction</span><span
-                    contenteditable="true">Enabled</span></div>
+
+              <div class="fsp-tabs">
+                <a class="fsp-tab active" href="#">Access Log</a>
+                <a class="fsp-tab" href="#">Forwarding Chain</a>
+                <a class="fsp-tab" href="#">Security</a>
               </div>
-              <div class="manage-link"><a href="#" onclick="alert('Manage Protection Settings')">Manage Protection
-                  Settings</a></div>
+
+              <div class="access-log">
+                <div class="access-log-item">
+                  <div class="al-dot upload"></div>
+                  <div>
+                    <div class="al-action" contenteditable="true">Uploaded by</div>
+                    <div class="al-email" contenteditable="true">bajaj.engineeringhead@aashita.ai</div>
+                    <div class="al-time" contenteditable="true">12 Jul 2026, 10:15 AM</div>
+                  </div>
+                </div>
+                <div class="access-log-item">
+                  <div class="al-dot forward"></div>
+                  <div>
+                    <div class="al-action" contenteditable="true">Forwarded to</div>
+                    <div class="al-email" contenteditable="true">bajaj.purchaser@aashita.ai</div>
+                    <div class="al-time" contenteditable="true">12 Jul 2026, 10:16 AM</div>
+                  </div>
+                </div>
+                <div class="access-log-item">
+                  <div class="al-dot forward"></div>
+                  <div>
+                    <div class="al-action" contenteditable="true">Forwarded to</div>
+                    <div class="al-email" contenteditable="true">aashita.sales@aashita.ai</div>
+                    <div class="al-time" contenteditable="true">12 Jul 2026, 10:22 AM</div>
+                  </div>
+                </div>
+                <div class="access-log-item">
+                  <div class="al-dot forward"></div>
+                  <div>
+                    <div class="al-action" contenteditable="true">Forwarded to</div>
+                    <div class="al-email" contenteditable="true">aashita.production@aashita.ai</div>
+                    <div class="al-time" contenteditable="true">12 Jul 2026, 10:25 AM</div>
+                  </div>
+                </div>
+                <div class="access-log-item">
+                  <div class="al-dot forward"></div>
+                  <div>
+                    <div class="al-action" contenteditable="true">Forwarded to</div>
+                    <div class="al-email" contenteditable="true">xyz.sales@aashita.ai</div>
+                    <div class="al-time" contenteditable="true">12 Jul 2026, 11:02 AM</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="fsp-downloads">
+                <div>
+                  <div class="dl-label" contenteditable="true">Total Downloads</div>
+                  <a class="view-link" href="#" onclick="alert('View Full Access Log')">View Full Access Log</a>
+                </div>
+                <div class="dl-count" contenteditable="true">5</div>
+              </div>
+
+              <div class="fsp-protection">
+                <h4><i class="fas fa-shield-alt"></i> <span contenteditable="true">File Protection</span></h4>
+                <div class="fp-item"><i class="fas fa-stamp"></i>
+                  <div class="fp-label"><span contenteditable="true">Watermarked</span><span
+                      contenteditable="true">Bajaj
+                      Auto Ltd. – Confidential</span></div>
+                </div>
+                <div class="fp-item"><i class="fas fa-download"></i>
+                  <div class="fp-label"><span contenteditable="true">Download Restriction</span><span
+                      contenteditable="true">Enabled</span></div>
+                </div>
+                <div class="fp-item"><i class="fas fa-camera"></i>
+                  <div class="fp-label"><span contenteditable="true">Screenshot Blocking</span><span
+                      contenteditable="true">Enabled</span></div>
+                </div>
+                <div class="fp-item"><i class="fas fa-print"></i>
+                  <div class="fp-label"><span contenteditable="true">Print Restriction</span><span
+                      contenteditable="true">Enabled</span></div>
+                </div>
+                <div class="manage-link"><a href="#" onclick="alert('Manage Protection Settings')">Manage Protection
+                    Settings</a></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
       </div><!-- end tab-org-chat -->
 
       <!-- Tab: RFQ Details -->
       <div class="tab-content-panel" id="tab-rfq">
         <div class="tab-panel-inner">
-          <h2><i class="fas fa-file-contract" style="color: #2563eb; margin-right: 8px;"></i>RFQ Details — REQ-250801</h2>
+          <h2><i class="fas fa-file-contract" style="color: #2563eb; margin-right: 8px;"></i>RFQ Details — REQ-250801
+          </h2>
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Suppliers Invited</div></div>
-            <div class="stat-card"><div class="stat-val">2</div><div class="stat-label">Quotes Received</div></div>
-            <div class="stat-card"><div class="stat-val">₹12.45L</div><div class="stat-label">Selected Quote Value</div></div>
-            <div class="stat-card"><div class="stat-val">15 Sep</div><div class="stat-label">Delivery Date</div></div>
+            <div class="stat-card">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Suppliers Invited</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">2</div>
+              <div class="stat-label">Quotes Received</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">₹12.45L</div>
+              <div class="stat-label">Selected Quote Value</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">15 Sep</div>
+              <div class="stat-label">Delivery Date</div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Requirement Specifications</h3></div>
+            <div class="panel-card-header">
+              <h3>Requirement Specifications</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Parameter</th><th>Specification</th><th>Tolerance</th></tr>
-              <tr><td contenteditable="true">Material</td><td contenteditable="true">Aluminium Alloy ADC12</td><td contenteditable="true">As per IS 617</td></tr>
-              <tr><td contenteditable="true">Weight</td><td contenteditable="true">2.8 kg</td><td contenteditable="true">± 0.05 kg</td></tr>
-              <tr><td contenteditable="true">Surface Finish</td><td contenteditable="true">Shot Blasted + Powder Coated</td><td contenteditable="true">Ra 3.2 µm</td></tr>
-              <tr><td contenteditable="true">Hardness</td><td contenteditable="true">85 HRB</td><td contenteditable="true">± 5 HRB</td></tr>
-              <tr><td contenteditable="true">Dimensions</td><td contenteditable="true">185mm × 120mm × 45mm</td><td contenteditable="true">± 0.1mm</td></tr>
-              <tr><td contenteditable="true">Quantity</td><td contenteditable="true">5,000 pcs / month</td><td contenteditable="true">—</td></tr>
+              <tr>
+                <th>Parameter</th>
+                <th>Specification</th>
+                <th>Tolerance</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Material</td>
+                <td contenteditable="true">Aluminium Alloy ADC12</td>
+                <td contenteditable="true">As per IS 617</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Weight</td>
+                <td contenteditable="true">2.8 kg</td>
+                <td contenteditable="true">± 0.05 kg</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Surface Finish</td>
+                <td contenteditable="true">Shot Blasted + Powder Coated</td>
+                <td contenteditable="true">Ra 3.2 µm</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Hardness</td>
+                <td contenteditable="true">85 HRB</td>
+                <td contenteditable="true">± 5 HRB</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Dimensions</td>
+                <td contenteditable="true">185mm × 120mm × 45mm</td>
+                <td contenteditable="true">± 0.1mm</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Quantity</td>
+                <td contenteditable="true">5,000 pcs / month</td>
+                <td contenteditable="true">—</td>
+              </tr>
             </table>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Supplier Quotation Comparison</h3></div>
+            <div class="panel-card-header">
+              <h3>Supplier Quotation Comparison</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Supplier</th><th>Unit Price</th><th>Tooling Cost</th><th>Lead Time</th><th>MOQ</th><th>Validity</th><th>Status</th></tr>
-              <tr><td contenteditable="true">Aashita Enterprises</td><td contenteditable="true">₹249</td><td contenteditable="true">₹3,50,000</td><td contenteditable="true">45 days</td><td contenteditable="true">1,000</td><td contenteditable="true">15 days</td><td><span class="status approved">Selected</span></td></tr>
-              <tr><td contenteditable="true">XYZ Castings Pvt. Ltd.</td><td contenteditable="true">₹278</td><td contenteditable="true">₹4,20,000</td><td contenteditable="true">60 days</td><td contenteditable="true">2,000</td><td contenteditable="true">10 days</td><td><span class="status rejected">Not Selected</span></td></tr>
-              <tr><td contenteditable="true">Sharma Metals & Sons</td><td contenteditable="true">₹262</td><td contenteditable="true">₹3,80,000</td><td contenteditable="true">50 days</td><td contenteditable="true">1,500</td><td contenteditable="true">20 days</td><td><span class="status rejected">Not Selected</span></td></tr>
+              <tr>
+                <th>Supplier</th>
+                <th>Unit Price</th>
+                <th>Tooling Cost</th>
+                <th>Lead Time</th>
+                <th>MOQ</th>
+                <th>Validity</th>
+                <th>Status</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Aashita Enterprises</td>
+                <td contenteditable="true">₹249</td>
+                <td contenteditable="true">₹3,50,000</td>
+                <td contenteditable="true">45 days</td>
+                <td contenteditable="true">1,000</td>
+                <td contenteditable="true">15 days</td>
+                <td><span class="status approved">Selected</span></td>
+              </tr>
+              <tr>
+                <td contenteditable="true">XYZ Castings Pvt. Ltd.</td>
+                <td contenteditable="true">₹278</td>
+                <td contenteditable="true">₹4,20,000</td>
+                <td contenteditable="true">60 days</td>
+                <td contenteditable="true">2,000</td>
+                <td contenteditable="true">10 days</td>
+                <td><span class="status rejected">Not Selected</span></td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Sharma Metals & Sons</td>
+                <td contenteditable="true">₹262</td>
+                <td contenteditable="true">₹3,80,000</td>
+                <td contenteditable="true">50 days</td>
+                <td contenteditable="true">1,500</td>
+                <td contenteditable="true">20 days</td>
+                <td><span class="status rejected">Not Selected</span></td>
+              </tr>
             </table>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Terms & Conditions</h3></div>
+            <div class="panel-card-header">
+              <h3>Terms & Conditions</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Term</th><th>Details</th></tr>
-              <tr><td contenteditable="true">Payment Terms</td><td contenteditable="true">Net 60 days from invoice date</td></tr>
-              <tr><td contenteditable="true">Delivery Terms</td><td contenteditable="true">Ex-Works, Chakan Pune</td></tr>
-              <tr><td contenteditable="true">Warranty</td><td contenteditable="true">12 months from date of delivery</td></tr>
-              <tr><td contenteditable="true">Quality Standard</td><td contenteditable="true">IATF 16949:2016 certified</td></tr>
-              <tr><td contenteditable="true">Penalty Clause</td><td contenteditable="true">1% per week for late delivery (max 5%)</td></tr>
+              <tr>
+                <th>Term</th>
+                <th>Details</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Payment Terms</td>
+                <td contenteditable="true">Net 60 days from invoice date</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Delivery Terms</td>
+                <td contenteditable="true">Ex-Works, Chakan Pune</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Warranty</td>
+                <td contenteditable="true">12 months from date of delivery</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Quality Standard</td>
+                <td contenteditable="true">IATF 16949:2016 certified</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Penalty Clause</td>
+                <td contenteditable="true">1% per week for late delivery (max 5%)</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -2626,30 +3431,129 @@
         <div class="tab-panel-inner">
           <h2><i class="fas fa-folder-open" style="color: #2563eb; margin-right: 8px;"></i>Documents</h2>
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-val">12</div><div class="stat-label">Total Documents</div></div>
-            <div class="stat-card"><div class="stat-val">5</div><div class="stat-label">Drawings</div></div>
-            <div class="stat-card"><div class="stat-val">4</div><div class="stat-label">Reports</div></div>
-            <div class="stat-card"><div class="stat-val">3</div><div class="stat-label">Contracts</div></div>
+            <div class="stat-card">
+              <div class="stat-val">12</div>
+              <div class="stat-label">Total Documents</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">5</div>
+              <div class="stat-label">Drawings</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">4</div>
+              <div class="stat-label">Reports</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">3</div>
+              <div class="stat-label">Contracts</div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Engineering Documents</h3></div>
-            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;"><div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div><div class="doc-info">2.4 MB • Uploaded by Engineering Head • 12 Jul 2026</div></div><div class="doc-actions"><button onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;"><div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Engine_Bracket_Drawing_V5.pdf</div><div class="doc-info">2.1 MB • Superseded • 28 Jun 2026</div></div><div class="doc-actions"><button onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;"><div class="doc-icon docx"><i class="fas fa-file-word"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Specifications_Rev2.docx</div><div class="doc-info">850 KB • Uploaded by Engineering Head • 12 Jul 2026</div></div><div class="doc-actions"><button onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;"><div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Material_Test_Report_ADC12.pdf</div><div class="doc-info">1.2 MB • Uploaded by Quality • 15 Jul 2026</div></div><div class="doc-actions"><button onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div></div>
+            <div class="panel-card-header">
+              <h3>Engineering Documents</h3>
+            </div>
+            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;">
+              <div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Engine_Bracket_Drawing_V6.pdf</div>
+                <div class="doc-info">2.4 MB • Uploaded by Engineering Head • 12 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button
+                  onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;">
+              <div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Engine_Bracket_Drawing_V5.pdf</div>
+                <div class="doc-info">2.1 MB • Superseded • 28 Jun 2026</div>
+              </div>
+              <div class="doc-actions"><button
+                  onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;">
+              <div class="doc-icon docx"><i class="fas fa-file-word"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Specifications_Rev2.docx</div>
+                <div class="doc-info">850 KB • Uploaded by Engineering Head • 12 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button
+                  onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item" onclick="openPdfModal(this)" style="cursor: pointer;">
+              <div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Material_Test_Report_ADC12.pdf</div>
+                <div class="doc-info">1.2 MB • Uploaded by Quality • 15 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button
+                  onclick="event.stopPropagation(); alert('Downloading...')">Download</button></div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Commercial Documents</h3></div>
-            <div class="doc-item"><div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Quotation_Aashita_Final.xlsx</div><div class="doc-info">340 KB • Received from Aashita • 14 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item"><div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Quotation_XYZ_Castings.xlsx</div><div class="doc-info">290 KB • Received from XYZ • 16 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item"><div class="doc-icon docx"><i class="fas fa-file-word"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">PO-78291_Purchase_Order.docx</div><div class="doc-info">420 KB • Generated • 01 Aug 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item"><div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">NDA_Aashita_Enterprises.pdf</div><div class="doc-info">180 KB • Signed • 10 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
+            <div class="panel-card-header">
+              <h3>Commercial Documents</h3>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Quotation_Aashita_Final.xlsx</div>
+                <div class="doc-info">340 KB • Received from Aashita • 14 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Quotation_XYZ_Castings.xlsx</div>
+                <div class="doc-info">290 KB • Received from XYZ • 16 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon docx"><i class="fas fa-file-word"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">PO-78291_Purchase_Order.docx</div>
+                <div class="doc-info">420 KB • Generated • 01 Aug 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">NDA_Aashita_Enterprises.pdf</div>
+                <div class="doc-info">180 KB • Signed • 10 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Quality & Inspection</h3></div>
-            <div class="doc-item"><div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">PPAP_Submission_Checklist.pdf</div><div class="doc-info">560 KB • Uploaded by Quality • 20 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item"><div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Inspection_Plan_EB_V6.xlsx</div><div class="doc-info">220 KB • Uploaded by Quality • 22 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
-            <div class="doc-item"><div class="doc-icon ppt"><i class="fas fa-file-powerpoint"></i></div><div class="doc-meta"><div class="doc-name" contenteditable="true">Supplier_Capability_Assessment.pptx</div><div class="doc-info">3.8 MB • Uploaded by Purchaser • 11 Jul 2026</div></div><div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div></div>
+            <div class="panel-card-header">
+              <h3>Quality & Inspection</h3>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon pdf"><i class="fas fa-file-pdf"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">PPAP_Submission_Checklist.pdf</div>
+                <div class="doc-info">560 KB • Uploaded by Quality • 20 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon xlsx"><i class="fas fa-file-excel"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Inspection_Plan_EB_V6.xlsx</div>
+                <div class="doc-info">220 KB • Uploaded by Quality • 22 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
+            <div class="doc-item">
+              <div class="doc-icon ppt"><i class="fas fa-file-powerpoint"></i></div>
+              <div class="doc-meta">
+                <div class="doc-name" contenteditable="true">Supplier_Capability_Assessment.pptx</div>
+                <div class="doc-info">3.8 MB • Uploaded by Purchaser • 11 Jul 2026</div>
+              </div>
+              <div class="doc-actions"><button onclick="alert('Downloading...')">Download</button></div>
+            </div>
           </div>
         </div>
       </div>
@@ -2657,37 +3561,70 @@
       <!-- Tab: Process Flow -->
       <div class="tab-content-panel" id="tab-process">
         <div class="tab-panel-inner">
-          <h2><i class="fas fa-project-diagram" style="color: #2563eb; margin-right: 8px;"></i>Process Flow</h2>
-          <div class="panel-card">
-            <div class="panel-card-header"><h3>Manufacturing Process Flow — Engine Bracket (Casting)</h3></div>
-            <div class="process-flow">
-              <div class="pf-step"><div class="pf-circle done"><i class="fas fa-pencil-ruler"></i></div><div class="pf-label">Design & Drawing</div><div class="pf-date">12 Jul</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle done"><i class="fas fa-cubes"></i></div><div class="pf-label">Material Procurement</div><div class="pf-date">18 Jul</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle done"><i class="fas fa-tools"></i></div><div class="pf-label">Tooling & Die Making</div><div class="pf-date">25 Jul</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle active"><i class="fas fa-flask"></i></div><div class="pf-label">Tool Trial & Sampling</div><div class="pf-date">03 Aug</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle pending"><i class="fas fa-microscope"></i></div><div class="pf-label">PPAP & Inspection</div><div class="pf-date">15 Aug</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle pending"><i class="fas fa-industry"></i></div><div class="pf-label">Mass Production</div><div class="pf-date">01 Sep</div></div>
-              <div class="pf-arrow">→</div>
-              <div class="pf-step"><div class="pf-circle pending"><i class="fas fa-truck"></i></div><div class="pf-label">Delivery</div><div class="pf-date">15 Sep</div></div>
+          <div
+            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+            <h2 style="margin: 0;"><i class="fas fa-project-diagram"
+                style="color: #2563eb; margin-right: 8px;"></i>Process Flow & Workflow Tracker</h2>
+            <div class="wf-controls" style="margin: 0; padding: 0; border: none;">
+              <select class="wf-template-select" id="wf-template-select" onchange="loadWorkflowTemplate(this.value)">
+                <option value="casting">Template: Casting (Engine Bracket)</option>
+                <option value="machining">Template: Machining (Engine Bracket)</option>
+                <option value="custom">Template: Custom (Blank)</option>
+              </select>
+              <button class="wf-btn wf-btn-primary" onclick="addNewWorkflowStep()"><i class="fas fa-plus"></i> Add
+                Step</button>
             </div>
           </div>
+
+          <!-- KPI Summary Dashboard -->
+          <div class="wf-dashboard">
+            <div class="wf-metric-card">
+              <span class="wf-metric-title">Workflow Completion</span>
+              <span class="wf-metric-val" id="wf-progress-pct">0%</span>
+            </div>
+            <div class="wf-metric-card">
+              <span class="wf-metric-title">Current Bottleneck</span>
+              <span class="wf-metric-val" id="wf-bottleneck"
+                style="font-size: 13px; font-weight: 600; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 250px;">None</span>
+            </div>
+            <div class="wf-metric-card">
+              <span class="wf-metric-title">Target Delivery</span>
+              <span class="wf-metric-val" id="wf-target-delivery">--</span>
+            </div>
+            <div class="wf-metric-card">
+              <span class="wf-metric-title">Total Active Days</span>
+              <span class="wf-metric-val" id="wf-active-days">0 days</span>
+            </div>
+          </div>
+
+          <div class="panel-card" style="margin-bottom: 16px;">
+            <div class="panel-card-header">
+              <h3>Manufacturing Visual Progress</h3>
+            </div>
+            <div class="process-flow" id="wf-visual-stepper">
+              <!-- Visual stepper nodes render dynamically here -->
+            </div>
+          </div>
+
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Detailed Process Steps</h3></div>
-            <table class="panel-table">
-              <tr><th>#</th><th>Process Step</th><th>Owner</th><th>Start Date</th><th>End Date</th><th>Status</th></tr>
-              <tr><td>1</td><td contenteditable="true">Release final drawing (V6)</td><td contenteditable="true">Engineering Head</td><td>12 Jul 2026</td><td>12 Jul 2026</td><td><span class="status completed">Completed</span></td></tr>
-              <tr><td>2</td><td contenteditable="true">Supplier selection & PO issue</td><td contenteditable="true">Purchaser</td><td>13 Jul 2026</td><td>01 Aug 2026</td><td><span class="status completed">Completed</span></td></tr>
-              <tr><td>3</td><td contenteditable="true">Raw material procurement (ADC12)</td><td contenteditable="true">Aashita Production</td><td>02 Aug 2026</td><td>10 Aug 2026</td><td><span class="status completed">Completed</span></td></tr>
-              <tr><td>4</td><td contenteditable="true">Die design & manufacturing</td><td contenteditable="true">Aashita Production</td><td>15 Jul 2026</td><td>28 Jul 2026</td><td><span class="status completed">Completed</span></td></tr>
-              <tr><td>5</td><td contenteditable="true">Tool trial & first article inspection</td><td contenteditable="true">Aashita Quality</td><td>03 Aug 2026</td><td>08 Aug 2026</td><td><span class="status in-progress">In Progress</span></td></tr>
-              <tr><td>6</td><td contenteditable="true">PPAP submission & approval</td><td contenteditable="true">Bajaj Quality</td><td>10 Aug 2026</td><td>18 Aug 2026</td><td><span class="status pending">Pending</span></td></tr>
-              <tr><td>7</td><td contenteditable="true">Mass production (5000 pcs)</td><td contenteditable="true">Aashita Production</td><td>20 Aug 2026</td><td>10 Sep 2026</td><td><span class="status pending">Pending</span></td></tr>
-              <tr><td>8</td><td contenteditable="true">Final inspection & dispatch</td><td contenteditable="true">Aashita Quality</td><td>11 Sep 2026</td><td>15 Sep 2026</td><td><span class="status pending">Pending</span></td></tr>
+            <div class="panel-card-header">
+              <h3>Detailed Process Steps & Owners</h3>
+            </div>
+            <table class="panel-table" style="table-layout: auto;">
+              <thead>
+                <tr>
+                  <th style="width: 40px; text-align: center;">#</th>
+                  <th>Process Step</th>
+                  <th>Owner</th>
+                  <th style="width: 140px;">Start Date</th>
+                  <th style="width: 140px;">End Date</th>
+                  <th style="width: 130px; text-align: center;">Status</th>
+                  <th style="width: 100px; text-align: center;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="wf-steps-tbody">
+                <!-- Detailed steps render dynamically here -->
+              </tbody>
             </table>
           </div>
         </div>
@@ -2698,36 +3635,115 @@
         <div class="tab-panel-inner">
           <h2><i class="fas fa-chart-pie" style="color: #2563eb; margin-right: 8px;"></i>Cost Analysis</h2>
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-val">₹12.45L</div><div class="stat-label">Total PO Value</div></div>
-            <div class="stat-card"><div class="stat-val">₹249</div><div class="stat-label">Unit Price</div></div>
-            <div class="stat-card"><div class="stat-val">₹3.50L</div><div class="stat-label">Tooling Cost</div></div>
-            <div class="stat-card"><div class="stat-val">8.2%</div><div class="stat-label">Cost Savings</div></div>
+            <div class="stat-card">
+              <div class="stat-val">₹12.45L</div>
+              <div class="stat-label">Total PO Value</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">₹249</div>
+              <div class="stat-label">Unit Price</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">₹3.50L</div>
+              <div class="stat-label">Tooling Cost</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">8.2%</div>
+              <div class="stat-label">Cost Savings</div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Cost Breakdown — Per Unit</h3></div>
+            <div class="panel-card-header">
+              <h3>Cost Breakdown — Per Unit</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Component</th><th>Cost (₹)</th><th>% of Total</th></tr>
-              <tr><td contenteditable="true">Raw Material (ADC12 Alloy)</td><td contenteditable="true">₹98.00</td><td contenteditable="true">39.4%</td></tr>
-              <tr><td contenteditable="true">Die Casting Process</td><td contenteditable="true">₹52.00</td><td contenteditable="true">20.9%</td></tr>
-              <tr><td contenteditable="true">CNC Machining</td><td contenteditable="true">₹38.00</td><td contenteditable="true">15.3%</td></tr>
-              <tr><td contenteditable="true">Surface Treatment (Shot Blast + Powder Coat)</td><td contenteditable="true">₹22.00</td><td contenteditable="true">8.8%</td></tr>
-              <tr><td contenteditable="true">Quality Inspection</td><td contenteditable="true">₹12.00</td><td contenteditable="true">4.8%</td></tr>
-              <tr><td contenteditable="true">Packaging & Logistics</td><td contenteditable="true">₹8.00</td><td contenteditable="true">3.2%</td></tr>
-              <tr><td contenteditable="true">Overheads & Margin</td><td contenteditable="true">₹19.00</td><td contenteditable="true">7.6%</td></tr>
-              <tr style="font-weight:700; background:#f1f5f9;"><td>Total</td><td>₹249.00</td><td>100%</td></tr>
+              <tr>
+                <th>Component</th>
+                <th>Cost (₹)</th>
+                <th>% of Total</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Raw Material (ADC12 Alloy)</td>
+                <td contenteditable="true">₹98.00</td>
+                <td contenteditable="true">39.4%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Die Casting Process</td>
+                <td contenteditable="true">₹52.00</td>
+                <td contenteditable="true">20.9%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">CNC Machining</td>
+                <td contenteditable="true">₹38.00</td>
+                <td contenteditable="true">15.3%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Surface Treatment (Shot Blast + Powder Coat)</td>
+                <td contenteditable="true">₹22.00</td>
+                <td contenteditable="true">8.8%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Quality Inspection</td>
+                <td contenteditable="true">₹12.00</td>
+                <td contenteditable="true">4.8%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Packaging & Logistics</td>
+                <td contenteditable="true">₹8.00</td>
+                <td contenteditable="true">3.2%</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Overheads & Margin</td>
+                <td contenteditable="true">₹19.00</td>
+                <td contenteditable="true">7.6%</td>
+              </tr>
+              <tr style="font-weight:700; background:#f1f5f9;">
+                <td>Total</td>
+                <td>₹249.00</td>
+                <td>100%</td>
+              </tr>
             </table>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Supplier Price Comparison</h3></div>
-            <div class="chart-placeholder"><i class="fas fa-chart-bar" style="font-size: 28px; margin-right: 10px;"></i> Bar chart: Aashita ₹249 vs XYZ ₹278 vs Sharma ₹262</div>
+            <div class="panel-card-header">
+              <h3>Supplier Price Comparison</h3>
+            </div>
+            <div class="chart-placeholder"><i class="fas fa-chart-bar" style="font-size: 28px; margin-right: 10px;"></i>
+              Bar chart: Aashita ₹249 vs XYZ ₹278 vs Sharma ₹262</div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Historical Price Trend</h3></div>
+            <div class="panel-card-header">
+              <h3>Historical Price Trend</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Period</th><th>Part</th><th>Previous Price</th><th>Current Price</th><th>Change</th></tr>
-              <tr><td>Q1 2026</td><td contenteditable="true">Engine Bracket V4</td><td contenteditable="true">₹271</td><td contenteditable="true">₹249</td><td style="color: #16a34a; font-weight: 600;">↓ 8.1%</td></tr>
-              <tr><td>Q4 2025</td><td contenteditable="true">Engine Bracket V3</td><td contenteditable="true">₹285</td><td contenteditable="true">₹271</td><td style="color: #16a34a; font-weight: 600;">↓ 4.9%</td></tr>
-              <tr><td>Q3 2025</td><td contenteditable="true">Engine Bracket V2</td><td contenteditable="true">₹295</td><td contenteditable="true">₹285</td><td style="color: #16a34a; font-weight: 600;">↓ 3.4%</td></tr>
+              <tr>
+                <th>Period</th>
+                <th>Part</th>
+                <th>Previous Price</th>
+                <th>Current Price</th>
+                <th>Change</th>
+              </tr>
+              <tr>
+                <td>Q1 2026</td>
+                <td contenteditable="true">Engine Bracket V4</td>
+                <td contenteditable="true">₹271</td>
+                <td contenteditable="true">₹249</td>
+                <td style="color: #16a34a; font-weight: 600;">↓ 8.1%</td>
+              </tr>
+              <tr>
+                <td>Q4 2025</td>
+                <td contenteditable="true">Engine Bracket V3</td>
+                <td contenteditable="true">₹285</td>
+                <td contenteditable="true">₹271</td>
+                <td style="color: #16a34a; font-weight: 600;">↓ 4.9%</td>
+              </tr>
+              <tr>
+                <td>Q3 2025</td>
+                <td contenteditable="true">Engine Bracket V2</td>
+                <td contenteditable="true">₹295</td>
+                <td contenteditable="true">₹285</td>
+                <td style="color: #16a34a; font-weight: 600;">↓ 3.4%</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -2738,21 +3754,91 @@
         <div class="tab-panel-inner">
           <h2><i class="fas fa-check-double" style="color: #2563eb; margin-right: 8px;"></i>Approvals</h2>
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-val">6</div><div class="stat-label">Total Approvals</div></div>
-            <div class="stat-card"><div class="stat-val" style="color: #16a34a;">5</div><div class="stat-label">Approved</div></div>
-            <div class="stat-card"><div class="stat-val" style="color: #d97706;">1</div><div class="stat-label">Pending</div></div>
-            <div class="stat-card"><div class="stat-val" style="color: #dc2626;">0</div><div class="stat-label">Rejected</div></div>
+            <div class="stat-card">
+              <div class="stat-val">6</div>
+              <div class="stat-label">Total Approvals</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val" style="color: #16a34a;">5</div>
+              <div class="stat-label">Approved</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val" style="color: #d97706;">1</div>
+              <div class="stat-label">Pending</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val" style="color: #dc2626;">0</div>
+              <div class="stat-label">Rejected</div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Approval Workflow</h3></div>
+            <div class="panel-card-header">
+              <h3>Approval Workflow</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Step</th><th>Approval Type</th><th>Approver</th><th>Submitted</th><th>Actioned</th><th>Status</th><th>Remarks</th></tr>
-              <tr><td>1</td><td contenteditable="true">Technical Drawing Approval</td><td contenteditable="true">bajaj.engineeringhead@aashita.ai</td><td>12 Jul 2026</td><td>12 Jul 2026</td><td><span class="status approved">Approved</span></td><td contenteditable="true">V6 final approved</td></tr>
-              <tr><td>2</td><td contenteditable="true">Supplier Selection Approval</td><td contenteditable="true">bajaj.planthead@aashita.ai</td><td>20 Jul 2026</td><td>21 Jul 2026</td><td><span class="status approved">Approved</span></td><td contenteditable="true">Aashita selected based on cost & quality</td></tr>
-              <tr><td>3</td><td contenteditable="true">Commercial Terms Approval</td><td contenteditable="true">bajaj.accounts@aashita.ai</td><td>22 Jul 2026</td><td>23 Jul 2026</td><td><span class="status approved">Approved</span></td><td contenteditable="true">Net 60 accepted</td></tr>
-              <tr><td>4</td><td contenteditable="true">PO Release Approval</td><td contenteditable="true">bajaj.purchaser@aashita.ai</td><td>28 Jul 2026</td><td>01 Aug 2026</td><td><span class="status approved">Approved</span></td><td contenteditable="true">PO-78291 issued</td></tr>
-              <tr><td>5</td><td contenteditable="true">Quality Plan Approval</td><td contenteditable="true">bajaj.quality@aashita.ai</td><td>25 Jul 2026</td><td>26 Jul 2026</td><td><span class="status approved">Approved</span></td><td contenteditable="true">Inspection plan signed off</td></tr>
-              <tr><td>6</td><td contenteditable="true">PPAP Approval</td><td contenteditable="true">bajaj.quality@aashita.ai</td><td>—</td><td>—</td><td><span class="status pending">Pending</span></td><td contenteditable="true">Awaiting tool trial samples</td></tr>
+              <tr>
+                <th>Step</th>
+                <th>Approval Type</th>
+                <th>Approver</th>
+                <th>Submitted</th>
+                <th>Actioned</th>
+                <th>Status</th>
+                <th>Remarks</th>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td contenteditable="true">Technical Drawing Approval</td>
+                <td contenteditable="true">bajaj.engineeringhead@aashita.ai</td>
+                <td>12 Jul 2026</td>
+                <td>12 Jul 2026</td>
+                <td><span class="status approved">Approved</span></td>
+                <td contenteditable="true">V6 final approved</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td contenteditable="true">Supplier Selection Approval</td>
+                <td contenteditable="true">bajaj.planthead@aashita.ai</td>
+                <td>20 Jul 2026</td>
+                <td>21 Jul 2026</td>
+                <td><span class="status approved">Approved</span></td>
+                <td contenteditable="true">Aashita selected based on cost & quality</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td contenteditable="true">Commercial Terms Approval</td>
+                <td contenteditable="true">bajaj.accounts@aashita.ai</td>
+                <td>22 Jul 2026</td>
+                <td>23 Jul 2026</td>
+                <td><span class="status approved">Approved</span></td>
+                <td contenteditable="true">Net 60 accepted</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td contenteditable="true">PO Release Approval</td>
+                <td contenteditable="true">bajaj.purchaser@aashita.ai</td>
+                <td>28 Jul 2026</td>
+                <td>01 Aug 2026</td>
+                <td><span class="status approved">Approved</span></td>
+                <td contenteditable="true">PO-78291 issued</td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td contenteditable="true">Quality Plan Approval</td>
+                <td contenteditable="true">bajaj.quality@aashita.ai</td>
+                <td>25 Jul 2026</td>
+                <td>26 Jul 2026</td>
+                <td><span class="status approved">Approved</span></td>
+                <td contenteditable="true">Inspection plan signed off</td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td contenteditable="true">PPAP Approval</td>
+                <td contenteditable="true">bajaj.quality@aashita.ai</td>
+                <td>—</td>
+                <td>—</td>
+                <td><span class="status pending">Pending</span></td>
+                <td contenteditable="true">Awaiting tool trial samples</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -2763,15 +3849,81 @@
         <div class="tab-panel-inner">
           <h2><i class="fas fa-stream" style="color: #2563eb; margin-right: 8px;"></i>Activity Timeline</h2>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Recent Activity</h3></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #2563eb;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Production plan initiated by bajaj.production@aashita.ai</div><div class="tl-desc" contenteditable="true">Tool trial scheduled for 03 Aug 2026. Reports will follow after sample inspection.</div></div><div class="tl-time">06 Aug 2026<br>09:25 AM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #22c55e;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">RFQ closed and PO-78291 issued</div><div class="tl-desc" contenteditable="true">Aashita Enterprises selected. Production & quality teams pulled into workspace.</div></div><div class="tl-time">01 Aug 2026<br>04:28 PM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #f59e0b;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Price negotiation completed</div><div class="tl-desc" contenteditable="true">Final unit price agreed at ₹249 with 15-day validity. Delivery: 15 Sep 2026.</div></div><div class="tl-time">28 Jul 2026<br>03:15 PM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #7c3aed;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Quality inspection plan approved</div><div class="tl-desc" contenteditable="true">bajaj.quality@aashita.ai approved the PPAP checklist and inspection plan.</div></div><div class="tl-time">26 Jul 2026<br>11:40 AM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #2563eb;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Quotations received from 2 suppliers</div><div class="tl-desc" contenteditable="true">Aashita Enterprises: ₹249/unit. XYZ Castings: ₹278/unit. Sharma Metals did not respond.</div></div><div class="tl-time">16 Jul 2026<br>06:00 PM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #22c55e;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">RFQ sent to 3 suppliers</div><div class="tl-desc" contenteditable="true">Aashita Enterprises, XYZ Castings Pvt. Ltd., and Sharma Metals & Sons.</div></div><div class="tl-time">12 Jul 2026<br>10:20 AM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #2563eb;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Drawing V6 uploaded by Engineering Head</div><div class="tl-desc" contenteditable="true">Final engineering drawing and specifications attached. Shared with all stakeholders.</div></div><div class="tl-time">12 Jul 2026<br>10:15 AM</div></div>
-            <div class="timeline-item"><div class="tl-dot" style="background: #64748b;"></div><div class="tl-content"><div class="tl-title" contenteditable="true">Requirement REQ-250801 - Engine Bracket (Casting) requirement created by bajaj.planthead@aashita.ai.</div></div><div class="tl-time">12 Jul 2026<br>09:00 AM</div></div>
+            <div class="panel-card-header">
+              <h3>Recent Activity</h3>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #2563eb;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Production plan initiated by bajaj.production@aashita.ai
+                </div>
+                <div class="tl-desc" contenteditable="true">Tool trial scheduled for 03 Aug 2026. Reports will follow
+                  after sample inspection.</div>
+              </div>
+              <div class="tl-time">06 Aug 2026<br>09:25 AM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #22c55e;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">RFQ closed and PO-78291 issued</div>
+                <div class="tl-desc" contenteditable="true">Aashita Enterprises selected. Production & quality teams
+                  pulled into workspace.</div>
+              </div>
+              <div class="tl-time">01 Aug 2026<br>04:28 PM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #f59e0b;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Price negotiation completed</div>
+                <div class="tl-desc" contenteditable="true">Final unit price agreed at ₹249 with 15-day validity.
+                  Delivery: 15 Sep 2026.</div>
+              </div>
+              <div class="tl-time">28 Jul 2026<br>03:15 PM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #7c3aed;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Quality inspection plan approved</div>
+                <div class="tl-desc" contenteditable="true">bajaj.quality@aashita.ai approved the PPAP checklist and
+                  inspection plan.</div>
+              </div>
+              <div class="tl-time">26 Jul 2026<br>11:40 AM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #2563eb;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Quotations received from 2 suppliers</div>
+                <div class="tl-desc" contenteditable="true">Aashita Enterprises: ₹249/unit. XYZ Castings: ₹278/unit.
+                  Sharma Metals did not respond.</div>
+              </div>
+              <div class="tl-time">16 Jul 2026<br>06:00 PM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #22c55e;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">RFQ sent to 3 suppliers</div>
+                <div class="tl-desc" contenteditable="true">Aashita Enterprises, XYZ Castings Pvt. Ltd., and Sharma
+                  Metals & Sons.</div>
+              </div>
+              <div class="tl-time">12 Jul 2026<br>10:20 AM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #2563eb;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Drawing V6 uploaded by Engineering Head</div>
+                <div class="tl-desc" contenteditable="true">Final engineering drawing and specifications attached.
+                  Shared with all stakeholders.</div>
+              </div>
+              <div class="tl-time">12 Jul 2026<br>10:15 AM</div>
+            </div>
+            <div class="timeline-item">
+              <div class="tl-dot" style="background: #64748b;"></div>
+              <div class="tl-content">
+                <div class="tl-title" contenteditable="true">Requirement REQ-250801 - Engine Bracket (Casting)
+                  requirement created by bajaj.planthead@aashita.ai.</div>
+              </div>
+              <div class="tl-time">12 Jul 2026<br>09:00 AM</div>
+            </div>
           </div>
         </div>
       </div>
@@ -2781,36 +3933,109 @@
         <div class="tab-panel-inner">
           <h2><i class="fas fa-chart-area" style="color: #2563eb; margin-right: 8px;"></i>Reports</h2>
           <div class="stat-grid">
-            <div class="stat-card"><div class="stat-val">28</div><div class="stat-label">Days to Close</div></div>
-            <div class="stat-card"><div class="stat-val">97%</div><div class="stat-label">On-Time Progress</div></div>
-            <div class="stat-card"><div class="stat-val">₹1.1L</div><div class="stat-label">Cost Saved</div></div>
-            <div class="stat-card"><div class="stat-val">4.8/5</div><div class="stat-label">Supplier Rating</div></div>
+            <div class="stat-card">
+              <div class="stat-val">28</div>
+              <div class="stat-label">Days to Close</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">97%</div>
+              <div class="stat-label">On-Time Progress</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">₹1.1L</div>
+              <div class="stat-label">Cost Saved</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-val">4.8/5</div>
+              <div class="stat-label">Supplier Rating</div>
+            </div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Cycle Time Analysis</h3></div>
-            <div class="chart-placeholder"><i class="fas fa-chart-line" style="font-size: 28px; margin-right: 10px;"></i> Line chart: Requirement → Closure in 28 days (Target: 30 days)</div>
+            <div class="panel-card-header">
+              <h3>Cycle Time Analysis</h3>
+            </div>
+            <div class="chart-placeholder"><i class="fas fa-chart-line"
+                style="font-size: 28px; margin-right: 10px;"></i> Line chart: Requirement → Closure in 28 days (Target:
+              30 days)</div>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Supplier Performance Summary</h3></div>
+            <div class="panel-card-header">
+              <h3>Supplier Performance Summary</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Metric</th><th>Aashita Enterprises</th><th>XYZ Castings</th><th>Sharma Metals</th></tr>
-              <tr><td contenteditable="true">Quote Response Time</td><td contenteditable="true">2 days</td><td contenteditable="true">4 days</td><td contenteditable="true">No Response</td></tr>
-              <tr><td contenteditable="true">Price Competitiveness</td><td contenteditable="true">★★★★★</td><td contenteditable="true">★★★☆☆</td><td contenteditable="true">★★★★☆</td></tr>
-              <tr><td contenteditable="true">Quality Certifications</td><td contenteditable="true">IATF 16949, ISO 14001</td><td contenteditable="true">ISO 9001</td><td contenteditable="true">ISO 9001</td></tr>
-              <tr><td contenteditable="true">Past Delivery Performance</td><td contenteditable="true">98% On-Time</td><td contenteditable="true">92% On-Time</td><td contenteditable="true">88% On-Time</td></tr>
-              <tr><td contenteditable="true">Defect Rate (PPM)</td><td contenteditable="true">120 PPM</td><td contenteditable="true">350 PPM</td><td contenteditable="true">480 PPM</td></tr>
-              <tr><td contenteditable="true">Overall Rating</td><td style="color: #16a34a; font-weight: 700;" contenteditable="true">4.8 / 5.0</td><td contenteditable="true">3.5 / 5.0</td><td contenteditable="true">3.2 / 5.0</td></tr>
+              <tr>
+                <th>Metric</th>
+                <th>Aashita Enterprises</th>
+                <th>XYZ Castings</th>
+                <th>Sharma Metals</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Quote Response Time</td>
+                <td contenteditable="true">2 days</td>
+                <td contenteditable="true">4 days</td>
+                <td contenteditable="true">No Response</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Price Competitiveness</td>
+                <td contenteditable="true">★★★★★</td>
+                <td contenteditable="true">★★★☆☆</td>
+                <td contenteditable="true">★★★★☆</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Quality Certifications</td>
+                <td contenteditable="true">IATF 16949, ISO 14001</td>
+                <td contenteditable="true">ISO 9001</td>
+                <td contenteditable="true">ISO 9001</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Past Delivery Performance</td>
+                <td contenteditable="true">98% On-Time</td>
+                <td contenteditable="true">92% On-Time</td>
+                <td contenteditable="true">88% On-Time</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Defect Rate (PPM)</td>
+                <td contenteditable="true">120 PPM</td>
+                <td contenteditable="true">350 PPM</td>
+                <td contenteditable="true">480 PPM</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Overall Rating</td>
+                <td style="color: #16a34a; font-weight: 700;" contenteditable="true">4.8 / 5.0</td>
+                <td contenteditable="true">3.5 / 5.0</td>
+                <td contenteditable="true">3.2 / 5.0</td>
+              </tr>
             </table>
           </div>
           <div class="panel-card">
-            <div class="panel-card-header"><h3>Communication Stats</h3></div>
+            <div class="panel-card-header">
+              <h3>Communication Stats</h3>
+            </div>
             <table class="panel-table">
-              <tr><th>Metric</th><th>Value</th></tr>
-              <tr><td contenteditable="true">Total Messages Exchanged</td><td contenteditable="true">147</td></tr>
-              <tr><td contenteditable="true">Documents Shared</td><td contenteditable="true">12</td></tr>
-              <tr><td contenteditable="true">Active Participants</td><td contenteditable="true">10</td></tr>
-              <tr><td contenteditable="true">Avg. Response Time</td><td contenteditable="true">2.3 hours</td></tr>
-              <tr><td contenteditable="true">Escalations</td><td contenteditable="true">0</td></tr>
+              <tr>
+                <th>Metric</th>
+                <th>Value</th>
+              </tr>
+              <tr>
+                <td contenteditable="true">Total Messages Exchanged</td>
+                <td contenteditable="true">147</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Documents Shared</td>
+                <td contenteditable="true">12</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Active Participants</td>
+                <td contenteditable="true">10</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Avg. Response Time</td>
+                <td contenteditable="true">2.3 hours</td>
+              </tr>
+              <tr>
+                <td contenteditable="true">Escalations</td>
+                <td contenteditable="true">0</td>
+              </tr>
             </table>
           </div>
         </div>
@@ -2842,7 +4067,10 @@
         if (targetTab) {
           document.getElementById(targetTab).classList.add('active');
         }
-        
+        if (targetTab === 'tab-process') {
+          if (typeof renderWorkflow === 'function') renderWorkflow();
+        }
+
         // Toggle sidebar based on active tab
         const sidebar = document.querySelector('.sidebar');
         if (sidebar) {
@@ -2888,7 +4116,7 @@
     });
 
     // Panel view dropdown toggle
-    document.getElementById('panelViewSelect').addEventListener('change', function() {
+    document.getElementById('panelViewSelect').addEventListener('change', function () {
       document.querySelectorAll('.panel-view').forEach(v => v.classList.remove('active'));
       document.getElementById(this.value).classList.add('active');
     });
@@ -2906,13 +4134,13 @@
       title.addEventListener('click', function () {
         const icon = this.querySelector('i');
         const isCollapsing = icon.classList.contains('fa-chevron-down');
-        
+
         if (isCollapsing) {
           icon.classList.replace('fa-chevron-down', 'fa-chevron-right');
         } else {
           icon.classList.replace('fa-chevron-right', 'fa-chevron-down');
         }
-        
+
         let sibling = this.nextElementSibling;
         while (sibling && !sibling.classList.contains('chat-section-title')) {
           if (isCollapsing) {
@@ -3023,20 +4251,20 @@
 
     // Individual chat item switching
     document.querySelectorAll('.indiv-chat-item').forEach(item => {
-      item.addEventListener('click', function() {
+      item.addEventListener('click', function () {
         document.querySelectorAll('.indiv-chat-item').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
 
         const email = this.querySelector('.ic-email').innerText.trim();
         const chatData = dummyChats[email];
-        
+
         if (chatData) {
           document.querySelector('.chat-title-section h2').innerText = chatData.title;
           document.querySelector('.chat-subtitle').innerText = chatData.subtitle;
-          
+
           const messagesContainer = document.querySelector('.chat-messages');
           messagesContainer.innerHTML = '';
-          
+
           chatData.messages.forEach(msg => {
             if (msg.type === 'system') {
               messagesContainer.innerHTML += `<div class="system-msg"><div class="sys-text"><i class="fas fa-info-circle"></i> <span>${msg.text}</span></div></div>`;
@@ -3057,7 +4285,7 @@
               `;
             }
           });
-          
+
           messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
       });
@@ -3068,7 +4296,7 @@
       item.addEventListener('click', function () {
         document.querySelectorAll('.chat-item').forEach(c => c.classList.remove('active'));
         this.classList.add('active');
-        
+
         // Restore org chat
         document.querySelector('.chat-title-section h2').innerText = orgChatTitle;
         document.querySelector('.chat-subtitle').innerText = orgChatSubtitle;
@@ -3078,7 +4306,7 @@
 
     // Filter tabs (Individual Chats)
     document.querySelectorAll('.filter-tab').forEach(tab => {
-      tab.addEventListener('click', function() {
+      tab.addEventListener('click', function () {
         document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
         this.classList.add('active');
         const filter = this.dataset.filter;
@@ -3090,7 +4318,8 @@
           } else {
             item.style.display = item.dataset.org === filter ? '' : 'none';
           }
-        });
+
+        });
       });
     });
 
@@ -3115,6 +4344,364 @@
         messagesContainer.scrollTop = messagesContainer.scrollHeight;
         this.value = '';
       }
+    });
+
+    // ===== PROCESS TRACKING WORKFLOW LOGIC =====
+    const wfTemplates = {
+      casting: [
+        { id: 1, label: "Design & Drawing", owner: "Engineering Head", startDate: "2026-07-12", endDate: "2026-07-12", status: "completed", icon: "fa-pencil-ruler" },
+        { id: 2, label: "Material Procurement", owner: "Aashita Production", startDate: "2026-07-13", endDate: "2026-08-01", status: "completed", icon: "fa-cubes" },
+        { id: 3, label: "Tooling & Die Making", owner: "Aashita Production", startDate: "2026-07-15", endDate: "2026-07-28", status: "completed", icon: "fa-tools" },
+        { id: 4, label: "Tool Trial & Sampling", owner: "Aashita Quality", startDate: "2026-08-03", endDate: "2026-08-08", status: "in-progress", icon: "fa-flask" },
+        { id: 5, label: "PPAP & Inspection", owner: "Bajaj Quality", startDate: "2026-08-10", endDate: "2026-08-18", status: "pending", icon: "fa-microscope" },
+        { id: 6, label: "Mass Production", owner: "Aashita Production", startDate: "2026-08-20", endDate: "2026-09-10", status: "pending", icon: "fa-industry" },
+        { id: 7, label: "Delivery", owner: "Aashita Quality", startDate: "2026-09-11", endDate: "2026-09-15", status: "pending", icon: "fa-truck" }
+      ],
+      machining: [
+        { id: 1, label: "Design Feasibility", owner: "Vivek Joshi (Bajaj)", startDate: "2026-08-01", endDate: "2026-08-03", status: "completed", icon: "fa-pencil-ruler" },
+        { id: 2, label: "Fixture Manufacturing", owner: "Manoj Kumar (Shree)", startDate: "2026-08-04", endDate: "2026-08-10", status: "completed", icon: "fa-tools" },
+        { id: 3, label: "First Part Trial", owner: "Rajesh Gupta (Shree)", startDate: "2026-08-11", endDate: "2026-08-13", status: "in-progress", icon: "fa-flask" },
+        { id: 4, label: "Quality Inspection", owner: "Vivek Joshi (Bajaj)", startDate: "2026-08-14", endDate: "2026-08-15", status: "pending", icon: "fa-check-double" },
+        { id: 5, label: "Batch CNC Run", owner: "Manoj Kumar (Shree)", startDate: "2026-08-16", endDate: "2026-08-28", status: "pending", icon: "fa-industry" },
+        { id: 6, label: "Final Dispatch", owner: "Rajesh Gupta (Shree)", startDate: "2026-08-29", endDate: "2026-08-30", status: "pending", icon: "fa-truck" }
+      ],
+      custom: [
+        { id: 1, label: "Requirement Analysis", owner: "Purchaser", startDate: "2026-08-07", endDate: "2026-08-10", status: "in-progress", icon: "fa-clipboard-list" }
+      ]
+    };
+
+    let currentWorkflow = [];
+
+    // Load initial workflow
+    function initWorkflow() {
+      const saved = localStorage.getItem('supplylink_workflow');
+      const savedTemplate = localStorage.getItem('supplylink_workflow_template') || 'casting';
+
+      const selectEl = document.getElementById('wf-template-select');
+      if (selectEl) selectEl.value = savedTemplate;
+
+      if (saved) {
+        try {
+          currentWorkflow = JSON.parse(saved);
+        } catch (e) {
+          currentWorkflow = [...wfTemplates.casting];
+        }
+      } else {
+        currentWorkflow = [...wfTemplates.casting];
+      }
+      renderWorkflow();
+    }
+
+    function saveWorkflow() {
+      localStorage.setItem('supplylink_workflow', JSON.stringify(currentWorkflow));
+      const selectEl = document.getElementById('wf-template-select');
+      if (selectEl) {
+        localStorage.setItem('supplylink_workflow_template', selectEl.value);
+      }
+    }
+
+    function loadWorkflowTemplate(templateKey) {
+      if (wfTemplates[templateKey]) {
+        currentWorkflow = JSON.parse(JSON.stringify(wfTemplates[templateKey])); // deep copy
+        saveWorkflow();
+        renderWorkflow();
+      }
+    }
+
+    function formatDateLabel(dateStr) {
+      if (!dateStr) return '--';
+      const parts = dateStr.split('-');
+      if (parts.length !== 3) return dateStr;
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const dateObj = new Date(parts[0], parts[1] - 1, parts[2]);
+      if (isNaN(dateObj)) return dateStr;
+      return dateObj.getDate() + ' ' + monthNames[dateObj.getMonth()];
+    }
+
+    function escapeHtml(text) {
+      const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#039;'
+      };
+      return String(text).replace(/[&<>"']/g, function (m) { return map[m]; });
+    }
+
+    function renderWorkflow() {
+      renderVisualStepper(currentWorkflow);
+      renderStepsTable(currentWorkflow);
+      updateWorkflowMetrics(currentWorkflow);
+    }
+
+    function renderVisualStepper(steps) {
+      const container = document.getElementById('wf-visual-stepper');
+      if (!container) return;
+      container.innerHTML = '';
+
+      if (steps.length === 0) {
+        container.innerHTML = '<div style="padding: 10px; color: #64748b; font-size: 12px; font-weight: 500;">No workflow steps defined. Click "Add Step" to build your workflow!</div>';
+        return;
+      }
+
+      steps.forEach((step, idx) => {
+        const stepDiv = document.createElement('div');
+        stepDiv.className = 'pf-step';
+        stepDiv.onclick = function () { scrollToTableRow(idx); };
+
+        const circleDiv = document.createElement('div');
+        circleDiv.className = `pf-circle ${step.status}`;
+
+        const iconClass = step.status === 'completed' ? 'fa-check' : (step.icon || 'fa-cog');
+        circleDiv.innerHTML = `<i class="fas ${iconClass}"></i>`;
+
+        const labelDiv = document.createElement('div');
+        labelDiv.className = 'pf-label';
+        labelDiv.innerText = step.label || `Step ${idx + 1}`;
+
+        const dateDiv = document.createElement('div');
+        dateDiv.className = 'pf-date';
+        dateDiv.innerText = formatDateLabel(step.endDate);
+
+        stepDiv.appendChild(circleDiv);
+        stepDiv.appendChild(labelDiv);
+        stepDiv.appendChild(dateDiv);
+        container.appendChild(stepDiv);
+
+        if (idx < steps.length - 1) {
+          const arrowDiv = document.createElement('div');
+          let arrowStatus = '';
+          if (step.status === 'completed') {
+            arrowStatus = 'done';
+          } else if (step.status === 'in-progress') {
+            arrowStatus = 'active';
+          }
+          arrowDiv.className = `pf-arrow ${arrowStatus}`;
+          arrowDiv.innerHTML = '→';
+          container.appendChild(arrowDiv);
+        }
+      });
+    }
+
+    function renderStepsTable(steps) {
+      const tbody = document.getElementById('wf-steps-tbody');
+      if (!tbody) return;
+      tbody.innerHTML = '';
+
+      if (steps.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 20px; color: #64748b; font-style: italic;">No steps found. Click "Add Step" to create one.</td></tr>';
+        return;
+      }
+
+      steps.forEach((step, idx) => {
+        const tr = document.createElement('tr');
+        tr.id = `wf-row-${idx}`;
+        tr.style.transition = 'background-color 0.25s';
+
+        tr.innerHTML = `
+          <td style="text-align: center; font-weight: 600; color: #64748b;">${idx + 1}</td>
+          <td>
+            <input type="text" class="wf-table-input" value="${escapeHtml(step.label)}" onchange="updateStepField(${idx}, 'label', this.value)">
+          </td>
+          <td>
+            <input type="text" class="wf-table-input" value="${escapeHtml(step.owner)}" onchange="updateStepField(${idx}, 'owner', this.value)">
+          </td>
+          <td>
+            <input type="date" class="wf-table-input" value="${step.startDate || ''}" onchange="updateStepField(${idx}, 'startDate', this.value)">
+          </td>
+          <td>
+            <input type="date" class="wf-table-input" value="${step.endDate || ''}" onchange="updateStepField(${idx}, 'endDate', this.value)">
+          </td>
+          <td style="text-align: center;">
+            <select class="wf-status-select ${step.status}" onchange="updateStepStatus(${idx}, this.value)">
+              <option value="completed" ${step.status === 'completed' ? 'selected' : ''}>Completed</option>
+              <option value="in-progress" ${step.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+              <option value="pending" ${step.status === 'pending' ? 'selected' : ''}>Pending</option>
+            </select>
+          </td>
+          <td style="text-align: center;">
+            <div class="wf-action-btn-row">
+              <button class="wf-icon-btn move-btn" onclick="moveStep(${idx}, -1)" ${idx === 0 ? 'disabled' : ''} title="Move Up"><i class="fas fa-chevron-up"></i></button>
+              <button class="wf-icon-btn move-btn" onclick="moveStep(${idx}, 1)" ${idx === steps.length - 1 ? 'disabled' : ''} title="Move Down"><i class="fas fa-chevron-down"></i></button>
+              <button class="wf-icon-btn delete" onclick="deleteWorkflowStep(${idx})" title="Delete Step"><i class="fas fa-trash-alt"></i></button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    function updateWorkflowMetrics(steps) {
+      const progressPctEl = document.getElementById('wf-progress-pct');
+      const bottleneckEl = document.getElementById('wf-bottleneck');
+      const targetDeliveryEl = document.getElementById('wf-target-delivery');
+      const activeDaysEl = document.getElementById('wf-active-days');
+
+      if (steps.length === 0) {
+        if (progressPctEl) progressPctEl.innerText = '0%';
+        if (bottleneckEl) bottleneckEl.innerText = 'None';
+        if (targetDeliveryEl) targetDeliveryEl.innerText = '--';
+        if (activeDaysEl) activeDaysEl.innerText = '0 days';
+        return;
+      }
+
+      // Calculate progress pct
+      const completedCount = steps.filter(s => s.status === 'completed').length;
+      const progressPct = Math.round((completedCount / steps.length) * 100);
+      if (progressPctEl) progressPctEl.innerText = `${progressPct}%`;
+
+      // Calculate bottleneck
+      let bottleneck = null;
+      bottleneck = steps.find(s => s.status === 'in-progress');
+      if (!bottleneck) {
+        bottleneck = steps.find(s => s.status === 'pending');
+      }
+
+      if (bottleneckEl) {
+        if (bottleneck) {
+          bottleneckEl.innerHTML = `<span style="color:#e11d48;font-weight:700;">${escapeHtml(bottleneck.label)}</span><br><span style="font-size:10px;color:#64748b;">Owner: ${escapeHtml(bottleneck.owner)}</span>`;
+        } else {
+          bottleneckEl.innerHTML = '<span style="color:#16a34a;font-weight:700;">All Steps Completed!</span>';
+        }
+      }
+
+      // Target Delivery (end date of last step)
+      let targetDate = steps[steps.length - 1].endDate;
+      if (targetDeliveryEl) {
+        if (targetDate) {
+          const parts = targetDate.split('-');
+          if (parts.length === 3) {
+            const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+            targetDeliveryEl.innerText = `${parts[2]} ${months[parseInt(parts[1]) - 1]} ${parts[0]}`;
+          } else {
+            targetDeliveryEl.innerText = targetDate;
+          }
+        } else {
+          targetDeliveryEl.innerText = '--';
+        }
+      }
+
+      // Total Active Days
+      let firstDate = steps[0].startDate;
+      if (firstDate && targetDate) {
+        const startObj = new Date(firstDate);
+        const endObj = new Date(targetDate);
+        const diffTime = Math.abs(endObj - startObj);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        if (activeDaysEl) {
+          activeDaysEl.innerText = isNaN(diffDays) ? '0 days' : `${diffDays} days`;
+        }
+      } else {
+        if (activeDaysEl) activeDaysEl.innerText = '--';
+      }
+    }
+
+    function updateStepField(index, field, value) {
+      if (currentWorkflow[index]) {
+        currentWorkflow[index][field] = value;
+        saveWorkflow();
+        updateWorkflowMetrics(currentWorkflow);
+        if (field === 'label' || field === 'endDate') {
+          renderVisualStepper(currentWorkflow);
+        }
+      }
+    }
+
+    function updateStepStatus(index, statusValue) {
+      if (currentWorkflow[index]) {
+        currentWorkflow[index].status = statusValue;
+        saveWorkflow();
+        renderWorkflow();
+      }
+    }
+
+    function addNewWorkflowStep() {
+      let defaultStart = "2026-08-07";
+      let defaultEnd = "2026-08-10";
+      if (currentWorkflow.length > 0) {
+        const lastStep = currentWorkflow[currentWorkflow.length - 1];
+        if (lastStep.endDate) {
+          defaultStart = lastStep.endDate;
+          const dateObj = new Date(lastStep.endDate);
+          dateObj.setDate(dateObj.getDate() + 3);
+          const y = dateObj.getFullYear();
+          const m = String(dateObj.getMonth() + 1).padStart(2, '0');
+          const d = String(dateObj.getDate()).padStart(2, '0');
+          defaultEnd = `${y}-${m}-${d}`;
+        }
+      }
+
+      const newStep = {
+        id: Date.now(),
+        label: "New Step",
+        owner: "Assignee",
+        startDate: defaultStart,
+        endDate: defaultEnd,
+        status: "pending",
+        icon: "fa-cog"
+      };
+
+      currentWorkflow.push(newStep);
+      saveWorkflow();
+      renderWorkflow();
+
+      setTimeout(() => {
+        const newRow = document.getElementById(`wf-row-${currentWorkflow.length - 1}`);
+        if (newRow) {
+          newRow.style.backgroundColor = '#eff6ff';
+          newRow.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          setTimeout(() => {
+            newRow.style.backgroundColor = '';
+          }, 1500);
+        }
+      }, 100);
+    }
+
+    function deleteWorkflowStep(index) {
+      if (confirm(`Are you sure you want to delete step ${index + 1}: "${currentWorkflow[index].label}"?`)) {
+        currentWorkflow.splice(index, 1);
+        saveWorkflow();
+        renderWorkflow();
+      }
+    }
+
+    // Move step order
+    function moveStep(index, direction) {
+      const targetIndex = index + direction;
+      if (targetIndex >= 0 && targetIndex < currentWorkflow.length) {
+        const temp = currentWorkflow[index];
+        currentWorkflow[index] = currentWorkflow[targetIndex];
+        currentWorkflow[targetIndex] = temp;
+        saveWorkflow();
+        renderWorkflow();
+
+        setTimeout(() => {
+          const shiftedRow = document.getElementById(`wf-row-${targetIndex}`);
+          if (shiftedRow) {
+            shiftedRow.style.backgroundColor = '#f0fdf4';
+            setTimeout(() => {
+              shiftedRow.style.backgroundColor = '';
+            }, 1000);
+          }
+        }, 50);
+      }
+    }
+
+    function scrollToTableRow(index) {
+      const row = document.getElementById(`wf-row-${index}`);
+      if (row) {
+        row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        row.style.backgroundColor = '#fef3c7';
+        setTimeout(() => {
+          row.style.backgroundColor = '';
+        }, 1500);
+      }
+    }
+
+    // Bind initialization
+    document.addEventListener('DOMContentLoaded', function () {
+      initWorkflow();
     });
   </script>
 
@@ -3155,7 +4742,7 @@
       list.innerHTML = '';
       selectedMembers.clear();
       updateInviteUI();
-      
+
       teamMembers.forEach((member, index) => {
         const item = document.createElement('div');
         item.className = 'member-item';
@@ -3190,7 +4777,7 @@
     function updateInviteUI() {
       const groupInput = document.getElementById('groupNameInput');
       const inviteBtn = document.getElementById('inviteBtn');
-      
+
       if (selectedMembers.size > 1) {
         groupInput.style.display = 'block';
         inviteBtn.innerText = 'Create Group';
@@ -3216,7 +4803,7 @@
       }
       closePullTeamsModal();
     }
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const dropdown = document.getElementById('mainReqDropdown');
       if (dropdown && dropdown.classList.contains('show') && !e.target.closest('.req-title-wrapper')) {
         dropdown.classList.remove('show');
@@ -3227,7 +4814,7 @@
     function openNdaModal() {
       document.getElementById('ndaModal').classList.add('active');
     }
-    
+
     function closeNdaModal() {
       document.getElementById('ndaModal').classList.remove('active');
     }
@@ -3265,38 +4852,57 @@
         <div style="display: flex; gap: 20px;">
           <div style="flex: 2;">
             <h4 style="margin-bottom: 10px; font-size: 13px; font-weight: 600; color: #0f172a;">Document Preview</h4>
-            <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; height: 320px; overflow-y: auto; background: #f8fafc; font-size: 11px; color: #475569; line-height: 1.6;">
+            <div
+              style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 16px; height: 320px; overflow-y: auto; background: #f8fafc; font-size: 11px; color: #475569; line-height: 1.6;">
               <p><strong style="color: #0f172a;">MUTUAL NON-DISCLOSURE AGREEMENT</strong></p>
-              <p>This Mutual Non-Disclosure Agreement (this "Agreement") is entered into as of July 12, 2026, by and between Bajaj Auto Ltd. ("Disclosing Party") and the undersigned Supplier ("Receiving Party").</p>
+              <p>This Mutual Non-Disclosure Agreement (this "Agreement") is entered into as of July 12, 2026, by and
+                between Bajaj Auto Ltd. ("Disclosing Party") and the undersigned Supplier ("Receiving Party").</p>
               <br />
-              <p><strong style="color: #0f172a;">1. Confidential Information.</strong> "Confidential Information" means any and all technical and non-technical information provided by either party to the other...</p>
+              <p><strong style="color: #0f172a;">1. Confidential Information.</strong> "Confidential Information" means
+                any and all technical and non-technical information provided by either party to the other...</p>
               <br />
-              <p><strong style="color: #0f172a;">2. Non-Use and Non-Disclosure.</strong> The Receiving Party agrees not to use any Confidential Information for any purpose except to evaluate and engage in discussions regarding the proposed business relationship.</p>
+              <p><strong style="color: #0f172a;">2. Non-Use and Non-Disclosure.</strong> The Receiving Party agrees not
+                to use any Confidential Information for any purpose except to evaluate and engage in discussions
+                regarding the proposed business relationship.</p>
               <br />
-              <p><strong style="color: #0f172a;">3. Maintenance of Confidentiality.</strong> The Receiving Party agrees that it shall take reasonable measures to protect the secrecy of and avoid disclosure and unauthorized use of the Confidential Information of the Disclosing Party.</p>
+              <p><strong style="color: #0f172a;">3. Maintenance of Confidentiality.</strong> The Receiving Party agrees
+                that it shall take reasonable measures to protect the secrecy of and avoid disclosure and unauthorized
+                use of the Confidential Information of the Disclosing Party.</p>
             </div>
           </div>
           <div style="flex: 1;">
             <h4 style="margin-bottom: 10px; font-size: 13px; font-weight: 600; color: #0f172a;">Signatures</h4>
             <div style="display: flex; flex-direction: column; gap: 10px;">
-              <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
-                <div class="ic-avatar av-green" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">BE</div>
+              <div
+                style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
+                <div class="ic-avatar av-green" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">BE
+                </div>
                 <div style="min-width: 0;">
-                  <div style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">bajaj.eng...</div>
+                  <div
+                    style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    bajaj.eng...</div>
                   <div style="font-size: 10px; color: #22c55e;">Signed 12 Jul</div>
                 </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
-                <div class="ic-avatar av-green" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">AS</div>
+              <div
+                style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
+                <div class="ic-avatar av-green" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">AS
+                </div>
                 <div style="min-width: 0;">
-                  <div style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">aashita.sales...</div>
+                  <div
+                    style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    aashita.sales...</div>
                   <div style="font-size: 10px; color: #22c55e;">Signed 13 Jul</div>
                 </div>
               </div>
-              <div style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
-                <div class="ic-avatar av-yellow" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">XY</div>
+              <div
+                style="display: flex; align-items: center; gap: 8px; padding: 10px; border: 1px solid #e2e8f0; border-radius: 6px; background: #fff;">
+                <div class="ic-avatar av-yellow" style="width: 28px; height: 28px; font-size: 10px; flex-shrink: 0;">XY
+                </div>
                 <div style="min-width: 0;">
-                  <div style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">xyz.sales...</div>
+                  <div
+                    style="font-size: 11px; font-weight: 600; color: #0f172a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                    xyz.sales...</div>
                   <div style="font-size: 10px; color: #eab308;">Viewed 13 Jul</div>
                 </div>
               </div>
@@ -3315,7 +4921,8 @@
         <i class="fas fa-times modal-close" onclick="closeViewPulledTeamsModal()"></i>
       </div>
       <div class="modal-body">
-        <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">The following internal teams have been pulled into this workspace.</p>
+        <p style="font-size: 13px; color: #64748b; margin-bottom: 16px;">The following internal teams have been pulled
+          into this workspace.</p>
         <div class="member-list">
           <div class="member-item selected" style="cursor: default;">
             <div class="ic-avatar av-pink">AP</div>
@@ -3349,7 +4956,8 @@
         <i class="fas fa-times modal-close" onclick="closePdfModal()"></i>
       </div>
       <div class="modal-body" style="flex: 1; display: flex; flex-direction: column; padding: 0;">
-        <div style="background: #f1f5f9; flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #64748b; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
+        <div
+          style="background: #f1f5f9; flex: 1; display: flex; align-items: center; justify-content: center; flex-direction: column; color: #64748b; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;">
           <i class="fas fa-file-pdf" style="font-size: 48px; margin-bottom: 16px; color: #cbd5e1;"></i>
           <p style="font-size: 16px; font-weight: 500;">Preview not available</p>
           <p style="font-size: 12px; margin-top: 8px;">This is a dummy document preview for demonstration purposes.</p>
@@ -3360,10 +4968,10 @@
 
   <script>
     function openPdfModal(element) {
-      const fileName = element.querySelector('.att-name') ? element.querySelector('.att-name').innerText : 
-                       (element.querySelector('.file-name') ? element.querySelector('.file-name').innerText : 
-                       (element.querySelector('.doc-name') ? element.querySelector('.doc-name').innerText : 'Document Preview'));
-      
+      const fileName = element.querySelector('.att-name') ? element.querySelector('.att-name').innerText :
+        (element.querySelector('.file-name') ? element.querySelector('.file-name').innerText :
+          (element.querySelector('.doc-name') ? element.querySelector('.doc-name').innerText : 'Document Preview'));
+
       document.getElementById('pdfModalTitle').innerText = fileName;
       document.getElementById('pdfModal').classList.add('active');
     }

@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drawing Integration - SupplyLink 360</title>
+  <meta name="description" content="Integrate CAD drawing and convert to Aashita Supplier Template format.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-sidebar: #050b18;
+      --sidebar-width: 250px;
+      
+      --text-white: #ffffff;
+      --text-gray-light: #cbd5e1;
+      --text-gray-dark: #1e293b;
+      --text-gray-muted: #64748b;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-light: #eff6ff;
+      --accent-blue-glow: rgba(37, 99, 235, 0.15);
+      
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-green-light: #ecfdf5;
+      
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-gray-dark);
+      line-height: 1.5;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
+    [contenteditable="true"] {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(37, 99, 235, 0.4);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.03);
+      border-radius: 4px;
+    }
+
+    [contenteditable="true"]:focus {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.06);
+      border-radius: 4px;
+      color: var(--text-gray-dark);
+    }
+
+    /* Sidebar items should have white dashed borders */
+    .sidebar [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar [contenteditable="true"]:focus {
+      outline: 2px solid var(--text-white);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+    }
+
+    /* ===== MAIN LAYOUT ===== */
+    .app-container {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* ===== LEFT MENU SIDEBAR ===== */
+    .sidebar {
+      width: var(--sidebar-width);
+      min-width: var(--sidebar-width);
+      background: var(--bg-sidebar);
+      color: var(--text-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #111e35;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 24px 20px 14px;
+      border-bottom: 1px solid #111e35;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .logo-text {
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-white);
+    }
+
+    .logo-tagline {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      padding-left: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Menu Navigation */
+    .sidebar-menu {
+      list-style: none;
+      padding: 16px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      flex-grow: 1;
+    }
+
+    .menu-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      color: #94a3b8;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+    }
+
+    .menu-item a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-white);
+    }
+
+    .menu-item.active a {
+      background: #111e35;
+      color: var(--text-white);
+      border-left-color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-item i {
+      font-size: 15px;
+      width: 16px;
+      text-align: center;
+    }
+
+    .menu-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: #ef4444;
+      color: var(--text-white);
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    /* Sidebar User and Brand block */
+    .sidebar-bottom {
+      border-top: 1px solid #111e35;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #030712;
+    }
+
+    .brand-selector {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      background: #111e35;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .brand-logo-block {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .brand-logo-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #ffffff;
+      color: #030712;
+      font-weight: 800;
+      font-size: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .brand-logo-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-white);
+    }
+
+    .brand-tag {
+      font-size: 8.5px;
+      color: #94a3b8;
+    }
+
+    .user-profile-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 4px;
+    }
+
+    .user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      color: var(--text-white);
+      font-weight: 700;
+      font-size: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1.5px solid #1e293b;
+    }
+
+    .user-profile-details {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .user-email {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-white);
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+    }
+
+    .user-role {
+      font-size: 9.5px;
+      color: #94a3b8;
+    }
+
+
+    /* ===== RIGHT MAIN CONTENT AREA ===== */
+    .main-content {
+      flex: 1;
+      background: var(--bg-primary);
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    /* Top Bar Navigation */
+    .top-bar {
+      height: 56px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 90;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .location-badge {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      background: #f1f5f9;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #334155;
+      border: 1px solid var(--border-color);
+    }
+
+    .location-badge img {
+      width: 14px;
+      height: 14px;
+      object-fit: contain;
+    }
+
+    .location-badge i {
+      font-size: 12px;
+      color: var(--text-gray-muted);
+    }
+
+    .location-badge span.divider {
+      color: #cbd5e1;
+      font-weight: 300;
+    }
+
+    /* Search Box */
+    .search-box-container {
+      position: relative;
+      width: 320px;
+    }
+
+    .search-box-container i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-gray-muted);
+      font-size: 13px;
+    }
+
+    .top-search-input {
+      width: 100%;
+      height: 34px;
+      padding: 6px 12px 6px 34px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #f8fafc;
+      font-family: inherit;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .top-search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.06);
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .top-alert-trigger {
+      position: relative;
+      font-size: 18px;
+      color: var(--text-gray-dark);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+
+    .top-alert-trigger:hover {
+      color: var(--accent-blue);
+    }
+
+    .top-alert-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      background: #ef4444;
+      color: var(--text-white);
+      font-size: 8px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-help-btn {
+      font-size: 18px;
+      color: var(--text-gray-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      transition: color 0.2s;
+    }
+
+    .top-help-btn:hover {
+      color: var(--text-gray-dark);
+    }
+
+    .top-user-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+
+
+    /* ===== VIEWPORT CONTAINER ===== */
+    .viewport-container {
+      padding: 30px;
+      max-width: 1400px;
+      width: 100%;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      flex-grow: 1;
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      margin-bottom: -15px;
+    }
+
+    .breadcrumbs a {
+      color: var(--text-gray-muted);
+      text-decoration: none;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--accent-blue);
+      text-decoration: underline;
+    }
+
+    /* Title Block */
+    .page-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+    }
+
+    .page-desc {
+      font-size: 12.5px;
+      color: var(--text-gray-muted);
+    }
+
+    /* Clickable Stepper Timeline */
+    .stepper-container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+      background: #ffffff;
+      padding: 16px 30px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+    }
+
+    .stepper-line {
+      position: absolute;
+      top: 27px;
+      left: 60px;
+      right: 60px;
+      height: 2px;
+      background: #e2e8f0;
+      z-index: 1;
+    }
+
+    .stepper-progress {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: var(--accent-blue);
+      transition: width 0.4s ease;
+    }
+
+    .stepper-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .step-circle {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: 2px solid #e2e8f0;
+      color: var(--text-gray-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      transition: all 0.3s ease;
+      margin-bottom: 6px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      transition: all 0.3s ease;
+    }
+
+    /* Active Stepper Style */
+    .stepper-step.active .step-circle {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: var(--text-white);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .stepper-step.active .step-label {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* Completed Stepper Style */
+    .stepper-step.completed .step-circle {
+      background: var(--accent-blue-light);
+      border-color: var(--accent-blue);
+      color: var(--accent-blue);
+    }
+
+    .stepper-step.completed .step-label {
+      color: var(--text-gray-dark);
+      font-weight: 500;
+    }
+
+
+    /* ===== THREE STAGE GRID LAYOUT ===== */
+    .stages-layout {
+      display: flex;
+      gap: 10px;
+      align-items: stretch;
+    }
+
+    .stage-panel {
+      flex: 1;
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .stage-panel.locked {
+      filter: blur(1.5px) grayscale(15%);
+      opacity: 0.65;
+      pointer-events: none;
+    }
+
+    .stage-panel.active-glow {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.08), var(--card-shadow);
+    }
+
+    .stage-header {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-bottom: 14px;
+      border-bottom: 1.5px solid var(--border-color);
+      padding-bottom: 8px;
+    }
+
+    .stage-arrow-col {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 20px;
+      color: #94a3b8;
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: color 0.3s;
+    }
+
+    .stage-arrow-col.active {
+      color: var(--accent-blue);
+    }
+
+    /* PANEL 1: Upload & Raw Preview */
+    .upload-zone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 24px 16px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .upload-zone:hover {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+    }
+
+    .upload-icon {
+      font-size: 24px;
+      color: var(--text-gray-muted);
+      margin-bottom: 8px;
+    }
+
+    .upload-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray-dark);
+      margin-bottom: 2px;
+    }
+
+    .upload-text span.browse-link {
+      color: var(--accent-blue);
+      text-decoration: underline;
+    }
+
+    .upload-subtext {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    /* Sim file upload progress */
+    .upload-progress-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 3px;
+      background: var(--accent-blue);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    .uploaded-file-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 11px;
+      margin-bottom: 14px;
+      display: none; /* Injected by JS */
+      animation: fadeIn 0.3s ease;
+    }
+
+    .file-item-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .file-item-left i {
+      font-size: 20px;
+      color: #ef4444;
+    }
+
+    .file-item-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .file-item-name {
+      font-weight: 600;
+      color: var(--text-gray-dark);
+    }
+
+    .file-item-size {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .file-item-check {
+      color: var(--accent-green);
+      font-size: 14px;
+    }
+
+    .preview-box {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: #f8fafc;
+      padding: 8px;
+      height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .preview-title-watermark {
+      position: absolute;
+      top: 8px;
+      left: 10px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--text-gray-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* TECHNICAL SVG BRACKET blueprints */
+    .cad-drawing-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+
+    /* PANEL 2: Cropped & Processed Drawing */
+    .success-alert {
+      background: var(--accent-green-light);
+      border: 1.5px solid #a7f3d0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11.5px;
+      color: #065f46;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: none; /* Triggered by JS */
+      animation: fadeIn 0.3s ease;
+    }
+
+    .success-alert i {
+      font-size: 13px;
+      color: var(--accent-green);
+    }
+
+    /* Auto Crop Scanner line effect */
+    .scanner-container {
+      position: relative;
+      height: 190px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: #ffffff;
+      overflow: hidden;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .scanner-laser {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: var(--accent-blue);
+      box-shadow: 0 0 8px rgba(37, 99, 235, 0.8);
+      z-index: 10;
+      display: none; /* Controlled by JS */
+    }
+
+    @keyframes scanAnimation {
+      0% { top: 0%; }
+      50% { top: 100%; }
+      100% { top: 0%; }
+    }
+
+    .details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-grow: 1;
+    }
+
+    .details-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11.5px;
+      color: var(--text-gray-dark);
+      padding: 2px 0;
+    }
+
+    .details-item-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .details-item i.check-ok {
+      color: var(--accent-green);
+      font-size: 12px;
+      opacity: 0; /* Animated checked by JS */
+      transition: opacity 0.3s;
+    }
+
+    .details-item-val {
+      font-weight: 700;
+      color: var(--text-gray-muted);
+    }
+
+    .reprocess-btn {
+      width: 100%;
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1.5px solid var(--accent-blue);
+      background: #ffffff;
+      color: var(--accent-blue);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .reprocess-btn:hover {
+      background: var(--accent-blue-light);
+    }
+
+
+    /* PANEL 3: Applied on Aashita Template */
+    .template-box {
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      background: #ffffff;
+      padding: 10px;
+      height: 345px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .template-table-container {
+      font-size: 8px;
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: auto;
+    }
+
+    .template-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+    .dl-template-btn {
+      flex: 1;
+      padding: 9px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .dl-template-btn:hover {
+      border-color: #cbd5e1;
+      background: var(--bg-primary);
+    }
+
+    .send-aashita-btn {
+      flex: 1.2;
+      padding: 9px 16px;
+      border-radius: 6px;
+      background: var(--accent-blue);
+      color: var(--text-white);
+      font-size: 11.5px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .send-aashita-btn:hover {
+      background: var(--accent-blue-hover);
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Paper plane animation */
+    @keyframes flyAway {
+      0% { transform: translate(0, 0) scale(1); opacity: 1; }
+      30% { transform: translate(-10px, 10px) scale(0.9); opacity: 0.8; }
+      100% { transform: translate(300px, -300px) scale(0.3); opacity: 0; }
+    }
+
+    .flying-plane {
+      animation: flyAway 1s forwards ease-in-out;
+    }
+
+
+    /* ===== BOTTOM INFORMATION CARDS ===== */
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .bottom-grid-left {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .info-card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+    }
+
+    .info-card-title {
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--text-gray-dark);
+      margin-bottom: 16px;
+    }
+
+    /* Timeline path */
+    .process-timeline {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .process-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+
+    .process-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #eff6ff;
+      color: var(--accent-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      margin-bottom: 8px;
+      border: 1px solid #dbeafe;
+    }
+
+    .process-step-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-bottom: 2px;
+    }
+
+    .process-step-desc {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+      line-height: 1.35;
+      max-width: 110px;
+    }
+
+    .process-arrow {
+      font-size: 11px;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 22px;
+    }
+
+    /* Recent Integrations Table Card */
+    .integrations-card {
+      padding: 18px 20px;
+    }
+
+    .table-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .integrations-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 12px;
+    }
+
+    .integrations-table th {
+      text-align: left;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-gray-muted);
+      padding: 6px 12px;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .integrations-table td {
+      font-size: 11.5px;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text-gray-dark);
+    }
+
+    .integrations-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .file-code {
+      font-family: monospace;
+      font-weight: 700;
+      color: #334155;
+    }
+
+    .date-val {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+    }
+
+    .completed-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-green);
+      background: var(--accent-green-light);
+      padding: 2px 8px;
+      border-radius: 12px;
+      border: 1px solid #a7f3d0;
+    }
+
+    .view-all-link {
+      font-size: 11.5px;
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .view-all-link:hover {
+      color: var(--accent-blue-hover);
+      text-decoration: underline;
+    }
+
+    /* Need Help blueprint Card */
+    .help-card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .help-blueprint-bg {
+      position: absolute;
+      right: -20px;
+      bottom: -20px;
+      width: 140px;
+      height: 140px;
+      opacity: 0.12;
+      pointer-events: none;
+    }
+
+    .help-info {
+      z-index: 2;
+    }
+
+    .help-title {
+      font-size: 13px;
+      font-weight: 750;
+      color: var(--text-gray-dark);
+      margin-bottom: 6px;
+    }
+
+    .help-desc {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      line-height: 1.4;
+      margin-bottom: 14px;
+      max-width: 180px;
+    }
+
+    .view-guide-btn {
+      padding: 8px 16px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 11.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+      z-index: 2;
+      align-self: flex-start;
+    }
+
+    .view-guide-btn:hover {
+      background: var(--bg-primary);
+      border-color: #cbd5e1;
+    }
+
+
+    /* ===== FOOTER ===== */
+    .app-footer {
+      border-top: 1px solid var(--border-color);
+      padding: 16px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      background: #ffffff;
+      flex-shrink: 0;
+      margin-top: auto;
+    }
+
+    .footer-left {
+      font-weight: 500;
+    }
+
+    .footer-right {
+      display: flex;
+      gap: 15px;
+    }
+
+    .footer-right a {
+      color: var(--text-gray-muted);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer-right a:hover {
+      color: var(--accent-blue);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <div class="sidebar-brand">
+          <div class="logo-container">
+            <!-- Inline SVG Infinitish circles overlapping loop -->
+            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
+              <circle cx="23" cy="12" r="7" stroke="#ef4444" stroke-width="3" />
+            </svg>
+            <span class="logo-text" contenteditable="true">SupplyLink 360</span>
+          </div>
+          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
+        </div>
+
+        <ul class="sidebar-menu">
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span contenteditable="true">Dashboard</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-list-check"></i>
+                <span contenteditable="true">Requirements</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-comments"></i>
+                <span contenteditable="true">Chats</span>
+              </div>
+              <span class="menu-badge" contenteditable="true">3</span>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-users"></i>
+                <span contenteditable="true">Suppliers</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-folder-open"></i>
+                <span contenteditable="true">Files</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-file-pdf"></i>
+                <span contenteditable="true">Drawing Integration</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-envelope"></i>
+                <span contenteditable="true">Mail</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-industry"></i>
+                <span contenteditable="true">Production</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-truck-ramp-box"></i>
+                <span contenteditable="true">Deliveries</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+                <span contenteditable="true">AI Assistant</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-server"></i>
+                <span contenteditable="true">Commstaht</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-chart-line"></i>
+                <span contenteditable="true">Reports & Analytics</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-check-double"></i>
+                <span contenteditable="true">Quality</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-circle-check"></i>
+                <span contenteditable="true">Approvals</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-cubes"></i>
+                <span contenteditable="true">Capacity Management</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-gears"></i>
+                <span contenteditable="true">Machine Park</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-circle-nodes"></i>
+                <span contenteditable="true">Integrations</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="#">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-sliders"></i>
+                <span contenteditable="true">Settings</span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-bottom">
+        <div class="brand-selector" onclick="alert('Company Selector Clicked!')">
+          <div class="brand-logo-block">
+            <div class="brand-logo-icon">BAJAJ</div>
+            <div class="brand-logo-details">
+              <span class="brand-name" contenteditable="true">Bajaj Auto Ltd.</span>
+              <span class="brand-tag" contenteditable="true">THE WORLD'S FAVOURITE INDIAN</span>
+            </div>
+          </div>
+          <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>
+        </div>
+
+        <div class="user-profile-card">
+          <div class="user-avatar">BP</div>
+          <div class="user-profile-details">
+            <span class="user-email" contenteditable="true">bajaj.planthead@bajajauto.co.in</span>
+            <span class="user-role" contenteditable="true">Plant Head</span>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- RIGHT MAIN PANELS VIEWPORT -->
+    <main class="main-content">
+      <!-- TOP NAVIGATION BAR -->
+      <header class="top-bar">
+        <div class="top-bar-left">
+          <div class="location-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="12" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
+            </svg>
+            <span contenteditable="true">Bajaj Auto Ltd.</span>
+          </div>
+          <div class="location-badge">
+            <i class="fa-solid fa-building"></i>
+            <span contenteditable="true">Plant: Chakan, Pune</span>
+          </div>
+          <div class="location-badge">
+            <i class="fa-solid fa-network-wired"></i>
+            <span contenteditable="true">Division: R&D - Powertrain</span>
+          </div>
+        </div>
+
+        <div class="search-box-container">
+          <i class="fa-solid fa-magnifying-glass"></i>
+          <input type="text" class="top-search-input" placeholder="Search requirements, suppliers, files...">
+        </div>
+
+        <div class="top-bar-right">
+          <button class="top-alert-trigger">
+            <i class="fa-regular fa-bell"></i>
+            <span class="top-alert-badge">3</span>
+          </button>
+          <button class="top-help-btn">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
+          <div class="top-user-menu" onclick="alert('Profile details dropdown clicked!')">
+            <div class="user-avatar" style="width: 28px; height: 28px; font-size: 11px;">BP</div>
+            <i class="fa-solid fa-chevron-down" style="font-size: 9px; color: var(--text-gray-muted)"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- VIEWPORT CONTENT BODY -->
+      <div class="viewport-container">
+
+        <!-- BREADCRUMBS -->
+        <nav class="breadcrumbs">
+          <a href="#" contenteditable="true">Drawing Integration</a>
+          <i class="fa-solid fa-chevron-right" style="font-size: 8px;"></i>
+          <span contenteditable="true">New Drawing Integration</span>
+        </nav>
+
+        <!-- PAGE HEADER -->
+        <div class="page-header">
+          <div>
+            <h2 class="page-title" contenteditable="true">Integrate Drawing with Supplier Template</h2>
+            <p class="page-desc" contenteditable="true">Upload drawing and generate on Aashita template</p>
+          </div>
+        </div>
+
+        <!-- TIMELINE STEPPER -->
+        <nav class="stepper-container" id="timeline-stepper">
+          <div class="stepper-line">
+            <div class="stepper-progress" id="stepper-progress-bar"></div>
+          </div>
+          
+          <div class="stepper-step active" data-step="1" onclick="jumpToStep(1)">
+            <div class="step-circle">1</div>
+            <div class="step-label" id="step-label-1" contenteditable="true">Upload Drawing</div>
+          </div>
+
+          <div class="stepper-step" data-step="2" onclick="jumpToStep(2)">
+            <div class="step-circle">2</div>
+            <div class="step-label" id="step-label-2" contenteditable="true">Crop & Process</div>
+          </div>
+
+          <div class="stepper-step" data-step="3" onclick="jumpToStep(3)">
+            <div class="step-circle">3</div>
+            <div class="step-label" id="step-label-3" contenteditable="true">Map to Template</div>
+          </div>
+
+          <div class="stepper-step" data-step="4" onclick="jumpToStep(4)">
+            <div class="step-circle">4</div>
+            <div class="step-label" id="step-label-4" contenteditable="true">Review & Send</div>
+          </div>
+        </nav>
+
+        <!-- THREE PANEL FLOW STAGES -->
+        <div class="stages-layout">
+          
+          <!-- PANEL 1: Upload Drawing -->
+          <section class="stage-panel active-glow" id="panel-1">
+            <div class="stage-header" contenteditable="true">1. Upload Drawing (From Bajaj)</div>
+            
+            <div class="upload-zone" onclick="simulateFileUpload()">
+              <div class="upload-icon">
+                <i class="fa-solid fa-cloud-arrow-up"></i>
+              </div>
+              <div class="upload-text" contenteditable="true">Drag and drop your drawing file here or <span class="browse-link">Browse Files</span></div>
+              <div class="upload-subtext" contenteditable="true">Supported formats: PDF, DWG, DXF, JPG, PNG | Max file size: 25MB</div>
+              <div class="upload-progress-bar" id="upload-progress-bar"></div>
+            </div>
+
+            <!-- Uploaded file block -->
+            <div class="uploaded-file-item" id="uploaded-file-block">
+              <div class="file-item-left">
+                <i class="fa-regular fa-file-pdf"></i>
+                <div class="file-item-details">
+                  <span class="file-item-name" id="uploaded-file-name" contenteditable="true">BRKT_ENG_MTG_001_V2.pdf</span>
+                  <span class="file-item-size" contenteditable="true">2.4 MB &bull; Uploaded on 12 Aug 2026, 10:15 AM</span>
+                </div>
+              </div>
+              <i class="fa-solid fa-circle-check file-item-check"></i>
+            </div>
+
+            <!-- Drawing Preview SVG -->
+            <div class="preview-box">
+              <span class="preview-title-watermark" contenteditable="true">Drawing Preview</span>
+              
+              <!-- Blank state layout before upload, SVG after upload -->
+              <div id="panel-1-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
+                <i class="fa-solid fa-file-import" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+                Upload an engineering document drawing to generate preview.
+              </div>
+
+              <div id="panel-1-svg-container" style="display: none; width: 100%; height: 100%;">
+                <!-- SVG CAD drawing with title block boundaries -->
+                <svg class="cad-drawing-svg" viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Blueprint border frame -->
+                  <rect x="5" y="5" width="310" height="250" stroke="#475569" stroke-width="1"/>
+                  <rect x="8" y="8" width="304" height="244" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  
+                  <!-- TECHNICAL CAD PROJECTION DRAWINGS (Bracket) -->
+                  <!-- Center bracket main body outline -->
+                  <path d="M 110,95 C 110,85 125,75 140,75 C 155,75 170,85 170,95 L 185,130 C 190,135 205,135 205,145 C 205,150 195,155 185,155 L 95,155 C 85,155 75,150 75,145 C 75,135 90,135 95,130 Z" stroke="#334155" stroke-width="1.2" fill="#f1f5f9"/>
+                  
+                  <!-- Center hole circles -->
+                  <circle cx="140" cy="115" r="22" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="140" cy="115" r="15" stroke="#475569" stroke-width="0.6" stroke-dasharray="3,3" />
+                  
+                  <!-- Ear mounting holes -->
+                  <circle cx="90" cy="145" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="190" cy="145" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  
+                  <!-- Projection Axis lines -->
+                  <line x1="140" y1="65" x2="140" y2="165" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
+                  <line x1="65" y1="115" x2="215" y2="115" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
+                  
+                  <!-- Dimensions indicators -->
+                  <!-- Dimension 108 -->
+                  <line x1="90" y1="170" x2="190" y2="170" stroke="#475569" stroke-width="0.5"/>
+                  <path d="M90,170 L93,168 L93,172 Z M190,170 L187,168 L187,172 Z" fill="#475569"/>
+                  <line x1="90" y1="150" x2="90" y2="173" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <line x1="190" y1="150" x2="190" y2="173" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <text x="140" y="167" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
+                  
+                  <!-- Projection: Side Profile section view -->
+                  <rect x="250" y="75" width="12" height="80" stroke="#334155" stroke-width="1.2" fill="#f1f5f9"/>
+                  <line x1="250" y1="75" x2="262" y2="85" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="250" y1="90" x2="262" y2="100" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="250" y1="105" x2="262" y2="115" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="250" y1="120" x2="262" y2="130" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="250" y1="135" x2="262" y2="145" stroke="#94a3b8" stroke-width="0.5"/>
+                  
+                  <!-- Side profile dimension 16 -->
+                  <line x1="250" y1="65" x2="262" y2="65" stroke="#475569" stroke-width="0.5"/>
+                  <path d="M250,65 L253,63 L253,67 Z M262,65 L259,63 L259,67 Z" fill="#475569"/>
+                  <line x1="250" y1="75" x2="250" y2="62" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <line x1="262" y1="75" x2="262" y2="62" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <text x="256" y="61" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">16</text>
+
+                  <!-- BAJAJ CUSTOM TITLE BLOCK BOUNDARY -->
+                  <line x1="5" y1="210" x2="315" y2="210" stroke="#475569" stroke-width="1"/>
+                  <line x1="160" y1="210" x2="160" y2="255" stroke="#475569" stroke-width="0.8"/>
+                  <line x1="240" y1="210" x2="240" y2="255" stroke="#475569" stroke-width="0.8"/>
+                  
+                  <!-- Title block internal detail texts -->
+                  <text x="12" y="222" font-size="6" font-weight="700" fill="#64748b">ORIGINATOR</text>
+                  <text x="12" y="234" font-size="7" font-weight="800" fill="#1e293b">BAJAJ AUTO LTD.</text>
+                  <text x="12" y="246" font-size="5" fill="#64748b">CHAKAN PLANT, PUNE</text>
+                  
+                  <text x="165" y="222" font-size="6" font-weight="700" fill="#64748b">PART NUMBER</text>
+                  <text x="165" y="234" font-size="7" font-weight="800" fill="#1e293b">BRKT_ENG_MTG_001</text>
+                  <text x="165" y="244" font-size="5" fill="#64748b">REV: 02  |  SCALE: 1:1</text>
+
+                  <text x="245" y="222" font-size="6" font-weight="700" fill="#64748b">PART DESCRIPTION</text>
+                  <text x="245" y="234" font-size="7" font-weight="800" fill="#1e293b">ENGINE MOUNT BRACKET</text>
+                  <text x="245" y="244" font-size="5" fill="#64748b">MATERIAL: EN8 | FINISH: Zn PLATED</text>
+                </svg>
+              </div>
+            </div>
+          </section>
+
+          <!-- ARROW COLUMN 1 -->
+          <div class="stage-arrow-col" id="arrow-1">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+
+          <!-- PANEL 2: Cropped & Processed Drawing -->
+          <section class="stage-panel locked" id="panel-2">
+            <div class="stage-header" contenteditable="true">2. Cropped & Processed Drawing</div>
+            
+            <div class="success-alert" id="panel-2-success-alert">
+              <i class="fa-solid fa-circle-check"></i>
+              <span contenteditable="true">Drawing cropped and processed successfully.</span>
+            </div>
+
+            <!-- Drawing Area with scan lines -->
+            <div class="scanner-container">
+              <div class="scanner-laser" id="laser-effect"></div>
+              
+              <!-- Blank state layout before scan, Cropped blueprint after scan -->
+              <div id="panel-2-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
+                <i class="fa-solid fa-crop-simple" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+                Await upload completion to start cropping.
+              </div>
+
+              <div id="panel-2-svg-container" style="display: none; width: 90%; height: 95%;">
+                <svg class="cad-drawing-svg" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- TECHNICAL PROJECTIONS ZOOMED (NO TITLE BLOCK borders) -->
+                  <!-- Bracket shape layout -->
+                  <path d="M 90,45 C 90,35 105,25 120,25 C 135,25 150,35 150,45 L 165,80 C 170,85 185,85 185,95 C 185,100 175,105 165,105 L 75,105 C 65,105 55,100 55,95 C 55,85 70,85 75,80 Z" stroke="#334155" stroke-width="1.2" fill="#f8fafc"/>
+                  <circle cx="120" cy="65" r="22" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="120" cy="65" r="15" stroke="#475569" stroke-width="0.6" stroke-dasharray="3,3" />
+                  <circle cx="70" cy="95" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="170" cy="95" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  
+                  <line x1="120" y1="15" x2="120" y2="115" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
+                  <line x1="45" y1="65" x2="195" y2="65" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
+                  
+                  <!-- Dimension 108 -->
+                  <line x1="70" y1="120" x2="170" y2="120" stroke="#475569" stroke-width="0.5"/>
+                  <path d="M70,120 L73,118 L73,122 Z M170,120 L167,118 L167,122 Z" fill="#475569"/>
+                  <line x1="70" y1="100" x2="70" y2="123" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <line x1="170" y1="100" x2="170" y2="123" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <text x="120" y="117" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
+                  
+                  <!-- Side profile projection -->
+                  <rect x="220" y="25" width="12" height="80" stroke="#334155" stroke-width="1.2" fill="#f8fafc"/>
+                  <line x1="220" y1="25" x2="232" y2="35" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="220" y1="40" x2="232" y2="50" stroke="#94a3b8" stroke-width="0.5"/>
+                  <line x1="220" y1="55" x2="232" y2="65" stroke="#94a3b8" stroke-width="0.5"/>
+                  
+                  <!-- side profile dimension 16 -->
+                  <line x1="220" y1="15" x2="232" y2="15" stroke="#475569" stroke-width="0.5"/>
+                  <path d="M220,15 L223,13 L223,17 Z M232,15 L229,13 L229,17 Z" fill="#475569"/>
+                  <line x1="220" y1="25" x2="220" y2="12" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <line x1="232" y1="25" x2="232" y2="12" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
+                  <text x="226" y="11" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">16</text>
+                  
+                  <!-- CAD annotation text -->
+                  <text x="10" y="145" font-size="6.5" font-weight="700" fill="#334155">NOTES:</text>
+                  <text x="10" y="154" font-size="6" fill="#64748b">1. ALL DIMENSIONS ARE IN MM.</text>
+                  <text x="10" y="163" font-size="6" fill="#64748b">2. GENERAL TOLERANCE: ±0.1</text>
+                  <text x="10" y="172" font-size="6" fill="#64748b">3. REMOVE ALL BURRS AND SHARP EDGES.</text>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Processing Parameters -->
+            <div class="details-list">
+              <div class="details-item">
+                <div class="details-item-left">
+                  <i class="fa-solid fa-circle-check check-ok" id="check-1"></i>
+                  <span contenteditable="true">Auto-crop</span>
+                </div>
+                <span class="details-item-val" contenteditable="true" id="val-1">Pending</span>
+              </div>
+              <div class="details-item">
+                <div class="details-item-left">
+                  <i class="fa-solid fa-circle-check check-ok" id="check-2"></i>
+                  <span contenteditable="true">Title block removed</span>
+                </div>
+                <span class="details-item-val" contenteditable="true" id="val-2">Pending</span>
+              </div>
+              <div class="details-item">
+                <div class="details-item-left">
+                  <i class="fa-solid fa-circle-check check-ok" id="check-3"></i>
+                  <span contenteditable="true">Views detected</span>
+                </div>
+                <span class="details-item-val" contenteditable="true" id="val-3">-</span>
+              </div>
+              <div class="details-item">
+                <div class="details-item-left">
+                  <i class="fa-solid fa-circle-check check-ok" id="check-4"></i>
+                  <span contenteditable="true">Scale detected</span>
+                </div>
+                <span class="details-item-val" contenteditable="true" id="val-4">-</span>
+              </div>
+              <div class="details-item">
+                <div class="details-item-left">
+                  <i class="fa-solid fa-circle-check check-ok" id="check-5"></i>
+                  <span contenteditable="true">Dimensions extracted</span>
+                </div>
+                <span class="details-item-val" contenteditable="true" id="val-5">-</span>
+              </div>
+            </div>
+
+            <button class="reprocess-btn" onclick="triggerScanningEffect()">
+              <i class="fa-solid fa-rotate"></i>
+              <span contenteditable="true">Reprocess Drawing</span>
+            </button>
+          </section>
+
+          <!-- ARROW COLUMN 2 -->
+          <div class="stage-arrow-col" id="arrow-2">
+            <i class="fa-solid fa-chevron-right"></i>
+          </div>
+
+          <!-- PANEL 3: Applied on Aashita Template -->
+          <section class="stage-panel locked" id="panel-3">
+            <div class="stage-header" contenteditable="true">3. Applied on Aashita Template</div>
+            
+            <div class="template-box">
+              
+              <!-- Blank state display, Drawing border SVG after map -->
+              <div id="panel-3-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%; margin: auto;">
+                <i class="fa-solid fa-object-group" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+                Map cropped outputs onto supplier drawing standard frame.
+              </div>
+
+              <div id="panel-3-svg-container" style="display: none; width: 100%; height: 100%; flex-direction: column;">
+                <svg class="cad-drawing-svg" viewBox="0 0 300 220" fill="none" style="flex-grow: 1;" xmlns="http://www.w3.org/2000/svg">
+                  <!-- AASHITA ENTERPRISES CARD BORDER -->
+                  <rect x="2" y="2" width="296" height="216" stroke="#1e3a8a" stroke-width="1.2"/>
+                  <line x1="2" y1="70" x2="298" y2="70" stroke="#1e3a8a" stroke-width="1.2"/>
+                  
+                  <!-- Aashita template header logo and parameters -->
+                  <text x="10" y="20" font-size="9" font-weight="800" fill="#1e3a8a">AASHITA ENTERPRISES</text>
+                  <text x="10" y="32" font-size="7" font-weight="700" fill="#475569">SUPPLIER DRAWING TEMPLATE</text>
+                  
+                  <!-- Aashita Logo Icon -->
+                  <path d="M 270,12 L 282,32 L 258,32 Z" fill="#1e3a8a"/>
+                  <text x="270" y="40" font-size="5" font-weight="750" fill="#1e3a8a" text-anchor="middle">AASHITA</text>
+
+                  <line x1="2" y1="44" x2="298" y2="44" stroke="#e2e8f0" stroke-width="0.8"/>
+                  <line x1="180" y1="44" x2="180" y2="70" stroke="#1e3a8a" stroke-width="0.8"/>
+                  <line x1="250" y1="44" x2="250" y2="70" stroke="#1e3a8a" stroke-width="0.8"/>
+
+                  <!-- Header text values -->
+                  <text x="10" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NO.</text>
+                  <text x="10" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-no">AE-BRKT-ENG-MTG-001</text>
+                  
+                  <text x="105" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NAME</text>
+                  <text x="105" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-name">ENGINE MOUNTING BRACKET</text>
+
+                  <text x="185" y="53" font-size="5.5" font-weight="700" fill="#64748b">DATE</text>
+                  <text x="185" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-date">12-08-2026</text>
+
+                  <text x="218" y="53" font-size="5.5" font-weight="700" fill="#64748b">REV</text>
+                  <text x="218" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-rev">A</text>
+
+                  <text x="255" y="53" font-size="5.5" font-weight="700" fill="#64748b">MATERIAL</text>
+                  <text x="255" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-material">EN8</text>
+
+                  <!-- Drawing projections layout inside Aashita template -->
+                  <path d="M 80,105 C 80,97 92,89 104,89 C 116,89 128,97 128,105 L 140,133 C 144,137 156,137 156,145 C 156,149 148,153 140,153 L 68,153 C 60,153 52,149 52,145 C 52,137 64,137 68,133 Z" stroke="#334155" stroke-width="1.2" fill="#ffffff"/>
+                  <circle cx="104" cy="121" r="17" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="64" cy="145" r="4" stroke="#334155" stroke-width="1" fill="#ffffff" />
+                  <circle cx="144" cy="145" r="4" stroke="#334155" stroke-width="1" fill="#ffffff" />
+
+                  <!-- Side Profile -->
+                  <rect x="180" y="89" width="10" height="64" stroke="#334155" stroke-width="1.2" fill="#ffffff"/>
+                  <line x1="180" y1="89" x2="190" y2="99" stroke="#94a3b8" stroke-width="0.5"/>
+                  
+                  <text x="104" y="167" font-size="6.5" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
+                  <text x="185" y="81" font-size="6.5" font-weight="700" fill="#334155" text-anchor="middle">16</text>
+
+                  <!-- CAD Notes inside Aashita template -->
+                  <text x="210" y="93" font-size="5" font-weight="700" fill="#334155">NOTES:</text>
+                  <text x="210" y="101" font-size="4.5" fill="#64748b">1. ALL DIMENSIONS ARE IN MM.</text>
+                  <text x="210" y="107" font-size="4.5" fill="#64748b">2. GENERAL TOLERANCE: ±0.1</text>
+                  <text x="210" y="113" font-size="4.5" fill="#64748b">3. REMOVE ALL BURRS AND EDGES.</text>
+
+                  <!-- Revision table details border lines at bottom of template -->
+                  <line x1="2" y1="178" x2="298" y2="178" stroke="#1e3a8a" stroke-width="1.2"/>
+                  <line x1="25" y1="178" x2="25" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
+                  <line x1="150" y1="178" x2="150" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
+                  <line x1="200" y1="178" x2="200" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
+
+                  <!-- Table cells content text -->
+                  <text x="13" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">REV</text>
+                  <text x="13" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">A</text>
+
+                  <text x="87" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DESCRIPTION</text>
+                  <text x="87" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">INITIAL RELEASE</text>
+
+                  <text x="175" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DATE</text>
+                  <text x="175" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">12-08-2026</text>
+
+                  <text x="249" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">APPROVED BY</text>
+                  <text x="249" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">J. SINGH</text>
+                </svg>
+              </div>
+            </div>
+
+            <div class="template-actions">
+              <button class="dl-template-btn" onclick="alert('Downloading conversion sheet template packet!')">
+                <i class="fa-solid fa-download"></i>
+                <span contenteditable="true">Download Template</span>
+              </button>
+              <button class="send-aashita-btn" id="send-btn" onclick="sendToAashita()">
+                <i class="fa-solid fa-paper-plane" id="paper-plane-icon"></i>
+                <span contenteditable="true">Send to XYZ Supplier</span>
+              </button>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- BOTTOM AREA: Next steps, recent conversions, support -->
+        <div class="bottom-grid">
+          
+          <div class="bottom-grid-left">
+            <!-- Timeline Process Card -->
+            <div class="info-card">
+              <h4 class="info-card-title" contenteditable="true">What happens next?</h4>
+              <div class="process-timeline">
+                <div class="process-step">
+                  <div class="process-icon-box">
+                    <i class="fa-solid fa-paper-plane"></i>
+                  </div>
+                  <span class="process-step-name" contenteditable="true">Drawing sent to XYZ Supplier</span>
+                </div>
+
+                <div class="process-arrow">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-icon-box">
+                    <i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <span class="process-step-name" contenteditable="true">Aashita reviews & confirms</span>
+                </div>
+
+                <div class="process-arrow">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-icon-box">
+                    <i class="fa-solid fa-user-group"></i>
+                  </div>
+                  <span class="process-step-name" contenteditable="true">Production & Quality teams pulled in</span>
+                </div>
+
+                <div class="process-arrow">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-icon-box">
+                    <i class="fa-regular fa-comments"></i>
+                  </div>
+                  <span class="process-step-name" contenteditable="true">Collaboration begins in Sub Chats</span>
+                </div>
+
+                <div class="process-arrow">
+                  <i class="fa-solid fa-arrow-right"></i>
+                </div>
+
+                <div class="process-step">
+                  <div class="process-icon-box">
+                    <i class="fa-solid fa-truck"></i>
+                  </div>
+                  <span class="process-step-name" contenteditable="true">Manufacturing & delivery process</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recent Integrations Table -->
+            <div class="info-card integrations-card">
+              <div class="table-header-row">
+                <h4 class="info-card-title" style="margin-bottom: 0;" contenteditable="true">Recent Integrations</h4>
+                <a href="#" class="view-all-link">
+                  <span contenteditable="true">View All Integrations</span>
+                  <i class="fa-solid fa-arrow-right"></i>
+                </a>
+              </div>
+              <table class="integrations-table">
+                <thead>
+                  <tr>
+                    <th contenteditable="true">DRAWING CODE</th>
+                    <th contenteditable="true">INTEGRATED DATE</th>
+                    <th contenteditable="true">STATUS</th>
+                  </tr>
+                </thead>
+                <tbody id="integrations-table-body">
+                  <tr>
+                    <td class="file-code" contenteditable="true">BRKT_CLUTCH_HSG_002</td>
+                    <td class="date-val" contenteditable="true">Integrated on 11 Aug 2026, 04:30 PM</td>
+                    <td><span class="completed-badge" contenteditable="true">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="file-code" contenteditable="true">SHAFT_INPUT_001</td>
+                    <td class="date-val" contenteditable="true">Integrated on 10 Aug 2026, 11:15 AM</td>
+                    <td><span class="completed-badge" contenteditable="true">Completed</span></td>
+                  </tr>
+                  <tr>
+                    <td class="file-code" contenteditable="true">COVER_GEAR_005</td>
+                    <td class="date-val" contenteditable="true">Integrated on 09 Aug 2026, 02:45 PM</td>
+                    <td><span class="completed-badge" contenteditable="true">Completed</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Need Help blueprint card -->
+          <div class="help-card">
+            <!-- Inline SVG Blueprint motor grid silhouette in card background -->
+            <svg class="help-blueprint-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="50" cy="50" r="40" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2,2"/>
+              <circle cx="50" cy="50" r="28" stroke="#2563eb" stroke-width="0.8"/>
+              <path d="M 50,10 L 50,90 M 10,50 L 90,50" stroke="#2563eb" stroke-width="0.4" stroke-dasharray="4,4"/>
+              <rect x="35" y="35" width="30" height="30" stroke="#2563eb" stroke-width="0.6"/>
+              <circle cx="50" cy="50" r="6" fill="#2563eb"/>
+            </svg>
+
+            <div class="help-info">
+              <h4 class="help-title" contenteditable="true">Need Help?</h4>
+              <p class="help-desc" contenteditable="true">Learn more about drawing integration, mapping formulas, and template customization options.</p>
+            </div>
+            <button class="view-guide-btn" onclick="alert('Displaying drawing integration handbook PDF!')">
+              <i class="fa-solid fa-book-open"></i>
+              <span contenteditable="true">View Guide</span>
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- FOOTER -->
+      <footer class="app-footer">
+        <div class="footer-left" contenteditable="true">
+          &copy; 2026 Bajaj Auto Ltd. All rights reserved.
+        </div>
+        <div class="footer-right">
+          <a href="#" contenteditable="true">Privacy Policy</a>
+          <span style="color: #cbd5e1;">|</span>
+          <a href="#" contenteditable="true">Terms of Use</a>
+          <span style="color: #cbd5e1;">|</span>
+          <a href="#" contenteditable="true">Support</a>
+        </div>
+      </footer>
+    </main>
+
+  </div>
+
+  <script>
+    // Global State
+    let currentStep = 1;
+    let uploadInProgress = false;
+    let isDrawingUploaded = false;
+    let isDrawingCropped = false;
+    let isDrawingMapped = false;
+    
+    // Page load setup
+    document.addEventListener("DOMContentLoaded", () => {
+      // Prevent broken layout linebreaks in headings / links on contenteditable keypress
+      const editableElements = document.querySelectorAll('[contenteditable="true"]');
+      editableElements.forEach(el => {
+        el.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' && (el.tagName.startsWith('H') || el.classList.contains('menu-badge') || el.classList.contains('step-label') || el.classList.contains('completed-badge'))) {
+            e.preventDefault();
+            el.blur();
+          }
+        });
+      });
+    });
+
+    // Handle timeline navigation clicks
+    function renderStep(step) {
+      // Stepper UI Nodes highlight
+      document.querySelectorAll('.stepper-step').forEach(node => {
+        const nodeStep = parseInt(node.getAttribute('data-step'));
+        node.classList.remove('active', 'completed');
+        if (nodeStep === step) {
+          node.classList.add('active');
+        } else if (nodeStep < step) {
+          node.classList.add('completed');
+        }
+      });
+
+      // Update progress line width
+      const progressLine = document.getElementById('stepper-progress-bar');
+      const progressPercentage = ((step - 1) / 3) * 100;
+      progressLine.style.width = `${progressPercentage}%`;
+
+      // Update Panel borders and locked styling
+      const p1 = document.getElementById('panel-1');
+      const p2 = document.getElementById('panel-2');
+      const p3 = document.getElementById('panel-3');
+      const arr1 = document.getElementById('arrow-1');
+      const arr2 = document.getElementById('arrow-2');
+
+      p1.classList.remove('active-glow');
+      p2.classList.remove('active-glow');
+      p3.classList.remove('active-glow');
+      arr1.classList.remove('active');
+      arr2.classList.remove('active');
+
+      if (step === 1) {
+        p1.classList.add('active-glow');
+      } else if (step === 2) {
+        p2.classList.add('active-glow');
+        p2.classList.remove('locked');
+        arr1.classList.add('active');
+        if (!isDrawingCropped) {
+          triggerScanningEffect();
+        }
+      } else if (step === 3 || step === 4) {
+        p3.classList.add('active-glow');
+        p2.classList.remove('locked');
+        p3.classList.remove('locked');
+        arr1.classList.add('active');
+        arr2.classList.add('active');
+        if (!isDrawingMapped) {
+          triggerTemplateMapping();
+        }
+      }
+    }
+
+    // Direct click jump validation
+    function jumpToStep(step) {
+      if (step === 1) {
+        currentStep = 1;
+        renderStep(1);
+        return;
+      }
+      
+      if (step === 2) {
+        if (!isDrawingUploaded) {
+          alert("Please upload a drawing in Stage 1 first.");
+          return;
+        }
+        currentStep = 2;
+        renderStep(2);
+        return;
+      }
+
+      if (step === 3 || step === 4) {
+        if (!isDrawingUploaded) {
+          alert("Please upload a drawing in Stage 1 first.");
+          return;
+        }
+        if (!isDrawingCropped) {
+          currentStep = 2;
+          renderStep(2);
+          // Auto crop triggers, then we let them move
+          setTimeout(() => {
+            currentStep = step;
+            renderStep(step);
+          }, 2000);
+          return;
+        }
+        currentStep = step;
+        renderStep(step);
+      }
+    }
+
+    // Simulate file upload (Panel 1)
+    function simulateFileUpload() {
+      if (isDrawingUploaded || uploadInProgress) return;
+      
+      uploadInProgress = true;
+      const progressBar = document.getElementById('upload-progress-bar');
+      let progress = 0;
+      
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = `${progress}%`;
+        
+        if (progress >= 100) {
+          clearInterval(interval);
+          uploadInProgress = false;
+          isDrawingUploaded = true;
+          
+          // Hide placeholder, show file details, show raw CAD drawing preview
+          document.getElementById('panel-1-placeholder').style.display = 'none';
+          document.getElementById('panel-1-svg-container').style.display = 'block';
+          document.getElementById('uploaded-file-block').style.display = 'flex';
+          
+          // Advance to Step 2
+          setTimeout(() => {
+            currentStep = 2;
+            renderStep(2);
+          }, 600);
+        }
+      }, 80);
+    }
+
+    // Simulate cropping scan animation (Panel 2)
+    function triggerScanningEffect() {
+      if (!isDrawingUploaded) return;
+
+      const laser = document.getElementById('laser-effect');
+      const p2Placeholder = document.getElementById('panel-2-placeholder');
+      const p2SvgContainer = document.getElementById('panel-2-svg-container');
+      const successAlert = document.getElementById('panel-2-success-alert');
+
+      laser.style.display = 'block';
+      laser.style.animation = 'scanAnimation 1.6s ease-in-out infinite';
+      
+      // Hide initial checkmarks and reset status labels
+      for (let i = 1; i <= 5; i++) {
+        document.getElementById(`check-${i}`).style.opacity = '0';
+        document.getElementById(`val-${i}`).textContent = 'Analyzing...';
+        document.getElementById(`val-${i}`).style.color = 'var(--text-gray-muted)';
+      }
+      
+      p2Placeholder.style.display = 'none';
+      successAlert.style.display = 'none';
+
+      // Scan completes in 2.2 seconds
+      setTimeout(() => {
+        laser.style.display = 'none';
+        p2SvgContainer.style.display = 'block';
+        successAlert.style.display = 'flex';
+        isDrawingCropped = true;
+
+        // Cascade checking items sequentially
+        setTimeout(() => { document.getElementById('check-1').style.opacity = '1'; document.getElementById('val-1').textContent = 'Success'; document.getElementById('val-1').style.color = 'var(--accent-green)'; }, 200);
+        setTimeout(() => { document.getElementById('check-2').style.opacity = '1'; document.getElementById('val-2').textContent = 'Success'; document.getElementById('val-2').style.color = 'var(--accent-green)'; }, 450);
+        setTimeout(() => { document.getElementById('check-3').style.opacity = '1'; document.getElementById('val-3').textContent = '3 Views'; document.getElementById('val-3').style.color = 'var(--text-gray-dark)'; }, 700);
+        setTimeout(() => { document.getElementById('check-4').style.opacity = '1'; document.getElementById('val-4').textContent = '1:1'; document.getElementById('val-4').style.color = 'var(--text-gray-dark)'; }, 950);
+        setTimeout(() => { document.getElementById('check-5').style.opacity = '1'; document.getElementById('val-5').textContent = '14'; document.getElementById('val-5').style.color = 'var(--text-gray-dark)'; }, 1200);
+
+        // Move to step 3 mapping
+        setTimeout(() => {
+          if (currentStep === 2) {
+            currentStep = 3;
+            renderStep(3);
+          }
+        }, 1800);
+      }, 2000);
+    }
+
+    // Simulate mapping onto Aashita Template frame (Panel 3)
+    function triggerTemplateMapping() {
+      if (!isDrawingCropped) return;
+      
+      const p3Placeholder = document.getElementById('panel-3-placeholder');
+      const p3SvgContainer = document.getElementById('panel-3-svg-container');
+
+      p3Placeholder.style.display = 'none';
+      p3SvgContainer.style.display = 'flex';
+      
+      isDrawingMapped = true;
+    }
+
+    // Simulate final submit to supplier Aashita (Panel 3 send)
+    function sendToAashita() {
+      if (!isDrawingMapped) {
+        alert("Please complete drawing processing and mapping first.");
+        return;
+      }
+
+      // Trigger paper plane flying animation
+      const plane = document.getElementById('paper-plane-icon');
+      plane.className = "fa-solid fa-paper-plane flying-plane";
+
+      setTimeout(() => {
+        // Reset classes
+        plane.className = "fa-solid fa-paper-plane";
+        
+        // Show success alert popup
+        alert("Success! Converted CAD drawing AE-BRKT-ENG-MTG-001 has been dispatched to XYZ Supplier successfully. Collaborations thread spawned in Sub Chats.");
+        
+        // Move stepper to completed step 4
+        currentStep = 4;
+        renderStep(4);
+
+        // Add item to recent integrations table
+        const tableBody = document.getElementById('integrations-table-body');
+        const newRowHTML = `
+          <tr style="animation: fadeIn 0.4s ease;">
+            <td class="file-code" contenteditable="true">AE-BRKT-ENG-MTG-001</td>
+            <td class="date-val" contenteditable="true">Integrated Today, ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td><span class="completed-badge" contenteditable="true">Completed</span></td>
+          </tr>
+        `;
+        tableBody.insertAdjacentHTML('afterbegin', newRowHTML);
+      }, 1000);
+    }
+  </script>
+</body>
+
+</html>
