@@ -168,6 +168,56 @@
     }
 
     /* Feature Items */
+    /* Sidebar navigation — same six destinations as every other page */
+    .sidebar-menu {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      margin: 0 -24px auto;
+      padding: 0;
+    }
+
+    .menu-item a {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 24px;
+      color: #94a3b8;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      white-space: nowrap;
+    }
+
+    .menu-item a:hover {
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-white);
+    }
+
+    .menu-item.active a {
+      background: #111e35;
+      color: var(--text-white);
+      border-left-color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    .menu-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .menu-item i {
+      font-size: 15px;
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
     .features-list {
       display: flex;
       flex-direction: column;
@@ -1475,48 +1525,57 @@
           <p class="hero-desc" contenteditable="true">Digitize your supplier collaboration and drive manufacturing excellence.</p>
         </div>
 
-        <!-- Value Proposition features -->
-        <div class="features-list">
-          <div class="feature-item">
-            <div class="feature-icon-wrapper">
-              <i class="fa-solid fa-users"></i>
-            </div>
-            <div class="feature-info">
-              <div class="feature-title" contenteditable="true">Streamlined Collaboration</div>
-              <div class="feature-desc" contenteditable="true">Connect with Bajaj teams and collaborate in real-time.</div>
-            </div>
-          </div>
-
-          <div class="feature-item">
-            <div class="feature-icon-wrapper">
-              <i class="fa-solid fa-eye"></i>
-            </div>
-            <div class="feature-info">
-              <div class="feature-title" contenteditable="true">End-to-End Visibility</div>
-              <div class="feature-desc" contenteditable="true">Track RFQs, approvals, production and deliveries seamlessly.</div>
-            </div>
-          </div>
-
-          <div class="feature-item">
-            <div class="feature-icon-wrapper">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <div class="feature-info">
-              <div class="feature-title" contenteditable="true">Smart & Secure</div>
-              <div class="feature-desc" contenteditable="true">Enterprise-grade security with role-based access and data protection.</div>
-            </div>
-          </div>
-
-          <div class="feature-item">
-            <div class="feature-icon-wrapper">
-              <i class="fa-solid fa-chart-line"></i>
-            </div>
-            <div class="feature-info">
-              <div class="feature-title" contenteditable="true">Performance & Insights</div>
-              <div class="feature-desc" contenteditable="true">Make data-driven decisions with powerful analytics and dashboards.</div>
-            </div>
-          </div>
-        </div>
+        <!-- Sidebar navigation -->
+        <ul class="sidebar-menu">
+          <li class="menu-item">
+            <a href="process_documents.html">
+              <div class="menu-item-left">
+                <i class="fa-regular fa-file-lines"></i>
+                <span>Process Documents</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="bajaj.html">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-gauge-high"></i>
+                <span>Bajaj Auto Dashboard</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="drawing_integration.html">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-compass-drafting"></i>
+                <span>Drawing Integration</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="index.html">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-table-columns"></i>
+                <span>Platform Overview</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item">
+            <a href="supplylink.html">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-diagram-project"></i>
+                <span>REQ-250801 Workspace</span>
+              </div>
+            </a>
+          </li>
+          <li class="menu-item active">
+            <a href="register.html">
+              <div class="menu-item-left">
+                <i class="fa-solid fa-user-plus"></i>
+                <span>Registration</span>
+              </div>
+            </a>
+          </li>
+        </ul>
       </div>
 
       <!-- Animated 3D Gears Asset -->
@@ -1764,7 +1823,7 @@
                 <p class="success-desc" contenteditable="true">Thank you for registering on the SupplyLink 360 Network. We are currently verifying your details. This process typically takes 12 to 24 business hours.</p>
                 <div class="success-badge" contenteditable="true">REFERENCE ID: SL360-REG-9874251</div>
                 <div>
-                  <button class="dashboard-btn" onclick="resetForm()" contenteditable="true">Go to Dashboard</button>
+                  <button class="dashboard-btn" onclick="goToDashboard()" contenteditable="true">Go to Dashboard</button>
                 </div>
               </div>
             </div>
@@ -2136,6 +2195,11 @@
       renderStep(currentStep);
     }
 
+    // Landing page once onboarding is complete
+    function goToDashboard() {
+      window.location.href = 'process_documents.html';
+    }
+
     // Move forward one step
     function goForward() {
       if (currentStep === 5) {
@@ -2145,21 +2209,9 @@
           alert("Please check the declaration box to submit your onboarding request.");
           return;
         }
-        
-        // Success State
-        currentStep = 6;
-        document.querySelectorAll('.wizard-step-content').forEach(section => {
-          section.classList.remove('active');
-        });
-        document.getElementById('success-step-content').classList.add('active');
-        document.getElementById('wizard-actions-bar').style.display = 'none';
-        
-        // Mark all steps in stepper as completed
-        document.querySelectorAll('.stepper-step').forEach(node => {
-          node.classList.remove('active');
-          node.classList.add('completed');
-        });
-        document.getElementById('stepper-progress-bar').style.width = '100%';
+
+        // Onboarding done -> open the main app
+        goToDashboard();
         return;
       }
 
