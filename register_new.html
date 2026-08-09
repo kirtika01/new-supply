@@ -1366,7 +1366,7 @@
           
           <div class="step-node active" id="step-node-1" onclick="navigateToStep(1)">
             <div class="step-circle">1</div>
-            <div class="step-label" contenteditable="true">Account Type & Intent</div>
+            <div class="step-label" contenteditable="true">Intent & Host OEM</div>
           </div>
           
           <div class="step-node" id="step-node-2" onclick="navigateToStep(2)">
@@ -1425,49 +1425,38 @@
                   </div>
                 </div>
               </div>
-
-              <!-- Account Type choice -->
-              <div class="form-card">
-                <div class="form-card-title" contenteditable="true">Choose your account type</div>
-                <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;" contenteditable="true">Select the option that best describes you</div>
-                
-                <div class="account-type-options">
-                  <!-- OEM Company card -->
-                  <div class="account-type-row" id="account-row-company" onclick="selectAccountTypeRow('company')">
-                    <div class="account-type-icon"><i class="fa-solid fa-building-user"></i></div>
-                    <div class="account-type-meta">
-                      <div class="account-type-name" contenteditable="true">Company (OEM / Buyer)</div>
-                      <div class="account-type-desc" contenteditable="true">You are a manufacturer or organization looking to buy products or services</div>
+              <!-- About Bajaj Auto Ltd. Card -->
+              <div class="form-card company-about-card">
+                <div class="form-card-title" contenteditable="true">About Bajaj Auto Ltd.</div>
+                <div class="company-about-content">
+                  <div class="company-logo-badge" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <i class="fa-solid fa-building" style="color: var(--accent-blue); font-size: 20px;"></i>
+                    <div>
+                      <h4 style="font-size: 13px; font-weight: 700; color: var(--text-gray-dark);" contenteditable="true">Bajaj Auto Ltd.</h4>
+                      <span style="font-size: 9px; font-weight: 600; color: var(--accent-green); background: var(--accent-green-light); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;" contenteditable="true">Host OEM</span>
                     </div>
-                    <div class="account-type-radio"></div>
                   </div>
-
-                  <!-- Supplier card -->
-                  <div class="account-type-row selected" id="account-row-supplier" onclick="selectAccountTypeRow('supplier')">
-                    <div class="account-type-icon"><i class="fa-solid fa-truck-ramp-box"></i></div>
-                    <div class="account-type-meta">
-                      <div class="account-type-name" contenteditable="true">Supplier / Vendor</div>
-                      <div class="account-type-desc" contenteditable="true">You are a supplier or vendor looking to sell products or services</div>
+                  <p style="font-size: 11px; color: var(--text-gray-muted); line-height: 1.6; margin-bottom: 12px;" contenteditable="true">
+                    Bajaj Auto is a preeminent global manufacturer of two-wheelers and three-wheelers, trusted by millions of customers across 70+ countries.
+                  </p>
+                  <div class="company-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;" contenteditable="true">Headquarters</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Pune, India</strong>
                     </div>
-                    <div class="account-type-radio"></div>
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;" contenteditable="true">Industry</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Automotive Mfg</strong>
+                    </div>
                   </div>
-
-                  <!-- Individual/Professional card -->
-                  <div class="account-type-row" id="account-row-individual" onclick="selectAccountTypeRow('individual')">
-                    <div class="account-type-icon"><i class="fa-solid fa-user-tie"></i></div>
-                    <div class="account-type-meta">
-                      <div class="account-type-name" contenteditable="true">Individual / Professional</div>
-                      <div class="account-type-desc" contenteditable="true">You are an individual professional, consultant or freelancer</div>
-                    </div>
-                    <div class="account-type-radio"></div>
+                  <div class="company-building-wrapper" style="width: 100%; height: 120px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 12px; position: relative;">
+                    <img src="bajaj_building.png" alt="Bajaj Corporate Building" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div style="font-size: 10px; color: var(--text-gray-muted); line-height: 1.5; background: var(--accent-blue-light); border: 1px solid rgba(37, 99, 235, 0.15); border-radius: 8px; padding: 10px; display: flex; gap: 8px; align-items: flex-start;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--accent-blue); margin-top: 2px;"></i>
+                    <span contenteditable="true">By registering, you are applying to join the Bajaj Auto Ltd. partner supply chain network. Your details will be submitted to the Bajaj Procurement team for review.</span>
                   </div>
                 </div>
-              </div>
-
-              <!-- Selection helper box banner -->
-              <div class="helper-card-banner">
-                <i class="fa-solid fa-circle-info"></i>
-                <div contenteditable="true">Not sure which to choose? You can select multiple options above. You'll have access to features based on your selection.</div>
               </div>
             </div>
 

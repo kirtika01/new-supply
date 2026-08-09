@@ -1,0 +1,3538 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Aashita Intelligence</title>
+  <meta name="description" content="Aashita Intelligence - Connect. Collaborate. Deliver. Enterprise Dashboard.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE STYLE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-sidebar: #0b0f19;
+      --bg-sidebar-hover: #162032;
+      --text-white: #ffffff;
+      --text-gray-light: #cbd5e1;
+      --text-gray-dark: #0f172a;
+      --text-gray-muted: #64748b;
+
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-light: #eff6ff;
+      --accent-blue-glow: rgba(37, 99, 235, 0.15);
+
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-green-light: #ecfdf5;
+
+      --accent-orange: #f59e0b;
+      --accent-orange-light: #fffbeb;
+
+      --accent-purple: #8b5cf6;
+      --accent-purple-light: #f5f3ff;
+
+      --accent-teal: #14b8a6;
+      --accent-teal-light: #f0fdfa;
+
+      --accent-red: #ef4444;
+      --accent-red-light: #fef2f2;
+
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-gray-dark);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      min-width: 1200px;
+    }
+
+    /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
+    [contenteditable="true"] {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(37, 99, 235, 0.4);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.03);
+      border-radius: 4px;
+    }
+
+    [contenteditable="true"]:focus {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.06);
+      border-radius: 4px;
+      color: var(--text-gray-dark);
+    }
+
+    .sidebar [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .sidebar [contenteditable="true"]:focus {
+      outline: 2px solid var(--text-white);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+    }
+
+    /* ===== APP LAYOUT ===== */
+    .app-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ===== LEFT SIDEBAR ===== */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: var(--bg-sidebar);
+      color: var(--text-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #111e35;
+      height: 100vh;
+      z-index: 100;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Brand Logo */
+    .brand-section {
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-white);
+    }
+
+    .logo-tagline {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      padding-left: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Navigation Items */
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: #94a3b8;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-item-left i {
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-sidebar-hover);
+      color: var(--text-white);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: var(--text-white);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .nav-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--accent-red);
+      color: var(--text-white);
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    /* Profile Section at Bottom */
+    .sidebar-bottom {
+      padding: 16px;
+      border-top: 1px solid #162032;
+      background: #070a12;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      background: var(--bg-sidebar-hover);
+    }
+
+    .profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .profile-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-role {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-company {
+      font-size: 9px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .profile-dropdown-icon {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+    }
+
+    .org-switcher {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #162032;
+    }
+
+    .org-switcher-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--text-gray-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .org-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111827;
+      border: 1px solid #1f2937;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-gray-light);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .org-dropdown-trigger:hover {
+      border-color: #374151;
+      background: #1f2937;
+    }
+
+    /* Org Switch Dropdown menu */
+    .dropdown-menu {
+      position: absolute;
+      bottom: 75px;
+      left: 16px;
+      right: 16px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+      z-index: 200;
+      display: none;
+      padding: 4px 0;
+    }
+
+    .dropdown-menu.active {
+      display: block;
+      animation: slideUp 0.2s ease-out;
+    }
+
+    .dropdown-item {
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--text-gray-light);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .dropdown-item:hover {
+      background: #1f2937;
+      color: var(--text-white);
+    }
+
+    .dropdown-item.selected {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* ===== MAIN CONTENT AREA ===== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header Bar */
+    .top-header {
+      height: 70px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .welcome-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .welcome-desc {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      margin-top: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Search Input */
+    .search-wrapper {
+      position: relative;
+      width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 11.5px;
+      color: var(--text-gray-dark);
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--text-gray-muted);
+    }
+
+    /* Notification Bell */
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .icon-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent-red);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+
+    /* Host logo badge */
+    .host-logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .host-logo-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .host-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .host-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      line-height: 1.2;
+    }
+
+    .host-desc {
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+      line-height: 1;
+    }
+
+    /* Scrollable Dashboard Viewport */
+    .dashboard-viewport {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .viewport-top-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: -5px;
+    }
+
+    .date-timestamp {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+    }
+
+    .customize-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 11px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .customize-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* ===== METRICS ROW ===== */
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 16px;
+    }
+
+    .metric-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s ease;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .metric-top-info {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+    }
+
+    .metric-value-container {
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-size: 22px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+    }
+
+    .metric-icon-box {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .metric-trend {
+      font-size: 9.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    /* Metric card variants styling */
+    .card-rfq .metric-icon-box {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .card-quote .metric-icon-box {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .card-progress .metric-icon-box {
+      background: #fff7ed;
+      color: #ea580c;
+    }
+
+    .card-po .metric-icon-box {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .card-spend .metric-icon-box {
+      background: #fffbeb;
+      color: #d97706;
+    }
+
+    .card-savings .metric-icon-box {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .trend-up {
+      color: var(--accent-green);
+    }
+
+    .trend-down {
+      color: var(--accent-orange);
+    }
+
+    /* ===== WIDGETS GRID (3 COLUMNS) ===== */
+    .widgets-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1.1fr;
+      gap: 20px;
+    }
+
+    .widget-panel {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 280px;
+    }
+
+    .widget-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 10px;
+    }
+
+    .widget-title {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .widget-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-gray-muted);
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .widget-footer-link {
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 14px;
+      align-self: flex-start;
+      transition: color 0.2s;
+    }
+
+    .widget-footer-link:hover {
+      color: var(--accent-blue-hover);
+    }
+
+    /* Donut chart layout */
+    .donut-chart-layout {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .donut-svg-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+
+    .donut-center-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .donut-center-num {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      line-height: 1.1;
+    }
+
+    .donut-center-lbl {
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .donut-legend {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      flex: 1;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10.5px;
+      color: var(--text-gray-dark);
+    }
+
+    .legend-label-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-bullet {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+
+    .legend-val-pct {
+      font-weight: 600;
+      color: var(--text-gray-muted);
+    }
+
+    /* Spend line chart layout */
+    .spend-chart-layout {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    .chart-meta-row {
+      display: flex;
+      gap: 24px;
+      margin-bottom: 12px;
+      background: #f8fafc;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .meta-stat {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .meta-lbl {
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .meta-val {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+    }
+
+    .line-svg-wrapper {
+      width: 100%;
+      height: 130px;
+    }
+
+    /* Table visual style */
+    .widget-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .widget-table th {
+      text-align: left;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border-color);
+      background: #f8fafc;
+    }
+
+    .widget-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--text-gray-dark);
+      font-weight: 500;
+    }
+
+    .widget-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* Supplier Table Delete Mode Styles */
+    .delete-col {
+      width: 45px;
+      text-align: center;
+      display: none;
+    }
+
+    .delete-mode-active .delete-col {
+      display: table-cell;
+      animation: slideUp 0.15s ease-out;
+    }
+
+    .delete-row-btn {
+      color: var(--accent-red);
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .delete-row-btn:hover {
+      transform: scale(1.25);
+    }
+
+    .rating-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 10.5px;
+    }
+
+    .rating-green {
+      background: #d1fae5;
+      color: #065f46;
+    }
+
+    .rating-yellow {
+      background: #fef3c7;
+      color: #92400e;
+    }
+
+    .rating-red {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    /* ===== BOTTOM WIDGETS ROW (PROJECTS / MILESTONES) ===== */
+    .projects-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 20px;
+    }
+
+    .project-table-wrapper {
+      overflow-x: auto;
+    }
+
+    .project-status-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .status-in-progress {
+      background: #eff6ff;
+      color: #1e40af;
+    }
+
+    .status-in-evaluation {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .status-po-issued {
+      background: #f5f3ff;
+      color: #6d28d9;
+    }
+
+    .status-in-production {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    .progress-bar-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 110px;
+    }
+
+    .progress-track {
+      flex: 1;
+      height: 6px;
+      background: #e2e8f0;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--accent-blue);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .progress-fill-casting {
+      background: #10b981;
+    }
+
+    .progress-fill-housing {
+      background: #ea580c;
+    }
+
+    .progress-fill-fork {
+      background: #8b5cf6;
+    }
+
+    .progress-fill-cover {
+      background: #3b82f6;
+    }
+
+    .progress-fill-shaft {
+      background: #10b981;
+    }
+
+    .progress-pct {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      width: 25px;
+      text-align: right;
+    }
+
+    /* Milestone list styling */
+    .milestones-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .milestone-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .milestone-item:hover {
+      border-color: #cbd5e1;
+      transform: translateX(2px);
+    }
+
+    .milestone-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .milestone-icon-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .milestone-icon-blue {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .milestone-icon-orange {
+      background: #fff7ed;
+      color: #ea580c;
+    }
+
+    .milestone-icon-purple {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .milestone-icon-green {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .milestone-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .milestone-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .milestone-desc {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .milestone-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+    }
+
+    .milestone-date {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .milestone-countdown {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 10px;
+      margin-top: 2px;
+    }
+
+    .countdown-blue {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .countdown-orange {
+      background: #fff7ed;
+      color: #c2410c;
+    }
+
+    .countdown-purple {
+      background: #f5f3ff;
+      color: #6d28d9;
+    }
+
+    .countdown-green {
+      background: #ecfdf5;
+      color: #047857;
+    }
+
+    /* ===== FOOTER ROW (DOCS, PRODUCTION, ACTIONS) ===== */
+    .footer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 10px;
+    }
+
+    /* Document Overview card grid */
+    .docs-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 8px;
+      flex: 1;
+    }
+
+    .doc-overview-card {
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 4px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      gap: 6px;
+      transition: all 0.2s;
+      min-height: 80px;
+    }
+
+    .doc-overview-card:hover {
+      border-color: #cbd5e1;
+      background: #ffffff;
+      box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    .doc-icon-wrapper {
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+    }
+
+    .doc-icon-blue {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .doc-icon-green {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .doc-icon-orange {
+      background: #fff7ed;
+      color: #ea580c;
+    }
+
+    .doc-icon-purple {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .doc-icon-teal {
+      background: #f0fdfa;
+      color: #14b8a6;
+    }
+
+    .doc-count {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      line-height: 1.1;
+    }
+
+    .doc-label {
+      font-size: 8.5px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    /* Quick Actions widget grid */
+    .quick-actions-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      flex: 1;
+    }
+
+    .action-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      background: #ffffff;
+      transition: all 0.2s ease;
+      text-align: center;
+      min-height: 80px;
+    }
+
+    .action-card:hover {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+      transform: translateY(-1px);
+    }
+
+    .action-icon {
+      font-size: 13px;
+      color: var(--accent-blue);
+    }
+
+    .action-title {
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    /* ===== DASHBOARD FOOTER ===== */
+    .dashboard-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border-color);
+      padding-top: 12px;
+      margin-top: 10px;
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      flex-shrink: 0;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 16px;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .footer-links a:hover {
+      color: var(--accent-blue);
+    }
+
+    /* ===== INTERACTIVE MODALS ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+      width: 480px;
+      max-width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+    }
+
+    .modal-overlay.active .modal-card {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+    }
+
+    .modal-title-text {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .close-modal-btn {
+      color: var(--text-gray-muted);
+      cursor: pointer;
+      font-size: 14px;
+      transition: color 0.15s;
+    }
+
+    .close-modal-btn:hover {
+      color: var(--text-gray-dark);
+    }
+
+    .modal-body {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      max-height: 70vh;
+      overflow-y: auto;
+    }
+
+    .modal-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .modal-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .modal-input,
+    .modal-select {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 11.5px;
+      font-family: inherit;
+      color: var(--text-gray-dark);
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .modal-input:focus,
+    .modal-select:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .modal-footer {
+      padding: 12px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #f8fafc;
+    }
+
+    .btn-secondary {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 11.5px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .btn-secondary:hover {
+      background: #f8fafc;
+    }
+
+    .btn-primary {
+      padding: 8px 16px;
+      border-radius: 6px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 11.5px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-blue-hover);
+    }
+
+    /* ===== CHAT SLIDE OUT DRAWER ===== */
+    .chat-drawer {
+      position: fixed;
+      top: 0;
+      right: -360px;
+      width: 360px;
+      height: 100vh;
+      background: #ffffff;
+      border-left: 1px solid var(--border-color);
+      box-shadow: -5px 0 25px rgba(0, 0, 0, 0.08);
+      z-index: 900;
+      transition: right 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .chat-drawer.active {
+      right: 0;
+    }
+
+    .chat-drawer-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-sidebar);
+      color: var(--text-white);
+    }
+
+    .chat-drawer-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .chat-drawer-close {
+      color: var(--text-gray-light);
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .chat-drawer-close:hover {
+      color: var(--text-white);
+    }
+
+    .chat-message-list {
+      flex: 1;
+      padding: 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f8fafc;
+    }
+
+    .chat-message {
+      max-width: 80%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      line-height: 1.4;
+    }
+
+    .message-bot {
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      align-self: flex-start;
+      border: 1px solid var(--border-color);
+      border-bottom-left-radius: 2px;
+    }
+
+    .message-user {
+      background: var(--accent-blue);
+      color: var(--text-white);
+      align-self: flex-end;
+      border-bottom-right-radius: 2px;
+    }
+
+    .chat-input-area {
+      padding: 12px 16px;
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      display: flex;
+      gap: 8px;
+    }
+
+    .chat-textbox {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-family: inherit;
+    }
+
+    .chat-textbox:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+    }
+
+    .chat-send-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: var(--accent-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .chat-send-btn:hover {
+      background: var(--accent-blue-hover);
+    }
+
+    /* Drag-drop Upload Area style */
+    .upload-dragzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .upload-dragzone:hover {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+    }
+
+    .upload-drag-icon {
+      font-size: 24px;
+      color: var(--accent-blue);
+    }
+
+    .upload-drag-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .upload-drag-desc {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .upload-progress-container {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      margin-top: 10px;
+    }
+
+    .upload-progress-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: var(--text-gray-dark);
+    }
+
+    .upload-progress-track {
+      width: 100%;
+      height: 6px;
+      background: #cbd5e1;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .upload-progress-fill {
+      height: 100%;
+      background: var(--accent-green);
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Tooltip */
+    .chart-tooltip {
+      position: absolute;
+      background: #0f172a;
+      color: #ffffff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 10px;
+      pointer-events: none;
+      z-index: 1000;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: opacity 0.15s ease, transform 0.15s ease;
+      transform: translate(-50%, -100%) scale(0.95);
+      white-space: nowrap;
+    }
+
+    .chart-tooltip.active {
+      opacity: 1;
+      transform: translate(-50%, -100%) scale(1);
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 2000;
+    }
+
+    .toast {
+      background: #0f172a;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideInLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .toast-success {
+      border-left-color: var(--accent-green);
+    }
+
+    .toast-info {
+      border-left-color: var(--accent-blue);
+    }
+
+    /* ===== KEYFRAME ANIMATIONS ===== */
+    @keyframes slideUp {
+      from {
+        transform: translateY(10px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    @keyframes slideInLeft {
+      from {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- ===== LEFT SIDEBAR ===== -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Logo -->
+        <div class="brand-section">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <!-- Overlapping infinite loop logo -->
+              <svg width="28" height="20" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
+                <circle cx="23" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
+              </svg>
+            </div>
+            <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
+          </div>
+          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-menu">
+          <a class="nav-item active" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span contenteditable="true">Dashboard</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-file-invoice"></i>
+              <span contenteditable="true">Requirements (RFQ)</span>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="font-size: 9px; color: var(--text-gray-muted);"></i>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-folder"></i>
+              <span contenteditable="true">My Projects</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-message"></i>
+              <span contenteditable="true">Chats</span>
+            </div>
+            <span class="nav-badge" contenteditable="true">6</span>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-users"></i>
+              <span contenteditable="true">Suppliers</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-file-shield"></i>
+              <span contenteditable="true">Process Documents</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-compass-drafting"></i>
+              <span contenteditable="true">Drawing Integration</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span contenteditable="true">Production Tracking</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-shield-check"></i>
+              <span contenteditable="true">Quality Management</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-truck"></i>
+              <span contenteditable="true">Deliveries & Logistics</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-wallet"></i>
+              <span contenteditable="true">Accounts & Finance</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-chart-line"></i>
+              <span contenteditable="true">Reports & Analytics</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="toggleChatDrawer()">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-robot"></i>
+              <span contenteditable="true">AI Assistant</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-bell"></i>
+              <span contenteditable="true">Notifications</span>
+            </div>
+            <span class="nav-badge" contenteditable="true">12</span>
+          </a>
+          <a class="nav-item" onclick="switchTab(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-gear"></i>
+              <span contenteditable="true">Settings</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Profile & Org Switcher -->
+      <div class="sidebar-bottom">
+        <div class="profile-card" onclick="toggleDropdownMenu(event)">
+          <div class="profile-avatar" contenteditable="true">PS</div>
+          <div class="profile-info">
+            <div class="profile-name" id="user-display-name" contenteditable="true">Prashant Sagar</div>
+            <div class="profile-role" id="user-display-role" contenteditable="true">Engineering Manager</div>
+            <div class="profile-company" contenteditable="true">Bajaj Auto Ltd.</div>
+          </div>
+          <i class="fa-solid fa-chevron-up profile-dropdown-icon"></i>
+
+          <!-- Dropdown switcher menu -->
+          <div class="dropdown-menu" id="profile-dropdown">
+            <div class="dropdown-item selected"
+              onclick="selectProfileOption('manager', 'Prashant Sagar', 'Engineering Manager')">Prashant (Manager)</div>
+            <div class="dropdown-item" onclick="selectProfileOption('admin', 'Neha Sharma', 'Procurement Officer')">Neha
+              (Procurement)</div>
+            <div class="dropdown-item" onclick="selectProfileOption('head', 'Vivek Joshi', 'Plant Head Chakan')">Vivek
+              (Plant Head)</div>
+          </div>
+        </div>
+
+        <div class="org-switcher">
+          <span class="org-switcher-label">Switch Organization</span>
+          <div class="org-dropdown-trigger" onclick="toggleOrgDropdown(event)">
+            <span id="org-selected-name" contenteditable="true">Bajaj Auto Ltd. (Plant: Chakan)</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 8px;"></i>
+          </div>
+          <div class="dropdown-menu" id="org-dropdown" style="bottom: 30px;">
+            <div class="dropdown-item selected" onclick="selectOrg('Bajaj Auto Ltd. (Plant: Chakan)')">Bajaj Auto Ltd.
+              (Chakan)</div>
+            <div class="dropdown-item" onclick="selectOrg('Bajaj Auto Ltd. (Plant: Akurdi)')">Bajaj Auto Ltd. (Akurdi)
+            </div>
+            <div class="dropdown-item" onclick="selectOrg('Bajaj Auto Ltd. (HQ: Pune)')">Bajaj Auto Ltd. (HQ Pune)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== RIGHT CONTENT AREA ===== -->
+    <main class="main-content">
+
+      <!-- Top header bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <h2 class="welcome-title" id="dashboard-welcome-msg">Good Morning, Prashant Sagar <span
+              class="wave-hand">👋</span></h2>
+          <p class="welcome-desc" contenteditable="true">Here's what's happening with your projects and suppliers today.
+          </p>
+        </div>
+
+        <div class="header-right">
+          <!-- Search input -->
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search RFQ, Suppliers, Part No., Documents..."
+              oninput="filterActiveProjects(this.value)">
+          </div>
+
+          <!-- Question help -->
+          <button class="icon-btn" onclick="alert('Opening Help Documentation Center...')">
+            <i class="fa-regular fa-circle-question"></i>
+          </button>
+
+          <!-- Notification bell -->
+          <button class="icon-btn" onclick="alert('Viewing notifications (12 pending).')">
+            <i class="fa-regular fa-bell"></i>
+            <span class="icon-badge">12</span>
+          </button>
+
+          <!-- Host company logo badge -->
+          <div class="host-logo-badge">
+            <div class="host-logo-icon">B</div>
+            <div class="host-info">
+              <span class="host-name" contenteditable="true">BAJAJ</span>
+              <span class="host-desc" contenteditable="true">Bajaj Auto Ltd.</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable dashboard viewport -->
+      <div class="dashboard-viewport">
+
+        <!-- Meta Row (Date / Customize) -->
+        <div class="viewport-top-meta">
+          <span class="date-timestamp" id="live-time-stamp" contenteditable="true">09 Aug 2026 | 10:30 AM IST</span>
+          <button class="customize-btn" onclick="alert('Loading Customization panel...')">
+            <i class="fa-solid fa-sliders"></i>
+            <span contenteditable="true">Customize</span>
+          </button>
+        </div>
+
+        <!-- Metrics cards row -->
+        <div class="metrics-row">
+          <!-- Card 1 -->
+          <div class="metric-card card-rfq" onclick="highlightMetricTab('rfq')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Active RFQs</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-file-lines"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-active-rfq" contenteditable="true">28</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">12% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="metric-card card-quote" onclick="highlightMetricTab('quote')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Pending Quotations</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-pending-quote" contenteditable="true">17</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">8% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="metric-card card-progress" onclick="highlightMetricTab('progress')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Projects In Progress</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-bars-progress"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-projects-progress" contenteditable="true">36</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">15% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="metric-card card-po" onclick="highlightMetricTab('po')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">POs Issued</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-receipt"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-po-issued" contenteditable="true">22</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">10% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="metric-card card-spend" onclick="highlightMetricTab('spend')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Total Spend (YTD)</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-total-spend" contenteditable="true">₹ 124.5 Cr</span>
+            </div>
+            <div class="metric-trend trend-down">
+              <i class="fa-solid fa-arrow-down"></i>
+              <span contenteditable="true">5% vs last year</span>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div class="metric-card card-savings" onclick="highlightMetricTab('savings')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Savings Achieved (YTD)</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-piggy-bank"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-savings-achieved" contenteditable="true">₹ 8.7 Cr</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">18% vs last year</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle widgets grid -->
+        <div class="widgets-grid">
+          <!-- Widget 1: RFQ Status Donut -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">RFQ Status Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="donut-chart-layout">
+              <div class="donut-svg-wrapper">
+                <svg id="rfq-donut-svg" width="120" height="120" viewBox="0 0 100 100"></svg>
+                <div class="donut-center-text">
+                  <div class="donut-center-num" id="rfq-chart-center-val">28</div>
+                  <div class="donut-center-lbl" contenteditable="true">Total RFQs</div>
+                </div>
+              </div>
+              <div class="donut-legend" id="rfq-legend-box"></div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to full RFQ list...');">
+              <span contenteditable="true">View All RFQs</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 2: Spend Analytics Line Chart -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" id="spend-title" contenteditable="true">Spend Analytics (YTD)</span>
+              <div class="widget-header-actions">
+                <select id="spend-period-select" onchange="handleSpendPeriodChange()" style="font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); background: #ffffff; color: var(--text-gray-dark); cursor: pointer; outline: none; transition: border-color 0.2s;">
+                  <option value="ytd" selected>YTD (Year to Date)</option>
+                  <option value="monthly">Monthly View</option>
+                  <option value="yearly">Yearly View</option>
+                </select>
+              </div>
+            </div>
+            <div class="spend-chart-layout">
+              <div class="chart-meta-row">
+                <div class="meta-stat">
+                  <span class="meta-lbl" contenteditable="true">Total Spend</span>
+                  <span class="meta-val" id="meta-total-spend" contenteditable="true">₹124.5 Cr</span>
+                </div>
+                <div class="meta-stat">
+                  <span class="meta-lbl" contenteditable="true">Savings Achieved</span>
+                  <span class="meta-val" id="meta-savings-achieved" contenteditable="true">₹8.7 Cr</span>
+                </div>
+              </div>
+              <div class="line-svg-wrapper">
+                <svg id="spend-line-svg" width="100%" height="130" viewBox="0 0 320 130"
+                  preserveAspectRatio="none"></svg>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link" onclick="openReportsModal()">
+              <span contenteditable="true">View Detailed Report</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 3: Top Suppliers table -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Top Suppliers by Performance</span>
+              <div class="widget-header-actions" style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                <i class="fa-solid fa-plus-circle" onclick="openAddSupplierModal()" style="color: var(--accent-blue);" title="Add Supplier"></i>
+                <i class="fa-solid fa-trash-can" id="toggle-delete-supplier-btn" onclick="toggleSupplierDeleteMode()" style="color: var(--text-gray-muted); transition: color 0.2s;" title="Toggle Delete Mode"></i>
+              </div>
+            </div>
+            <table class="widget-table" id="suppliers-perf-table">
+              <thead>
+                <tr>
+                  <th contenteditable="true">Supplier</th>
+                  <th contenteditable="true">Quality</th>
+                  <th contenteditable="true">Delivery</th>
+                  <th contenteditable="true">Response</th>
+                  <th contenteditable="true">Overall</th>
+                  <th class="delete-col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="suppliers-table-body">
+                <tr>
+                  <td contenteditable="true">Aashita Enterprises</td>
+                  <td contenteditable="true">4.8</td>
+                  <td contenteditable="true">4.7</td>
+                  <td contenteditable="true">4.9</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.8</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                  <td contenteditable="true">4.6</td>
+                  <td contenteditable="true">4.5</td>
+                  <td contenteditable="true">4.6</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.6</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">XYZ Forgings Ltd.</td>
+                  <td contenteditable="true">4.4</td>
+                  <td contenteditable="true">4.3</td>
+                  <td contenteditable="true">4.5</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.4</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">Precision Machining</td>
+                  <td contenteditable="true">4.3</td>
+                  <td contenteditable="true">4.2</td>
+                  <td contenteditable="true">4.4</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.3</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">Reliable Industries</td>
+                  <td contenteditable="true">4.1</td>
+                  <td contenteditable="true">4.0</td>
+                  <td contenteditable="true">4.2</td>
+                  <td><span class="rating-pill rating-yellow" contenteditable="true">4.1</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Opening full Supplier Directory...');">
+              <span contenteditable="true">View Supplier Performance</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Active Projects & Upcoming Milestones Row -->
+        <div class="projects-row">
+          <!-- Active Projects Panel -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">My Active Projects</span>
+              <div class="widget-header-actions" onclick="openCreateRFQModal()"><i class="fa-solid fa-folder-plus"
+                  style="color: var(--accent-blue);"></i></div>
+            </div>
+            <div class="project-table-wrapper">
+              <table class="widget-table" id="active-projects-table">
+                <thead>
+                  <tr>
+                    <th contenteditable="true">Project / RFQ No.</th>
+                    <th contenteditable="true">Part Name</th>
+                    <th contenteditable="true">Supplier</th>
+                    <th contenteditable="true">Status</th>
+                    <th contenteditable="true">Progress</th>
+                    <th contenteditable="true">Next Milestone</th>
+                    <th contenteditable="true">Due Date</th>
+                    <th style="width: 20px;"></th>
+                  </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260801')">REQ-260801</a></td>
+                    <td contenteditable="true">Engine Bracket - Casting</td>
+                    <td contenteditable="true">Aashita Enterprises</td>
+                    <td><span class="project-status-badge status-in-progress" contenteditable="true">In Progress</span>
+                    </td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-casting" style="width: 65%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">65%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">First Article Approval</td>
+                    <td contenteditable="true" style="font-weight: 700;">12 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260742')">REQ-260742</a></td>
+                    <td contenteditable="true">Gear Housing</td>
+                    <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                    <td><span class="project-status-badge status-in-evaluation" contenteditable="true">In
+                        Evaluation</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-housing" style="width: 40%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">40%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Quotation Analysis</td>
+                    <td contenteditable="true" style="font-weight: 700;">14 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260615')">REQ-260615</a></td>
+                    <td contenteditable="true">Shift Fork</td>
+                    <td contenteditable="true">XYZ Forgings Ltd.</td>
+                    <td><span class="project-status-badge status-po-issued" contenteditable="true">PO Issued</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-fork" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">80%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Production Start</td>
+                    <td contenteditable="true" style="font-weight: 700;">10 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260512')">REQ-260512</a></td>
+                    <td contenteditable="true">Cover Plate</td>
+                    <td contenteditable="true">Precision Machining</td>
+                    <td><span class="project-status-badge status-in-progress" contenteditable="true">In Progress</span>
+                    </td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-cover" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">30%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">PPAP Submission</td>
+                    <td contenteditable="true" style="font-weight: 700;">18 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260401')">REQ-260401</a></td>
+                    <td contenteditable="true">Shaft - Input</td>
+                    <td contenteditable="true">Reliable Industries</td>
+                    <td><span class="project-status-badge status-in-production" contenteditable="true">In
+                        Production</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-shaft" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">75%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Dispatch</td>
+                    <td contenteditable="true" style="font-weight: 700;">16 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Navigating to projects dashboard...');">
+              <span contenteditable="true">View All Projects</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Upcoming Milestones Panel -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Upcoming Milestones</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="milestones-list">
+              <!-- Item 1 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-blue"><i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">First Article Approval</span>
+                    <span class="milestone-desc" contenteditable="true">Engine Bracket - Casting</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">12 Aug 2026</span>
+                  <span class="milestone-countdown countdown-blue" contenteditable="true">3 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-orange"><i class="fa-solid fa-file-signature"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">Quotation Submission Deadline</span>
+                    <span class="milestone-desc" contenteditable="true">Gear Housing</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">14 Aug 2026</span>
+                  <span class="milestone-countdown countdown-orange" contenteditable="true">5 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-purple"><i class="fa-solid fa-upload"></i></div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">PPAP Submission</span>
+                    <span class="milestone-desc" contenteditable="true">Cover Plate</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">18 Aug 2026</span>
+                  <span class="milestone-countdown countdown-purple" contenteditable="true">9 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 4 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-green"><i class="fa-solid fa-truck-ramp-box"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">Dispatch</span>
+                    <span class="milestone-desc" contenteditable="true">Shaft - Input</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">16 Aug 2026</span>
+                  <span class="milestone-countdown countdown-green" contenteditable="true">7 Days Left</span>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Opening Milestones Timeline Gantt...');">
+              <span contenteditable="true">View All Milestones</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer widgets row (Document Overview, Production Overview, Quick Actions) -->
+        <div class="footer-row">
+          <!-- Widget 1: Document Overview -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Document Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="docs-grid">
+              <div class="doc-overview-card" onclick="alert('Viewing Drawings...')">
+                <div class="doc-icon-wrapper doc-icon-blue"><i class="fa-solid fa-compass-drafting"></i></div>
+                <span class="doc-count" id="doc-drawings-count">512</span>
+                <span class="doc-label" contenteditable="true">Drawings</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing PPAPs...')">
+                <div class="doc-icon-wrapper doc-icon-green"><i class="fa-solid fa-clipboard-check"></i></div>
+                <span class="doc-count" id="doc-ppaps-count">126</span>
+                <span class="doc-label" contenteditable="true">PPAPs</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing SOPs...')">
+                <div class="doc-icon-wrapper doc-icon-orange"><i class="fa-solid fa-book"></i></div>
+                <span class="doc-count">342</span>
+                <span class="doc-label" contenteditable="true">SOPs</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing Control Plans...')">
+                <div class="doc-icon-wrapper doc-icon-purple"><i class="fa-solid fa-route"></i></div>
+                <span class="doc-count">189</span>
+                <span class="doc-label" contenteditable="true">Control Plans</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing Inspection Standards...')">
+                <div class="doc-icon-wrapper doc-icon-teal"><i class="fa-solid fa-microscope"></i></div>
+                <span class="doc-count">390</span>
+                <span class="doc-label" contenteditable="true">Inspection Std.</span>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to Documents Hub...');">
+              <span contenteditable="true">View All Documents</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 2: Production Overview Chart -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Production Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="donut-chart-layout">
+              <div class="donut-svg-wrapper">
+                <svg id="prod-donut-svg" width="120" height="120" viewBox="0 0 100 100"></svg>
+                <div class="donut-center-text">
+                  <div class="donut-center-num" id="prod-chart-center-val">36</div>
+                  <div class="donut-center-lbl" contenteditable="true">Projects</div>
+                </div>
+              </div>
+              <div class="donut-legend" id="prod-legend-box"></div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to full Production Track...');">
+              <span contenteditable="true">View All Production</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 3: Quick Actions -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Quick Actions</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="quick-actions-grid">
+              <div class="action-card" onclick="openCreateRFQModal()">
+                <i class="fa-solid fa-file-circle-plus action-icon"></i>
+                <span class="action-title" contenteditable="true">Create New RFQ</span>
+              </div>
+              <div class="action-card" onclick="openUploadDrawingModal()">
+                <i class="fa-solid fa-cloud-arrow-up action-icon"></i>
+                <span class="action-title" contenteditable="true">Upload Drawing</span>
+              </div>
+              <div class="action-card" onclick="openAddSupplierModal()">
+                <i class="fa-solid fa-user-plus action-icon"></i>
+                <span class="action-title" contenteditable="true">Add New Supplier</span>
+              </div>
+              <div class="action-card" onclick="toggleChatDrawer()">
+                <i class="fa-regular fa-comments action-icon"></i>
+                <span class="action-title" contenteditable="true">Start Chat</span>
+              </div>
+              <div class="action-card" onclick="openRequestApprovalModal()">
+                <i class="fa-solid fa-signature action-icon"></i>
+                <span class="action-title" contenteditable="true">Request Approval</span>
+              </div>
+              <div class="action-card" onclick="openReportsModal()">
+                <i class="fa-solid fa-chart-column action-icon"></i>
+                <span class="action-title" contenteditable="true">View Reports</span>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Managing custom action links...');">
+              <span contenteditable="true">Manage Actions</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dashboard Footer -->
+        <footer class="dashboard-footer">
+          <span contenteditable="true">© 2026 Aashita Intelligence. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#" contenteditable="true">Privacy Policy</a>
+            <a href="#" contenteditable="true">Terms of Use</a>
+            <a href="#" contenteditable="true">Support</a>
+          </div>
+        </footer>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ===== DIALOG MODALS ===== -->
+
+  <!-- Modal 1: Create RFQ -->
+  <div class="modal-overlay" id="create-rfq-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title-text">Create New RFQ Requirement</span>
+        <i class="fa-solid fa-xmark close-modal-btn" onclick="closeModal('create-rfq-modal')"></i>
+      </div>
+      <form id="create-rfq-form" onsubmit="handleCreateRFQSubmit(event)">
+        <div class="modal-body">
+          <div class="modal-form-group">
+            <label class="modal-label">Part Name / Component Name</label>
+            <input type="text" class="modal-input" id="rfq-part-name" placeholder="e.g. Crankcase Cover" required>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">Supplier Partner</label>
+            <select class="modal-select" id="rfq-supplier" required>
+              <option value="Aashita Enterprises">Aashita Enterprises</option>
+              <option value="ABC Castings Pvt. Ltd.">ABC Castings Pvt. Ltd.</option>
+              <option value="XYZ Forgings Ltd.">XYZ Forgings Ltd.</option>
+              <option value="Precision Machining">Precision Machining</option>
+              <option value="Reliable Industries">Reliable Industries</option>
+            </select>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">Initial Status</label>
+            <select class="modal-select" id="rfq-status" required>
+              <option value="In Progress">In Progress</option>
+              <option value="In Evaluation">In Evaluation</option>
+              <option value="PO Issued">PO Issued</option>
+              <option value="In Production">In Production</option>
+            </select>
+          </div>
+          <div class="modal-form-group">
+            <label class="modal-label">Due Date</label>
+            <input type="text" class="modal-input" id="rfq-due-date" placeholder="e.g. 25 Aug 2026" required>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn-secondary" onclick="closeModal('create-rfq-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Create RFQ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Upload Drawing -->
+  <div class="modal-overlay" id="upload-drawing-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title-text">Upload Engineering Drawing</span>
+        <i class="fa-solid fa-xmark close-modal-btn" onclick="closeModal('upload-drawing-modal')"></i>
+      </div>
+      <div class="modal-body">
+        <div class="upload-dragzone" onclick="simulateDrawingUpload()">
+          <i class="fa-solid fa-cloud-arrow-up upload-drag-icon"></i>
+          <span class="upload-drag-title">Drag & Drop 2D/3D Drawings here</span>
+          <span class="upload-drag-desc">Supports PDF, DWG, STEP files up to 50MB</span>
+        </div>
+        <!-- Progress bar simulated -->
+        <div class="upload-progress-container" id="upload-progress-box">
+          <div class="upload-progress-header">
+            <span>Uploading Clutch_Housing_v3.dwg...</span>
+            <span id="upload-progress-pct">0%</span>
+          </div>
+          <div class="upload-progress-track">
+            <div class="upload-progress-fill" id="upload-progress-fill-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('upload-drawing-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Add Supplier -->
+  <div class="modal-overlay" id="add-supplier-modal">
+    <div class="modal-card" style="width: 500px; max-height: 90vh; overflow-y: auto;">
+      <div class="modal-header">
+        <span class="modal-title-text">Register New Supplier Partner</span>
+        <i class="fa-solid fa-xmark close-modal-btn" onclick="closeModal('add-supplier-modal')"></i>
+      </div>
+      <form id="add-supplier-form" onsubmit="handleAddSupplierSubmit(event)">
+        <div class="modal-body" style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Pre-filled Dummy Suppliers List -->
+          <div>
+            <span style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 10px; display: block;">Choose from Available Dummy List</span>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              
+              <!-- Dummy Supplier Item 1 -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+                <div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Apex Auto Components</div>
+                  <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
+                    Quality: <strong style="color: var(--text-gray-dark);">4.6</strong> | 
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.4</strong> | 
+                    Response: <strong style="color: var(--text-gray-dark);">4.8</strong>
+                  </div>
+                </div>
+                <button type="button" class="btn-primary" onclick="addDummySupplier('Apex Auto Components', 4.6, 4.4, 4.8)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                  <i class="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+
+              <!-- Dummy Supplier Item 2 -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+                <div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Shree Industries</div>
+                  <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
+                    Quality: <strong style="color: var(--text-gray-dark);">4.2</strong> | 
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.1</strong> | 
+                    Response: <strong style="color: var(--text-gray-dark);">4.3</strong>
+                  </div>
+                </div>
+                <button type="button" class="btn-primary" onclick="addDummySupplier('Shree Industries', 4.2, 4.1, 4.3)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                  <i class="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+
+              <!-- Dummy Supplier Item 3 -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+                <div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Dynamic Castings Ltd.</div>
+                  <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
+                    Quality: <strong style="color: var(--text-gray-dark);">4.8</strong> | 
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.7</strong> | 
+                    Response: <strong style="color: var(--text-gray-dark);">4.9</strong>
+                  </div>
+                </div>
+                <button type="button" class="btn-primary" onclick="addDummySupplier('Dynamic Castings Ltd.', 4.8, 4.7, 4.9)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                  <i class="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+
+              <!-- Dummy Supplier Item 4 -->
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+                <div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">National Tooling Pvt. Ltd.</div>
+                  <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
+                    Quality: <strong style="color: var(--text-gray-dark);">4.5</strong> | 
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.3</strong> | 
+                    Response: <strong style="color: var(--text-gray-dark);">4.6</strong>
+                  </div>
+                </div>
+                <button type="button" class="btn-primary" onclick="addDummySupplier('National Tooling Pvt. Ltd.', 4.5, 4.3, 4.6)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                  <i class="fa-solid fa-plus"></i> Add
+                </button>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div style="height: 1px; background: var(--border-color); margin: 4px 0;"></div>
+
+          <!-- Custom Form Option -->
+          <div>
+            <span style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 12px; display: block;">Or Register Custom Supplier</span>
+            <div class="modal-form-group" style="margin-bottom: 12px;">
+              <label class="modal-label">Company Legal Name</label>
+              <input type="text" class="modal-input" id="sup-company-name" placeholder="e.g. Apex Auto Components">
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+              <div class="modal-form-group">
+                <label class="modal-label">Quality (1-5)</label>
+                <input type="number" step="0.1" min="1.0" max="5.0" class="modal-input" id="sup-quality"
+                  placeholder="e.g. 4.5">
+              </div>
+              <div class="modal-form-group">
+                <label class="modal-label">Delivery (1-5)</label>
+                <input type="number" step="0.1" min="1.0" max="5.0" class="modal-input" id="sup-delivery"
+                  placeholder="e.g. 4.3">
+              </div>
+              <div class="modal-form-group">
+                <label class="modal-label">Response (1-5)</label>
+                <input type="number" step="0.1" min="1.0" max="5.0" class="modal-input" id="sup-response"
+                  placeholder="e.g. 4.7">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer" style="margin-top: 16px;">
+          <button type="button" class="btn-secondary" onclick="closeModal('add-supplier-modal')">Cancel</button>
+          <button type="submit" class="btn-primary">Add Custom Supplier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Request Approval -->
+  <div class="modal-overlay" id="request-approval-modal">
+    <div class="modal-card">
+      <div class="modal-header">
+        <span class="modal-title-text">Submit Design/PPAP Approval Request</span>
+        <i class="fa-solid fa-xmark close-modal-btn" onclick="closeModal('request-approval-modal')"></i>
+      </div>
+      <div class="modal-body">
+        <div class="modal-form-group">
+          <label class="modal-label">Select Project / Milestone to Approve</label>
+          <select class="modal-select" id="approval-project-select">
+            <option value="REQ-260801">REQ-260801 - Engine Bracket (First Article Approval)</option>
+            <option value="REQ-260512">REQ-260512 - Cover Plate (PPAP Submission)</option>
+            <option value="REQ-260742">REQ-260742 - Gear Housing (Quotation Analysis)</option>
+          </select>
+        </div>
+        <div class="modal-form-group">
+          <label class="modal-label">Notes for Approver</label>
+          <input type="text" class="modal-input"
+            placeholder="e.g. Design verified by Plant Quality Lead. Checked tolerances.">
+        </div>
+        <div
+          style="font-size: 10px; color: var(--text-gray-muted); background: #f8fafc; padding: 10px; border-radius: 6px; border: 1px solid var(--border-color); display: flex; gap: 8px; align-items: flex-start;">
+          <i class="fa-solid fa-circle-info" style="color: var(--accent-blue); margin-top: 2px;"></i>
+          <span>This will send a priority approval action item to the Plant Head and Procurement managers on their
+            dashboard alert feed.</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="closeModal('request-approval-modal')">Cancel</button>
+        <button class="btn-primary" onclick="submitSimulatedApproval()">Request Approval</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: View Reports -->
+  <div class="modal-overlay" id="reports-modal">
+    <div class="modal-card" style="width: 580px;">
+      <div class="modal-header">
+        <span class="modal-title-text">YTD Spend & Savings Report Summary</span>
+        <i class="fa-solid fa-xmark close-modal-btn" onclick="closeModal('reports-modal')"></i>
+      </div>
+      <div class="modal-body">
+        <table class="widget-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>This Year Spend (₹ Cr)</th>
+              <th>Last Year Spend (₹ Cr)</th>
+              <th>YTD Savings (₹ Cr)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>January</td>
+              <td>12.5</td>
+              <td>10.1</td>
+              <td>0.5</td>
+            </tr>
+            <tr>
+              <td>February</td>
+              <td>15.2</td>
+              <td>12.3</td>
+              <td>0.8</td>
+            </tr>
+            <tr>
+              <td>March</td>
+              <td>14.0</td>
+              <td>11.5</td>
+              <td>0.7</td>
+            </tr>
+            <tr>
+              <td>April</td>
+              <td>16.8</td>
+              <td>13.2</td>
+              <td>1.2</td>
+            </tr>
+            <tr>
+              <td>May</td>
+              <td>19.1</td>
+              <td>14.6</td>
+              <td>1.5</td>
+            </tr>
+            <tr>
+              <td>June</td>
+              <td>18.0</td>
+              <td>15.1</td>
+              <td>1.4</td>
+            </tr>
+            <tr>
+              <td>July</td>
+              <td>21.5</td>
+              <td>16.8</td>
+              <td>2.0</td>
+            </tr>
+            <tr>
+              <td>August</td>
+              <td>25.2</td>
+              <td>18.0</td>
+              <td>2.3</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-secondary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+        <button class="btn-primary" onclick="closeModal('reports-modal')">Close Report</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- AI Chat Drawer Panel -->
+  <div class="chat-drawer" id="chat-drawer-panel">
+    <div class="chat-drawer-header">
+      <span class="chat-drawer-title">
+        <i class="fa-solid fa-robot"></i>
+        <span>Aashita Intelligence AI Assistant</span>
+      </span>
+      <i class="fa-solid fa-xmark chat-drawer-close" onclick="toggleChatDrawer()"></i>
+    </div>
+
+    <!-- Conversation Messages list -->
+    <div class="chat-message-list" id="chat-messages-container">
+      <div class="chat-message message-bot">
+        Hello Prashant! I am your AI Supply Chain Assistant. Ask me anything about your active RFQs, milestones, or
+        supplier ratings!
+      </div>
+      <div class="chat-message message-bot">
+        Try asking: <em>"What is the status of shift fork project?"</em>
+      </div>
+    </div>
+
+    <!-- Text area box input -->
+    <div class="chat-input-area">
+      <input type="text" class="chat-textbox" id="chat-textbox-input" placeholder="Type your query here..."
+        onkeypress="handleChatKeyPress(event)">
+      <div class="chat-send-btn" onclick="sendChatMessage()"><i class="fa-solid fa-paper-plane"
+          style="font-size: 11px;"></i></div>
+    </div>
+  </div>
+
+  <!-- Toast Feed Container -->
+  <div class="toast-container" id="toast-notifications-container"></div>
+
+  <!-- Tooltip elements for SVG Charts -->
+  <div class="chart-tooltip" id="tooltip-el"></div>
+
+  <!-- ===== JAVASCRIPT LOGIC ===== -->
+  <script>
+    // Global data stores
+    let rfqData = [
+      { label: 'Draft', value: 5, color: '#3b82f6' },
+      { label: 'Published', value: 8, color: '#10b981' },
+      { label: 'Quotations Received', value: 7, color: '#f59e0b' },
+      { label: 'Under Evaluation', value: 5, color: '#8b5cf6' },
+      { label: 'Closed', value: 3, color: '#ef4444' }
+    ];
+
+    let prodData = [
+      { label: 'In Production', value: 14, color: '#10b981' },
+      { label: 'In Progress', value: 12, color: '#3b82f6' },
+      { label: 'Pending', value: 6, color: '#f59e0b' },
+      { label: 'Completed', value: 4, color: '#8b5cf6' }
+    ];
+
+    // Chart spend views data with monthly, YTD and yearly values
+    const spendViews = {
+      ytd: {
+        title: 'Spend Analytics (YTD)',
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        thisYear: [12.5, 15.2, 14.0, 16.8, 19.1, 18.0, 21.5, 25.2],
+        lastYear: [10.1, 12.3, 11.5, 13.2, 14.6, 15.1, 16.8, 18.0],
+        total: '₹124.5 Cr',
+        savings: '₹8.7 Cr'
+      },
+      monthly: {
+        title: 'Spend Analytics (Monthly - Aug)',
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        thisYear: [5.2, 6.8, 5.8, 7.4],
+        lastYear: [4.1, 4.8, 4.3, 4.8],
+        total: '₹25.2 Cr',
+        savings: '₹2.3 Cr'
+      },
+      yearly: {
+        title: 'Spend Analytics (Yearly)',
+        labels: ['2022', '2023', '2024', '2025', '2026'],
+        thisYear: [95.4, 112.5, 138.2, 152.0, 124.5],
+        lastYear: [82.0, 98.6, 115.4, 142.1, 102.5],
+        total: '₹622.6 Cr',
+        savings: '₹45.2 Cr'
+      }
+    };
+
+    // Initializer
+    window.addEventListener('DOMContentLoaded', () => {
+      // Draw SVG Donut charts
+      drawDonutChart('rfq-donut-svg', rfqData, 'rfq-chart-center-val');
+      drawDonutChart('prod-donut-svg', prodData, 'prod-chart-center-val');
+
+      // Draw SVG line chart
+      drawLineChart();
+
+      // Setup legend box render
+      renderDonutLegend('rfq-legend-box', rfqData);
+      renderDonutLegend('prod-legend-box', prodData);
+
+      // Listen to editable profile / org switcher clicks to close on outside click
+      window.addEventListener('click', (e) => {
+        if (!e.target.closest('.profile-card')) {
+          document.getElementById('profile-dropdown').classList.remove('active');
+        }
+        if (!e.target.closest('.org-switcher')) {
+          document.getElementById('org-dropdown').classList.remove('active');
+        }
+      });
+
+      // Bind input events to editable metric cards to dynamically redraw charts
+      setupMetricLiveUpdate();
+
+      // Bind suppliers table calculation updates
+      setupSupplierRatingUpdate();
+
+      // Bind active project progress bar live updating
+      setupProjectProgressUpdate();
+    });
+
+    // Donut chart rendering logic using raw SVG circles
+    function drawDonutChart(svgId, data, centerValId) {
+      const svg = document.getElementById(svgId);
+      svg.innerHTML = ''; // Clear SVG elements
+
+      let total = data.reduce((acc, curr) => acc + curr.value, 0);
+      document.getElementById(centerValId).innerText = total;
+
+      let r = 35;
+      let cx = 50;
+      let cy = 50;
+      let circumference = 2 * Math.PI * r; // ~219.91
+
+      let accumulatedOffset = 0;
+
+      data.forEach(item => {
+        let percent = item.value / total;
+        let strokeDash = percent * circumference;
+        let strokeOffset = circumference - strokeDash + accumulatedOffset;
+
+        let circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', cx);
+        circle.setAttribute('cy', cy);
+        circle.setAttribute('r', r);
+        circle.setAttribute('fill', 'transparent');
+        circle.setAttribute('stroke', item.color);
+        circle.setAttribute('stroke-width', '12');
+        circle.setAttribute('stroke-dasharray', `${strokeDash} ${circumference - strokeDash}`);
+        circle.setAttribute('stroke-dashoffset', accumulatedOffset ? -accumulatedOffset : 0);
+        circle.setAttribute('transform', 'rotate(-90 50 50)'); // Start drawing from top center
+
+        // Add interactive hover animations & tooltips
+        circle.style.transition = 'stroke-width 0.2s ease, filter 0.2s ease';
+        circle.style.cursor = 'pointer';
+
+        circle.addEventListener('mouseover', (e) => {
+          circle.setAttribute('stroke-width', '15');
+          circle.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.15))';
+          showTooltip(e, `${item.label}: ${item.value} (${Math.round(percent * 100)}%)`);
+        });
+
+        circle.addEventListener('mousemove', (e) => {
+          positionTooltip(e);
+        });
+
+        circle.addEventListener('mouseout', () => {
+          circle.setAttribute('stroke-width', '12');
+          circle.style.filter = 'none';
+          hideTooltip();
+        });
+
+        svg.appendChild(circle);
+        accumulatedOffset += strokeDash;
+      });
+    }
+
+    // Legend box populator
+    function renderDonutLegend(legendId, data) {
+      const box = document.getElementById(legendId);
+      box.innerHTML = '';
+
+      let total = data.reduce((acc, curr) => acc + curr.value, 0);
+
+      data.forEach(item => {
+        let pct = Math.round((item.value / total) * 100);
+        let itemDiv = document.createElement('div');
+        itemDiv.className = 'legend-item';
+        itemDiv.innerHTML = `
+          <div class="legend-label-group">
+            <span class="legend-bullet" style="background: ${item.color}"></span>
+            <span contenteditable="true">${item.label}</span>
+          </div>
+          <span class="legend-val-pct" contenteditable="true">${item.value} (${pct}%)</span>
+        `;
+        box.appendChild(itemDiv);
+      });
+    }
+    // Spend Analytics SVG Line Chart Drawing
+    function drawLineChart(viewKey) {
+      if (!viewKey) {
+        const selectEl = document.getElementById('spend-period-select');
+        viewKey = selectEl ? selectEl.value : 'ytd';
+      }
+      const data = spendViews[viewKey];
+      
+      const svg = document.getElementById('spend-line-svg');
+      svg.innerHTML = '';
+
+      let width = 320;
+      let height = 130;
+      let padding = 15;
+      let graphWidth = width - 2 * padding;
+      let graphHeight = height - 2 * padding;
+
+      // Find max spend for scaling
+      let allSpend = data.thisYear.concat(data.lastYear);
+      let maxVal = Math.max(...allSpend) + (viewKey === 'yearly' ? 20 : 5);
+
+      // Draw horizontal grid lines
+      for (let i = 0; i <= 3; i++) {
+        let y = padding + (graphHeight / 3) * i;
+        let gridLine = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        gridLine.setAttribute('x1', padding);
+        gridLine.setAttribute('y1', y);
+        gridLine.setAttribute('x2', width - padding);
+        gridLine.setAttribute('y2', y);
+        gridLine.setAttribute('stroke', '#f1f5f9');
+        gridLine.setAttribute('stroke-width', '1');
+        svg.appendChild(gridLine);
+      }
+
+      // Coordinates mapping helper
+      function getCoordinates(dataPoints) {
+        return dataPoints.map((val, idx) => {
+          let x = padding + (graphWidth / (dataPoints.length - 1)) * idx;
+          let y = height - padding - (val / maxVal) * graphHeight;
+          return { x, y, val, label: data.labels[idx] };
+        });
+      }
+
+      let coordsThisYear = getCoordinates(data.thisYear);
+      let coordsLastYear = getCoordinates(data.lastYear);
+
+      // Build path line generator
+      function drawPath(coords, color, strokeStyle = '') {
+        let pathString = `M ${coords[0].x} ${coords[0].y} ` + coords.slice(1).map(c => `L ${c.x} ${c.y}`).join(' ');
+        let path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathString);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', color);
+        path.setAttribute('stroke-width', '2.5');
+        if (strokeStyle) path.setAttribute('stroke-dasharray', strokeStyle);
+        svg.appendChild(path);
+      }
+
+      // Draw Lines
+      drawPath(coordsLastYear, '#cbd5e1', '4 4'); // Last Year (Gray Dashed)
+      drawPath(coordsThisYear, '#2563eb');       // This Year (Blue Solid)
+
+      // Draw Data points and hook tooltips
+      function drawPoints(coords, color, yearLabel) {
+        coords.forEach(pt => {
+          let circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          circle.setAttribute('cx', pt.x);
+          circle.setAttribute('cy', pt.y);
+          circle.setAttribute('r', '4');
+          circle.setAttribute('fill', '#ffffff');
+          circle.setAttribute('stroke', color);
+          circle.setAttribute('stroke-width', '2');
+          circle.style.cursor = 'pointer';
+
+          circle.addEventListener('mouseover', (e) => {
+            circle.setAttribute('r', '6');
+            showTooltip(e, `${pt.label} (${yearLabel}): ₹${pt.val} Cr`);
+          });
+
+          circle.addEventListener('mousemove', (e) => {
+            positionTooltip(e);
+          });
+
+          circle.addEventListener('mouseout', () => {
+            circle.setAttribute('r', '4');
+            hideTooltip();
+          });
+
+          svg.appendChild(circle);
+        });
+      }
+
+      drawPoints(coordsLastYear, '#cbd5e1', viewKey === 'yearly' ? 'Prev Year' : 'Last Cycle');
+      drawPoints(coordsThisYear, '#2563eb', viewKey === 'yearly' ? 'This Year' : 'Current Cycle');
+
+      // Draw Month Labels X-axis
+      coordsThisYear.forEach((pt, idx) => {
+        let text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', pt.x);
+        text.setAttribute('y', height - 2);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '8.5');
+        text.setAttribute('fill', '#94a3b8');
+        text.setAttribute('font-weight', '600');
+        text.textContent = pt.label;
+        svg.appendChild(text);
+      });
+    }
+
+    // Handle Spend Period Switcher dropdown Change
+    function handleSpendPeriodChange() {
+      const selectEl = document.getElementById('spend-period-select');
+      const viewKey = selectEl.value;
+      const data = spendViews[viewKey];
+
+      // Update title text
+      document.getElementById('spend-title').innerText = data.title;
+      // Update metadata spend figures
+      document.getElementById('meta-total-spend').innerText = data.total;
+      document.getElementById('meta-savings-achieved').innerText = data.savings;
+
+      // Redraw line chart
+      drawLineChart(viewKey);
+
+      showToast(`Updated Spend Analytics view to ${selectEl.options[selectEl.selectedIndex].text}!`, 'info');
+    }
+    // Chart Tooltip functions
+    const tooltipEl = document.getElementById('tooltip-el');
+
+    function showTooltip(event, text) {
+      tooltipEl.innerHTML = text;
+      tooltipEl.classList.add('active');
+      positionTooltip(event);
+    }
+
+    function positionTooltip(event) {
+      tooltipEl.style.left = `${event.clientX}px`;
+      tooltipEl.style.top = `${event.clientY - 12}px`;
+    }
+
+    function hideTooltip() {
+      tooltipEl.classList.remove('active');
+    }
+
+    // Toggle Tab highlighting in left menu list
+    function switchTab(element) {
+      document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+      element.classList.add('active');
+      showToast(`Switched view to ${element.querySelector('span').innerText}`, 'info');
+    }
+
+    // Profile Dropdown Switcher
+    function toggleDropdownMenu(e) {
+      e.stopPropagation();
+      document.getElementById('profile-dropdown').classList.toggle('active');
+      document.getElementById('org-dropdown').classList.remove('active');
+    }
+
+    // Toggle Org switcher dropdown
+    function toggleOrgDropdown(e) {
+      e.stopPropagation();
+      document.getElementById('org-dropdown').classList.toggle('active');
+      document.getElementById('profile-dropdown').classList.remove('active');
+    }
+
+    function selectProfileOption(roleKey, name, roleTitle) {
+      document.getElementById('user-display-name').innerText = name;
+      document.getElementById('user-display-role').innerText = roleTitle;
+      document.getElementById('dashboard-welcome-msg').innerHTML = `Good Morning, ${name} <span class="wave-hand">👋</span>`;
+
+      // Update active selected check
+      document.querySelectorAll('#profile-dropdown .dropdown-item').forEach((item, index) => {
+        item.classList.remove('selected');
+        if (name.includes(item.innerText.split(' ')[0])) {
+          item.classList.add('selected');
+        }
+      });
+
+      showToast(`Switched user profile to ${name}`, 'info');
+    }
+
+    function selectOrg(orgName) {
+      document.getElementById('org-selected-name').innerText = orgName;
+      document.querySelectorAll('#org-dropdown .dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+        if (item.innerText.includes(orgName.split(' ')[0])) {
+          item.classList.add('selected');
+        }
+      });
+      showToast(`Switched organization to ${orgName}`, 'info');
+    }
+
+    // Modal Control wrappers
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+
+      // Reset upload progress if upload drawer is closed
+      if (id === 'upload-drawing-modal') {
+        document.getElementById('upload-progress-box').style.display = 'none';
+        document.getElementById('upload-progress-fill-bar').style.width = '0%';
+      }
+    }
+
+    // Quick Action button click bindings
+    function openCreateRFQModal() { openModal('create-rfq-modal'); }
+    function openUploadDrawingModal() { openModal('upload-drawing-modal'); }
+    function openAddSupplierModal() { openModal('add-supplier-modal'); }
+    function openRequestApprovalModal() { openModal('request-approval-modal'); }
+    function openReportsModal() { openModal('reports-modal'); }
+
+    // Toggle Slide out chat panel drawer
+    function toggleChatDrawer() {
+      document.getElementById('chat-drawer-panel').classList.toggle('active');
+    }
+
+    // Toast Notifications Feed manager
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-notifications-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+
+      let icon = '<i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i>';
+      if (type === 'info') icon = '<i class="fa-solid fa-circle-info" style="color: var(--accent-blue);"></i>';
+      if (type === 'error') icon = '<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red);"></i>';
+
+      toast.innerHTML = `${icon} <span>${message}</span>`;
+      container.appendChild(toast);
+
+      // Slide out and remove toast after 3.5s
+      setTimeout(() => {
+        toast.style.transition = 'all 0.3s ease';
+        toast.style.transform = 'translateX(-120%)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Handle Create RFQ form submission
+    function handleCreateRFQSubmit(event) {
+      event.preventDefault();
+
+      const partName = document.getElementById('rfq-part-name').value;
+      const supplier = document.getElementById('rfq-supplier').value;
+      const status = document.getElementById('rfq-status').value;
+      const dueDate = document.getElementById('rfq-due-date').value;
+
+      // Create new logical RFQ ID
+      const rfqIdNum = 260802 + Math.floor(Math.random() * 100);
+      const rfqId = `REQ-${rfqIdNum}`;
+
+      // Insert new row into My Active Projects table
+      const tbody = document.getElementById('projects-table-body');
+      const tr = document.createElement('tr');
+
+      let statusClass = 'status-in-progress';
+      let progressVal = 30;
+      let fillClass = 'progress-fill-cover';
+
+      if (status === 'In Evaluation') {
+        statusClass = 'status-in-evaluation';
+        progressVal = 40;
+        fillClass = 'progress-fill-housing';
+      } else if (status === 'PO Issued') {
+        statusClass = 'status-po-issued';
+        progressVal = 10;
+        fillClass = 'progress-fill-fork';
+      } else if (status === 'In Production') {
+        statusClass = 'status-in-production';
+        progressVal = 70;
+        fillClass = 'progress-fill-shaft';
+      }
+
+      tr.innerHTML = `
+        <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true" onclick="event.preventDefault(); openProjectDetails('${rfqId}')">${rfqId}</a></td>
+        <td contenteditable="true">${partName}</td>
+        <td contenteditable="true">${supplier}</td>
+        <td><span class="project-status-badge ${statusClass}" contenteditable="true">${status}</span></td>
+        <td>
+          <div class="progress-bar-container">
+            <div class="progress-track"><div class="progress-fill ${fillClass}" style="width: ${progressVal}%;"></div></div>
+            <span class="progress-pct" contenteditable="true">${progressVal}%</span>
+          </div>
+        </td>
+        <td contenteditable="true">Initial Quality Review</td>
+        <td contenteditable="true" style="font-weight: 700;">${dueDate}</td>
+        <td><i class="fa-solid fa-ellipsis-vertical" style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+      `;
+
+      tbody.insertBefore(tr, tbody.firstChild);
+
+      // Update Active RFQs metric card
+      const rfqMetric = document.getElementById('val-active-rfq');
+      let currentRfqCount = parseInt(rfqMetric.innerText) || 0;
+      rfqMetric.innerText = currentRfqCount + 1;
+
+      // Update RFQ Status donut chart data
+      if (status === 'In Progress') {
+        rfqData[1].value += 1; // Increment Published/In Progress
+      } else {
+        rfqData[3].value += 1; // Increment Under Evaluation
+      }
+
+      drawDonutChart('rfq-donut-svg', rfqData, 'rfq-chart-center-val');
+      renderDonutLegend('rfq-legend-box', rfqData);
+
+      // Update Project progress triggers
+      setupProjectProgressUpdate();
+
+      closeModal('create-rfq-modal');
+      showToast(`Created RFQ ${rfqId} for ${partName} successfully!`, 'success');
+      document.getElementById('create-rfq-form').reset();
+    }
+
+    // Simulate Drag-drop Drawing upload progress
+    function simulateDrawingUpload() {
+      const progressBox = document.getElementById('upload-progress-box');
+      const fillBar = document.getElementById('upload-progress-fill-bar');
+      const pctLabel = document.getElementById('upload-progress-pct');
+
+      progressBox.style.display = 'flex';
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        fillBar.style.width = `${progress}%`;
+        pctLabel.innerText = `${progress}%`;
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            // Increment Document Overview -> Drawings count
+            const drawingsCountEl = document.getElementById('doc-drawings-count');
+            let count = parseInt(drawingsCountEl.innerText) || 512;
+            drawingsCountEl.innerText = count + 1;
+
+            closeModal('upload-drawing-modal');
+            showToast('Drawing uploaded and processed successfully!', 'success');
+          }, 300);
+        }
+      }, 150);
+    }
+
+    // Handle Add Supplier form submission
+    function handleAddSupplierSubmit(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('sup-company-name').value.trim();
+      if (!name) {
+        showToast('Please enter a supplier name or click "Add" in the dummy list.', 'error');
+        return;
+      }
+      const quality = parseFloat(document.getElementById('sup-quality').value) || 0;
+      const delivery = parseFloat(document.getElementById('sup-delivery').value) || 0;
+      const response = parseFloat(document.getElementById('sup-response').value) || 0;
+
+      // Calculate overall rating
+      const overall = ((quality + delivery + response) / 3).toFixed(1);
+      let ratingClass = 'rating-red';
+      if (overall >= 4.5) ratingClass = 'rating-green';
+      else if (overall >= 4.0) ratingClass = 'rating-yellow';
+
+      const tbody = document.getElementById('suppliers-table-body');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td contenteditable="true">${name}</td>
+        <td contenteditable="true">${quality.toFixed(1)}</td>
+        <td contenteditable="true">${delivery.toFixed(1)}</td>
+        <td contenteditable="true">${response.toFixed(1)}</td>
+        <td><span class="rating-pill ${ratingClass}" contenteditable="true">${overall}</span></td>
+        <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+      `;
+
+      tbody.appendChild(tr);
+
+      // Re-setup rating update triggers
+      setupSupplierRatingUpdate();
+
+      closeModal('add-supplier-modal');
+      showToast(`Supplier ${name} added with overall rating ${overall}`, 'success');
+      document.getElementById('add-supplier-form').reset();
+    }
+
+    let supplierDeleteModeActive = false;
+
+    function toggleSupplierDeleteMode() {
+      supplierDeleteModeActive = !supplierDeleteModeActive;
+      const btn = document.getElementById('toggle-delete-supplier-btn');
+      const table = document.getElementById('suppliers-perf-table');
+      
+      if (supplierDeleteModeActive) {
+        btn.style.color = 'var(--accent-red)';
+        table.classList.add('delete-mode-active');
+        showToast('Delete Supplier Mode Activated. Click a red trash icon to delete.', 'info');
+      } else {
+        btn.style.color = 'var(--text-gray-muted)';
+        table.classList.remove('delete-mode-active');
+        showToast('Delete Supplier Mode Deactivated.', 'info');
+      }
+    }
+
+    function deleteSupplierRow(btnEl) {
+      const row = btnEl.closest('tr');
+      const supplierName = row.cells[0].innerText;
+      
+      if (confirm(`Are you sure you want to delete supplier "${supplierName}"?`)) {
+        row.remove();
+        showToast(`Supplier "${supplierName}" has been removed.`, 'success');
+      }
+    }
+
+    function addDummySupplier(name, quality, delivery, response) {
+      // Calculate overall rating
+      const overall = ((quality + delivery + response) / 3).toFixed(1);
+      let ratingClass = 'rating-red';
+      if (overall >= 4.5) ratingClass = 'rating-green';
+      else if (overall >= 4.0) ratingClass = 'rating-yellow';
+
+      const tbody = document.getElementById('suppliers-table-body');
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td contenteditable="true">${name}</td>
+        <td contenteditable="true">${quality.toFixed(1)}</td>
+        <td contenteditable="true">${delivery.toFixed(1)}</td>
+        <td contenteditable="true">${response.toFixed(1)}</td>
+        <td><span class="rating-pill ${ratingClass}" contenteditable="true">${overall}</span></td>
+        <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+      `;
+
+      tbody.appendChild(tr);
+
+      // Re-setup rating update triggers
+      setupSupplierRatingUpdate();
+
+      closeModal('add-supplier-modal');
+      showToast(`Supplier ${name} added with overall rating ${overall}`, 'success');
+    }
+
+    // Submit Simulated Approval request
+    function submitSimulatedApproval() {
+      const selected = document.getElementById('approval-project-select').value;
+      closeModal('request-approval-modal');
+      showToast(`Approval request sent for ${selected}!`, 'success');
+    }
+
+    // AI Chat Panel message sender & logic
+    function sendChatMessage() {
+      const input = document.getElementById('chat-textbox-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('chat-messages-container');
+
+      // User message element
+      const userMsg = document.createElement('div');
+      userMsg.className = 'chat-message message-user';
+      userMsg.innerText = text;
+      container.appendChild(userMsg);
+
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      // Auto reply chatbot logic
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'chat-message message-bot';
+
+        let responseText = "I'm sorry, I couldn't find details on that query. Try asking: 'What is the status of shift fork project?' or 'Show supplier performance summary'.";
+
+        const lowerText = text.toLowerCase();
+
+        if (lowerText.includes('shift fork') || lowerText.includes('req-260615')) {
+          responseText = "Project REQ-260615 (Shift Fork) is handled by XYZ Forgings Ltd. The current status is **PO Issued** (80% complete). Next milestone: Production Start is due tomorrow (10 Aug 2026).";
+        } else if (lowerText.includes('engine bracket') || lowerText.includes('req-260801')) {
+          responseText = "Project REQ-260801 (Engine Bracket - Casting) is handled by Aashita Enterprises. The status is **In Progress** (65% complete). Next milestone: First Article Approval due on 12 Aug 2026 (3 Days Left).";
+        } else if (lowerText.includes('supplier') || lowerText.includes('performance')) {
+          responseText = "Our top performing supplier is **Aashita Enterprises** with an overall score of 4.8. Followed by ABC Castings Pvt. Ltd. at 4.6. All suppliers are green except Reliable Industries at 4.1.";
+        } else if (lowerText.includes('active rfq') || lowerText.includes('rfqs')) {
+          responseText = "There are currently 28 Active RFQs. Breakdown: 8 Published, 7 Quotations Received, 5 Under Evaluation, 5 Drafts, and 3 Closed.";
+        } else if (lowerText.includes('spend') || lowerText.includes('savings')) {
+          responseText = "The YTD Total Spend is **₹124.5 Crores** (down 5% vs last year). The YTD Savings achieved are **₹8.7 Crores** (up 18% vs last year).";
+        }
+
+        botMsg.innerHTML = responseText;
+        container.appendChild(botMsg);
+        container.scrollTop = container.scrollHeight;
+      }, 800);
+    }
+
+    function handleChatKeyPress(event) {
+      if (event.key === 'Enter') {
+        sendChatMessage();
+      }
+    }
+
+    // setup Metric live updates from contenteditable text changes
+    function setupMetricLiveUpdate() {
+      const bindUpdate = (elementId, arrayIdx, chartId, dataArray, centerId) => {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+
+        el.addEventListener('blur', () => {
+          let cleanVal = parseInt(el.innerText.replace(/[^0-9]/g, '')) || 0;
+          if (chartId && dataArray) {
+            dataArray[arrayIdx].value = cleanVal;
+            drawDonutChart(chartId, dataArray, centerId);
+            renderDonutLegend(chartId.includes('rfq') ? 'rfq-legend-box' : 'prod-legend-box', dataArray);
+            showToast(`Dynamic charts updated based on edited value!`, 'info');
+          }
+        });
+      };
+
+      // Bind Metric 1 with Donut slice 1 (Published RFQs)
+      bindUpdate('val-active-rfq', 1, 'rfq-donut-svg', rfqData, 'rfq-chart-center-val');
+      // Bind Metric 3 with Donut slice 1 (Projects In Progress)
+      bindUpdate('val-projects-progress', 1, 'prod-donut-svg', prodData, 'prod-chart-center-val');
+    }
+
+    // Auto calculate supplier overall scores on edit
+    function setupSupplierRatingUpdate() {
+      const rows = document.querySelectorAll('#suppliers-table-body tr');
+      rows.forEach(row => {
+        const cells = row.querySelectorAll('td');
+        // Quality, Delivery, Response are index 1, 2, 3
+        [1, 2, 3].forEach(idx => {
+          cells[idx].addEventListener('blur', () => {
+            let quality = parseFloat(cells[1].innerText) || 0;
+            let delivery = parseFloat(cells[2].innerText) || 0;
+            let response = parseFloat(cells[3].innerText) || 0;
+
+            let overall = ((quality + delivery + response) / 3).toFixed(1);
+            const pill = cells[4].querySelector('.rating-pill');
+            pill.innerText = overall;
+
+            // Adjust class colors
+            pill.className = 'rating-pill';
+            if (overall >= 4.5) pill.classList.add('rating-green');
+            else if (overall >= 4.0) pill.classList.add('rating-yellow');
+            else pill.classList.add('rating-red');
+
+            showToast(`Recalculated overall supplier rating: ${overall}`, 'info');
+          });
+        });
+      });
+    }
+
+    // Project progress bar updates when percentage number is edited
+    function setupProjectProgressUpdate() {
+      const rows = document.querySelectorAll('#projects-table-body tr');
+      rows.forEach(row => {
+        const pctEl = row.querySelector('.progress-pct');
+        const fillBar = row.querySelector('.progress-fill');
+
+        if (pctEl && fillBar) {
+          pctEl.addEventListener('blur', () => {
+            let val = parseInt(pctEl.innerText.replace(/[^0-9]/g, '')) || 0;
+            if (val > 100) val = 100;
+            if (val < 0) val = 0;
+
+            pctEl.innerText = `${val}%`;
+            fillBar.style.width = `${val}%`;
+            showToast(`Updated project progress to ${val}%`, 'info');
+          });
+        }
+      });
+    }
+
+    // Search filter projects table
+    function filterActiveProjects(query) {
+      const lowerQuery = query.toLowerCase();
+      const rows = document.querySelectorAll('#projects-table-body tr');
+      rows.forEach(row => {
+        const text = row.innerText.toLowerCase();
+        if (text.includes(lowerQuery)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+
+    // Open detailed info of a project
+    function openProjectDetails(rfqNo) {
+      showToast(`Loading timeline & details page for ${rfqNo}...`, 'info');
+    }
+  </script>
+</body>
+
+</html>
