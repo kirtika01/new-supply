@@ -1,0 +1,1316 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Aashita Intelligence — Requirement Workspace</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* ===== RESET & BASE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #1e293b;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    button {
+      cursor: pointer;
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+    }
+
+    /* ===== SCROLLBAR ===== */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+
+    /* ===== LAYOUT ===== */
+    .app {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+    }
+
+    .top-bar {
+      display: flex;
+      align-items: center;
+      height: 50px;
+      background: linear-gradient(135deg, #1e3a8a, #2563eb);
+      color: #fff;
+      padding: 0 16px;
+      flex-shrink: 0;
+      z-index: 100;
+    }
+
+    .main-wrapper {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 200px;
+      background: #0f172a;
+      color: #cbd5e1;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+    }
+
+    .sidebar-nav {
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sidebar-nav .nav-item {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 16px;
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 500;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-nav .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+    }
+
+    .sidebar-nav .nav-item.active {
+      background: #1e293b;
+      border-left: 3px solid #3b82f6;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .sidebar-nav .nav-item i {
+      font-size: 14px;
+      width: 22px;
+      text-align: center;
+    }
+
+    .sidebar-nav-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 6px 16px;
+    }
+
+    .sidebar-bottom {
+      padding: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      margin-top: auto;
+    }
+
+    .sidebar-bottom .bajaj-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px;
+    }
+
+    .sidebar-bottom .bajaj-logo-img {
+      width: 50px;
+      height: 40px;
+      background: #fff;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .sidebar-bottom .bajaj-logo-img span {
+      font-weight: 800;
+      color: #1e3a8a;
+      font-size: 11px;
+      text-align: center;
+      line-height: 1.1;
+    }
+
+    .sidebar-bottom .bajaj-tagline {
+      font-size: 8px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .sidebar-user {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-user .s-avatar {
+      width: 32px;
+      height: 32px;
+      background: #334155;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar-user .s-info {
+      font-size: 11px;
+    }
+
+    .sidebar-user .s-info .s-name {
+      color: #e2e8f0;
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .sidebar-user .s-info .s-email,
+    .sidebar-user .s-info .s-role {
+      color: #64748b;
+      font-size: 10px;
+    }
+
+    /* ===== TOP BAR BRANDING ===== */
+    .top-bar .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-right: 24px;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+
+    .top-bar .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-bar .logo-icon i {
+      color: #2563eb;
+      font-size: 18px;
+    }
+
+    .top-bar .logo-text {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .top-bar .logo-sub {
+      font-size: 9px;
+      opacity: 0.7;
+      display: block;
+      margin-top: -2px;
+    }
+
+    .top-bar .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 12px;
+    }
+
+    .top-bar .breadcrumbs .crumb {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      white-space: nowrap;
+      background: rgba(255, 255, 255, 0.12);
+      padding: 5px 14px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .top-bar .breadcrumbs .crumb:hover {
+      background: rgba(255, 255, 255, 0.22);
+    }
+
+    .top-bar .breadcrumbs .crumb i {
+      font-size: 14px;
+    }
+
+    .top-bar .search-bar {
+      flex: 1;
+      min-width: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .top-bar .search-wrap {
+      position: relative;
+      width: 100%;
+      max-width: 380px;
+    }
+
+    .top-bar .search-wrap i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #94a3b8;
+      font-size: 13px;
+    }
+
+    .top-bar .search-wrap input {
+      width: 100%;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.12);
+      border: none;
+      border-radius: 6px;
+      padding-left: 36px;
+      padding-right: 12px;
+      color: #fff;
+      font-family: inherit;
+      font-size: 12px;
+    }
+
+    .top-bar .search-wrap input::placeholder {
+      color: #cbd5e1;
+      opacity: 0.7;
+    }
+
+    .top-bar .search-wrap input:focus {
+      outline: none;
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .top-bar .right-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-left: auto;
+    }
+
+    .top-bar .icon-btn {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      cursor: pointer;
+      position: relative;
+      transition: background 0.2s;
+    }
+
+    .top-bar .icon-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .top-bar .icon-btn i {
+      font-size: 16px;
+    }
+
+    .top-bar .icon-btn .badge {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      min-width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-bar .user-profile {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .top-bar .user-profile:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .top-bar .user-profile .user-avatar {
+      width: 28px;
+      height: 28px;
+      background: #f59e0b;
+      color: #fff;
+      border-radius: 50%;
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .top-bar .user-profile .user-info {
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .top-bar .user-profile .user-info .name {
+      font-weight: 600;
+    }
+
+    .top-bar .user-profile .user-info .role {
+      opacity: 0.8;
+      font-size: 9px;
+    }
+
+    /* ===== CONTENT AREA ===== */
+    .content-area {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      background: #f8fafc;
+    }
+
+    /* ===== CONTENT HEADER ===== */
+    .req-header {
+      background: #fff;
+      padding: 16px 24px;
+      border-bottom: 1px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+
+    .req-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .req-title-wrapper {
+      position: relative;
+    }
+
+    .req-title-row h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .req-title-row h1 i {
+      font-size: 14px;
+      color: #64748b;
+      margin-top: 2px;
+      transition: transform 0.2s;
+    }
+
+    .req-title-row h1.active i {
+      transform: rotate(180deg);
+    }
+
+    .req-title-row .status-badge {
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .status-active { background: #dcfce7; color: #15803d; }
+    .status-review { background: #fef9c3; color: #a16207; }
+    .status-planning { background: #f1f5f9; color: #475569; }
+
+    .req-subtitle {
+      font-size: 12px;
+      color: #64748b;
+      margin-bottom: 12px;
+    }
+
+    /* ===== DROPDOWN MENU ===== */
+    .req-dropdown-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 340px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-top: 8px;
+      z-index: 100;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .req-dropdown-menu.show {
+      display: flex;
+    }
+
+    .req-dropdown-item {
+      padding: 12px 16px;
+      border-bottom: 1px solid #f1f5f9;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .req-dropdown-item:last-child {
+      border-bottom: none;
+    }
+
+    .req-dropdown-item:hover {
+      background: #f8fafc;
+    }
+
+    .req-dropdown-item.active {
+      background: #eff6ff;
+    }
+
+    .req-dropdown-item .rd-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .req-dropdown-item .rd-sub {
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    /* ===== TABS ===== */
+    .tabs-row {
+      display: flex;
+      gap: 24px;
+      margin-top: 12px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .tab-item {
+      padding: 8px 0;
+      font-size: 13px;
+      font-weight: 500;
+      color: #64748b;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .tab-item:hover {
+      color: #0f172a;
+    }
+
+    .tab-item.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+      font-weight: 600;
+    }
+
+    /* ===== MAIN GRID CONTENT ===== */
+    .content-body {
+      padding: 24px;
+      flex: 1;
+      overflow-y: auto;
+      max-width: 1200px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .tab-panel {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== DASHBOARD DETAILS ===== */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .metric-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .metric-card .m-label {
+      font-size: 11px;
+      color: #64748b;
+      text-transform: uppercase;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-bottom: 6px;
+    }
+
+    .metric-card .m-value {
+      font-size: 20px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .metric-card .m-sub {
+      font-size: 11px;
+      color: #10b981;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .metric-card .m-sub.neutral {
+      color: #64748b;
+    }
+
+    /* TWO COLUMN LAYOUT */
+    .details-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+    }
+
+    @media (max-width: 900px) {
+      .details-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .panel-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+      margin-bottom: 24px;
+    }
+
+    .panel-card h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-card h3 i {
+      color: #2563eb;
+    }
+
+    .meta-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .meta-item {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .meta-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .meta-item .m-name {
+      font-weight: 600;
+      color: #64748b;
+    }
+
+    .meta-item .m-desc {
+      color: #0f172a;
+      font-weight: 500;
+    }
+
+    .desc-block {
+      line-height: 1.6;
+      color: #334155;
+      font-size: 13.5px;
+    }
+
+    /* ===== DOCUMENTS TABLE ===== */
+    .doc-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .doc-table th {
+      padding: 12px;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      color: #64748b;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .doc-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+
+    .doc-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .doc-type-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .type-pdf { background: #ef4444; }
+    .type-step { background: #3b82f6; }
+    .type-xlsx { background: #10b981; }
+    .type-dwg { background: #8b5cf6; }
+
+    .doc-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: #2563eb;
+      font-weight: 600;
+      transition: color 0.15s;
+    }
+
+    .doc-action-btn:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* ===== TIMELINE ===== */
+    .timeline-container {
+      position: relative;
+      padding-left: 24px;
+    }
+
+    .timeline-container::before {
+      content: '';
+      position: absolute;
+      left: 7px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: #e2e8f0;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -21px;
+      top: 3px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #2563eb;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #bfdbfe;
+    }
+
+    .timeline-item.info .timeline-dot {
+      background: #64748b;
+      box-shadow: 0 0 0 2px #cbd5e1;
+    }
+
+    .timeline-item.success .timeline-dot {
+      background: #10b981;
+      box-shadow: 0 0 0 2px #a7f3d0;
+    }
+
+    .timeline-meta {
+      font-size: 11px;
+      color: #64748b;
+      margin-bottom: 4px;
+      display: flex;
+      gap: 8px;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      color: #0f172a;
+      margin-bottom: 4px;
+    }
+
+    .timeline-desc {
+      color: #64748b;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    /* ===== COST COMPARISON TABLE ===== */
+    .cost-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .cost-table th {
+      padding: 12px;
+      background: #f8fafc;
+      border-bottom: 2px solid #e2e8f0;
+      color: #64748b;
+      font-weight: 600;
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .cost-table td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #e2e8f0;
+      color: #334155;
+    }
+
+    .cost-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    .cost-status-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .cost-status-ok { background: #dcfce7; color: #15803d; }
+    .cost-status-rec { background: #dbeafe; color: #1e40af; }
+    .cost-status-review { background: #fef3c7; color: #d97706; }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+    <!-- ===== TOP BAR ===== -->
+    <div class="top-bar">
+      <div class="logo">
+        <div class="logo-icon"><i class="fas fa-infinity"></i></div>
+        <div>
+          <span class="logo-text">Aashita Intelligence</span>
+          <span class="logo-sub">Connect. Collaborate. Deliver.</span>
+        </div>
+      </div>
+      <div class="breadcrumbs">
+        <a class="crumb" href="#"><i class="fas fa-building"></i> <span id="breadCompany">Bajaj Auto Ltd.</span></a>
+        <a class="crumb" href="#"><i class="fas fa-industry"></i> <span id="breadPlant">Plant: Chakan, Pune</span></a>
+        <a class="crumb" href="#"><span id="breadDivision">Division: R&amp;D – Powertrain</span></a>
+      </div>
+      <div class="search-bar">
+        <div class="search-wrap">
+          <i class="fas fa-search"></i>
+          <input type="text" placeholder="Search requirements, suppliers, files...">
+        </div>
+      </div>
+      <div class="right-icons">
+        <div class="icon-btn" title="Notifications"><i class="fas fa-bell"></i><span class="badge">3</span></div>
+        <div class="icon-btn" title="Help"><i class="fas fa-question-circle"></i></div>
+      </div>
+      <div class="user-profile">
+        <div class="user-avatar">BP</div>
+        <div class="user-info">
+          <div class="name">bajaj.planthead@aashita.ai</div>
+          <div class="role">Plant Head</div>
+        </div>
+        <i class="fas fa-chevron-down" style="margin-left: 4px; font-size: 10px; opacity: 0.7;"></i>
+      </div>
+    </div>
+
+    <div class="main-wrapper">
+      <!-- ===== SIDEBAR ===== -->
+      <div class="sidebar">
+        <nav class="sidebar-nav">
+          <a class="nav-item" href="supplylink.html"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+          <a class="nav-item" href="supplylink.html"><i class="fas fa-comment-dots"></i> <span>Chats</span></a>
+          <div class="sidebar-nav-divider"></div>
+          <a class="nav-item" href="process_documents.html"><i class="fas fa-file-alt"></i> <span>Process Documents</span></a>
+          <a class="nav-item" href="bajaj.html"><i class="fas fa-tachometer-alt"></i> <span>Bajaj Auto Dashboard</span></a>
+          <a class="nav-item" href="drawing_integration.html"><i class="fas fa-drafting-compass"></i> <span>Drawing Integration</span></a>
+          <a class="nav-item" href="index.html"><i class="fas fa-th-large"></i> <span>Platform Overview</span></a>
+          <a class="nav-item" href="supplylink.html"><i class="fas fa-project-diagram"></i> <span>REQ-250801 Workspace</span></a>
+          <a class="nav-item active" id="dynamicNavWorkspace"><i class="fas fa-project-diagram"></i> <span id="dynamicNavText">REQ-XXXXXX Workspace</span></a>
+          <a class="nav-item" href="register.html"><i class="fas fa-user-plus"></i> <span>Registration</span></a>
+        </nav>
+        <div class="sidebar-bottom">
+          <div class="bajaj-logo">
+            <div class="bajaj-logo-img"><span>BAJAJ</span></div>
+            <div>
+              <div style="font-size: 12px; font-weight: 700; color: #e2e8f0;">BAJAJ</div>
+              <div class="bajaj-tagline">THE WORLD'S FAVOURITE INDIAN</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-user">
+          <div class="s-avatar"><i class="fas fa-user" style="color: #94a3b8;"></i></div>
+          <div class="s-info">
+            <div class="s-name">bajaj.planthead</div>
+            <div class="s-email">bajaj.planthead@aashita.ai</div>
+            <div class="s-role">Plant Head</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== CONTENT AREA ===== -->
+      <div class="content-area">
+        <!-- Req Header -->
+        <div class="req-header">
+          <div class="req-title-row">
+            <div class="req-title-wrapper">
+              <h1 id="reqTitleHeader" onclick="toggleDropdown(event)">
+                REQ-XXXXXX - Loading Title
+                <i class="fas fa-chevron-down"></i>
+              </h1>
+              
+              <!-- DROPDOWN OPTIONS -->
+              <div id="mainReqDropdown" class="req-dropdown-menu">
+                <div class="req-dropdown-item" onclick="window.location.href='supplylink.html'">
+                  <div class="rd-title">REQ-250801 - Engine Bracket - Casting</div>
+                  <div class="rd-sub">Bajaj Auto Ltd.</div>
+                </div>
+                <div class="req-dropdown-item" id="dd-250802" onclick="window.location.href='dummy_requirement.html?req=250802'">
+                  <div class="rd-title">REQ-250802 - Gear Box Housing - Forging</div>
+                  <div class="rd-sub">Eicher Auto Ltd.</div>
+                </div>
+                <div class="req-dropdown-item" id="dd-250803" onclick="window.location.href='dummy_requirement.html?req=250803'">
+                  <div class="rd-title">REQ-250803 - Shaft Machining</div>
+                  <div class="rd-sub">Bajaj Auto Ltd.</div>
+                </div>
+                <div class="req-dropdown-item" id="dd-250804" onclick="window.location.href='dummy_requirement.html?req=250804'">
+                  <div class="rd-title">REQ-250804 - Housing - Casting</div>
+                  <div class="rd-sub">Bajaj Auto Ltd.</div>
+                </div>
+              </div>
+            </div>
+            <span class="status-badge" id="reqStatusBadge">Status</span>
+          </div>
+
+          <div class="req-subtitle" id="reqSubtitleHeader">Company &nbsp;|&nbsp; Sourcing Workspace</div>
+
+          <!-- TABS -->
+          <div class="tabs-row">
+            <a class="tab-item active" onclick="switchTab(event, 'tab-details')">RFQ Details</a>
+            <a class="tab-item" onclick="switchTab(event, 'tab-docs')">Documents</a>
+            <a class="tab-item" onclick="switchTab(event, 'tab-timeline')">Activity Timeline</a>
+            <a class="tab-item" onclick="switchTab(event, 'tab-cost')">Cost Assessment</a>
+          </div>
+        </div>
+
+        <!-- ===== BODY CONTAINER ===== -->
+        <div class="content-body">
+          
+          <!-- TAB: RFQ DETAILS -->
+          <div id="tab-details" class="tab-panel active">
+            <div class="metrics-grid">
+              <div class="metric-card">
+                <span class="m-label">Target Piece Cost</span>
+                <span class="m-value" id="metricCost">-</span>
+                <span class="m-sub">Target Target Cost</span>
+              </div>
+              <div class="metric-card">
+                <span class="m-label">Annual Volume</span>
+                <span class="m-value" id="metricVolume">-</span>
+                <span class="m-sub neutral">Projected Demand</span>
+              </div>
+              <div class="metric-card">
+                <span class="m-label">Response Status</span>
+                <span class="m-value" id="metricResponse">-</span>
+                <span class="m-sub" style="color: #64748b;">Panel Sourcing</span>
+              </div>
+              <div class="metric-card">
+                <span class="m-label">Timeline Status</span>
+                <span class="m-value" id="metricDeadline">-</span>
+                <span class="m-sub" style="color: #64748b;">Target Deadline</span>
+              </div>
+            </div>
+
+            <div class="details-row">
+              <div class="panel-card">
+                <h3><i class="fas fa-align-left"></i> Requirement Scope</h3>
+                <div class="desc-block" id="reqDescription">
+                  Loading description...
+                </div>
+              </div>
+
+              <div class="panel-card">
+                <h3><i class="fas fa-info-circle"></i> Sourcing Parameters</h3>
+                <div class="meta-list">
+                  <div class="meta-item">
+                    <span class="m-name">Material</span>
+                    <span class="m-desc" id="metaMaterial">-</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="m-name">Process</span>
+                    <span class="m-desc" id="metaProcess">-</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="m-name">Manager</span>
+                    <span class="m-desc" id="metaManager">-</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: DOCUMENTS -->
+          <div id="tab-docs" class="tab-panel">
+            <div class="panel-card">
+              <h3><i class="fas fa-folder-open"></i> Sourcing & Engineering Files</h3>
+              <table class="doc-table">
+                <thead>
+                  <tr>
+                    <th>Document Name</th>
+                    <th>Size</th>
+                    <th>Upload Date</th>
+                    <th>Type</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="docTableBody">
+                  <!-- Dynamic -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- TAB: TIMELINE -->
+          <div id="tab-timeline" class="tab-panel">
+            <div class="panel-card">
+              <h3><i class="fas fa-stream"></i> Sourcing Workspace Log</h3>
+              <div class="timeline-container" id="timelineContainer">
+                <!-- Dynamic -->
+              </div>
+            </div>
+          </div>
+
+          <!-- TAB: COST ASSESSMENT -->
+          <div id="tab-cost" class="tab-panel">
+            <div class="panel-card">
+              <h3><i class="fas fa-calculator"></i> Supplier Quotation Summary</h3>
+              <table class="cost-table">
+                <thead>
+                  <tr>
+                    <th>Supplier Name</th>
+                    <th>Tooling Cost</th>
+                    <th>Piece Cost (FOB)</th>
+                    <th>Lead Time</th>
+                    <th>Technical Status</th>
+                  </tr>
+                </thead>
+                <tbody id="costTableBody">
+                  <!-- Dynamic -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Requirement Dynamic Data Store
+    const requirements = {
+      '250802': {
+        code: 'REQ-250802',
+        title: 'Gear Box Housing - Forging',
+        company: 'Eicher Auto Ltd.',
+        plant: 'Plant: Pithampur',
+        division: 'Division: R&D – Drivetrain',
+        status: 'In Review',
+        statusClass: 'status-review',
+        details: {
+          material: 'Medium Carbon Steel (EN 19)',
+          process: 'Closed Die Forging + Rough Machining',
+          volume: '30,000 Parts / Annum',
+          targetCost: '₹480.00 / Part',
+          sourcingManager: 'amit.singh@eicher.ai',
+          deadline: '25 Aug 2026',
+          description: 'Request for quotation for Gear Box Housing closed-die forging. Parts must meet Eicher ES-8821 engineering specifications. Critical features include grain flow alignment and minimum decarburization depth. Suppliers are requested to submit draft tooling designs along with commercial offers.'
+        },
+        documents: [
+          { name: 'Gearbox_Housing_Drawing_V2.pdf', size: '4.8 MB', date: '04 Aug 2026', type: 'PDF' },
+          { name: 'Forging_Spec_Sheet_ES8821.pdf', size: '1.2 MB', date: '04 Aug 2026', type: 'PDF' },
+          { name: 'Gearbox_Housing_3D_Model.stp', size: '24.5 MB', date: '05 Aug 2026', type: 'STEP' }
+        ],
+        timeline: [
+          { date: '05 Aug 2026', time: '02:30 PM', title: 'Technical clarification submitted by sub-supplier.', desc: 'Clarification regarding machining allowance on the mounting flange.' },
+          { date: '04 Aug 2026', time: '11:00 AM', title: 'Requirement REQ-250802 published to panel suppliers.', desc: 'RFQ event opened on Eicher Sourcing Portal.' },
+          { date: '01 Aug 2026', time: '09:15 AM', title: 'Engineering drawing and spec sheet V2 approved by R&D.', desc: 'Approved by R&D lead amit.singh@eicher.ai.' }
+        ],
+        costAnalysis: [
+          { supplier: 'Precision Forgings Ltd.', tooling: '₹4,50,000', piece: '₹495.00', leadTime: '6 weeks', status: 'Technically Ok', sClass: 'cost-status-ok' },
+          { supplier: 'Bharat Forge & Forgings', tooling: '₹6,00,000', piece: '₹485.00', leadTime: '8 weeks', status: 'Technically Ok', sClass: 'cost-status-ok' },
+          { supplier: 'Apex Forged Parts Corp.', tooling: '₹3,80,000', piece: '₹510.00', leadTime: '5 weeks', status: 'Reviewing Spec', sClass: 'cost-status-review' }
+        ]
+      },
+      '250803': {
+        code: 'REQ-250803',
+        title: 'Shaft Machining',
+        company: 'Bajaj Auto Ltd.',
+        plant: 'Plant: Chakan, Pune',
+        division: 'Division: R&D – Powertrain',
+        status: 'Active',
+        statusClass: 'status-active',
+        details: {
+          material: 'Alloy Steel (20MnCr5)',
+          process: 'CNC Turning + Spline Hobbing + Heat Treatment',
+          volume: '12,000 Parts / Annum',
+          targetCost: '₹150.00 / Part',
+          sourcingManager: 'sanjay.sharma@bajaj.ai',
+          deadline: '18 Aug 2026',
+          description: 'Precision shaft machining requirement. Shaft features keyways, external splines, and ground diameters with close tolerance (g6). Hardness requirement: 58-62 HRC post case-hardening. Spline quality class: DIN 8.'
+        },
+        documents: [
+          { name: 'Splined_Shaft_Machining_V1.pdf', size: '3.1 MB', date: '28 Jul 2026', type: 'PDF' },
+          { name: 'Shaft_Spline_Data_Table.xlsx', size: '150 KB', date: '28 Jul 2026', type: 'XLSX' },
+          { name: 'Spline_Gage_Drawing.dwg', size: '2.4 MB', date: '30 Jul 2026', type: 'DWG' }
+        ],
+        timeline: [
+          { date: '08 Aug 2026', time: '04:10 PM', title: 'Inspection gages finalized and validated.', desc: 'Spline ring gage design approved.' },
+          { date: '02 Aug 2026', time: '10:00 AM', title: 'First trial batch (5 parts) received from Aashita Enterprises.', desc: 'Sent for metallurgical lab testing.' },
+          { date: '28 Jul 2026', time: '10:45 AM', title: 'Requirement REQ-250803 created and released.', desc: 'Created by sanjay.sharma@bajaj.ai.' }
+        ],
+        costAnalysis: [
+          { supplier: 'Aashita Enterprises', tooling: '₹80,000', piece: '₹142.50', leadTime: '3 weeks', status: 'Recommended', sClass: 'cost-status-rec' },
+          { supplier: 'Precision Gears & Shafts', tooling: '₹1,20,000', piece: '₹148.00', leadTime: '4 weeks', status: 'Technically Ok', sClass: 'cost-status-ok' },
+          { supplier: 'Max Precision Components', tooling: '₹95,000', piece: '₹152.00', leadTime: '3 weeks', status: 'Technically Ok', sClass: 'cost-status-ok' }
+        ]
+      },
+      '250804': {
+        code: 'REQ-250804',
+        title: 'Housing - Casting',
+        company: 'Bajaj Auto Ltd.',
+        plant: 'Plant: Chakan, Pune',
+        division: 'Division: R&D – Engine Sourcing',
+        status: 'In Planning',
+        statusClass: 'status-planning',
+        details: {
+          material: 'Aluminium Alloy (ADC12)',
+          process: 'High Pressure Die Casting (HPDC)',
+          volume: '50,000 Parts / Annum',
+          targetCost: '₹320.00 / Part',
+          sourcingManager: 'vikram.roy@bajaj.ai',
+          deadline: '10 Sep 2026',
+          description: 'HPDC Aluminium Housing RFQ. Part weight is approx 1.2 kg. Wall thickness is thin-walled (average 3.0mm), requiring highly optimized gate runner designs to avoid gas porosity. Standard leak testing at 1.5 bar required.'
+        },
+        documents: [
+          { name: 'Al_Housing_Draft_Casting_V0.pdf', size: '5.2 MB', date: '09 Aug 2026', type: 'PDF' },
+          { name: 'Al_Housing_Draft_3D_V0.stp', size: '32.1 MB', date: '09 Aug 2026', type: 'STEP' }
+        ],
+        timeline: [
+          { date: '09 Aug 2026', time: '05:30 PM', title: 'Draft drawings uploaded by Design Team.', desc: 'Initial CAD draft released for feasibility feedback.' },
+          { date: '09 Aug 2026', time: '11:00 AM', title: 'Requirement REQ-250804 initiated in internal planning.', desc: 'Sourcing cycle started by vikram.roy@bajaj.ai.' }
+        ],
+        costAnalysis: [
+          { supplier: 'Aashita Enterprises', tooling: '₹12,50,000', piece: '₹318.00', leadTime: '10 weeks', status: 'Feasibility Ok', sClass: 'cost-status-ok' },
+          { supplier: 'XYZ Castings Pvt. Ltd.', tooling: '₹14,00,000', piece: '₹312.00', leadTime: '12 weeks', status: 'Feasibility Ok', sClass: 'cost-status-ok' }
+        ]
+      }
+    };
+
+    // Parse URL parameter
+    function getRequirementKey() {
+      const params = new URLSearchParams(window.location.search);
+      const reqId = params.get('req');
+      return (reqId && requirements[reqId]) ? reqId : '250802'; // default to 250802
+    }
+
+    const currentKey = getRequirementKey();
+    const reqData = requirements[currentKey];
+
+    // Load Data Into UI
+    document.title = `Aashita Intelligence — ${reqData.code} - ${reqData.title}`;
+    document.getElementById('pageTitle').innerText = `Aashita Intelligence — ${reqData.code} - ${reqData.title}`;
+    document.getElementById('breadCompany').innerText = reqData.company;
+    document.getElementById('breadPlant').innerText = reqData.plant;
+    document.getElementById('breadDivision').innerText = reqData.division;
+
+    // Sidebar navigation update
+    document.getElementById('dynamicNavText').innerText = `${reqData.code} Workspace`;
+    
+    // Header title and status
+    document.getElementById('reqTitleHeader').innerHTML = `
+      ${reqData.code} - ${reqData.title}
+      <i class="fas fa-chevron-down"></i>
+    `;
+    document.getElementById('reqSubtitleHeader').innerText = `${reqData.company}  |  Aashita Enterprises & Suppliers`;
+    
+    const badge = document.getElementById('reqStatusBadge');
+    badge.className = `status-badge ${reqData.statusClass}`;
+    badge.innerText = reqData.status;
+
+    // Highlight active dropdown item
+    document.getElementById(`dd-${currentKey}`).classList.add('active');
+
+    // Details metrics
+    document.getElementById('metricCost').innerText = reqData.details.targetCost;
+    document.getElementById('metricVolume').innerText = reqData.details.volume;
+    document.getElementById('metricResponse').innerText = reqData.costAnalysis.length + ' Received';
+    document.getElementById('metricDeadline').innerText = reqData.details.deadline;
+
+    // Description & Parameters
+    document.getElementById('reqDescription').innerText = reqData.details.description;
+    document.getElementById('metaMaterial').innerText = reqData.details.material;
+    document.getElementById('metaProcess').innerText = reqData.details.process;
+    document.getElementById('metaManager').innerText = reqData.details.sourcingManager;
+
+    // Render Documents Table
+    const docTableBody = document.getElementById('docTableBody');
+    docTableBody.innerHTML = '';
+    reqData.documents.forEach(doc => {
+      const typeClass = `type-${doc.type.toLowerCase()}`;
+      docTableBody.innerHTML += `
+        <tr>
+          <td><i class="far fa-file-alt" style="margin-right: 6px; color: #64748b;"></i><strong>${doc.name}</strong></td>
+          <td>${doc.size}</td>
+          <td>${doc.date}</td>
+          <td><span class="doc-type-badge ${typeClass}">${doc.type}</span></td>
+          <td><a class="doc-action-btn" onclick="alert('Downloading ${doc.name}...')"><i class="fas fa-download"></i> Download</a></td>
+        </tr>
+      `;
+    });
+
+    // Render Timeline
+    const timelineContainer = document.getElementById('timelineContainer');
+    timelineContainer.innerHTML = '';
+    reqData.timeline.forEach((item, index) => {
+      const successClass = index === 0 ? 'success' : 'info';
+      timelineContainer.innerHTML += `
+        <div class="timeline-item ${successClass}">
+          <div class="timeline-dot"></div>
+          <div class="timeline-meta">
+            <span><i class="far fa-calendar-alt"></i> ${item.date}</span>
+            <span><i class="far fa-clock"></i> ${item.time}</span>
+          </div>
+          <div class="timeline-title">${item.title}</div>
+          <div class="timeline-desc">${item.desc}</div>
+        </div>
+      `;
+    });
+
+    // Render Cost Analysis Table
+    const costTableBody = document.getElementById('costTableBody');
+    costTableBody.innerHTML = '';
+    reqData.costAnalysis.forEach(row => {
+      costTableBody.innerHTML += `
+        <tr>
+          <td><strong>${row.supplier}</strong></td>
+          <td>${row.tooling}</td>
+          <td style="color: #1e3a8a; font-weight: 600;">${row.piece}</td>
+          <td>${row.leadTime}</td>
+          <td><span class="cost-status-badge ${row.sClass}">${row.status}</span></td>
+        </tr>
+      `;
+    });
+
+    // Toggle dropdown visibility
+    function toggleDropdown(event) {
+      event.stopPropagation();
+      const h1 = document.getElementById('reqTitleHeader');
+      const menu = document.getElementById('mainReqDropdown');
+      h1.classList.toggle('active');
+      menu.classList.toggle('show');
+    }
+
+    // Close dropdown on click outside
+    document.addEventListener('click', function(e) {
+      const menu = document.getElementById('mainReqDropdown');
+      const h1 = document.getElementById('reqTitleHeader');
+      if (menu && menu.classList.contains('show') && !e.target.closest('.req-title-wrapper')) {
+        menu.classList.remove('show');
+        h1.classList.remove('active');
+      }
+    });
+
+    // Switch Tabs
+    function switchTab(event, tabId) {
+      // Deactivate other tabs
+      document.querySelectorAll('.tab-item').forEach(btn => btn.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+      
+      // Activate selected tab
+      event.target.classList.add('active');
+      document.getElementById(tabId).classList.add('active');
+    }
+  </script>
+</body>
+
+</html>
