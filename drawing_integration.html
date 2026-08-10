@@ -771,6 +771,203 @@
       display: block;
     }
 
+    /* ---- Uploaded drawing images (real Bajaj sheet) ---- */
+    .drawing-image-frame {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: zoom-in;
+    }
+
+    .drawing-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .drawing-zoom-hint {
+      position: absolute;
+      right: 6px;
+      bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #ffffff;
+      background: rgba(30, 41, 59, 0.85);
+      padding: 3px 9px;
+      border-radius: 20px;
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    .drawing-image-frame:hover .drawing-zoom-hint { opacity: 1; }
+
+    .drawing-image-missing {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      width: 100%;
+      height: 100%;
+      padding: 10px;
+      text-align: center;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #b45309;
+      background: #fffbeb;
+      border: 1.5px dashed #fcd34d;
+      border-radius: 6px;
+    }
+
+    .drawing-image-missing code {
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #92400e;
+      background: #fef3c7;
+      padding: 2px 6px;
+      border-radius: 3px;
+    }
+
+    /* ---- Full-size drawing preview (lightbox) ---- */
+    .drawing-lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 4000;
+      display: none;
+      flex-direction: column;
+      background: rgba(15, 23, 42, 0.93);
+      animation: fadeIn 0.2s ease;
+    }
+
+    .drawing-lightbox.open { display: flex; }
+
+    .dlb-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      padding: 10px 16px;
+      background: rgba(15, 23, 42, 0.96);
+      border-bottom: 1px solid rgba(148, 163, 184, 0.28);
+    }
+
+    .dlb-tabs { display: flex; gap: 6px; }
+
+    .dlb-tab {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-family: inherit;
+      font-size: 12px;
+      font-weight: 700;
+      color: #cbd5e1;
+      background: rgba(148, 163, 184, 0.14);
+      border: 1px solid transparent;
+      border-radius: 6px;
+      padding: 7px 13px;
+      cursor: pointer;
+      transition: all 0.16s ease;
+    }
+
+    .dlb-tab:hover { background: rgba(148, 163, 184, 0.26); color: #f1f5f9; }
+
+    .dlb-tab.active {
+      background: var(--primary-blue, #2563eb);
+      border-color: rgba(255, 255, 255, 0.35);
+      color: #ffffff;
+    }
+
+    .dlb-caption {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      color: #94a3b8;
+      text-transform: uppercase;
+    }
+
+    .dlb-tools { display: flex; align-items: center; gap: 6px; }
+
+    .dlb-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      font-size: 13px;
+      color: #e2e8f0;
+      background: rgba(148, 163, 184, 0.16);
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.16s ease;
+    }
+
+    .dlb-btn:hover { background: rgba(148, 163, 184, 0.34); }
+    .dlb-btn.dlb-close:hover { background: #dc2626; color: #ffffff; }
+
+    .dlb-zoom {
+      min-width: 46px;
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #cbd5e1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .dlb-stage {
+      flex: 1;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      cursor: grab;
+    }
+
+    .dlb-stage.is-panning { cursor: grabbing; }
+
+    .dlb-image {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      background: #ffffff;
+      border-radius: 3px;
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.55);
+      transform-origin: center center;
+      transition: transform 0.12s ease-out;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .dlb-foot {
+      padding: 8px 16px 12px;
+      text-align: center;
+      font-size: 11px;
+      color: #64748b;
+    }
+
+    .dlb-foot kbd {
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      color: #cbd5e1;
+      background: rgba(148, 163, 184, 0.2);
+      border-radius: 3px;
+      padding: 1px 5px;
+    }
+
 
     /* PANEL 2: Cropped & Processed Drawing */
     .success-alert {
@@ -1424,8 +1621,8 @@
               <div class="file-item-left">
                 <i class="fa-regular fa-file-pdf"></i>
                 <div class="file-item-details">
-                  <span class="file-item-name" id="uploaded-file-name" contenteditable="true">BRKT_ENG_MTG_001_V2.pdf</span>
-                  <span class="file-item-size" contenteditable="true">2.4 MB &bull; Uploaded on 12 Aug 2026, 10:15 AM</span>
+                  <span class="file-item-name" id="uploaded-file-name" contenteditable="true">DH101334_COLLAR_SPROCKET_R04.pdf</span>
+                  <span class="file-item-size" contenteditable="true">2.4 MB &bull; Sheet A3 297 x 420 &bull; Uploaded on 12 Aug 2026, 10:15 AM</span>
                 </div>
               </div>
               <i class="fa-solid fa-circle-check file-item-check"></i>
@@ -1442,69 +1639,13 @@
               </div>
 
               <div id="panel-1-svg-container" style="display: none; width: 100%; height: 100%;">
-                <!-- SVG CAD drawing with title block boundaries -->
-                <svg class="cad-drawing-svg" viewBox="0 0 320 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Blueprint border frame -->
-                  <rect x="5" y="5" width="310" height="250" stroke="#475569" stroke-width="1"/>
-                  <rect x="8" y="8" width="304" height="244" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  
-                  <!-- TECHNICAL CAD PROJECTION DRAWINGS (Bracket) -->
-                  <!-- Center bracket main body outline -->
-                  <path d="M 110,95 C 110,85 125,75 140,75 C 155,75 170,85 170,95 L 185,130 C 190,135 205,135 205,145 C 205,150 195,155 185,155 L 95,155 C 85,155 75,150 75,145 C 75,135 90,135 95,130 Z" stroke="#334155" stroke-width="1.2" fill="#f1f5f9"/>
-                  
-                  <!-- Center hole circles -->
-                  <circle cx="140" cy="115" r="22" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="140" cy="115" r="15" stroke="#475569" stroke-width="0.6" stroke-dasharray="3,3" />
-                  
-                  <!-- Ear mounting holes -->
-                  <circle cx="90" cy="145" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="190" cy="145" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  
-                  <!-- Projection Axis lines -->
-                  <line x1="140" y1="65" x2="140" y2="165" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
-                  <line x1="65" y1="115" x2="215" y2="115" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
-                  
-                  <!-- Dimensions indicators -->
-                  <!-- Dimension 108 -->
-                  <line x1="90" y1="170" x2="190" y2="170" stroke="#475569" stroke-width="0.5"/>
-                  <path d="M90,170 L93,168 L93,172 Z M190,170 L187,168 L187,172 Z" fill="#475569"/>
-                  <line x1="90" y1="150" x2="90" y2="173" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <line x1="190" y1="150" x2="190" y2="173" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <text x="140" y="167" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
-                  
-                  <!-- Projection: Side Profile section view -->
-                  <rect x="250" y="75" width="12" height="80" stroke="#334155" stroke-width="1.2" fill="#f1f5f9"/>
-                  <line x1="250" y1="75" x2="262" y2="85" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="250" y1="90" x2="262" y2="100" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="250" y1="105" x2="262" y2="115" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="250" y1="120" x2="262" y2="130" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="250" y1="135" x2="262" y2="145" stroke="#94a3b8" stroke-width="0.5"/>
-                  
-                  <!-- Side profile dimension 16 -->
-                  <line x1="250" y1="65" x2="262" y2="65" stroke="#475569" stroke-width="0.5"/>
-                  <path d="M250,65 L253,63 L253,67 Z M262,65 L259,63 L259,67 Z" fill="#475569"/>
-                  <line x1="250" y1="75" x2="250" y2="62" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <line x1="262" y1="75" x2="262" y2="62" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <text x="256" y="61" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">16</text>
-
-                  <!-- BAJAJ CUSTOM TITLE BLOCK BOUNDARY -->
-                  <line x1="5" y1="210" x2="315" y2="210" stroke="#475569" stroke-width="1"/>
-                  <line x1="160" y1="210" x2="160" y2="255" stroke="#475569" stroke-width="0.8"/>
-                  <line x1="240" y1="210" x2="240" y2="255" stroke="#475569" stroke-width="0.8"/>
-                  
-                  <!-- Title block internal detail texts -->
-                  <text x="12" y="222" font-size="6" font-weight="700" fill="#64748b">ORIGINATOR</text>
-                  <text x="12" y="234" font-size="7" font-weight="800" fill="#1e293b">BAJAJ AUTO LTD.</text>
-                  <text x="12" y="246" font-size="5" fill="#64748b">CHAKAN PLANT, PUNE</text>
-                  
-                  <text x="165" y="222" font-size="6" font-weight="700" fill="#64748b">PART NUMBER</text>
-                  <text x="165" y="234" font-size="7" font-weight="800" fill="#1e293b">BRKT_ENG_MTG_001</text>
-                  <text x="165" y="244" font-size="5" fill="#64748b">REV: 02  |  SCALE: 1:1</text>
-
-                  <text x="245" y="222" font-size="6" font-weight="700" fill="#64748b">PART DESCRIPTION</text>
-                  <text x="245" y="234" font-size="7" font-weight="800" fill="#1e293b">ENGINE MOUNT BRACKET</text>
-                  <text x="245" y="244" font-size="5" fill="#64748b">MATERIAL: EN8 | FINISH: Zn PLATED</text>
-                </svg>
+                <!-- Original Bajaj drawing sheet exactly as received (title block + border intact) -->
+                <div class="drawing-image-frame" onclick="openDrawingPreview('original')" title="Click to preview full size">
+                  <img id="drawing-original-img" class="drawing-image" src="drawing_original.png"
+                       alt="Bajaj drawing sheet DH101334 - Collar Sprocket, full sheet with title block"
+                       onerror="markDrawingImageMissing(this)">
+                  <span class="drawing-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Preview</span>
+                </div>
               </div>
             </div>
           </section>
@@ -1534,44 +1675,13 @@
               </div>
 
               <div id="panel-2-svg-container" style="display: none; width: 90%; height: 95%;">
-                <svg class="cad-drawing-svg" viewBox="0 0 280 180" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- TECHNICAL PROJECTIONS ZOOMED (NO TITLE BLOCK borders) -->
-                  <!-- Bracket shape layout -->
-                  <path d="M 90,45 C 90,35 105,25 120,25 C 135,25 150,35 150,45 L 165,80 C 170,85 185,85 185,95 C 185,100 175,105 165,105 L 75,105 C 65,105 55,100 55,95 C 55,85 70,85 75,80 Z" stroke="#334155" stroke-width="1.2" fill="#f8fafc"/>
-                  <circle cx="120" cy="65" r="22" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="120" cy="65" r="15" stroke="#475569" stroke-width="0.6" stroke-dasharray="3,3" />
-                  <circle cx="70" cy="95" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="170" cy="95" r="5" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  
-                  <line x1="120" y1="15" x2="120" y2="115" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
-                  <line x1="45" y1="65" x2="195" y2="65" stroke="#ef4444" stroke-width="0.5" stroke-dasharray="4,2,1,2"/>
-                  
-                  <!-- Dimension 108 -->
-                  <line x1="70" y1="120" x2="170" y2="120" stroke="#475569" stroke-width="0.5"/>
-                  <path d="M70,120 L73,118 L73,122 Z M170,120 L167,118 L167,122 Z" fill="#475569"/>
-                  <line x1="70" y1="100" x2="70" y2="123" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <line x1="170" y1="100" x2="170" y2="123" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <text x="120" y="117" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
-                  
-                  <!-- Side profile projection -->
-                  <rect x="220" y="25" width="12" height="80" stroke="#334155" stroke-width="1.2" fill="#f8fafc"/>
-                  <line x1="220" y1="25" x2="232" y2="35" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="220" y1="40" x2="232" y2="50" stroke="#94a3b8" stroke-width="0.5"/>
-                  <line x1="220" y1="55" x2="232" y2="65" stroke="#94a3b8" stroke-width="0.5"/>
-                  
-                  <!-- side profile dimension 16 -->
-                  <line x1="220" y1="15" x2="232" y2="15" stroke="#475569" stroke-width="0.5"/>
-                  <path d="M220,15 L223,13 L223,17 Z M232,15 L229,13 L229,17 Z" fill="#475569"/>
-                  <line x1="220" y1="25" x2="220" y2="12" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <line x1="232" y1="25" x2="232" y2="12" stroke="#94a3b8" stroke-width="0.5" stroke-dasharray="2,2"/>
-                  <text x="226" y="11" font-size="7" font-weight="700" fill="#334155" text-anchor="middle">16</text>
-                  
-                  <!-- CAD annotation text -->
-                  <text x="10" y="145" font-size="6.5" font-weight="700" fill="#334155">NOTES:</text>
-                  <text x="10" y="154" font-size="6" fill="#64748b">1. ALL DIMENSIONS ARE IN MM.</text>
-                  <text x="10" y="163" font-size="6" fill="#64748b">2. GENERAL TOLERANCE: ±0.1</text>
-                  <text x="10" y="172" font-size="6" fill="#64748b">3. REMOVE ALL BURRS AND SHARP EDGES.</text>
-                </svg>
+                <!-- Same sheet after auto-crop: title block, border and frame notes stripped -->
+                <div class="drawing-image-frame" onclick="openDrawingPreview('cropped')" title="Click to preview full size">
+                  <img id="drawing-cropped-img" class="drawing-image" src="drawing_cropped.png"
+                       alt="DH101334 Collar Sprocket drawing after auto-crop, title block removed"
+                       onerror="markDrawingImageMissing(this)">
+                  <span class="drawing-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Preview</span>
+                </div>
               </div>
             </div>
 
@@ -1638,7 +1748,7 @@
               </div>
 
               <div id="panel-3-svg-container" style="display: none; width: 100%; height: 100%; flex-direction: column;">
-                <svg class="cad-drawing-svg" viewBox="0 0 300 220" fill="none" style="flex-grow: 1;" xmlns="http://www.w3.org/2000/svg">
+                <svg class="cad-drawing-svg" viewBox="0 0 300 220" fill="none" style="flex-grow: 1;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <!-- AASHITA ENTERPRISES CARD BORDER -->
                   <rect x="2" y="2" width="296" height="216" stroke="#1e3a8a" stroke-width="1.2"/>
                   <line x1="2" y1="70" x2="298" y2="70" stroke="#1e3a8a" stroke-width="1.2"/>
@@ -1657,38 +1767,23 @@
 
                   <!-- Header text values -->
                   <text x="10" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NO.</text>
-                  <text x="10" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-no">AE-BRKT-ENG-MTG-001</text>
+                  <text x="10" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-no">AE-DH101334</text>
                   
                   <text x="105" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NAME</text>
-                  <text x="105" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-name">ENGINE MOUNTING BRACKET</text>
+                  <text x="105" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-name">COLLAR SPROCKET</text>
 
                   <text x="185" y="53" font-size="5.5" font-weight="700" fill="#64748b">DATE</text>
                   <text x="185" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-date">12-08-2026</text>
 
                   <text x="218" y="53" font-size="5.5" font-weight="700" fill="#64748b">REV</text>
-                  <text x="218" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-rev">A</text>
+                  <text x="218" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-rev">04</text>
 
                   <text x="255" y="53" font-size="5.5" font-weight="700" fill="#64748b">MATERIAL</text>
-                  <text x="255" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-material">EN8</text>
+                  <text x="255" y="63" font-size="6" font-weight="800" fill="#1e293b" id="tpl-material">16MnCr5Si</text>
 
-                  <!-- Drawing projections layout inside Aashita template -->
-                  <path d="M 80,105 C 80,97 92,89 104,89 C 116,89 128,97 128,105 L 140,133 C 144,137 156,137 156,145 C 156,149 148,153 140,153 L 68,153 C 60,153 52,149 52,145 C 52,137 64,137 68,133 Z" stroke="#334155" stroke-width="1.2" fill="#ffffff"/>
-                  <circle cx="104" cy="121" r="17" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="64" cy="145" r="4" stroke="#334155" stroke-width="1" fill="#ffffff" />
-                  <circle cx="144" cy="145" r="4" stroke="#334155" stroke-width="1" fill="#ffffff" />
-
-                  <!-- Side Profile -->
-                  <rect x="180" y="89" width="10" height="64" stroke="#334155" stroke-width="1.2" fill="#ffffff"/>
-                  <line x1="180" y1="89" x2="190" y2="99" stroke="#94a3b8" stroke-width="0.5"/>
-                  
-                  <text x="104" y="167" font-size="6.5" font-weight="700" fill="#334155" text-anchor="middle">108±0.2</text>
-                  <text x="185" y="81" font-size="6.5" font-weight="700" fill="#334155" text-anchor="middle">16</text>
-
-                  <!-- CAD Notes inside Aashita template -->
-                  <text x="210" y="93" font-size="5" font-weight="700" fill="#334155">NOTES:</text>
-                  <text x="210" y="101" font-size="4.5" fill="#64748b">1. ALL DIMENSIONS ARE IN MM.</text>
-                  <text x="210" y="107" font-size="4.5" fill="#64748b">2. GENERAL TOLERANCE: ±0.1</text>
-                  <text x="210" y="113" font-size="4.5" fill="#64748b">3. REMOVE ALL BURRS AND EDGES.</text>
+                  <!-- Cropped Bajaj geometry mapped into the Aashita supplier frame -->
+                  <image href="drawing_cropped.png" xlink:href="drawing_cropped.png"
+                         x="8" y="74" width="284" height="102" preserveAspectRatio="xMidYMid meet"/>
 
                   <!-- Revision table details border lines at bottom of template -->
                   <line x1="2" y1="178" x2="298" y2="178" stroke="#1e3a8a" stroke-width="1.2"/>
@@ -1698,10 +1793,10 @@
 
                   <!-- Table cells content text -->
                   <text x="13" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">REV</text>
-                  <text x="13" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">A</text>
+                  <text x="13" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">04</text>
 
                   <text x="87" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DESCRIPTION</text>
-                  <text x="87" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">INITIAL RELEASE</text>
+                  <text x="87" y="202" font-size="6" font-weight="700" fill="#1e293b" text-anchor="middle">DETAIL J UPDATED</text>
 
                   <text x="175" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DATE</text>
                   <text x="175" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">12-08-2026</text>
@@ -2042,8 +2137,8 @@
         // Cascade checking items sequentially
         setTimeout(() => { document.getElementById('check-1').style.opacity = '1'; document.getElementById('val-1').textContent = 'Success'; document.getElementById('val-1').style.color = 'var(--accent-green)'; }, 200);
         setTimeout(() => { document.getElementById('check-2').style.opacity = '1'; document.getElementById('val-2').textContent = 'Success'; document.getElementById('val-2').style.color = 'var(--accent-green)'; }, 450);
-        setTimeout(() => { document.getElementById('check-3').style.opacity = '1'; document.getElementById('val-3').textContent = '3 Views'; document.getElementById('val-3').style.color = 'var(--text-gray-dark)'; }, 700);
-        setTimeout(() => { document.getElementById('check-4').style.opacity = '1'; document.getElementById('val-4').textContent = '1:1'; document.getElementById('val-4').style.color = 'var(--text-gray-dark)'; }, 950);
+        setTimeout(() => { document.getElementById('check-3').style.opacity = '1'; document.getElementById('val-3').textContent = '3 Views + Detail J'; document.getElementById('val-3').style.color = 'var(--text-gray-dark)'; }, 700);
+        setTimeout(() => { document.getElementById('check-4').style.opacity = '1'; document.getElementById('val-4').textContent = '1:1, 5:1'; document.getElementById('val-4').style.color = 'var(--text-gray-dark)'; }, 950);
         setTimeout(() => { document.getElementById('check-5').style.opacity = '1'; document.getElementById('val-5').textContent = '14'; document.getElementById('val-5').style.color = 'var(--text-gray-dark)'; }, 1200);
 
         // Move to step 3 mapping
@@ -2085,7 +2180,7 @@
         plane.className = "fa-solid fa-paper-plane";
         
         // Show success alert popup
-        alert("Success! Converted CAD drawing AE-BRKT-ENG-MTG-001 has been dispatched to XYZ Supplier successfully. Collaborations thread spawned in Sub Chats.");
+        alert("Success! Converted CAD drawing AE-DH101334 (COLLAR SPROCKET) has been dispatched to XYZ Supplier successfully. Collaborations thread spawned in Sub Chats.");
         
         // Move stepper to completed step 4
         currentStep = 4;
@@ -2095,7 +2190,7 @@
         const tableBody = document.getElementById('integrations-table-body');
         const newRowHTML = `
           <tr style="animation: fadeIn 0.4s ease;">
-            <td class="file-code" contenteditable="true">AE-BRKT-ENG-MTG-001</td>
+            <td class="file-code" contenteditable="true">AE-DH101334</td>
             <td class="date-val" contenteditable="true">Integrated Today, ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
             <td><span class="completed-badge" contenteditable="true">Completed</span></td>
           </tr>
@@ -2103,7 +2198,149 @@
         tableBody.insertAdjacentHTML('afterbegin', newRowHTML);
       }, 1000);
     }
+    /* ============================================================
+       DRAWING PREVIEW (LIGHTBOX) - view either sheet at full size
+       ============================================================ */
+    const DRAWING_SOURCES = {
+      original: { src: 'drawing_original.png', caption: 'DH101334 \u2014 Collar Sprocket \u00b7 Original Bajaj sheet (A3 297 x 420)' },
+      cropped:  { src: 'drawing_cropped.png',  caption: 'DH101334 \u2014 Collar Sprocket \u00b7 Cropped, title block removed' }
+    };
+
+    let dlbCurrent = 'original';
+    let dlbScale = 1;
+    let dlbPanX = 0, dlbPanY = 0;
+    let dlbDragging = false, dlbStartX = 0, dlbStartY = 0;
+
+    // Swap a broken <img> for an inline "file not found" note so the flow still runs
+    function markDrawingImageMissing(img) {
+      const frame = img.closest('.drawing-image-frame');
+      if (!frame || frame.classList.contains('is-missing')) return;
+      frame.classList.add('is-missing');
+      frame.style.cursor = 'default';
+      frame.onclick = null;
+      frame.innerHTML =
+        '<div class="drawing-image-missing">' +
+          '<i class="fa-solid fa-triangle-exclamation" style="font-size:18px;"></i>' +
+          '<span>Drawing image not found</span>' +
+          '<code>' + img.getAttribute('src') + '</code>' +
+          '<span style="font-weight:500;">Save it next to drawing_integration.html</span>' +
+        '</div>';
+    }
+
+    function applyDrawingTransform() {
+      const img = document.getElementById('dlb-image');
+      img.style.transform = 'translate(' + dlbPanX + 'px,' + dlbPanY + 'px) scale(' + dlbScale + ')';
+      document.getElementById('dlb-zoom').textContent = Math.round(dlbScale * 100) + '%';
+    }
+
+    function openDrawingPreview(which) {
+      const entry = DRAWING_SOURCES[which];
+      if (!entry) return;
+      dlbCurrent = which;
+
+      const img = document.getElementById('dlb-image');
+      img.src = entry.src;
+      document.getElementById('dlb-caption').textContent = entry.caption;
+
+      document.getElementById('dlb-tab-original').classList.toggle('active', which === 'original');
+      document.getElementById('dlb-tab-cropped').classList.toggle('active', which === 'cropped');
+
+      resetDrawingPreview();
+      document.getElementById('drawing-lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDrawingPreview() {
+      document.getElementById('drawing-lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function toggleDrawingPreview() {
+      openDrawingPreview(dlbCurrent === 'original' ? 'cropped' : 'original');
+    }
+
+    function zoomDrawingPreview(direction) {
+      dlbScale = Math.min(6, Math.max(0.4, dlbScale * (direction > 0 ? 1.25 : 0.8)));
+      applyDrawingTransform();
+    }
+
+    function resetDrawingPreview() {
+      dlbScale = 1;
+      dlbPanX = 0;
+      dlbPanY = 0;
+      applyDrawingTransform();
+    }
+
+    (function initDrawingPreview() {
+      const box   = document.getElementById('drawing-lightbox');
+      const stage = document.getElementById('dlb-stage');
+      if (!box || !stage) return;
+
+      stage.addEventListener('wheel', function (e) {
+        e.preventDefault();
+        zoomDrawingPreview(e.deltaY < 0 ? 1 : -1);
+      }, { passive: false });
+
+      stage.addEventListener('mousedown', function (e) {
+        dlbDragging = true;
+        dlbStartX = e.clientX - dlbPanX;
+        dlbStartY = e.clientY - dlbPanY;
+        stage.classList.add('is-panning');
+        e.preventDefault();
+      });
+
+      window.addEventListener('mousemove', function (e) {
+        if (!dlbDragging) return;
+        dlbPanX = e.clientX - dlbStartX;
+        dlbPanY = e.clientY - dlbStartY;
+        applyDrawingTransform();
+      });
+
+      window.addEventListener('mouseup', function () {
+        dlbDragging = false;
+        stage.classList.remove('is-panning');
+      });
+
+      // Backdrop click closes only when it was a click, not the end of a pan
+      stage.addEventListener('click', function (e) {
+        if (e.target === stage && dlbPanX === 0 && dlbPanY === 0) closeDrawingPreview();
+      });
+
+      document.addEventListener('keydown', function (e) {
+        if (!box.classList.contains('open')) return;
+        if (e.key === 'Escape') closeDrawingPreview();
+        else if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') toggleDrawingPreview();
+        else if (e.key === '+' || e.key === '=') zoomDrawingPreview(1);
+        else if (e.key === '-') zoomDrawingPreview(-1);
+        else if (e.key === '0') resetDrawingPreview();
+      });
+    })();
   </script>
+  <!-- ============ FULL-SIZE DRAWING PREVIEW (LIGHTBOX) ============ -->
+  <div class="drawing-lightbox" id="drawing-lightbox" role="dialog" aria-modal="true" aria-label="Drawing preview">
+    <div class="dlb-bar">
+      <div class="dlb-tabs">
+        <button type="button" class="dlb-tab active" id="dlb-tab-original" onclick="openDrawingPreview('original')">
+          <i class="fa-regular fa-file-lines"></i> Original Sheet
+        </button>
+        <button type="button" class="dlb-tab" id="dlb-tab-cropped" onclick="openDrawingPreview('cropped')">
+          <i class="fa-solid fa-crop-simple"></i> Cropped &amp; Processed
+        </button>
+      </div>
+      <div class="dlb-caption" id="dlb-caption">DH101334 &mdash; Collar Sprocket</div>
+      <div class="dlb-tools">
+        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(-1)" title="Zoom out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+        <span class="dlb-zoom" id="dlb-zoom">100%</span>
+        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(1)" title="Zoom in"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
+        <button type="button" class="dlb-btn" onclick="resetDrawingPreview()" title="Fit to screen"><i class="fa-solid fa-expand"></i></button>
+        <button type="button" class="dlb-btn dlb-close" onclick="closeDrawingPreview()" title="Close (Esc)"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="dlb-stage" id="dlb-stage">
+      <img id="dlb-image" class="dlb-image" src="" alt="Drawing preview" draggable="false">
+    </div>
+    <div class="dlb-foot">Scroll to zoom &bull; drag to pan &bull; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to switch &bull; <kbd>Esc</kbd> to close</div>
+  </div>
 </body>
 
 </html>
