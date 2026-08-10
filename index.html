@@ -16,16 +16,18 @@
         }
 
         :root {
-            --bg-darkest: #ffffff;
-            --bg-dark: #f8f9fb;
-            --bg-card: #ffffff;
-            --bg-card-hover: #f1f5f9;
-            --bg-sidebar: #f0f2f5;
-            --bg-input: #f1f5f9;
-            --border-color: #e2e8f0;
-            --border-light: #cbd5e1;
-            --text-primary: #1e293b;
-            --text-secondary: #475569;
+            /* Dark theme palette — must stay in sync with the hardcoded
+               #0b1121 / #0f172a / #1e293b surfaces used across this page. */
+            --bg-darkest: #0b1121;
+            --bg-dark: #0f172a;
+            --bg-card: #0f172a;
+            --bg-card-hover: #1a2338;
+            --bg-sidebar: #0b1121;
+            --bg-input: #16203a;
+            --border-color: #1e293b;
+            --border-light: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
             --accent-blue: #3b82f6;
             --accent-cyan: #06b6d4;
@@ -34,8 +36,8 @@
             --accent-red: #ef4444;
             --accent-purple: #8b5cf6;
             --accent-teal: #14b8a6;
-            --gradient-blue: linear-gradient(135deg, #e0ecff 0%, #f8f9fb 100%);
-            --gradient-card: linear-gradient(135deg, #f0f4ff 0%, #f8fafc 100%);
+            --gradient-blue: linear-gradient(135deg, #16294d 0%, #0b1121 100%);
+            --gradient-card: linear-gradient(135deg, #132038 0%, #0b1121 100%);
         }
 
         html {
@@ -62,6 +64,12 @@
             border-radius: 2px;
             background: rgba(59, 130, 246, 0.05);
             color: var(--text-primary); /* ensure contrast when editing */
+        }
+
+        /* Keep highlighted text readable on the dark surfaces */
+        ::selection {
+            background: rgba(59, 130, 246, 0.45);
+            color: #ffffff;
         }
 
         a {
@@ -2153,14 +2161,8 @@
                             <span style="font-size: 11px; font-weight: 700;" contenteditable="true">Aashita Intelligence</span>
                         </div>
 
-                        <div class="nav-item" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active')">
-                            <i class="fas fa-tachometer-alt"></i><span contenteditable="true">Dashboard</span>
-                        </div>
-                        <div class="nav-item" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active')">
-                            <i class="fas fa-clipboard-list"></i><span contenteditable="true">Requirements</span>
-                        </div>
                         <div class="nav-item active" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active')">
-                            <i class="fas fa-comments"></i><span contenteditable="true">Chats</span>
+                            <i class="fas fa-clipboard-list"></i><span contenteditable="true">Requirements</span>
                         </div>
                         <div class="nav-item" onclick="document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));this.classList.add('active')">
                             <i class="fas fa-users"></i><span contenteditable="true">Suppliers</span>

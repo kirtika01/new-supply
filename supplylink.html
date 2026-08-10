@@ -417,6 +417,12 @@
       color: #fff;
     }
 
+    .sidebar-nav-divider {
+      height: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      margin: 6px 16px;
+    }
+
     .sidebar-bottom {
       padding: 12px;
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -2070,6 +2076,645 @@
       font-size: 11px;
       color: #64748b;
     }
+
+    /* ===================================================================
+       DASHBOARD & CHATS MODULES (moved here from supplylink_dashboard.html)
+       Shown from the sidebar; they replace the requirement workspace view.
+       =================================================================== */
+    .sl-module { display: none; flex: 1; overflow: hidden; }
+    .sl-module.active { display: flex; }
+
+    /* While a module is showing, hide the requirement workspace chrome */
+    .content-area.module-mode > .req-header,
+    .content-area.module-mode > .tab-content-panel { display: none !important; }
+
+    .sl-module-inner {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 24px;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .sl-module-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .sl-module-head h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .sl-module-head .sl-sub {
+      display: block;
+      font-size: 12px;
+      font-weight: 400;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .sl-customize-btn {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      color: #475569;
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 12px;
+      font-weight: 600;
+      transition: all 0.15s;
+    }
+
+    .sl-customize-btn:hover { border-color: #2563eb; color: #2563eb; }
+
+    /* Metric cards */
+    .sl-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 12px;
+    }
+
+    .sl-metric-card {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-top: 3px solid #2563eb;
+      border-radius: 10px;
+      padding: 14px;
+      cursor: pointer;
+      transition: all 0.15s;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .sl-metric-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 16px -6px rgba(0, 0, 0, 0.12);
+    }
+
+    .sl-metric-card.m-quote   { border-top-color: #f59e0b; }
+    .sl-metric-card.m-progress { border-top-color: #8b5cf6; }
+    .sl-metric-card.m-po      { border-top-color: #06b6d4; }
+    .sl-metric-card.m-spend   { border-top-color: #14b8a6; }
+    .sl-metric-card.m-savings { border-top-color: #10b981; }
+
+    .sl-metric-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sl-metric-label {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #64748b;
+      line-height: 1.35;
+    }
+
+    .sl-metric-icon {
+      width: 28px;
+      height: 28px;
+      flex-shrink: 0;
+      border-radius: 8px;
+      background: #eff6ff;
+      color: #2563eb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+    }
+
+    .sl-metric-value {
+      display: block;
+      font-size: 24px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    .sl-metric-trend {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .sl-trend-up { color: #10b981; }
+    .sl-trend-down { color: #ef4444; }
+
+    /* Panels */
+    .sl-widgets-grid { display: grid; grid-template-columns: 0.85fr 1.15fr 1.3fr; gap: 12px; }
+    .sl-projects-row { display: grid; grid-template-columns: 1.7fr 1fr; gap: 12px; }
+    .sl-footer-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+
+    .sl-panel {
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+    }
+
+    .sl-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .sl-panel-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .sl-panel-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #94a3b8;
+      cursor: pointer;
+    }
+
+    .sl-panel-link {
+      margin-top: auto;
+      padding-top: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    .sl-panel-link:hover { color: #1d4ed8; }
+
+    .sl-select {
+      font-size: 11.5px;
+      font-weight: 600;
+      font-family: inherit;
+      padding: 4px 8px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      background: #fff;
+      color: #0f172a;
+      cursor: pointer;
+      outline: none;
+    }
+
+    /* Donut */
+    .sl-donut-layout { display: flex; align-items: center; gap: 14px; }
+
+    .sl-donut-wrapper {
+      position: relative;
+      width: 120px;
+      height: 120px;
+      flex-shrink: 0;
+    }
+
+    .sl-donut-center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+
+    .sl-donut-num { font-size: 20px; font-weight: 700; color: #0f172a; }
+    .sl-donut-lbl { font-size: 10px; color: #64748b; }
+
+    .sl-legend { flex: 1; display: flex; flex-direction: column; gap: 7px; }
+
+    .sl-legend-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11.5px;
+      color: #475569;
+    }
+
+    .sl-legend-label { display: flex; align-items: center; gap: 7px; }
+
+    .sl-legend-bullet {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .sl-legend-pct { font-weight: 700; color: #0f172a; white-space: nowrap; }
+
+    /* Spend chart */
+    .sl-chart-meta { display: flex; gap: 24px; margin-bottom: 8px; }
+    .sl-meta-stat { display: flex; flex-direction: column; gap: 2px; }
+
+    .sl-meta-lbl {
+      font-size: 10.5px;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .sl-meta-val { font-size: 17px; font-weight: 700; color: #0f172a; }
+
+    /* Tables */
+    .sl-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+
+    .sl-table th {
+      text-align: left;
+      padding: 8px 8px;
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+      border-bottom: 2px solid #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .sl-table td {
+      padding: 9px 8px;
+      color: #334155;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .sl-table tbody tr:hover td { background: #f8fafc; }
+
+    .sl-pill {
+      display: inline-block;
+      padding: 2px 9px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .sl-pill-green { background: #ecfdf5; color: #059669; }
+    .sl-pill-yellow { background: #fffbeb; color: #d97706; }
+
+    .sl-status {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .sl-status-progress { background: #eff6ff; color: #2563eb; }
+    .sl-status-evaluation { background: #fffbeb; color: #d97706; }
+    .sl-status-po { background: #f5f3ff; color: #7c3aed; }
+    .sl-status-production { background: #ecfdf5; color: #059669; }
+
+    .sl-progress-wrap { display: flex; align-items: center; gap: 8px; }
+
+    .sl-progress-track {
+      flex: 1;
+      min-width: 54px;
+      height: 6px;
+      border-radius: 4px;
+      background: #f1f5f9;
+      overflow: hidden;
+    }
+
+    .sl-progress-fill { height: 100%; border-radius: 4px; background: #2563eb; }
+    .sl-progress-pct { font-size: 11px; font-weight: 700; color: #64748b; }
+
+    /* Milestones */
+    .sl-milestones { display: flex; flex-direction: column; gap: 10px; }
+
+    .sl-milestone {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+
+    .sl-milestone-left { display: flex; align-items: center; gap: 10px; min-width: 0; }
+
+    .sl-milestone-icon {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+    }
+
+    .sl-mi-blue { background: #eff6ff; color: #2563eb; }
+    .sl-mi-orange { background: #fffbeb; color: #d97706; }
+    .sl-mi-purple { background: #f5f3ff; color: #7c3aed; }
+    .sl-mi-green { background: #ecfdf5; color: #059669; }
+
+    .sl-milestone-title { display: block; font-size: 12.5px; font-weight: 600; color: #0f172a; }
+    .sl-milestone-desc { display: block; font-size: 11px; color: #64748b; }
+    .sl-milestone-right { text-align: right; flex-shrink: 0; }
+    .sl-milestone-date { display: block; font-size: 11.5px; font-weight: 600; color: #475569; }
+
+    .sl-countdown {
+      display: inline-block;
+      margin-top: 3px;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10.5px;
+      font-weight: 700;
+    }
+
+    .sl-cd-blue { background: #eff6ff; color: #2563eb; }
+    .sl-cd-orange { background: #fffbeb; color: #d97706; }
+    .sl-cd-purple { background: #f5f3ff; color: #7c3aed; }
+    .sl-cd-green { background: #ecfdf5; color: #059669; }
+
+    /* Documents + quick actions */
+    .sl-docs-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+
+    .sl-doc-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sl-doc-card:hover { border-color: #2563eb; transform: translateY(-2px); }
+
+    .sl-doc-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      margin-bottom: 3px;
+    }
+
+    .sl-di-blue { background: #eff6ff; color: #2563eb; }
+    .sl-di-green { background: #ecfdf5; color: #059669; }
+    .sl-di-orange { background: #fffbeb; color: #d97706; }
+    .sl-di-purple { background: #f5f3ff; color: #7c3aed; }
+    .sl-di-teal { background: #f0fdfa; color: #0d9488; }
+
+    .sl-doc-count { font-size: 17px; font-weight: 700; color: #0f172a; }
+    .sl-doc-label { font-size: 10.5px; color: #64748b; text-align: center; }
+
+    .sl-actions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+
+    .sl-action-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 13px 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sl-action-card:hover { border-color: #2563eb; background: #eff6ff; }
+    .sl-action-icon { font-size: 16px; color: #2563eb; }
+    .sl-action-title { font-size: 10.5px; font-weight: 600; color: #475569; text-align: center; }
+
+    .sl-chart-tooltip {
+      position: fixed;
+      z-index: 3000;
+      display: none;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #0f172a;
+      color: #fff;
+      font-size: 11.5px;
+      font-weight: 600;
+      pointer-events: none;
+      transform: translate(-50%, -100%);
+      white-space: nowrap;
+    }
+
+    .sl-chart-tooltip.active { display: block; }
+
+    /* ===== CHATS MODULE ===== */
+    .sl-chats-layout {
+      flex: 1;
+      display: flex;
+      min-height: 0;
+      gap: 14px;
+      padding: 20px 24px;
+      background: #f8fafc;
+    }
+
+    .sl-chats-list-panel {
+      width: 260px;
+      flex-shrink: 0;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sl-chats-list-header {
+      padding: 13px 14px;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .sl-chats-list { flex: 1; overflow-y: auto; }
+
+    .sl-chats-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 14px;
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all 0.15s;
+    }
+
+    .sl-chats-item:hover { background: #f8fafc; }
+    .sl-chats-item.active { background: #eff6ff; border-left-color: #2563eb; }
+
+    .sl-chats-avatar {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .sl-chats-body { flex: 1; min-width: 0; }
+    .sl-chats-name { display: block; font-size: 12.5px; font-weight: 600; color: #0f172a; }
+
+    .sl-chats-preview {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .sl-chats-badge {
+      flex-shrink: 0;
+      min-width: 18px;
+      height: 18px;
+      padding: 0 5px;
+      border-radius: 9px;
+      background: #ef4444;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sl-chats-conv {
+      flex: 1;
+      min-width: 0;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .sl-chats-conv-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 13px 16px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+
+    .sl-chats-conv-title {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    .sl-chats-conv-title i { color: #2563eb; }
+    .sl-chats-conv-status { font-size: 11px; font-weight: 600; color: #10b981; }
+
+    .sl-chats-messages {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #f8fafc;
+    }
+
+    .sl-chat-msg {
+      max-width: 76%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .sl-chat-msg.bot {
+      align-self: flex-start;
+      background: #fff;
+      border: 1px solid #e2e8f0;
+      color: #334155;
+      border-bottom-left-radius: 3px;
+    }
+
+    .sl-chat-msg.user {
+      align-self: flex-end;
+      background: #2563eb;
+      color: #fff;
+      border-bottom-right-radius: 3px;
+    }
+
+    .sl-chats-input {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 14px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .sl-chats-textbox {
+      flex: 1;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 20px;
+      padding: 9px 15px;
+      font-family: inherit;
+      font-size: 12px;
+      color: #0f172a;
+      outline: none;
+    }
+
+    .sl-chats-textbox:focus { border-color: #2563eb; background: #fff; }
+
+    .sl-chats-send {
+      width: 34px;
+      height: 34px;
+      flex-shrink: 0;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .sl-chats-send:hover { background: #1d4ed8; }
+
+    @media (max-width: 1400px) {
+      .sl-metrics-row { grid-template-columns: repeat(3, 1fr); }
+      .sl-widgets-grid,
+      .sl-projects-row,
+      .sl-footer-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 
@@ -2116,6 +2761,9 @@
       <!-- ===== SIDEBAR ===== -->
       <div class="sidebar">
         <nav class="sidebar-nav">
+          <a class="nav-item" data-module="dashboard" onclick="showSlModule('dashboard')"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
+          <a class="nav-item" data-module="chats" onclick="showSlModule('chats')"><i class="fas fa-comment-dots"></i> <span>Chats</span> <span class="nav-badge">6</span></a>
+          <div class="sidebar-nav-divider"></div>
           <a class="nav-item" href="process_documents.html"><i class="fas fa-file-alt"></i> <span>Process Documents</span></a>
           <a class="nav-item" href="bajaj.html"><i class="fas fa-tachometer-alt"></i> <span>Bajaj Auto Dashboard</span></a>
           <a class="nav-item" href="drawing_integration.html"><i class="fas fa-drafting-compass"></i> <span>Drawing Integration</span></a>
@@ -3002,8 +3650,505 @@
           </div>
         </div>
       </div>
+      <!-- ============ MODULE: DASHBOARD ============ -->
+      <!-- Moved here from supplylink_dashboard.html -->
+      <div class="sl-module" id="sl-module-dashboard">
+        <div class="sl-module-inner">
+
+          <div class="sl-module-head">
+            <div>
+              <h2 contenteditable="true">Dashboard</h2>
+              <span class="sl-sub" contenteditable="true">Here's what's happening with your projects and suppliers today.</span>
+            </div>
+            <button class="sl-customize-btn" onclick="alert('Loading Customization panel...')">
+              <i class="fas fa-sliders-h"></i><span contenteditable="true">Customize</span>
+            </button>
+          </div>
+
+          <div class="sl-metrics-row">
+            <div class="sl-metric-card" onclick="alert('Opening Active RFQs')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">Active RFQs</span>
+                <div class="sl-metric-icon"><i class="fas fa-file-alt"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">28</span>
+              <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">12% vs last month</span></div>
+            </div>
+            <div class="sl-metric-card m-quote" onclick="alert('Opening Pending Quotations')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">Pending Quotations</span>
+                <div class="sl-metric-icon"><i class="fas fa-history"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">17</span>
+              <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">8% vs last month</span></div>
+            </div>
+            <div class="sl-metric-card m-progress" onclick="alert('Opening Projects In Progress')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">Projects In Progress</span>
+                <div class="sl-metric-icon"><i class="fas fa-tasks"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">36</span>
+              <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">15% vs last month</span></div>
+            </div>
+            <div class="sl-metric-card m-po" onclick="alert('Opening POs Issued')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">POs Issued</span>
+                <div class="sl-metric-icon"><i class="fas fa-receipt"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">22</span>
+              <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">10% vs last month</span></div>
+            </div>
+            <div class="sl-metric-card m-spend" onclick="alert('Opening Spend Analysis')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">Total Spend (YTD)</span>
+                <div class="sl-metric-icon"><i class="fas fa-rupee-sign"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">₹ 124.5 Cr</span>
+              <div class="sl-metric-trend sl-trend-down"><i class="fas fa-arrow-down"></i><span contenteditable="true">5% vs last year</span></div>
+            </div>
+            <div class="sl-metric-card m-savings" onclick="alert('Opening Savings Report')">
+              <div class="sl-metric-top">
+                <span class="sl-metric-label" contenteditable="true">Savings Achieved (YTD)</span>
+                <div class="sl-metric-icon"><i class="fas fa-piggy-bank"></i></div>
+              </div>
+              <span class="sl-metric-value" contenteditable="true">₹ 8.7 Cr</span>
+              <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">18% vs last year</span></div>
+            </div>
+          </div>
+
+          <div class="sl-widgets-grid">
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">RFQ Status Overview</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <div class="sl-donut-layout">
+                <div class="sl-donut-wrapper">
+                  <svg id="slRfqDonut" width="120" height="120" viewBox="0 0 100 100"></svg>
+                  <div class="sl-donut-center">
+                    <div class="sl-donut-num" id="slRfqDonutTotal">28</div>
+                    <div class="sl-donut-lbl" contenteditable="true">Total RFQs</div>
+                  </div>
+                </div>
+                <div class="sl-legend" id="slRfqLegend"></div>
+              </div>
+              <a class="sl-panel-link" onclick="alert('Redirecting to full RFQ list...')">
+                <span contenteditable="true">View All RFQs</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" id="slSpendTitle" contenteditable="true">Spend Analytics (YTD)</span>
+                <select class="sl-select" id="slSpendPeriod" onchange="handleSlSpendChange()">
+                  <option value="ytd" selected>YTD (Year to Date)</option>
+                  <option value="monthly">Monthly View</option>
+                  <option value="yearly">Yearly View</option>
+                </select>
+              </div>
+              <div class="sl-chart-meta">
+                <div class="sl-meta-stat">
+                  <span class="sl-meta-lbl" contenteditable="true">Total Spend</span>
+                  <span class="sl-meta-val" id="slMetaSpend" contenteditable="true">₹124.5 Cr</span>
+                </div>
+                <div class="sl-meta-stat">
+                  <span class="sl-meta-lbl" contenteditable="true">Savings Achieved</span>
+                  <span class="sl-meta-val" id="slMetaSavings" contenteditable="true">₹8.7 Cr</span>
+                </div>
+              </div>
+              <svg id="slSpendLine" width="100%" height="150" viewBox="0 0 320 130" preserveAspectRatio="none"></svg>
+              <a class="sl-panel-link" onclick="alert('Opening detailed spend report...')">
+                <span contenteditable="true">View Detailed Report</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">Top Suppliers by Performance</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <table class="sl-table">
+                <thead>
+                  <tr>
+                    <th contenteditable="true">Supplier</th>
+                    <th contenteditable="true">Quality</th>
+                    <th contenteditable="true">Delivery</th>
+                    <th contenteditable="true">Response</th>
+                    <th contenteditable="true">Overall</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td contenteditable="true">Aashita Enterprises</td>
+                    <td contenteditable="true">4.8</td><td contenteditable="true">4.7</td><td contenteditable="true">4.9</td>
+                    <td><span class="sl-pill sl-pill-green" contenteditable="true">4.8</span></td>
+                  </tr>
+                  <tr>
+                    <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                    <td contenteditable="true">4.6</td><td contenteditable="true">4.5</td><td contenteditable="true">4.6</td>
+                    <td><span class="sl-pill sl-pill-green" contenteditable="true">4.6</span></td>
+                  </tr>
+                  <tr>
+                    <td contenteditable="true">XYZ Forgings Ltd.</td>
+                    <td contenteditable="true">4.4</td><td contenteditable="true">4.3</td><td contenteditable="true">4.5</td>
+                    <td><span class="sl-pill sl-pill-green" contenteditable="true">4.4</span></td>
+                  </tr>
+                  <tr>
+                    <td contenteditable="true">Precision Machining</td>
+                    <td contenteditable="true">4.3</td><td contenteditable="true">4.2</td><td contenteditable="true">4.4</td>
+                    <td><span class="sl-pill sl-pill-green" contenteditable="true">4.3</span></td>
+                  </tr>
+                  <tr>
+                    <td contenteditable="true">Reliable Industries</td>
+                    <td contenteditable="true">4.1</td><td contenteditable="true">4.0</td><td contenteditable="true">4.2</td>
+                    <td><span class="sl-pill sl-pill-yellow" contenteditable="true">4.1</span></td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="sl-panel-link" onclick="alert('Opening full Supplier Directory...')">
+                <span contenteditable="true">View Supplier Performance</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="sl-projects-row">
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">My Active Projects</span>
+                <div class="sl-panel-actions" onclick="alert('Create new project / RFQ')"><i class="fas fa-folder-plus" style="color:#2563eb;"></i></div>
+              </div>
+              <table class="sl-table">
+                <thead>
+                  <tr>
+                    <th contenteditable="true">Project / RFQ No.</th>
+                    <th contenteditable="true">Part Name</th>
+                    <th contenteditable="true">Supplier</th>
+                    <th contenteditable="true">Status</th>
+                    <th contenteditable="true">Progress</th>
+                    <th contenteditable="true">Next Milestone</th>
+                    <th contenteditable="true">Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260801')" contenteditable="true">REQ-260801</a></td>
+                    <td contenteditable="true">Engine Bracket - Casting</td>
+                    <td contenteditable="true">Aashita Enterprises</td>
+                    <td><span class="sl-status sl-status-progress" contenteditable="true">In Progress</span></td>
+                    <td>
+                      <div class="sl-progress-wrap">
+                        <div class="sl-progress-track"><div class="sl-progress-fill" style="width:65%;"></div></div>
+                        <span class="sl-progress-pct" contenteditable="true">65%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">First Article Approval</td>
+                    <td contenteditable="true" style="font-weight:700;">12 Aug 2026</td>
+                  </tr>
+                  <tr>
+                    <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260742')" contenteditable="true">REQ-260742</a></td>
+                    <td contenteditable="true">Gear Housing</td>
+                    <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                    <td><span class="sl-status sl-status-evaluation" contenteditable="true">In Evaluation</span></td>
+                    <td>
+                      <div class="sl-progress-wrap">
+                        <div class="sl-progress-track"><div class="sl-progress-fill" style="width:40%;background:#f59e0b;"></div></div>
+                        <span class="sl-progress-pct" contenteditable="true">40%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Quotation Analysis</td>
+                    <td contenteditable="true" style="font-weight:700;">14 Aug 2026</td>
+                  </tr>
+                  <tr>
+                    <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260615')" contenteditable="true">REQ-260615</a></td>
+                    <td contenteditable="true">Shift Fork</td>
+                    <td contenteditable="true">XYZ Forgings Ltd.</td>
+                    <td><span class="sl-status sl-status-po" contenteditable="true">PO Issued</span></td>
+                    <td>
+                      <div class="sl-progress-wrap">
+                        <div class="sl-progress-track"><div class="sl-progress-fill" style="width:80%;background:#8b5cf6;"></div></div>
+                        <span class="sl-progress-pct" contenteditable="true">80%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Production Start</td>
+                    <td contenteditable="true" style="font-weight:700;">10 Aug 2026</td>
+                  </tr>
+                  <tr>
+                    <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260512')" contenteditable="true">REQ-260512</a></td>
+                    <td contenteditable="true">Cover Plate</td>
+                    <td contenteditable="true">Precision Machining</td>
+                    <td><span class="sl-status sl-status-progress" contenteditable="true">In Progress</span></td>
+                    <td>
+                      <div class="sl-progress-wrap">
+                        <div class="sl-progress-track"><div class="sl-progress-fill" style="width:30%;"></div></div>
+                        <span class="sl-progress-pct" contenteditable="true">30%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">PPAP Submission</td>
+                    <td contenteditable="true" style="font-weight:700;">18 Aug 2026</td>
+                  </tr>
+                  <tr>
+                    <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260401')" contenteditable="true">REQ-260401</a></td>
+                    <td contenteditable="true">Shaft - Input</td>
+                    <td contenteditable="true">Reliable Industries</td>
+                    <td><span class="sl-status sl-status-production" contenteditable="true">In Production</span></td>
+                    <td>
+                      <div class="sl-progress-wrap">
+                        <div class="sl-progress-track"><div class="sl-progress-fill" style="width:75%;background:#10b981;"></div></div>
+                        <span class="sl-progress-pct" contenteditable="true">75%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Dispatch</td>
+                    <td contenteditable="true" style="font-weight:700;">16 Aug 2026</td>
+                  </tr>
+                </tbody>
+              </table>
+              <a class="sl-panel-link" onclick="alert('Navigating to projects dashboard...')">
+                <span contenteditable="true">View All Projects</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">Upcoming Milestones</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <div class="sl-milestones">
+                <div class="sl-milestone">
+                  <div class="sl-milestone-left">
+                    <div class="sl-milestone-icon sl-mi-blue"><i class="fas fa-clipboard-check"></i></div>
+                    <div>
+                      <span class="sl-milestone-title" contenteditable="true">First Article Approval</span>
+                      <span class="sl-milestone-desc" contenteditable="true">Engine Bracket - Casting</span>
+                    </div>
+                  </div>
+                  <div class="sl-milestone-right">
+                    <span class="sl-milestone-date" contenteditable="true">12 Aug 2026</span>
+                    <span class="sl-countdown sl-cd-blue" contenteditable="true">3 Days Left</span>
+                  </div>
+                </div>
+                <div class="sl-milestone">
+                  <div class="sl-milestone-left">
+                    <div class="sl-milestone-icon sl-mi-orange"><i class="fas fa-file-signature"></i></div>
+                    <div>
+                      <span class="sl-milestone-title" contenteditable="true">Quotation Submission Deadline</span>
+                      <span class="sl-milestone-desc" contenteditable="true">Gear Housing</span>
+                    </div>
+                  </div>
+                  <div class="sl-milestone-right">
+                    <span class="sl-milestone-date" contenteditable="true">14 Aug 2026</span>
+                    <span class="sl-countdown sl-cd-orange" contenteditable="true">5 Days Left</span>
+                  </div>
+                </div>
+                <div class="sl-milestone">
+                  <div class="sl-milestone-left">
+                    <div class="sl-milestone-icon sl-mi-purple"><i class="fas fa-upload"></i></div>
+                    <div>
+                      <span class="sl-milestone-title" contenteditable="true">PPAP Submission</span>
+                      <span class="sl-milestone-desc" contenteditable="true">Cover Plate</span>
+                    </div>
+                  </div>
+                  <div class="sl-milestone-right">
+                    <span class="sl-milestone-date" contenteditable="true">18 Aug 2026</span>
+                    <span class="sl-countdown sl-cd-purple" contenteditable="true">9 Days Left</span>
+                  </div>
+                </div>
+                <div class="sl-milestone">
+                  <div class="sl-milestone-left">
+                    <div class="sl-milestone-icon sl-mi-green"><i class="fas fa-truck-loading"></i></div>
+                    <div>
+                      <span class="sl-milestone-title" contenteditable="true">Dispatch</span>
+                      <span class="sl-milestone-desc" contenteditable="true">Shaft - Input</span>
+                    </div>
+                  </div>
+                  <div class="sl-milestone-right">
+                    <span class="sl-milestone-date" contenteditable="true">16 Aug 2026</span>
+                    <span class="sl-countdown sl-cd-green" contenteditable="true">7 Days Left</span>
+                  </div>
+                </div>
+              </div>
+              <a class="sl-panel-link" onclick="alert('Opening Milestones Timeline Gantt...')">
+                <span contenteditable="true">View All Milestones</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="sl-footer-row">
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">Document Overview</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <div class="sl-docs-grid">
+                <div class="sl-doc-card" onclick="alert('Viewing Drawings...')">
+                  <div class="sl-doc-icon sl-di-blue"><i class="fas fa-drafting-compass"></i></div>
+                  <span class="sl-doc-count" contenteditable="true">512</span>
+                  <span class="sl-doc-label" contenteditable="true">Drawings</span>
+                </div>
+                <div class="sl-doc-card" onclick="alert('Viewing PPAPs...')">
+                  <div class="sl-doc-icon sl-di-green"><i class="fas fa-clipboard-check"></i></div>
+                  <span class="sl-doc-count" contenteditable="true">126</span>
+                  <span class="sl-doc-label" contenteditable="true">PPAPs</span>
+                </div>
+                <div class="sl-doc-card" onclick="alert('Viewing SOPs...')">
+                  <div class="sl-doc-icon sl-di-orange"><i class="fas fa-book"></i></div>
+                  <span class="sl-doc-count" contenteditable="true">342</span>
+                  <span class="sl-doc-label" contenteditable="true">SOPs</span>
+                </div>
+                <div class="sl-doc-card" onclick="alert('Viewing Control Plans...')">
+                  <div class="sl-doc-icon sl-di-purple"><i class="fas fa-route"></i></div>
+                  <span class="sl-doc-count" contenteditable="true">189</span>
+                  <span class="sl-doc-label" contenteditable="true">Control Plans</span>
+                </div>
+                <div class="sl-doc-card" onclick="alert('Viewing Inspection Standards...')">
+                  <div class="sl-doc-icon sl-di-teal"><i class="fas fa-microscope"></i></div>
+                  <span class="sl-doc-count" contenteditable="true">390</span>
+                  <span class="sl-doc-label" contenteditable="true">Inspection Std.</span>
+                </div>
+              </div>
+              <a class="sl-panel-link" onclick="alert('Redirecting to Documents Hub...')">
+                <span contenteditable="true">View All Documents</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">Production Overview</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <div class="sl-donut-layout">
+                <div class="sl-donut-wrapper">
+                  <svg id="slProdDonut" width="120" height="120" viewBox="0 0 100 100"></svg>
+                  <div class="sl-donut-center">
+                    <div class="sl-donut-num" id="slProdDonutTotal">36</div>
+                    <div class="sl-donut-lbl" contenteditable="true">Projects</div>
+                  </div>
+                </div>
+                <div class="sl-legend" id="slProdLegend"></div>
+              </div>
+              <a class="sl-panel-link" onclick="alert('Redirecting to full Production Track...')">
+                <span contenteditable="true">View All Production</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+
+            <div class="sl-panel">
+              <div class="sl-panel-header">
+                <span class="sl-panel-title" contenteditable="true">Quick Actions</span>
+                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+              </div>
+              <div class="sl-actions-grid">
+                <div class="sl-action-card" onclick="alert('Create New RFQ')">
+                  <i class="fas fa-file-medical sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">Create New RFQ</span>
+                </div>
+                <div class="sl-action-card" onclick="alert('Upload Drawing')">
+                  <i class="fas fa-cloud-upload-alt sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">Upload Drawing</span>
+                </div>
+                <div class="sl-action-card" onclick="alert('Add New Supplier')">
+                  <i class="fas fa-user-plus sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">Add New Supplier</span>
+                </div>
+                <div class="sl-action-card" onclick="showSlModule('chats')">
+                  <i class="far fa-comments sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">Start Chat</span>
+                </div>
+                <div class="sl-action-card" onclick="alert('Request Approval')">
+                  <i class="fas fa-signature sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">Request Approval</span>
+                </div>
+                <div class="sl-action-card" onclick="alert('View Reports')">
+                  <i class="fas fa-chart-column sl-action-icon"></i>
+                  <span class="sl-action-title" contenteditable="true">View Reports</span>
+                </div>
+              </div>
+              <a class="sl-panel-link" onclick="alert('Managing custom action links...')">
+                <span contenteditable="true">Manage Actions</span><i class="fas fa-long-arrow-alt-right"></i>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ============ MODULE: CHATS ============ -->
+      <!-- Moved here from supplylink_dashboard.html -->
+      <div class="sl-module" id="sl-module-chats">
+        <div class="sl-chats-layout">
+          <div class="sl-chats-list-panel">
+            <div class="sl-chats-list-header" contenteditable="true">Conversations</div>
+            <div class="sl-chats-list">
+              <div class="sl-chats-item active" onclick="selectSlChat(this, 'Aashita Intelligence AI Assistant', 'fa-robot')">
+                <div class="sl-chats-avatar" style="background:#2563eb;"><i class="fas fa-robot"></i></div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">AI Assistant</span>
+                  <span class="sl-chats-preview" contenteditable="true">Ask about RFQs, milestones, suppliers</span>
+                </div>
+              </div>
+              <div class="sl-chats-item" onclick="selectSlChat(this, 'REQ-250801 | Engine Bracket', 'fa-users')">
+                <div class="sl-chats-avatar" style="background:#8b5cf6;">BA</div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">Bajaj Auto Ltd. (OEM)</span>
+                  <span class="sl-chats-preview" contenteditable="true">Please find attached the drawing...</span>
+                </div>
+                <span class="sl-chats-badge" contenteditable="true">3</span>
+              </div>
+              <div class="sl-chats-item" onclick="selectSlChat(this, 'REQ-250802 | Gear Box Housing', 'fa-users')">
+                <div class="sl-chats-avatar" style="background:#f59e0b;">EA</div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">Eicher Auto Ltd.</span>
+                  <span class="sl-chats-preview" contenteditable="true">Quotation received, under review</span>
+                </div>
+                <span class="sl-chats-badge" contenteditable="true">2</span>
+              </div>
+              <div class="sl-chats-item" onclick="selectSlChat(this, 'Sub Chat | ABC Castings', 'fa-comments')">
+                <div class="sl-chats-avatar" style="background:#10b981;">AC</div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">ABC Castings Pvt. Ltd.</span>
+                  <span class="sl-chats-preview" contenteditable="true">Casting trial scheduled 12 Aug</span>
+                </div>
+              </div>
+              <div class="sl-chats-item" onclick="selectSlChat(this, 'Sub Chat | XYZ Forgings', 'fa-comments')">
+                <div class="sl-chats-avatar" style="background:#14b8a6;">XF</div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">XYZ Forgings Ltd.</span>
+                  <span class="sl-chats-preview" contenteditable="true">PO acknowledged, production start</span>
+                </div>
+                <span class="sl-chats-badge" contenteditable="true">1</span>
+              </div>
+              <div class="sl-chats-item" onclick="selectSlChat(this, 'Quality Team | Internal', 'fa-check-circle')">
+                <div class="sl-chats-avatar" style="background:#ef4444;">QT</div>
+                <div class="sl-chats-body">
+                  <span class="sl-chats-name" contenteditable="true">Quality Team (Internal)</span>
+                  <span class="sl-chats-preview" contenteditable="true">CMM report uploaded for batch 1</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sl-chats-conv">
+            <div class="sl-chats-conv-header">
+              <span class="sl-chats-conv-title">
+                <i class="fas fa-robot" id="slChatIcon"></i>
+                <span id="slChatTitle" contenteditable="true">Aashita Intelligence AI Assistant</span>
+              </span>
+              <span class="sl-chats-conv-status"><i class="fas fa-circle" style="font-size:7px;"></i> Online</span>
+            </div>
+            <div class="sl-chats-messages" id="slChatMessages">
+              <div class="sl-chat-msg bot">Hello! I am your AI Supply Chain Assistant. Ask me anything about your active RFQs, milestones, or supplier ratings!</div>
+              <div class="sl-chat-msg bot">Try asking: <em>"What is the status of shift fork project?"</em></div>
+            </div>
+            <div class="sl-chats-input">
+              <input type="text" class="sl-chats-textbox" id="slChatTextbox" placeholder="Type your query here..." onkeypress="handleSlChatKeyPress(event)">
+              <div class="sl-chats-send" onclick="sendSlChatMessage()"><i class="fas fa-paper-plane" style="font-size:13px;"></i></div>
+            </div>
+          </div>
+        </div>
+      </div>
       </div><!-- end content-area -->
     </div>
+
+    <!-- Tooltip for the dashboard module SVG charts -->
+    <div class="sl-chart-tooltip" id="slChartTooltip"></div>
 
     <!-- Footer -->
     <div class="footer">
@@ -3601,6 +4746,329 @@
 
     function closePdfModal() {
       document.getElementById('pdfModal').classList.remove('active');
+    }
+
+    /* ===================================================================
+       DASHBOARD & CHATS MODULES (moved here from supplylink_dashboard.html)
+       =================================================================== */
+
+    // Show a sidebar module, or pass null to return to the requirement workspace
+    function showSlModule(moduleId) {
+      const contentArea = document.querySelector('.content-area');
+      document.querySelectorAll('.sl-module').forEach(m => m.classList.remove('active'));
+      document.querySelectorAll('.sidebar-nav .nav-item').forEach(n => n.classList.remove('active'));
+
+      if (!moduleId) {
+        contentArea.classList.remove('module-mode');
+        const workspaceLink = document.querySelector('.sidebar-nav .nav-item[href="supplylink.html"]');
+        if (workspaceLink) workspaceLink.classList.add('active');
+        return;
+      }
+
+      contentArea.classList.add('module-mode');
+      const target = document.getElementById('sl-module-' + moduleId);
+      if (target) target.classList.add('active');
+      const navLink = document.querySelector('.sidebar-nav .nav-item[data-module="' + moduleId + '"]');
+      if (navLink) navLink.classList.add('active');
+
+      if (moduleId === 'dashboard') drawSlDashboardCharts();
+    }
+
+    // Clicking any workspace tab drops back out of module mode
+    document.querySelectorAll('.tabs-row .tab-item').forEach(tab => {
+      tab.addEventListener('click', () => {
+        if (document.querySelector('.content-area').classList.contains('module-mode')) showSlModule(null);
+      });
+    });
+
+    // ----- Chart data -----
+    const slRfqData = [
+      { label: 'Draft', value: 5, color: '#3b82f6' },
+      { label: 'Published', value: 8, color: '#10b981' },
+      { label: 'Quotations Received', value: 7, color: '#f59e0b' },
+      { label: 'Under Evaluation', value: 5, color: '#8b5cf6' },
+      { label: 'Closed', value: 3, color: '#ef4444' }
+    ];
+
+    const slProdData = [
+      { label: 'In Production', value: 14, color: '#10b981' },
+      { label: 'In Progress', value: 12, color: '#3b82f6' },
+      { label: 'Pending', value: 6, color: '#f59e0b' },
+      { label: 'Completed', value: 4, color: '#8b5cf6' }
+    ];
+
+    const slSpendViews = {
+      ytd: {
+        title: 'Spend Analytics (YTD)',
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+        thisYear: [12.5, 15.2, 14.0, 16.8, 19.1, 18.0, 21.5, 25.2],
+        lastYear: [10.1, 12.3, 11.5, 13.2, 14.6, 15.1, 16.8, 18.0],
+        total: '₹124.5 Cr', savings: '₹8.7 Cr'
+      },
+      monthly: {
+        title: 'Spend Analytics (Monthly - Aug)',
+        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+        thisYear: [5.2, 6.8, 5.8, 7.4],
+        lastYear: [4.1, 4.8, 4.3, 4.8],
+        total: '₹25.2 Cr', savings: '₹2.3 Cr'
+      },
+      yearly: {
+        title: 'Spend Analytics (Yearly)',
+        labels: ['2022', '2023', '2024', '2025', '2026'],
+        thisYear: [95.4, 112.5, 138.2, 152.0, 124.5],
+        lastYear: [82.0, 98.6, 115.4, 142.1, 102.5],
+        total: '₹622.6 Cr', savings: '₹45.2 Cr'
+      }
+    };
+
+    // ----- Tooltip -----
+    function slShowTooltip(event, text) {
+      const el = document.getElementById('slChartTooltip');
+      if (!el) return;
+      el.innerHTML = text;
+      el.classList.add('active');
+      slMoveTooltip(event);
+    }
+
+    function slMoveTooltip(event) {
+      const el = document.getElementById('slChartTooltip');
+      if (!el) return;
+      el.style.left = event.clientX + 'px';
+      el.style.top = (event.clientY - 10) + 'px';
+    }
+
+    function slHideTooltip() {
+      const el = document.getElementById('slChartTooltip');
+      if (el) el.classList.remove('active');
+    }
+
+    // ----- Donut -----
+    function drawSlDonut(svgId, data, centerValId, legendId) {
+      const svg = document.getElementById(svgId);
+      if (!svg) return;
+      svg.innerHTML = '';
+
+      const total = data.reduce((acc, d) => acc + d.value, 0);
+      const centerEl = document.getElementById(centerValId);
+      if (centerEl) centerEl.innerText = total;
+
+      const r = 35, circumference = 2 * Math.PI * r;
+      let offset = 0;
+
+      data.forEach(item => {
+        const percent = item.value / total;
+        const dash = percent * circumference;
+
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', 50);
+        circle.setAttribute('cy', 50);
+        circle.setAttribute('r', r);
+        circle.setAttribute('fill', 'transparent');
+        circle.setAttribute('stroke', item.color);
+        circle.setAttribute('stroke-width', '12');
+        circle.setAttribute('stroke-dasharray', dash + ' ' + (circumference - dash));
+        circle.setAttribute('stroke-dashoffset', offset ? -offset : 0);
+        circle.setAttribute('transform', 'rotate(-90 50 50)');
+        circle.style.transition = 'stroke-width 0.2s ease';
+        circle.style.cursor = 'pointer';
+
+        circle.addEventListener('mouseover', e => {
+          circle.setAttribute('stroke-width', '15');
+          slShowTooltip(e, item.label + ': ' + item.value + ' (' + Math.round(percent * 100) + '%)');
+        });
+        circle.addEventListener('mousemove', slMoveTooltip);
+        circle.addEventListener('mouseout', () => {
+          circle.setAttribute('stroke-width', '12');
+          slHideTooltip();
+        });
+
+        svg.appendChild(circle);
+        offset += dash;
+      });
+
+      const box = document.getElementById(legendId);
+      if (!box) return;
+      box.innerHTML = '';
+      data.forEach(item => {
+        const pct = Math.round((item.value / total) * 100);
+        const row = document.createElement('div');
+        row.className = 'sl-legend-item';
+        row.innerHTML =
+          '<span class="sl-legend-label">' +
+            '<span class="sl-legend-bullet" style="background:' + item.color + '"></span>' +
+            '<span contenteditable="true">' + item.label + '</span>' +
+          '</span>' +
+          '<span class="sl-legend-pct" contenteditable="true">' + item.value + ' (' + pct + '%)</span>';
+        box.appendChild(row);
+      });
+    }
+
+    // ----- Spend line chart -----
+    function drawSlSpendLine(viewKey) {
+      const svg = document.getElementById('slSpendLine');
+      if (!svg) return;
+
+      if (!viewKey) {
+        const sel = document.getElementById('slSpendPeriod');
+        viewKey = sel ? sel.value : 'ytd';
+      }
+      const data = slSpendViews[viewKey];
+      svg.innerHTML = '';
+
+      const width = 320, height = 130, padding = 15;
+      const graphWidth = width - 2 * padding;
+      const graphHeight = height - 2 * padding;
+      const maxVal = Math.max.apply(null, data.thisYear.concat(data.lastYear)) + (viewKey === 'yearly' ? 20 : 5);
+
+      for (let i = 0; i <= 3; i++) {
+        const y = padding + (graphHeight / 3) * i;
+        const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+        line.setAttribute('x1', padding);
+        line.setAttribute('y1', y);
+        line.setAttribute('x2', width - padding);
+        line.setAttribute('y2', y);
+        line.setAttribute('stroke', '#f1f5f9');
+        line.setAttribute('stroke-width', '1');
+        svg.appendChild(line);
+      }
+
+      function coords(points) {
+        return points.map((val, idx) => ({
+          x: padding + (graphWidth / (points.length - 1)) * idx,
+          y: height - padding - (val / maxVal) * graphHeight,
+          val: val,
+          label: data.labels[idx]
+        }));
+      }
+
+      const thisYear = coords(data.thisYear);
+      const lastYear = coords(data.lastYear);
+
+      function drawPath(pts, color, dashArray) {
+        const d = 'M ' + pts[0].x + ' ' + pts[0].y + ' ' + pts.slice(1).map(p => 'L ' + p.x + ' ' + p.y).join(' ');
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', d);
+        path.setAttribute('fill', 'none');
+        path.setAttribute('stroke', color);
+        path.setAttribute('stroke-width', '2.5');
+        if (dashArray) path.setAttribute('stroke-dasharray', dashArray);
+        svg.appendChild(path);
+      }
+
+      drawPath(lastYear, '#cbd5e1', '4 4');
+      drawPath(thisYear, '#2563eb');
+
+      function drawPoints(pts, color, yearLabel) {
+        pts.forEach(pt => {
+          const c = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+          c.setAttribute('cx', pt.x);
+          c.setAttribute('cy', pt.y);
+          c.setAttribute('r', '4');
+          c.setAttribute('fill', '#ffffff');
+          c.setAttribute('stroke', color);
+          c.setAttribute('stroke-width', '2');
+          c.style.cursor = 'pointer';
+
+          c.addEventListener('mouseover', e => {
+            c.setAttribute('r', '6');
+            slShowTooltip(e, pt.label + ' (' + yearLabel + '): ₹' + pt.val + ' Cr');
+          });
+          c.addEventListener('mousemove', slMoveTooltip);
+          c.addEventListener('mouseout', () => {
+            c.setAttribute('r', '4');
+            slHideTooltip();
+          });
+          svg.appendChild(c);
+        });
+      }
+
+      drawPoints(lastYear, '#cbd5e1', viewKey === 'yearly' ? 'Prev Year' : 'Last Cycle');
+      drawPoints(thisYear, '#2563eb', viewKey === 'yearly' ? 'This Year' : 'Current Cycle');
+
+      thisYear.forEach(pt => {
+        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+        text.setAttribute('x', pt.x);
+        text.setAttribute('y', height - 2);
+        text.setAttribute('text-anchor', 'middle');
+        text.setAttribute('font-size', '8.5');
+        text.setAttribute('fill', '#94a3b8');
+        text.setAttribute('font-weight', '600');
+        text.textContent = pt.label;
+        svg.appendChild(text);
+      });
+    }
+
+    function handleSlSpendChange() {
+      const sel = document.getElementById('slSpendPeriod');
+      const data = slSpendViews[sel.value];
+      document.getElementById('slSpendTitle').innerText = data.title;
+      document.getElementById('slMetaSpend').innerText = data.total;
+      document.getElementById('slMetaSavings').innerText = data.savings;
+      drawSlSpendLine(sel.value);
+    }
+
+    function drawSlDashboardCharts() {
+      drawSlDonut('slRfqDonut', slRfqData, 'slRfqDonutTotal', 'slRfqLegend');
+      drawSlDonut('slProdDonut', slProdData, 'slProdDonutTotal', 'slProdLegend');
+      drawSlSpendLine();
+    }
+
+    // Both charts use fixed viewBox coordinates, so they render correctly
+    // even while the Dashboard module is still hidden.
+    window.addEventListener('DOMContentLoaded', drawSlDashboardCharts);
+
+    // ----- Chats module -----
+    function selectSlChat(el, title, iconClass) {
+      document.querySelectorAll('.sl-chats-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+      const badge = el.querySelector('.sl-chats-badge');
+      if (badge) badge.remove();
+      document.getElementById('slChatTitle').innerText = title;
+      document.getElementById('slChatIcon').className = 'fas ' + iconClass;
+    }
+
+    function sendSlChatMessage() {
+      const input = document.getElementById('slChatTextbox');
+      const text = input.value.trim();
+      if (!text) return;
+
+      const container = document.getElementById('slChatMessages');
+
+      const userMsg = document.createElement('div');
+      userMsg.className = 'sl-chat-msg user';
+      userMsg.innerText = text;
+      container.appendChild(userMsg);
+
+      input.value = '';
+      container.scrollTop = container.scrollHeight;
+
+      setTimeout(() => {
+        const botMsg = document.createElement('div');
+        botMsg.className = 'sl-chat-msg bot';
+
+        const q = text.toLowerCase();
+        let reply = "I'm sorry, I couldn't find details on that query. Try asking: 'What is the status of shift fork project?' or 'Show supplier performance summary'.";
+
+        if (q.includes('shift fork') || q.includes('req-260615')) {
+          reply = 'Project REQ-260615 (Shift Fork) is handled by XYZ Forgings Ltd. The current status is <strong>PO Issued</strong> (80% complete). Next milestone: Production Start is due 10 Aug 2026.';
+        } else if (q.includes('engine bracket') || q.includes('req-260801') || q.includes('req-250801')) {
+          reply = 'Project REQ-260801 (Engine Bracket - Casting) is handled by Aashita Enterprises. The status is <strong>In Progress</strong> (65% complete). Next milestone: First Article Approval due 12 Aug 2026 (3 Days Left).';
+        } else if (q.includes('supplier') || q.includes('performance')) {
+          reply = 'Our top performing supplier is <strong>Aashita Enterprises</strong> with an overall score of 4.8, followed by ABC Castings Pvt. Ltd. at 4.6. All suppliers are green except Reliable Industries at 4.1.';
+        } else if (q.includes('active rfq') || q.includes('rfqs')) {
+          reply = 'There are currently 28 Active RFQs. Breakdown: 8 Published, 7 Quotations Received, 5 Under Evaluation, 5 Drafts and 3 Closed.';
+        } else if (q.includes('spend') || q.includes('savings')) {
+          reply = 'The YTD Total Spend is <strong>₹124.5 Crores</strong> (down 5% vs last year). The YTD Savings achieved are <strong>₹8.7 Crores</strong> (up 18% vs last year).';
+        }
+
+        botMsg.innerHTML = reply;
+        container.appendChild(botMsg);
+        container.scrollTop = container.scrollHeight;
+      }, 700);
+    }
+
+    function handleSlChatKeyPress(event) {
+      if (event.key === 'Enter') sendSlChatMessage();
     }
   </script>
 </body>
