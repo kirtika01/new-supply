@@ -1420,14 +1420,524 @@
       color: #1e3a8a;
     }
 
-    /* Keyframe Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+    /* ===== PDF VIEWER MODAL STYLE ===== */
+    .pdf-viewer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
     }
-    @keyframes slideIn {
-      from { transform: scale(0.95) translateY(10px); opacity: 0; }
-      to { transform: scale(1) translateY(0); opacity: 1; }
+    .pdf-viewer-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .pdf-viewer-container {
+      width: 92%;
+      max-width: 1100px;
+      height: 88vh;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s ease;
+    }
+    .pdf-viewer-overlay.show .pdf-viewer-container {
+      transform: scale(1) translateY(0);
+    }
+    .pdf-toolbar {
+      height: 52px;
+      background-color: #0f172a;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid #1e293b;
+      user-select: none;
+    }
+    .pdf-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .pdf-doc-title-icon {
+      color: #ef4444;
+      font-size: 18px;
+    }
+    .pdf-doc-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #f8fafc;
+    }
+    .pdf-toolbar-center {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .pdf-page-indicator {
+      font-size: 12px;
+      background-color: #1e293b;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+    .pdf-zoom-controls {
+      display: flex;
+      align-items: center;
+      background-color: #1e293b;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      overflow: hidden;
+    }
+    .pdf-zoom-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+    .pdf-zoom-btn:hover {
+      color: #f8fafc;
+      background-color: #334155;
+    }
+    .pdf-zoom-value {
+      font-size: 11px;
+      padding: 0 8px;
+      color: #e2e8f0;
+      min-width: 40px;
+      text-align: center;
+      border-left: 1px solid #334155;
+      border-right: 1px solid #334155;
+    }
+    .pdf-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .pdf-action-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .pdf-action-btn:hover {
+      color: #f8fafc;
+      background-color: #1e293b;
+    }
+    .pdf-close-btn {
+      color: #f43f5e;
+    }
+    .pdf-close-btn:hover {
+      background-color: rgba(244, 63, 94, 0.1);
+      color: #fda4af;
+    }
+    .pdf-main-layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      background-color: #334155;
+    }
+    .pdf-sidebar {
+      width: 260px;
+      background-color: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .pdf-meta-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pdf-meta-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .pdf-meta-box {
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .pdf-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 11.5px;
+    }
+    .pdf-meta-label {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .pdf-meta-value {
+      color: #334155;
+      font-weight: 600;
+    }
+    .pdf-status-tag {
+      align-self: flex-start;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+    .pdf-status-unlocked {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+    .pdf-page-container {
+      flex: 1;
+      padding: 28px;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      scroll-behavior: smooth;
+    }
+    .pdf-page-paper {
+      background-color: #fff;
+      width: 100%;
+      max-width: 780px;
+      min-height: 1020px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+      padding: 48px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .pdf-paper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+    .pdf-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pdf-header-classification {
+      font-size: 10px;
+      font-weight: 800;
+      color: #dc2626;
+      letter-spacing: 0.1em;
+    }
+    .pdf-header-company {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+    }
+    .pdf-header-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+    .pdf-header-right {
+      text-align: right;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .pdf-paper-footer {
+      margin-top: auto;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+    
+    /* Document-specific Styles */
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 12px;
+    }
+    .pdf-table th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+    }
+    .pdf-table td {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+    }
+    .pdf-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 18px 0 8px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .pdf-text-p {
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+    .pdf-drawing-container {
+      border: 1px solid #cbd5e1;
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 14px 0;
+    }
+    .pdf-drawing-image {
+      max-width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+    }
+
+    /* ===== SUPPLIER PROFILE MODAL STYLE ===== */
+    .profile-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .profile-modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .profile-modal-container {
+      width: 90%;
+      max-width: 650px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      transform: scale(0.95) translateY(15px);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .profile-modal-overlay.show .profile-modal-container {
+      transform: scale(1) translateY(0);
+    }
+    .profile-modal-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .profile-header-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+    }
+    .profile-header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .profile-header-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+    .profile-header-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .profile-close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+    .profile-close-icon:hover {
+      color: #fff;
+    }
+    .profile-modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 70vh;
+      overflow-y: auto;
+      background-color: #f8fafc;
+    }
+    .profile-grid-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 580px) {
+      .profile-grid-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+    .profile-section-card {
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .profile-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+    .profile-section-title i {
+      color: #4f46e5;
+    }
+    .profile-info-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      font-size: 12.5px;
+      padding: 5px 0;
+      align-items: start;
+    }
+    .profile-info-label {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+    .profile-info-value {
+      color: #334155;
+      font-weight: 600;
+    }
+    .profile-progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .profile-progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+    .profile-progress-bar-bg {
+      height: 8px;
+      background-color: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .profile-progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+    .fill-green {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+    .fill-blue {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+    .fill-purple {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+    .profile-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .profile-tag {
+      font-size: 11px;
+      background-color: #f1f5f9;
+      color: #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+    .profile-footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: flex-end;
+      background-color: #fff;
     }
   </style>
 </head>
@@ -1637,27 +2147,27 @@
               </div>
               
               <div class="step-node" id="stepNode-5">
-                <div class="step-circle">5</div>
+                <div class="step-circle" id="stepCircle-5">5</div>
                 <span class="step-title" contenteditable="true">Quotation Submitted</span>
-                <span class="step-subtitle" contenteditable="true">Pending</span>
+                <span class="step-subtitle" id="stepSub-5" contenteditable="true">Pending</span>
               </div>
               
               <div class="step-node" id="stepNode-6">
-                <div class="step-circle">6</div>
+                <div class="step-circle" id="stepCircle-6">6</div>
                 <span class="step-title" contenteditable="true">Evaluation</span>
-                <span class="step-subtitle" contenteditable="true">Pending</span>
+                <span class="step-subtitle" id="stepSub-6" contenteditable="true">Pending</span>
               </div>
               
               <div class="step-node" id="stepNode-7">
-                <div class="step-circle">7</div>
+                <div class="step-circle" id="stepCircle-7">7</div>
                 <span class="step-title" contenteditable="true">PO Issued</span>
-                <span class="step-subtitle" contenteditable="true">Pending</span>
+                <span class="step-subtitle" id="stepSub-7" contenteditable="true">Pending</span>
               </div>
               
               <div class="step-node" id="stepNode-8">
-                <div class="step-circle">8</div>
+                <div class="step-circle" id="stepCircle-8">8</div>
                 <span class="step-title" contenteditable="true">Closed</span>
-                <span class="step-subtitle" contenteditable="true">Pending</span>
+                <span class="step-subtitle" id="stepSub-8" contenteditable="true">Pending</span>
               </div>
             </div>
           </div>
@@ -1787,7 +2297,7 @@
                   <span contenteditable="true">Contact: +91 98765 43210</span>
                 </div>
               </div>
-              <button class="btn btn-outline" style="width: 100%;" onclick="alert('Redirecting to supplier profile...')">View Supplier Profile</button>
+              <button class="btn btn-outline" style="width: 100%;" onclick="openSupplierProfile()">View Supplier Profile</button>
             </div>
 
           </div>
@@ -1953,17 +2463,17 @@
               <span class="timeline-time" contenteditable="true">09 Aug 2026, 09:30 AM</span>
             </div>
 
-            <div class="timeline-item completed">
+            <div class="timeline-item completed" id="timelineNodeViewed">
               <div class="timeline-node"></div>
-              <span class="timeline-header" contenteditable="true">Supplier Viewed RFQ</span>
-              <span class="timeline-sub" contenteditable="true">09 Aug 2026, 10:05 AM</span>
-              <span class="timeline-time" contenteditable="true">09 Aug 2026, 10:05 AM</span>
+              <span class="timeline-header" id="timelineHeaderViewed" contenteditable="true">Supplier Viewed RFQ</span>
+              <span class="timeline-sub" id="timelineSubViewed" contenteditable="true">09 Aug 2026, 10:05 AM</span>
+              <span class="timeline-time" id="timelineTimeViewed" contenteditable="true">09 Aug 2026, 10:05 AM</span>
             </div>
 
-            <div class="timeline-item">
+            <div class="timeline-item" id="timelineNodeResponse">
               <div class="timeline-node"></div>
-              <span class="timeline-header" contenteditable="true">Supplier Response</span>
-              <span class="timeline-time" contenteditable="true">Pending</span>
+              <span class="timeline-header" id="timelineHeaderResponse" contenteditable="true">Supplier Response</span>
+              <span class="timeline-time" id="timelineTimeResponse" contenteditable="true">Pending</span>
             </div>
 
             <div class="timeline-item" id="timelineNodeNDA">
@@ -2042,7 +2552,7 @@
       <div class="modal-body">
         <div class="nda-document-viewer">
           <h4>MUTUAL CONFIDENTIALITY & NON-DISCLOSURE AGREEMENT</h4>
-          <p>This Mutual Non-Disclosure Agreement (the "Agreement") is entered into as of August 09, 2026, by and between <strong>Bajaj Auto Ltd.</strong>, having its principal place of business at Chakan Plant, Pune, and <strong>Aashita Enterprises</strong>, having its principal place of business at Nashik.</p>
+          <p>This Mutual Non-Disclosure Agreement (the "Agreement") is entered into as of August 09, 2026, by and between <strong>Bajaj Auto Ltd.</strong>, having its principal place of business at Chakan Plant, Pune, and <strong>Aashita Enterprises</strong>, having its principal place of business at Jaipur.</p>
           <br>
           <p><strong>1. Purpose:</strong> The parties wish to evaluate a potential business relationship concerning the sourcing and manufacturing of <strong>Engine Bracket Casting (EB-CAST-001)</strong>. In connection with this evaluation, both parties will share certain proprietary drawings, processes, specifications, and commercial estimations.</p>
           <br>
@@ -2106,6 +2616,209 @@
     </div>
   </div>
 
+  <!-- ===== FLOATING PDF VIEWER MODAL ===== -->
+  <div class="pdf-viewer-overlay" id="pdfPreviewModal">
+    <div class="pdf-viewer-container">
+      <div class="pdf-toolbar">
+        <div class="pdf-toolbar-left">
+          <i class="far fa-file-pdf pdf-doc-title-icon"></i>
+          <span class="pdf-doc-name" id="pdfDocName">Document_Preview.pdf</span>
+        </div>
+        <div class="pdf-toolbar-center">
+          <div class="pdf-page-indicator">Page <span id="pdfCurrentPage">1</span> of 1</div>
+          <div class="pdf-zoom-controls">
+            <button class="pdf-zoom-btn" onclick="adjustPdfZoom(-10)"><i class="fas fa-search-minus"></i></button>
+            <span class="pdf-zoom-value" id="pdfZoomValue">100%</span>
+            <button class="pdf-zoom-btn" onclick="adjustPdfZoom(10)"><i class="fas fa-search-plus"></i></button>
+          </div>
+        </div>
+        <div class="pdf-toolbar-right">
+          <button class="pdf-action-btn" title="Download Document" onclick="triggerMockDownload()"><i class="fas fa-download"></i></button>
+          <button class="pdf-action-btn" title="Print Document" onclick="window.print()"><i class="fas fa-print"></i></button>
+          <button class="pdf-action-btn pdf-close-btn" title="Close Viewer" onclick="closePdfPreview()"><i class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="pdf-main-layout">
+        <div class="pdf-sidebar">
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">Document Status</span>
+            <span class="pdf-status-tag pdf-status-unlocked"><i class="fas fa-lock-open" style="margin-right:4px;"></i> Unlocked</span>
+          </div>
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">File Details</span>
+            <div class="pdf-meta-box">
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">File Size</span>
+                <span class="pdf-meta-value" id="pdfMetaSize">1.5 MB</span>
+              </div>
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">Document Version</span>
+                <span class="pdf-meta-value" id="pdfMetaVersion">Rev 2.4</span>
+              </div>
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">Last Modified</span>
+                <span class="pdf-meta-value" id="pdfMetaDate">09 Aug 2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">Authorized Access</span>
+            <div class="pdf-meta-box">
+              <div class="pdf-meta-item" style="gap:4px;">
+                <span class="pdf-meta-label" style="font-size:10px;">NDA Signee (Aashita)</span>
+                <span class="pdf-meta-value" id="pdfMetaSignee" style="font-size:11px;color:#1e3a8a;">Representative Name</span>
+              </div>
+              <div class="pdf-meta-item" style="gap:4px;">
+                <span class="pdf-meta-label" style="font-size:10px;">NDA Witness (Bajaj)</span>
+                <span class="pdf-meta-value" style="font-size:11px;">Manoj Kumar (Legal)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-page-container">
+          <div class="pdf-page-paper" id="pdfPagePaper">
+            <!-- Simulated PDF Document page will be dynamically rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUPPLIER PROFILE MODAL ===== -->
+  <div class="profile-modal-overlay" id="supplierProfileModal">
+    <div class="profile-modal-container">
+      <div class="profile-modal-header">
+        <div class="profile-header-avatar" id="profAvatar">AE</div>
+        <div class="profile-header-meta">
+          <span class="profile-header-name" id="profCompanyName">Aashita Enterprises</span>
+          <span class="profile-header-sub">
+            <span id="profCode">SUP-01234</span> • 
+            <span><i class="fas fa-star" style="color:#fbbf24;margin-right:2px;"></i> 4.8 Rating</span> • 
+            <span><i class="fas fa-map-marker-alt" style="color:#f87171;margin-right:2px;"></i> <span id="profLocation">Jaipur</span></span>
+          </span>
+        </div>
+        <i class="fas fa-times profile-close-icon" onclick="closeSupplierProfile()"></i>
+      </div>
+      <div class="profile-modal-body">
+        
+        <div class="profile-grid-cols">
+          <!-- Card 1: Contact Details -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-id-card"></i> Contact Information</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Contact Person</span>
+              <span class="profile-info-value" id="profContactPerson">Rohit Deshmukh (Director)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Email</span>
+              <span class="profile-info-value" id="profEmail">info@aashitaenterprises.com</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Phone</span>
+              <span class="profile-info-value" id="profPhone">+91 98765 43210</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Factory Address</span>
+              <span class="profile-info-value" id="profAddress">RIICO Industrial Area, Jaipur, RJ</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Operations & Capacity -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-industry"></i> Foundry Capacity</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Primary Process</span>
+              <span class="profile-info-value">HPDC Aluminium Casting</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Machine Tonnage</span>
+              <span class="profile-info-value">800T, 1000T, 1250T HPDC</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">CNC Machining</span>
+              <span class="profile-info-value">3 & 4 Axis Milling</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Monthly Output</span>
+              <span class="profile-info-value">~150 Tons Finished Alloy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-grid-cols">
+          <!-- Card 3: Performance Metrics -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-chart-line"></i> Performance Metrics</span>
+            
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>Quality Compliance Score</span>
+                <span>96.5%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-green" style="width: 96.5%;"></div>
+              </div>
+            </div>
+
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>On-Time Delivery Rate</span>
+                <span>98.0%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-blue" style="width: 98%;"></div>
+              </div>
+            </div>
+
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>Commercial Competitiveness</span>
+                <span>88.0%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-purple" style="width: 88%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Quality & Compliance -->
+          <div class="profile-section-card" style="justify-content: flex-start;">
+            <span class="profile-section-title"><i class="fas fa-certificate"></i> Certifications & Compliance</span>
+            <div class="profile-tags-container">
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> IATF 16949</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> ISO 9001:2015</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> OHSAS 18001</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> ZED Gold Certified</span>
+            </div>
+            
+            <span class="profile-section-title" style="margin-top: 12px;"><i class="fas fa-clipboard-check"></i> Quality Audit Compliance</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Audit Grade</span>
+              <span class="profile-info-value" style="color:#10b981;font-weight:700;">Grade A (94/100)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Rejection PPM</span>
+              <span class="profile-info-value">120 PPM (Target &le; 200)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Capability (Cpk)</span>
+              <span class="profile-info-value">1.82 (Target &ge; 1.67)</span>
+            </div>
+
+            <div class="profile-info-row" style="margin-top:6px;border-top:1px solid #f1f5f9;padding-top:8px;">
+              <span class="profile-info-label" style="font-size:11px;">Active RFQs in Portal</span>
+              <span class="profile-info-value" style="font-size:11px;color:#4f46e5;">3 Pending, 1 In Negotiation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="profile-footer">
+        <button class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;" onclick="closeSupplierProfile()">Close Profile</button>
+      </div>
+    </div>
+  </div>
+
   <!-- ===== JAVASCRIPT LOGIC ===== -->
   <script>
     let isNdaSigned = false;
@@ -2160,6 +2873,26 @@
       step4.className = "step-node";
       document.getElementById('stepCircle-4').innerHTML = "4";
       document.getElementById('stepSub-4').innerText = "Pending";
+
+      const step5 = document.getElementById('stepNode-5');
+      step5.className = "step-node";
+      document.getElementById('stepCircle-5').innerHTML = "5";
+      document.getElementById('stepSub-5').innerText = "Pending";
+
+      const step6 = document.getElementById('stepNode-6');
+      step6.className = "step-node";
+      document.getElementById('stepCircle-6').innerHTML = "6";
+      document.getElementById('stepSub-6').innerText = "Pending";
+
+      const step7 = document.getElementById('stepNode-7');
+      step7.className = "step-node";
+      document.getElementById('stepCircle-7').innerHTML = "7";
+      document.getElementById('stepSub-7').innerText = "Pending";
+
+      const step8 = document.getElementById('stepNode-8');
+      step8.className = "step-node";
+      document.getElementById('stepCircle-8').innerHTML = "8";
+      document.getElementById('stepSub-8').innerText = "Pending";
 
       // Update RFQ Info Card values
       const infoValues = document.querySelectorAll('.info-value');
@@ -2256,15 +2989,15 @@
           <span class="timeline-sub">${supplierName}</span>
           <span class="timeline-time">${timeStr}</span>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" id="timelineNodeViewed">
           <div class="timeline-node"></div>
-          <span class="timeline-header">Supplier Viewed RFQ</span>
-          <span class="timeline-time">Pending</span>
+          <span class="timeline-header" id="timelineHeaderViewed">Supplier Viewed RFQ</span>
+          <span class="timeline-time" id="timelineTimeViewed">Pending</span>
         </div>
-        <div class="timeline-item">
+        <div class="timeline-item" id="timelineNodeResponse">
           <div class="timeline-node"></div>
-          <span class="timeline-header">Supplier Response</span>
-          <span class="timeline-time">Pending</span>
+          <span class="timeline-header" id="timelineHeaderResponse">Supplier Response</span>
+          <span class="timeline-time" id="timelineTimeResponse">Pending</span>
         </div>
         <div class="timeline-item" id="timelineNodeNDA">
           <div class="timeline-node"></div>
@@ -2325,6 +3058,9 @@
         alert("The NDA is already signed and validated!");
         return;
       }
+      document.getElementById('sigInput').value = "";
+      document.getElementById('sigPreview').innerText = "Your Signature Preview";
+      document.getElementById('submitSigBtn').setAttribute('disabled', 'true');
       document.getElementById('ndaSignModal').classList.add('show');
     }
     
@@ -2387,17 +3123,41 @@
       signBtn.onclick = function() { alert("Opening Signed NDA document signed by " + signName); };
 
       // Update Stepper Progress & Nodes
-      document.getElementById('stepperProgressBar').style.width = "42.84%"; // Progress through step 4
-      
-      const step3 = document.getElementById('stepNode-3');
-      step3.className = "step-node completed";
-      document.getElementById('stepCircle-3').innerHTML = `<i class="fas fa-check"></i>`;
-      document.getElementById('stepSub-3').innerText = "Completed";
+      document.getElementById('stepperProgressBar').style.width = "57.14%"; // Reach step 5 (4 / 7 segments)
 
-      const step4 = document.getElementById('stepNode-4');
-      step4.className = "step-node active";
-      document.getElementById('stepCircle-4').innerHTML = `4`;
-      document.getElementById('stepSub-4').innerText = "In Progress";
+      const node2 = document.getElementById('stepNode-2');
+      if (node2) {
+        node2.className = "step-node completed";
+        const circle2 = document.getElementById('stepCircle-2');
+        if (circle2) circle2.innerHTML = `<i class="fas fa-check"></i>`;
+      }
+
+      const node3 = document.getElementById('stepNode-3');
+      if (node3) {
+        node3.className = "step-node completed";
+        const circle3 = document.getElementById('stepCircle-3');
+        if (circle3) circle3.innerHTML = `<i class="fas fa-check"></i>`;
+        const sub3 = document.getElementById('stepSub-3');
+        if (sub3) sub3.innerText = "Completed";
+      }
+
+      const node4 = document.getElementById('stepNode-4');
+      if (node4) {
+        node4.className = "step-node completed";
+        const circle4 = document.getElementById('stepCircle-4');
+        if (circle4) circle4.innerHTML = `<i class="fas fa-check"></i>`;
+        const sub4 = document.getElementById('stepSub-4');
+        if (sub4) sub4.innerText = "Completed";
+      }
+
+      const node5 = document.getElementById('stepNode-5');
+      if (node5) {
+        node5.className = "step-node active";
+        const circle5 = document.getElementById('stepCircle-5');
+        if (circle5) circle5.innerHTML = `5`;
+        const sub5 = document.getElementById('stepSub-5');
+        if (sub5) sub5.innerText = "In Progress";
+      }
 
       // Update Supplier Response Card
       const respCardIcon = document.getElementById('respCardIcon-3');
@@ -2419,28 +3179,428 @@
         }
       });
 
-      // Add timeline item to the activity timeline
-      const timeline = document.getElementById('timelineList');
-      
-      // Create new timeline item
-      const newItem = document.createElement('div');
-      newItem.className = "timeline-item completed";
-      newItem.innerHTML = `
-        <div class="timeline-node"></div>
-        <span class="timeline-header" contenteditable="true">NDA Signed & Confirmed</span>
-        <span class="timeline-sub" contenteditable="true">by ${signName} (Aashita Enterprises)</span>
-        <span class="timeline-time" contenteditable="true">${timeStr}</span>
-      `;
-      // Insert at position 3 (above Supplier Response Pending)
-      timeline.insertBefore(newItem, timeline.children[3]);
+      // Update Timeline milestones
+      const timelineViewed = document.getElementById('timelineNodeViewed');
+      if (timelineViewed) {
+        timelineViewed.className = "timeline-item completed";
+        const headerViewed = document.getElementById('timelineHeaderViewed');
+        if (headerViewed) headerViewed.innerText = "Supplier Viewed RFQ";
+        const timeViewed = document.getElementById('timelineTimeViewed');
+        if (timeViewed && (timeViewed.innerText === "Pending" || timeViewed.innerText === "")) {
+          timeViewed.innerText = timeStr;
+        }
+      }
 
-      // Update NDA timeline node
+      const timelineResp = document.getElementById('timelineNodeResponse');
+      if (timelineResp) {
+        timelineResp.className = "timeline-item completed";
+        const headerResp = document.getElementById('timelineHeaderResponse');
+        if (headerResp) headerResp.innerText = "Supplier Responded (Interested)";
+        const timeResp = document.getElementById('timelineTimeResponse');
+        if (timeResp && (timeResp.innerText === "Pending" || timeResp.innerText === "")) {
+          timeResp.innerText = timeStr;
+        }
+      }
+
       const timelineNDA = document.getElementById('timelineNodeNDA');
-      timelineNDA.className = "timeline-item completed";
-      document.getElementById('timelineHeaderNDA').innerText = "NDA & Agreements Signed";
-      document.getElementById('timelineTimeNDA').innerText = timeStr;
+      if (timelineNDA) {
+        timelineNDA.className = "timeline-item completed";
+        const headerNDA = document.getElementById('timelineHeaderNDA');
+        if (headerNDA) headerNDA.innerText = "NDA & Agreements Signed";
+        const timeNDA = document.getElementById('timelineTimeNDA');
+        if (timeNDA) timeNDA.innerText = timeStr;
+      }
 
       alert("NDA Signed successfully! Confidential drawings and requirements are now fully unlocked.");
+    }
+
+    let currentPdfZoom = 100;
+    let currentPdfName = "";
+
+    function openPdfPreview(name) {
+      currentPdfName = name;
+      document.getElementById('pdfDocName').innerText = name;
+      
+      // Determine file metadata based on name
+      let fileSize = "1.5 MB";
+      let version = "Rev 1.0";
+      let modDate = "09 Aug 2026";
+      
+      if (name.includes("Engine_Bracket") || name.includes("Drawing")) {
+        fileSize = "2.4 MB";
+        version = "Rev D";
+        modDate = "08 Aug 2026";
+      } else if (name.includes("Technical")) {
+        fileSize = "1.1 MB";
+        version = "Rev 2.1";
+        modDate = "07 Aug 2026";
+      } else if (name.includes("Material")) {
+        fileSize = "0.8 MB";
+        version = "Rev 1.8";
+        modDate = "05 Aug 2026";
+      } else if (name.includes("Process")) {
+        fileSize = "1.6 MB";
+        version = "Rev 3.0";
+        modDate = "09 Aug 2026";
+      } else if (name.includes("Quality")) {
+        fileSize = "1.2 MB";
+        version = "Rev 2.2";
+        modDate = "08 Aug 2026";
+      }
+      
+      document.getElementById('pdfMetaSize').innerText = fileSize;
+      document.getElementById('pdfMetaVersion').innerText = version;
+      document.getElementById('pdfMetaDate').innerText = modDate;
+      
+      // Set the signee name
+      const signName = document.getElementById('sigInput').value || "Aashita Representative";
+      document.getElementById('pdfMetaSignee').innerText = signName;
+      
+      // Generate preview page content
+      const paper = document.getElementById('pdfPagePaper');
+      paper.innerHTML = getMockPdfContent(name);
+      
+      // Reset zoom
+      currentPdfZoom = 100;
+      document.getElementById('pdfZoomValue').innerText = "100%";
+      paper.style.transform = "scale(1)";
+      paper.style.transformOrigin = "top center";
+      
+      // Show modal
+      document.getElementById('pdfPreviewModal').classList.add('show');
+    }
+
+    function closePdfPreview() {
+      document.getElementById('pdfPreviewModal').classList.remove('show');
+    }
+
+    function adjustPdfZoom(amount) {
+      currentPdfZoom += amount;
+      if (currentPdfZoom < 50) currentPdfZoom = 50;
+      if (currentPdfZoom > 150) currentPdfZoom = 150;
+      document.getElementById('pdfZoomValue').innerText = currentPdfZoom + "%";
+      document.getElementById('pdfPagePaper').style.transform = `scale(${currentPdfZoom / 100})`;
+    }
+
+    function triggerMockDownload() {
+      alert("Downloading " + currentPdfName + " ... File integrity validated.");
+    }
+
+    function getMockPdfContent(name) {
+      const isDrawing = name.includes("Drawing") || name.includes("Engine_Bracket");
+      const isTech = name.includes("Technical");
+      const isMaterial = name.includes("Material");
+      const isProcess = name.includes("Process");
+      const isQuality = name.includes("Quality");
+      
+      let title = "DOCUMENT SPECIFICATION";
+      let subtitle = "Engineering Data Sheet";
+      
+      if (isDrawing) {
+        title = "ENGINEERING DRAWING - ENGINE BRACKET CASTING";
+        subtitle = "Part No: EB-CAST-001 / Revision D";
+      } else if (isTech) {
+        title = "TECHNICAL & FUNCTIONAL SPECIFICATION";
+        subtitle = "Standard Operating Parameters & Stress Tolerances";
+      } else if (isMaterial) {
+        title = "MATERIAL COMPOSITION AND SPECS SHEET";
+        subtitle = "Aluminium High Pressure Die Casting (HPDC) - Alloy ADC12";
+      } else if (isProcess) {
+        title = "MANUFACTURING PROCESS & TOOLING PARAMETERS";
+        subtitle = "HPDC Foundry Production Standards & Machine Configurations";
+      } else if (isQuality) {
+        title = "QUALITY ASSURANCE & INSPECTION STANDARD";
+        subtitle = "PPAP Level 3 Qualification & Dimensional Control Plan";
+      }
+
+      let headerHtml = `
+        <div class="pdf-paper-header">
+          <div class="pdf-header-left">
+            <span class="pdf-header-classification"><i class="fas fa-exclamation-triangle"></i> STRICTLY CONFIDENTIAL - NDA SECURED</span>
+            <span class="pdf-header-company">BAJAJ AUTO LTD. & AASHITA ENTERPRISES</span>
+            <span class="pdf-header-title">${title}</span>
+          </div>
+          <div class="pdf-header-right">
+            <span>Doc Code: BJ-AE-RFQ-250801</span>
+            <span>Date: Aug 09, 2026</span>
+            <span>Status: APPROVED</span>
+          </div>
+        </div>
+      `;
+
+      let footerHtml = `
+        <div class="pdf-paper-footer">
+          <span>Bajaj Auto Proprietary & Confidential</span>
+          <span>Page 1 of 1</span>
+          <span>Security Token: HPDC-SECURE-2026-X8</span>
+        </div>
+      `;
+
+      let bodyHtml = "";
+
+      if (isDrawing) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-drafting-compass"></i> 1.0 Engineering Diagram & Annotations</div>
+          <p class="pdf-text-p">The following detailed CAD diagram showcases the primary dimensional layouts, case depth details, and heat treatment specifications for the Engine Bracket Casting (EB-CAST-001) Rev D.</p>
+          
+          <div class="pdf-drawing-container">
+            <img class="pdf-drawing-image" src="drawing_cropped.png" alt="Engineering Drawing Schematic">
+          </div>
+          
+          <div class="pdf-section-title"><i class="fas fa-table"></i> 2.0 Critical Geometry Specifications</div>
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Feature / Detail</th>
+                <th>Nominal Dimension</th>
+                <th>Tolerance Limit</th>
+                <th>Inspection Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Plunge Grinding Lead</td>
+                <td>&plusmn;0.05&deg;</td>
+                <td>Max Permissible Grinding</td>
+                <td>Optical Profile Projector</td>
+              </tr>
+              <tr>
+                <td>Mounting Hole Chamfer</td>
+                <td>1.5 +0.2 mm</td>
+                <td>Single Side Chamfer</td>
+                <td>Digital Caliper</td>
+              </tr>
+              <tr>
+                <td>Outer Diameter (OD)</td>
+                <td>&Oslash;26 -0.06 / -0.88 mm</td>
+                <td>High Precision turned</td>
+                <td>Micrometer Gauge</td>
+              </tr>
+              <tr>
+                <td>Inner Bore (ID)</td>
+                <td>&Oslash;20 +0.025 mm (H9)</td>
+                <td>Grinding standard</td>
+                <td>Air Plug Gauge</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+      } else if (isTech) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-cogs"></i> 1.0 Mechanical Properties & Performance Requirements</div>
+          <p class="pdf-text-p">High-pressure die-cast engine bracket parts must sustain structural stresses under dynamic vibration tests. Tensile and yield strength standards are aligned with standard automotive housing rules.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Property Parameter</th>
+                <th>Minimum Value</th>
+                <th>Standard Reference</th>
+                <th>Testing Equipment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tensile Strength (UTS)</td>
+                <td>&le; 280 MPa</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Yield Strength (0.2% Offset)</td>
+                <td>&le; 160 MPa</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Elongation (in 50mm)</td>
+                <td>&le; 2.5 %</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Brinell Hardness (HBW 5/250)</td>
+                <td>&le; 80 HB</td>
+                <td>ASTM E10 Standard</td>
+                <td>Hardness Tester</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-tint-slash"></i> 2.0 Porosity & Hydrostatic Leakage Standards</div>
+          <p class="pdf-text-p"><strong>Leak Testing:</strong> Every engine bracket casting part must pass leakage testing. No gas/air porosity leakage allowed when tested with air pressure of <strong>1.5 bar for 15 seconds</strong> in water bath or dry air decay testing machine.</p>
+          <p class="pdf-text-p"><strong>Radiographic Porosity:</strong> Maximum allowable porosity level is ASTM E155 Class 2 in critical structural joints, and Class 3 in non-critical wall sections.</p>
+        `;
+      } else if (isMaterial) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-atom"></i> 1.0 Chemical Composition limits - Alloy ADC12</div>
+          <p class="pdf-text-p">Material composition must conform to Japanese Standard JIS H 5302 (Aluminium Alloy Die Castings). The table below details chemical boundaries by mass percentage.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Min %</th>
+                <th>Max %</th>
+                <th>Nominal Limit</th>
+                <th>Role in Castability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Copper (Cu)</td>
+                <td>1.5</td>
+                <td>3.5</td>
+                <td>2.5%</td>
+                <td>Improves tensile strength and hardness</td>
+              </tr>
+              <tr>
+                <td>Silicon (Si)</td>
+                <td>9.6</td>
+                <td>12.0</td>
+                <td>11.0%</td>
+                <td>Increases fluid flow, reduces shrinkage</td>
+              </tr>
+              <tr>
+                <td>Iron (Fe)</td>
+                <td>-</td>
+                <td>1.3</td>
+                <td>0.9%</td>
+                <td>Prevents die soldering & sticking</td>
+              </tr>
+              <tr>
+                <td>Magnesium (Mg)</td>
+                <td>-</td>
+                <td>0.3</td>
+                <td>0.15%</td>
+                <td>Improves machining surface finish</td>
+              </tr>
+              <tr>
+                <td>Zinc (Zn)</td>
+                <td>-</td>
+                <td>1.0</td>
+                <td>0.6%</td>
+                <td>Acts as a general alloy component</td>
+              </tr>
+              <tr>
+                <td>Aluminium (Al)</td>
+                <td colspan="3">Remainder (Balance)</td>
+                <td>Primary metal base</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-microscope"></i> 2.0 Microstructure & Thermal Properties</div>
+          <p class="pdf-text-p">Microstructure must show a uniform distribution of silicon particles in the aluminum solid solution matrix. Thermal conductivity should be in the range of 90-100 W/m&middot;K at 25&deg;C. No slag or non-metallic inclusions are permitted.</p>
+        `;
+      } else if (isProcess) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-industry"></i> 1.0 Casting Process Specifications (HPDC)</div>
+          <p class="pdf-text-p">The engine bracket casting is to be manufactured using a cold-chamber High Pressure Die Casting (HPDC) machine. Minimum machine tonnage must be selected carefully based on projected area calculations.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Casting Process Parameter</th>
+                <th>Target Setting</th>
+                <th>Tolerance Band</th>
+                <th>Control Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Machine Locking Force</td>
+                <td>800 Metric Tons</td>
+                <td>Minimum</td>
+                <td>Hydraulic Toggle Lock</td>
+              </tr>
+              <tr>
+                <td>Furnace Temperature</td>
+                <td>660 &deg;C</td>
+                <td>&plusmn; 10 &deg;C</td>
+                <td>Thermocouple loop PID</td>
+              </tr>
+              <tr>
+                <td>Plunger Injection Speed</td>
+                <td>3.5 m/s (Fast Stage)</td>
+                <td>&plusmn; 0.2 m/s</td>
+                <td>Servo Valve Feed</td>
+              </tr>
+              <tr>
+                <td>Die Temperature</td>
+                <td>180 &deg;C</td>
+                <td>&plusmn; 15 &deg;C</td>
+                <td>Thermal Fluid Regulator</td>
+              </tr>
+              <tr>
+                <td>Solidification Time</td>
+                <td>9.5 seconds</td>
+                <td>&plusmn; 1.0 s</td>
+                <td>Automatic Timer</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-tools"></i> 2.0 Post-Casting Machining Standards</div>
+          <p class="pdf-text-p">Secondary CNC operations must follow the locked clamping reference features. Air pressure blow-out and oil wash cycle are mandatory to remove residual fine metal chips inside the bore.</p>
+        `;
+      } else if (isQuality) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-clipboard-check"></i> 1.0 PPAP Level 3 Quality Control Plan</div>
+          <p class="pdf-text-p">Aashita Enterprises is requested to submit full PPAP Level 3 documentation prior to tooling sign-off and batch delivery approval. The QA checklist below is mandatory.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Quality Element</th>
+                <th>Reporting Requirement</th>
+                <th>Frequency</th>
+                <th>Status (Aashita)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dimensional Inspection</td>
+                <td>CMM report of 30 layout parts</td>
+                <td>First Article Inspection</td>
+                <td>Awaiting tool completion</td>
+              </tr>
+              <tr>
+                <td>Material Test Report</td>
+                <td>Chemical spectroscopy & hardness</td>
+                <td>Per batch dispatch</td>
+                <td>Awaiting raw ingot test</td>
+              </tr>
+              <tr>
+                <td>Process Capability (Cpk)</td>
+                <td>Critical dimensions Cpk &ge; 1.67</td>
+                <td>Monthly capability audit</td>
+                <td>Trial run dependent</td>
+              </tr>
+              <tr>
+                <td>X-ray Radiography</td>
+                <td>Porosity index certified reports</td>
+                <td>5 parts per shift batch</td>
+                <td>Awaiting casting setup</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-ban"></i> 2.0 Critical-to-Quality (CTQ) Definitions</div>
+          <p class="pdf-text-p"><strong>CTQ-1:</strong> Mounting hole alignments. <strong>CTQ-2:</strong> Inner bore diameter roundness within 15 microns. Failure on any CTQ parameter will trigger immediate batch isolation and material rejection.</p>
+        `;
+      } else {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-file-alt"></i> 1.0 Document Contents</div>
+          <p class="pdf-text-p">This is a placeholder document layout for <strong>${name}</strong>. The full contents are protected by the signed Mutual Non-Disclosure Agreement (NDA).</p>
+          <div style="margin: 40px 0; text-align: center; color: #94a3b8;">
+            <i class="fas fa-file-contract" style="font-size: 48px; margin-bottom: 12px;"></i>
+            <p>Confidential Specification Data Block</p>
+          </div>
+        `;
+      }
+
+      return headerHtml + bodyHtml + footerHtml;
     }
 
     // Document download simulator
@@ -2448,8 +3608,39 @@
       if (!isNdaSigned) {
         alert("ACCESS DENIED: Please sign the NDA & Confidentiality Agreement to unlock and view this document.");
       } else {
-        alert("Downloading " + name + "...");
+        openPdfPreview(name);
       }
+    }
+
+    // Supplier Profile Modal logic
+    function openSupplierProfile() {
+      const supplierName = document.querySelector('.supplier-name').innerText || "Aashita Enterprises";
+      document.getElementById('profCompanyName').innerText = supplierName;
+      
+      const initials = supplierName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
+      document.getElementById('profAvatar').innerText = initials;
+      
+      if (supplierName === "Aashita Enterprises") {
+        document.getElementById('profCode').innerText = "SUP-01234";
+        document.getElementById('profContactPerson').innerText = "Rohit Deshmukh (Director)";
+        document.getElementById('profEmail').innerText = "info@aashitaenterprises.com";
+        document.getElementById('profPhone').innerText = "+91 98765 43210";
+        document.getElementById('profLocation').innerText = "Jaipur";
+        document.getElementById('profAddress').innerText = "RIICO Industrial Area, Jaipur, RJ";
+      } else {
+        document.getElementById('profCode').innerText = "SUP-07890";
+        document.getElementById('profContactPerson').innerText = "Sourcing Team Representative";
+        document.getElementById('profEmail').innerText = "contact@" + supplierName.toLowerCase().replace(/\s+/g, '') + ".com";
+        document.getElementById('profPhone').innerText = "+91 91234 56789";
+        document.getElementById('profLocation').innerText = "Jaipur";
+        document.getElementById('profAddress').innerText = "Industrial Zone, Jaipur, RJ";
+      }
+      
+      document.getElementById('supplierProfileModal').classList.add('show');
+    }
+
+    function closeSupplierProfile() {
+      document.getElementById('supplierProfileModal').classList.remove('show');
     }
   </script>
 </body>
