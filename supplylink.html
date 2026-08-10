@@ -2366,6 +2366,7 @@
 
     .sl-pill-green { background: #ecfdf5; color: #059669; }
     .sl-pill-yellow { background: #fffbeb; color: #d97706; }
+    .sl-pill-red { background: #fef2f2; color: #dc2626; }
 
     .sl-status {
       display: inline-block;
@@ -2520,186 +2521,1878 @@
 
     .sl-chart-tooltip.active { display: block; }
 
-    /* ===== CHATS MODULE ===== */
-    .sl-chats-layout {
+    /* ===================================================================
+       CHATS MODULE — Individual Chats
+       Ported from supplychats.html. Every class is prefixed sc- and every
+       rule is scoped to #sl-module-chats (or #sc-floater for the overlay)
+       =================================================================== */
+    #sl-module-chats .sc-shell {
       flex: 1;
-      display: flex;
-      min-height: 0;
-      gap: 14px;
-      padding: 20px 24px;
-      background: #f8fafc;
-    }
-
-    .sl-chats-list-panel {
-      width: 260px;
-      flex-shrink: 0;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      border-radius: 10px;
+      min-width: 0;
       display: flex;
       flex-direction: column;
+      height: 100%;
+      min-height: 0;
+      background: #ffffff;
       overflow: hidden;
     }
 
-    .sl-chats-list-header {
-      padding: 13px 14px;
+    #sl-module-chats .sc-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
       border-bottom: 1px solid #e2e8f0;
-      font-size: 13px;
-      font-weight: 700;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-head h2 {
+      font-size: 16px;
+      font-weight: 800;
       color: #0f172a;
     }
 
-    .sl-chats-list { flex: 1; overflow-y: auto; }
-
-    .sl-chats-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 11px 14px;
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      transition: all 0.15s;
+    #sl-module-chats .sc-head .sc-head-sub {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 1px;
     }
 
-    .sl-chats-item:hover { background: #f8fafc; }
-    .sl-chats-item.active { background: #eff6ff; border-left-color: #2563eb; }
+    #sl-module-chats .sc-head-search {
+      position: relative;
+      width: 280px;
+    }
 
-    .sl-chats-avatar {
+    #sl-module-chats .sc-head-search i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: #94a3b8;
+    }
+
+    #sl-module-chats .sc-head-search input {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      font-family: inherit;
+      font-size: 11.5px;
+      color: #0f172a;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    #sl-module-chats .sc-head-search input:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    /* ===== TRIPLE COLUMN WORKSPACE ===== */
+    #sl-module-chats .sc-workspace {
+      flex: 1;
+      min-height: 0;
+      display: flex;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    /* ===== COLUMN 1: CHAT LIST ===== */
+    #sl-module-chats .sc-list-col {
+      width: 320px;
+      min-width: 320px;
+      border-right: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+    #sl-module-chats .sc-search-row {
+      padding: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    #sl-module-chats .sc-search-wrap {
+      position: relative;
+      flex: 1;
+    }
+
+    #sl-module-chats .sc-search-wrap i {
+      position: absolute;
+      left: 11px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    #sl-module-chats .sc-search-input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      font-family: inherit;
+      font-size: 11px;
+      color: #0f172a;
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    #sl-module-chats .sc-search-input:focus {
+      outline: none;
+      border-color: #2563eb;
+      background: #ffffff;
+    }
+
+    #sl-module-chats .sc-filter-btn {
       width: 32px;
       height: 32px;
       flex-shrink: 0;
-      border-radius: 50%;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #64748b;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
-      font-weight: 700;
-      color: #fff;
+      cursor: pointer;
+      transition: all 0.2s;
     }
 
-    .sl-chats-body { flex: 1; min-width: 0; }
-    .sl-chats-name { display: block; font-size: 12.5px; font-weight: 600; color: #0f172a; }
+    #sl-module-chats .sc-filter-btn:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+      color: #0f172a;
+    }
 
-    .sl-chats-preview {
-      display: block;
+    #sl-module-chats .sc-tabs {
+      display: flex;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 0 16px;
+    }
+
+    #sl-module-chats .sc-tab {
+      padding: 10px 12px;
       font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #sl-module-chats .sc-tab:hover { color: #0f172a; }
+
+    #sl-module-chats .sc-tab.active {
+      color: #2563eb;
+      border-bottom-color: #2563eb;
+    }
+
+    #sl-module-chats .sc-scroll {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+    }
+
+    #sl-module-chats .sc-group-head {
+      padding: 12px 16px 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #sl-module-chats .sc-empty {
+      padding: 30px 16px;
+      text-align: center;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    #sl-module-chats .sc-chat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    #sl-module-chats .sc-chat-item:hover { background: #f8fafc; }
+
+    #sl-module-chats .sc-chat-item.active {
+      background: #f0f6ff;
+      border-left: 3px solid #2563eb;
+      padding-left: 13px;
+    }
+
+    #sl-module-chats .sc-avatar-box {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      color: #ffffff;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-dot {
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      background: #94a3b8;
+    }
+
+    #sl-module-chats .sc-dot.sc-dot-online { background: #10b981; }
+
+    #sl-module-chats .sc-item-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    #sl-module-chats .sc-item-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    #sl-module-chats .sc-item-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #sl-module-chats .sc-item-time {
+      font-size: 9px;
+      color: #64748b;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-item-role {
+      font-size: 9px;
+      color: #64748b;
+      margin-bottom: 2px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #sl-module-chats .sc-item-snippet {
+      font-size: 10.5px;
       color: #64748b;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .sl-chats-badge {
-      flex-shrink: 0;
-      min-width: 18px;
-      height: 18px;
-      padding: 0 5px;
-      border-radius: 9px;
-      background: #ef4444;
-      color: #fff;
-      font-size: 10px;
+    #sl-module-chats .sc-chat-item.active .sc-item-snippet { color: #334155; }
+
+    #sl-module-chats .sc-item-ind {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      margin-left: 6px;
+    }
+
+    #sl-module-chats .sc-unread {
+      font-size: 9.5px;
       font-weight: 700;
+      background: #2563eb;
+      color: #ffffff;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
-    .sl-chats-conv {
+    #sl-module-chats .sc-attach-ic {
+      font-size: 10px;
+      color: #64748b;
+    }
+
+    /* ===== COLUMN 2: ACTIVE CHAT PANEL ===== */
+    #sl-module-chats .sc-chat-col {
       flex: 1;
       min-width: 0;
-      background: #fff;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      height: 100%;
+    }
+
+    #sl-module-chats .sc-pane-head {
+      height: 60px;
+      border-bottom: 1px solid #e2e8f0;
+      background: #ffffff;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-hc-details {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    #sl-module-chats .sc-hc-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    #sl-module-chats .sc-hc-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #sl-module-chats .sc-hc-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #sl-module-chats .sc-pill {
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: #64748b;
       border: 1px solid #e2e8f0;
-      border-radius: 10px;
+    }
+
+    #sl-module-chats .sc-pill.sc-pill-int {
+      background: #eff6ff;
+      color: #1e40af;
+      border-color: #dbeafe;
+    }
+
+    #sl-module-chats .sc-pill.sc-pill-part {
+      background: #ecfdf5;
+      color: #047857;
+      border-color: #d1fae5;
+    }
+
+    #sl-module-chats .sc-hc-role {
+      font-size: 9.5px;
+      color: #64748b;
+    }
+
+    #sl-module-chats .sc-hc-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    #sl-module-chats .sc-hc-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    #sl-module-chats .sc-hc-btn:hover {
+      border-color: #cbd5e1;
+      color: #0f172a;
+      background: #f8fafc;
+    }
+
+    #sl-module-chats .sc-timeline {
+      flex: 1;
+      min-height: 0;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    #sl-module-chats .sc-msg-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      max-width: 75%;
+    }
+
+    #sl-module-chats .sc-msg-row.sc-msg-left { align-self: flex-start; }
+
+    #sl-module-chats .sc-msg-row.sc-msg-right {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+      max-width: 75%;
+    }
+
+    #sl-module-chats .sc-msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    #sl-module-chats .sc-bubble-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    #sl-module-chats .sc-bubble {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      line-height: 1.55;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    #sl-module-chats .sc-msg-left .sc-bubble {
+      background: #ffffff;
+      color: #0f172a;
+      border-top-left-radius: 2px;
+      border: 1px solid #e2e8f0;
+    }
+
+    #sl-module-chats .sc-msg-right .sc-bubble {
+      background: #eff6ff;
+      color: #1e3a8a;
+      border-top-right-radius: 2px;
+      border: 1px solid #dbeafe;
+    }
+
+    #sl-module-chats .sc-msg-meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      color: #64748b;
+      margin-top: 2px;
+      padding: 0 4px;
+    }
+
+    #sl-module-chats .sc-msg-right .sc-msg-meta { justify-content: flex-end; }
+
+    #sl-module-chats .sc-msg-checks {
+      font-size: 10px;
+      color: #2563eb;
+    }
+
+    #sl-module-chats .sc-att-card {
+      margin-top: 8px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 280px;
+      box-shadow: 0 1px 3px rgba(15, 23, 42, 0.06);
+    }
+
+    #sl-module-chats .sc-att-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    #sl-module-chats .sc-doc-ic {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+      border-radius: 6px;
+      background: #fef2f2;
+      color: #ef4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    #sl-module-chats .sc-doc-details {
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+    }
+
+    #sl-module-chats .sc-doc-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 160px;
+    }
+
+    #sl-module-chats .sc-doc-size {
+      font-size: 9px;
+      color: #64748b;
+    }
+
+    #sl-module-chats .sc-att-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #sl-module-chats .sc-doc-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #64748b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 9.5px;
+    }
+
+    #sl-module-chats .sc-doc-btn:hover {
+      background: #f8fafc;
+      color: #0f172a;
+      border-color: #cbd5e1;
+    }
+
+    #sl-module-chats .sc-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 0;
+      position: relative;
+    }
+
+    #sl-module-chats .sc-divider-line {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #dbeafe;
+      z-index: 1;
+    }
+
+    #sl-module-chats .sc-divider-text {
+      background: #eff6ff;
+      color: #2563eb;
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 12px;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+      border: 1px solid #dbeafe;
+    }
+
+    #sl-module-chats .sc-typing {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 6px 12px;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      border-top-left-radius: 2px;
+      width: fit-content;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    #sl-module-chats .sc-dot-bounce {
+      width: 6px;
+      height: 6px;
+      background: #64748b;
+      border-radius: 50%;
+      animation: scBouncingDot 1.4s infinite ease-in-out both;
+    }
+
+    #sl-module-chats .sc-dot-bounce:nth-child(1) { animation-delay: -0.32s; }
+    #sl-module-chats .sc-dot-bounce:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes scBouncingDot {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+
+    #sl-module-chats .sc-composer {
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 6px 12px;
+      transition: all 0.2s;
+    }
+
+    #sl-module-chats .sc-input-row:focus-within {
+      border-color: #2563eb;
+      background: #ffffff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+    }
+
+    #sl-module-chats .sc-textarea {
+      flex: 1;
+      border: none;
+      background: transparent;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 11.5px;
+      color: #0f172a;
+      padding: 4px 0;
+      height: 24px;
+      max-height: 80px;
+      line-height: 1.4;
+    }
+
+    #sl-module-chats .sc-send {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-send:hover {
+      background: #1d4ed8;
+      transform: scale(1.05);
+    }
+
+    #sl-module-chats .sc-input-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    #sl-module-chats .sc-input-icons {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #64748b;
+    }
+
+    #sl-module-chats .sc-input-icons i {
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    #sl-module-chats .sc-input-icons i:hover { color: #0f172a; }
+
+    #sl-module-chats .sc-input-hint {
+      font-size: 9px;
+      color: #94a3b8;
+    }
+
+    /* ===== COLUMN 3: ABOUT / INSPECTOR PANEL ===== */
+    #sl-module-chats .sc-inspector {
+      width: 280px;
+      min-width: 280px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    #sl-module-chats .sc-inspector.sc-collapsed { display: none; }
+
+    #sl-module-chats .sc-insp-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f172a;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    #sl-module-chats .sc-insp-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    #sl-module-chats .sc-insp-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 12px;
+      border: 3px solid #f1f5f9;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    #sl-module-chats .sc-insp-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    #sl-module-chats .sc-insp-role {
+      font-size: 9.5px;
+      color: #64748b;
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    #sl-module-chats .sc-insp-company {
+      font-size: 9.5px;
+      color: #2563eb;
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    #sl-module-chats .sc-insp-details {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid #e2e8f0;
+      margin-bottom: 20px;
+    }
+
+    #sl-module-chats .sc-det-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    #sl-module-chats .sc-det-lbl {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    #sl-module-chats .sc-det-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: #0f172a;
+      word-break: break-all;
+    }
+
+    #sl-module-chats .sc-files {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      padding-bottom: 20px;
+    }
+
+    #sl-module-chats .sc-files-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    #sl-module-chats .sc-files-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    #sl-module-chats .sc-files-link {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: #2563eb;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #sl-module-chats .sc-file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px;
+      margin-bottom: 8px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      background: #f8fafc;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    #sl-module-chats .sc-file-item:hover {
+      border-color: #cbd5e1;
+      background: #ffffff;
+    }
+
+    #sl-module-chats .sc-file-ic {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    #sl-module-chats .sc-ic-pdf,
+    #sc-floater .sc-ic-pdf { background: #fef2f2; color: #ef4444; }
+    #sl-module-chats .sc-ic-word,
+    #sc-floater .sc-ic-word { background: #eff6ff; color: #3b82f6; }
+    #sl-module-chats .sc-ic-excel,
+    #sc-floater .sc-ic-excel { background: #f0fdf4; color: #22c55e; }
+
+    #sl-module-chats .sc-file-info {
       display: flex;
       flex-direction: column;
       overflow: hidden;
     }
 
-    .sl-chats-conv-header {
-      display: flex;
+    #sl-module-chats .sc-file-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f172a;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    #sl-module-chats .sc-file-date {
+      font-size: 8.5px;
+      color: #64748b;
+    }
+
+    #sl-module-chats .sc-insp-btn {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #0f172a;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: auto;
+    }
+
+    #sl-module-chats .sc-insp-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* ===================================================================
+       CHATS MODULE — FLOATING DOCUMENT PREVIEW
+       Fixed overlay, so it lives outside #sl-module-chats and is scoped
+       to its own #sc-floater id instead.
+       =================================================================== */
+    #sc-floater {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(5px);
+      z-index: 1700;
+      display: none;
       align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 13px 16px;
+      justify-content: center;
+    }
+
+    #sc-floater.sc-show {
+      display: flex;
+      animation: scFadeIn 0.2s ease-out;
+    }
+
+    @keyframes scFadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes scZoomIn {
+      from { transform: scale(0.96); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    #sc-floater .sc-floater-sheet {
+      background: #ffffff;
+      width: 900px;
+      max-width: 95%;
+      height: 85vh;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #e2e8f0;
+      animation: scZoomIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    #sc-floater .sc-floater-head {
+      padding: 14px 20px;
       border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       background: #f8fafc;
     }
 
-    .sl-chats-conv-title {
+    #sc-floater .sc-floater-title {
+      font-size: 13.5px;
+      font-weight: 750;
+      color: #0f172a;
       display: flex;
       align-items: center;
-      gap: 9px;
+      gap: 8px;
+    }
+
+    #sc-floater .sc-floater-btn {
+      background: none;
+      border: none;
+      color: #64748b;
+      cursor: pointer;
+      font-size: 14px;
+      padding: 6px;
+      transition: color 0.15s, background 0.15s;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #sc-floater .sc-floater-btn:hover {
+      color: #2563eb;
+      background: rgba(37, 99, 235, 0.08);
+    }
+
+    #sc-floater .sc-floater-body {
+      padding: 30px;
+      flex: 1;
+      overflow-y: auto;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* Document sheet styling */
+    #sc-floater .sc-docpage {
+      background: #ffffff;
+      width: 100%;
+      max-width: 800px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      color: #334155;
+    }
+
+    #sc-floater .sc-ds-head {
+      border-bottom: 2px solid #334155;
+      padding-bottom: 12px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    #sc-floater .sc-ds-logo {
+      font-size: 10.5px;
+      font-weight: 800;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    #sc-floater .sc-ds-meta {
+      font-size: 9.5px;
+      color: #64748b;
+      text-align: right;
+    }
+
+    #sc-floater .sc-ds-title {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    #sc-floater .sc-ds-title h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: -0.3px;
+    }
+
+    #sc-floater .sc-ds-title p {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    #sc-floater .sc-ds-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      overflow: hidden;
+      margin-bottom: 24px;
+    }
+
+    #sc-floater .sc-ds-cell {
+      border-right: 1px solid #cbd5e1;
+      padding: 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      background: #fafbfd;
+    }
+
+    #sc-floater .sc-ds-cell:last-child { border-right: none; }
+
+    #sc-floater .sc-ds-lbl {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      color: #64748b;
+      font-weight: 700;
+    }
+
+    #sc-floater .sc-ds-val {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    #sc-floater .sc-ds-sect {
+      font-size: 11.5px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      border-bottom: 1.5px solid #e2e8f0;
+      padding-bottom: 6px;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    #sc-floater .sc-ds-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 24px;
+      font-size: 10.5px;
+    }
+
+    #sc-floater .sc-ds-table th,
+    #sc-floater .sc-ds-table td {
+      border: 1px solid #cbd5e1;
+      padding: 8px 10px;
+      text-align: left;
+    }
+
+    #sc-floater .sc-ds-table th {
+      background: #f8fafc;
+      font-weight: 800;
+      color: #334155;
+      text-transform: uppercase;
+      font-size: 9px;
+    }
+
+    #sc-floater .sc-sign-block {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-top: auto;
+      padding-top: 30px;
+    }
+
+    #sc-floater .sc-sign-box {
+      border-top: 1px solid #cbd5e1;
+      padding-top: 8px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    #sc-floater .sc-sign-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    #sc-floater .sc-sign-role {
+      font-size: 8.5px;
+      color: #64748b;
+    }
+
+    #sc-floater .sc-sign-date {
+      font-size: 8px;
+      color: #94a3b8;
+    }
+
+    /* Word reader layout */
+    #sc-floater .sc-word {
+      font-family: Georgia, serif;
+      line-height: 1.6;
+      font-size: 13.5px;
+      color: #27272a;
+    }
+
+    #sc-floater .sc-word h2 {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-bottom: 8px;
+      margin-top: 20px;
+    }
+
+    #sc-floater .sc-word p { margin-bottom: 12px; }
+    #sc-floater .sc-word ul { margin: 0 0 14px 20px; }
+    #sc-floater .sc-word li { margin-bottom: 6px; }
+
+    #sc-floater .sc-word-callout {
+      border-left: 4px solid #2563eb;
+      background: #eff6ff;
+      padding: 12px 16px;
+      border-radius: 0 6px 6px 0;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    /* Excel grid layout */
+    #sc-floater .sc-xl-wrap {
+      overflow-x: auto;
+      width: 100%;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+
+    #sc-floater .sc-xl-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      background: #ffffff;
+    }
+
+    #sc-floater .sc-xl-table th,
+    #sc-floater .sc-xl-table td {
+      border: 1px solid #cbd5e1;
+      padding: 6px 8px;
+      min-width: 60px;
+    }
+
+    #sc-floater .sc-xl-col {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      text-align: center;
+      font-size: 9px;
+      user-select: none;
+    }
+
+    #sc-floater .sc-xl-row {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      text-align: center;
+      width: 30px;
+      user-select: none;
+    }
+
+    #sc-floater .sc-xl-bold {
+      font-weight: 700;
+      color: #0f172a;
+    }
+
+    #sc-floater .sc-xl-formula {
+      background: #f8fafc;
+      font-weight: 700;
+      color: #2563eb;
+    }
+
+    #sc-floater .sc-xl-tag {
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      display: inline-block;
+    }
+
+    #sc-floater .sc-xl-track { background: #ecfdf5; color: #10b981; }
+    #sc-floater .sc-xl-review { background: #fff7ed; color: #f97316; }
+    #sc-floater .sc-xl-delay { background: #fef2f2; color: #ef4444; }
+    /* ===================================================================
+       DASHBOARD ACTION MODALS
+       Namespaced with sl- so they do not collide with the requirement
+       workspace modals (pullTeamsModal, ndaModal, pdfModal ...).
+       =================================================================== */
+    .sl-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.4);
+      backdrop-filter: blur(4px);
+      z-index: 1600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+
+    .sl-modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .sl-modal-card {
+      background: #ffffff;
+      border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      width: 480px;
+      max-width: 90%;
+      max-height: 90vh;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: transform 0.25s ease;
+    }
+
+    .sl-modal-overlay.active .sl-modal-card { transform: scale(1); }
+
+    .sl-modal-card.wide { width: 580px; }
+
+    .sl-modal-head {
+      padding: 16px 20px;
+      border-bottom: 1px solid #e2e8f0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f8fafc;
+      flex-shrink: 0;
+    }
+
+    .sl-modal-title {
       font-size: 13.5px;
       font-weight: 700;
       color: #0f172a;
     }
 
-    .sl-chats-conv-title i { color: #2563eb; }
-    .sl-chats-conv-status { font-size: 11px; font-weight: 600; color: #10b981; }
+    .sl-modal-close {
+      color: #64748b;
+      cursor: pointer;
+      font-size: 14px;
+      transition: color 0.15s;
+    }
 
-    .sl-chats-messages {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      padding: 16px;
+    .sl-modal-close:hover { color: #0f172a; }
+
+    .sl-modal-body {
+      padding: 20px;
       display: flex;
       flex-direction: column;
+      gap: 14px;
+      overflow-y: auto;
+    }
+
+    .sl-form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sl-form-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .sl-form-input,
+    .sl-form-select {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #cbd5e1;
+      font-size: 11.5px;
+      font-family: inherit;
+      color: #0f172a;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+
+    .sl-form-input:focus,
+    .sl-form-select:focus {
+      outline: none;
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .sl-modal-foot {
+      padding: 12px 20px;
+      border-top: 1px solid #e2e8f0;
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #f8fafc;
+      flex-shrink: 0;
+    }
+
+    .sl-btn-secondary {
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      background: #ffffff;
+      color: #0f172a;
+      font-family: inherit;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sl-btn-secondary:hover { background: #f8fafc; }
+
+    .sl-btn-blue {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      background: #2563eb;
+      color: #ffffff;
+      font-family: inherit;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .sl-btn-blue:hover { background: #1d4ed8; }
+
+    .sl-modal-subhead {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0f172a;
+      display: block;
+    }
+
+    .sl-modal-divider {
+      height: 1px;
+      background: #e2e8f0;
+    }
+
+    .sl-info-note {
+      font-size: 10px;
+      color: #64748b;
+      background: #f8fafc;
+      padding: 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    /* Dummy supplier picker rows */
+    .sl-dummy-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       gap: 12px;
+      padding: 10px 12px;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
       background: #f8fafc;
     }
 
-    .sl-chat-msg {
-      max-width: 76%;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 12px;
-      line-height: 1.5;
+    .sl-dummy-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0f172a;
     }
 
-    .sl-chat-msg.bot {
-      align-self: flex-start;
-      background: #fff;
-      border: 1px solid #e2e8f0;
-      color: #334155;
-      border-bottom-left-radius: 3px;
+    .sl-dummy-scores {
+      font-size: 9.5px;
+      color: #64748b;
+      margin-top: 2px;
     }
 
-    .sl-chat-msg.user {
-      align-self: flex-end;
+    .sl-dummy-scores strong { color: #0f172a; }
+
+    .sl-dummy-add-btn {
+      font-size: 10.5px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      border: none;
       background: #2563eb;
       color: #fff;
-      border-bottom-right-radius: 3px;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 600;
+      flex-shrink: 0;
     }
 
-    .sl-chats-input {
+    .sl-dummy-add-btn:hover { background: #1d4ed8; }
+
+    .sl-score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    /* Drag-drop upload area */
+    .sl-upload-dragzone {
+      border: 2px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .sl-upload-dragzone:hover {
+      border-color: #2563eb;
+      background: #eff6ff;
+    }
+
+    .sl-upload-icon { font-size: 24px; color: #2563eb; }
+    .sl-upload-title { font-size: 11.5px; font-weight: 700; color: #0f172a; }
+    .sl-upload-desc { font-size: 9.5px; color: #64748b; }
+
+    .sl-upload-progress {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .sl-upload-progress-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 10.5px;
+      font-weight: 600;
+      color: #0f172a;
+    }
+
+    .sl-upload-progress-track {
+      width: 100%;
+      height: 6px;
+      background: #cbd5e1;
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .sl-upload-progress-fill {
+      height: 100%;
+      background: #10b981;
+      width: 0%;
+      transition: width 0.1s linear;
+    }
+
+    /* Report table inside the reports modal */
+    .sl-report-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    .sl-report-table th {
+      text-align: left;
+      padding: 8px 10px;
+      background: #f8fafc;
+      color: #64748b;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .sl-report-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid #f1f5f9;
+      color: #0f172a;
+    }
+
+    .sl-report-table tr:hover td { background: #f8fafc; }
+
+    /* Supplier table delete mode */
+    .sl-panel-actions .sl-icon-btn {
+      cursor: pointer;
+      margin-left: 10px;
+      transition: color 0.15s;
+    }
+
+    .sl-panel-actions .sl-icon-btn.add { color: #2563eb; }
+    .sl-panel-actions .sl-icon-btn.del { color: #94a3b8; }
+    .sl-panel-actions .sl-icon-btn.del.armed { color: #ef4444; }
+
+    .sl-delete-col { width: 44px; text-align: center; }
+
+    .sl-delete-row-btn {
+      color: #ef4444;
+      cursor: pointer;
+      visibility: hidden;
+      transition: transform 0.15s;
+    }
+
+    .sl-delete-row-btn:hover { transform: scale(1.15); }
+
+    .sl-table.delete-mode-active .sl-delete-row-btn { visibility: visible; }
+
+    /* Toast feed */
+    .sl-toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 2000;
+    }
+
+    .sl-toast {
+      background: #0f172a;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slToastIn 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 4px solid #2563eb;
+    }
+
+    .sl-toast.success { border-left-color: #10b981; }
+    .sl-toast.info { border-left-color: #2563eb; }
+    .sl-toast.error { border-left-color: #ef4444; }
+
+    @keyframes slToastIn {
+      from { transform: translateX(-120%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    /* ===== AI ASSISTANT SLIDE-OUT DRAWER ===== */
+    .sl-ai-scrim {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.35);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+      z-index: 1400;
+    }
+
+    .sl-ai-scrim.active { opacity: 1; visibility: visible; }
+
+    .sl-ai-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 380px;
+      max-width: 92vw;
+      height: 100vh;
+      background: #ffffff;
+      border-left: 1px solid #e2e8f0;
+      box-shadow: -8px 0 30px rgba(15, 23, 42, 0.12);
+      z-index: 1500;
+      display: flex;
+      flex-direction: column;
+      transform: translateX(100%);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .sl-ai-drawer.active { transform: translateX(0); }
+
+    .sl-ai-head {
+      padding: 14px 18px;
+      background: #1e3a8a;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .sl-ai-head-title {
       display: flex;
       align-items: center;
       gap: 10px;
-      padding: 12px 14px;
-      border-top: 1px solid #e2e8f0;
+      font-size: 13px;
+      font-weight: 700;
     }
 
-    .sl-chats-textbox {
+    .sl-ai-head-title i { font-size: 15px; }
+
+    .sl-ai-head-sub {
+      font-size: 9.5px;
+      font-weight: 500;
+      color: #bfdbfe;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+    }
+
+    .sl-ai-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4ade80;
+      display: inline-block;
+    }
+
+    .sl-ai-close {
+      color: #bfdbfe;
+      cursor: pointer;
+      font-size: 15px;
+      padding: 4px;
+    }
+
+    .sl-ai-close:hover { color: #ffffff; }
+
+    .sl-ai-body {
       flex: 1;
+      padding: 16px;
+      overflow-y: auto;
       background: #f8fafc;
-      border: 1px solid #e2e8f0;
-      border-radius: 20px;
-      padding: 9px 15px;
-      font-family: inherit;
-      font-size: 12px;
-      color: #0f172a;
-      outline: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .sl-chats-textbox:focus { border-color: #2563eb; background: #fff; }
+    .sl-ai-msg {
+      max-width: 84%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      line-height: 1.5;
+      animation: slAiMsgIn 0.2s ease;
+    }
 
-    .sl-chats-send {
+    @keyframes slAiMsgIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .sl-ai-msg.bot {
+      background: #ffffff;
+      color: #334155;
+      align-self: flex-start;
+      border: 1px solid #e2e8f0;
+      border-bottom-left-radius: 3px;
+    }
+
+    .sl-ai-msg.user {
+      background: #2563eb;
+      color: #ffffff;
+      align-self: flex-end;
+      border-bottom-right-radius: 3px;
+    }
+
+    .sl-ai-msg strong { font-weight: 700; }
+    .sl-ai-msg.bot .sl-ai-msg-label {
+      display: block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 4px;
+    }
+
+    .sl-ai-msg.bot ul {
+      margin: 6px 0 0 0;
+      padding-left: 16px;
+    }
+
+    .sl-ai-msg.bot li { margin-bottom: 3px; }
+
+    /* Typing indicator */
+    .sl-ai-typing {
+      align-self: flex-start;
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      border-bottom-left-radius: 3px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 4px;
+    }
+
+    .sl-ai-typing span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #94a3b8;
+      animation: slAiBlink 1.2s infinite ease-in-out;
+    }
+
+    .sl-ai-typing span:nth-child(2) { animation-delay: 0.2s; }
+    .sl-ai-typing span:nth-child(3) { animation-delay: 0.4s; }
+
+    @keyframes slAiBlink {
+      0%, 60%, 100% { opacity: 0.25; transform: translateY(0); }
+      30% { opacity: 1; transform: translateY(-3px); }
+    }
+
+    /* Suggestion chips */
+    .sl-ai-suggests {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 10px 16px 0 16px;
+      background: #f8fafc;
+      flex-shrink: 0;
+    }
+
+    .sl-ai-chip {
+      font-size: 10px;
+      font-weight: 600;
+      color: #2563eb;
+      background: #eff6ff;
+      border: 1px solid #bfdbfe;
+      border-radius: 20px;
+      padding: 5px 11px;
+      cursor: pointer;
+      transition: background 0.15s, border-color 0.15s;
+    }
+
+    .sl-ai-chip:hover { background: #dbeafe; border-color: #2563eb; }
+
+    .sl-ai-foot {
+      padding: 12px 16px;
+      border-top: 1px solid #e2e8f0;
+      background: #ffffff;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .sl-ai-input {
+      flex: 1;
+      padding: 9px 12px;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-family: inherit;
+      color: #0f172a;
+    }
+
+    .sl-ai-input:focus { outline: none; border-color: #2563eb; }
+
+    .sl-ai-send {
       width: 34px;
       height: 34px;
-      flex-shrink: 0;
-      border-radius: 50%;
+      border: none;
+      border-radius: 8px;
       background: #2563eb;
-      color: #fff;
+      color: #ffffff;
+      font-size: 12px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2707,7 +4400,16 @@
       transition: background 0.15s;
     }
 
-    .sl-chats-send:hover { background: #1d4ed8; }
+    .sl-ai-send:hover { background: #1d4ed8; }
+
+    .sl-ai-disclaimer {
+      font-size: 9px;
+      color: #94a3b8;
+      text-align: center;
+      padding: 0 16px 10px 16px;
+      background: #ffffff;
+      flex-shrink: 0;
+    }
 
     @media (max-width: 1400px) {
       .sl-metrics-row { grid-template-columns: repeat(3, 1fr); }
@@ -2762,7 +4464,7 @@
       <div class="sidebar">
         <nav class="sidebar-nav">
           <a class="nav-item" data-module="dashboard" onclick="showSlModule('dashboard')"><i class="fas fa-chart-pie"></i> <span>Dashboard</span></a>
-          <a class="nav-item" data-module="chats" onclick="showSlModule('chats')"><i class="fas fa-comment-dots"></i> <span>Chats</span> <span class="nav-badge">6</span></a>
+          <a class="nav-item" data-module="chats" onclick="showSlModule('chats')"><i class="fas fa-comment-dots"></i> <span>Chats</span> <span class="nav-badge" id="sc-nav-badge">6</span></a>
           <div class="sidebar-nav-divider"></div>
           <a class="nav-item" href="process_documents.html"><i class="fas fa-file-alt"></i> <span>Process Documents</span></a>
           <a class="nav-item" href="bajaj.html"><i class="fas fa-tachometer-alt"></i> <span>Bajaj Auto Dashboard</span></a>
@@ -3666,12 +5368,12 @@
           </div>
 
           <div class="sl-metrics-row">
-            <div class="sl-metric-card" onclick="alert('Opening Active RFQs')">
+            <div class="sl-metric-card" onclick="openSlModal('sl-create-rfq-modal')">
               <div class="sl-metric-top">
                 <span class="sl-metric-label" contenteditable="true">Active RFQs</span>
                 <div class="sl-metric-icon"><i class="fas fa-file-alt"></i></div>
               </div>
-              <span class="sl-metric-value" contenteditable="true">28</span>
+              <span class="sl-metric-value" id="sl-metric-active-rfq" contenteditable="true">28</span>
               <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">12% vs last month</span></div>
             </div>
             <div class="sl-metric-card m-quote" onclick="alert('Opening Pending Quotations')">
@@ -3698,7 +5400,7 @@
               <span class="sl-metric-value" contenteditable="true">22</span>
               <div class="sl-metric-trend sl-trend-up"><i class="fas fa-arrow-up"></i><span contenteditable="true">10% vs last month</span></div>
             </div>
-            <div class="sl-metric-card m-spend" onclick="alert('Opening Spend Analysis')">
+            <div class="sl-metric-card m-spend" onclick="openSlModal('sl-reports-modal')">
               <div class="sl-metric-top">
                 <span class="sl-metric-label" contenteditable="true">Total Spend (YTD)</span>
                 <div class="sl-metric-icon"><i class="fas fa-rupee-sign"></i></div>
@@ -3706,7 +5408,7 @@
               <span class="sl-metric-value" contenteditable="true">₹ 124.5 Cr</span>
               <div class="sl-metric-trend sl-trend-down"><i class="fas fa-arrow-down"></i><span contenteditable="true">5% vs last year</span></div>
             </div>
-            <div class="sl-metric-card m-savings" onclick="alert('Opening Savings Report')">
+            <div class="sl-metric-card m-savings" onclick="openSlModal('sl-reports-modal')">
               <div class="sl-metric-top">
                 <span class="sl-metric-label" contenteditable="true">Savings Achieved (YTD)</span>
                 <div class="sl-metric-icon"><i class="fas fa-piggy-bank"></i></div>
@@ -3765,9 +5467,14 @@
             <div class="sl-panel">
               <div class="sl-panel-header">
                 <span class="sl-panel-title" contenteditable="true">Top Suppliers by Performance</span>
-                <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
+                <div class="sl-panel-actions">
+                  <i class="fas fa-circle-plus sl-icon-btn add" title="Register new supplier"
+                    onclick="openSlModal('sl-add-supplier-modal')"></i>
+                  <i class="fas fa-trash sl-icon-btn del" id="sl-toggle-delete-btn" title="Toggle delete mode"
+                    onclick="toggleSupplierDeleteMode()"></i>
+                </div>
               </div>
-              <table class="sl-table">
+              <table class="sl-table" id="sl-suppliers-table">
                 <thead>
                   <tr>
                     <th contenteditable="true">Supplier</th>
@@ -3775,37 +5482,43 @@
                     <th contenteditable="true">Delivery</th>
                     <th contenteditable="true">Response</th>
                     <th contenteditable="true">Overall</th>
+                    <th class="sl-delete-col">Action</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="sl-suppliers-body">
                   <tr>
                     <td contenteditable="true">Aashita Enterprises</td>
                     <td contenteditable="true">4.8</td><td contenteditable="true">4.7</td><td contenteditable="true">4.9</td>
                     <td><span class="sl-pill sl-pill-green" contenteditable="true">4.8</span></td>
+                    <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>
                   </tr>
                   <tr>
                     <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
                     <td contenteditable="true">4.6</td><td contenteditable="true">4.5</td><td contenteditable="true">4.6</td>
                     <td><span class="sl-pill sl-pill-green" contenteditable="true">4.6</span></td>
+                    <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>
                   </tr>
                   <tr>
                     <td contenteditable="true">XYZ Forgings Ltd.</td>
                     <td contenteditable="true">4.4</td><td contenteditable="true">4.3</td><td contenteditable="true">4.5</td>
                     <td><span class="sl-pill sl-pill-green" contenteditable="true">4.4</span></td>
+                    <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>
                   </tr>
                   <tr>
                     <td contenteditable="true">Precision Machining</td>
                     <td contenteditable="true">4.3</td><td contenteditable="true">4.2</td><td contenteditable="true">4.4</td>
                     <td><span class="sl-pill sl-pill-green" contenteditable="true">4.3</span></td>
+                    <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>
                   </tr>
                   <tr>
                     <td contenteditable="true">Reliable Industries</td>
                     <td contenteditable="true">4.1</td><td contenteditable="true">4.0</td><td contenteditable="true">4.2</td>
                     <td><span class="sl-pill sl-pill-yellow" contenteditable="true">4.1</span></td>
+                    <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>
                   </tr>
                 </tbody>
               </table>
-              <a class="sl-panel-link" onclick="alert('Opening full Supplier Directory...')">
+              <a class="sl-panel-link" onclick="showSlToast('Opening full supplier directory…', 'info')">
                 <span contenteditable="true">View Supplier Performance</span><i class="fas fa-long-arrow-alt-right"></i>
               </a>
             </div>
@@ -3815,7 +5528,7 @@
             <div class="sl-panel">
               <div class="sl-panel-header">
                 <span class="sl-panel-title" contenteditable="true">My Active Projects</span>
-                <div class="sl-panel-actions" onclick="alert('Create new project / RFQ')"><i class="fas fa-folder-plus" style="color:#2563eb;"></i></div>
+                <div class="sl-panel-actions" onclick="openSlModal('sl-create-rfq-modal')" title="Create new RFQ"><i class="fas fa-folder-plus" style="color:#2563eb;cursor:pointer;"></i></div>
               </div>
               <table class="sl-table">
                 <thead>
@@ -3829,7 +5542,7 @@
                     <th contenteditable="true">Due Date</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="sl-projects-body">
                   <tr>
                     <td><a style="color:#2563eb;font-weight:700;" onclick="alert('Opening REQ-260801')" contenteditable="true">REQ-260801</a></td>
                     <td contenteditable="true">Engine Bracket - Casting</td>
@@ -3979,9 +5692,9 @@
                 <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
               </div>
               <div class="sl-docs-grid">
-                <div class="sl-doc-card" onclick="alert('Viewing Drawings...')">
+                <div class="sl-doc-card" onclick="openSlModal('sl-upload-drawing-modal')">
                   <div class="sl-doc-icon sl-di-blue"><i class="fas fa-drafting-compass"></i></div>
-                  <span class="sl-doc-count" contenteditable="true">512</span>
+                  <span class="sl-doc-count" id="sl-doc-drawings-count" contenteditable="true">512</span>
                   <span class="sl-doc-label" contenteditable="true">Drawings</span>
                 </div>
                 <div class="sl-doc-card" onclick="alert('Viewing PPAPs...')">
@@ -4036,32 +5749,32 @@
                 <div class="sl-panel-actions"><i class="fas fa-ellipsis-h"></i></div>
               </div>
               <div class="sl-actions-grid">
-                <div class="sl-action-card" onclick="alert('Create New RFQ')">
+                <div class="sl-action-card" onclick="openSlModal('sl-create-rfq-modal')">
                   <i class="fas fa-file-medical sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">Create New RFQ</span>
                 </div>
-                <div class="sl-action-card" onclick="alert('Upload Drawing')">
+                <div class="sl-action-card" onclick="openSlModal('sl-upload-drawing-modal')">
                   <i class="fas fa-cloud-upload-alt sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">Upload Drawing</span>
                 </div>
-                <div class="sl-action-card" onclick="alert('Add New Supplier')">
+                <div class="sl-action-card" onclick="openSlModal('sl-add-supplier-modal')">
                   <i class="fas fa-user-plus sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">Add New Supplier</span>
                 </div>
-                <div class="sl-action-card" onclick="showSlModule('chats')">
-                  <i class="far fa-comments sl-action-icon"></i>
+                <div class="sl-action-card" onclick="openSlAiChat()">
+                  <i class="fas fa-robot sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">Start Chat</span>
                 </div>
-                <div class="sl-action-card" onclick="alert('Request Approval')">
+                <div class="sl-action-card" onclick="openSlModal('sl-request-approval-modal')">
                   <i class="fas fa-signature sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">Request Approval</span>
                 </div>
-                <div class="sl-action-card" onclick="alert('View Reports')">
+                <div class="sl-action-card" onclick="openSlModal('sl-reports-modal')">
                   <i class="fas fa-chart-column sl-action-icon"></i>
                   <span class="sl-action-title" contenteditable="true">View Reports</span>
                 </div>
               </div>
-              <a class="sl-panel-link" onclick="alert('Managing custom action links...')">
+              <a class="sl-panel-link" onclick="showSlToast('Custom action links can be managed from Settings.', 'info')">
                 <span contenteditable="true">Manage Actions</span><i class="fas fa-long-arrow-alt-right"></i>
               </a>
             </div>
@@ -4070,80 +5783,128 @@
         </div>
       </div>
 
-      <!-- ============ MODULE: CHATS ============ -->
-      <!-- Moved here from supplylink_dashboard.html -->
+      <!-- ============ MODULE: CHATS (Individual Chats) ============ -->
+      <!-- Ported from supplychats.html — list / timeline / about inspector -->
       <div class="sl-module" id="sl-module-chats">
-        <div class="sl-chats-layout">
-          <div class="sl-chats-list-panel">
-            <div class="sl-chats-list-header" contenteditable="true">Conversations</div>
-            <div class="sl-chats-list">
-              <div class="sl-chats-item active" onclick="selectSlChat(this, 'Aashita Intelligence AI Assistant', 'fa-robot')">
-                <div class="sl-chats-avatar" style="background:#2563eb;"><i class="fas fa-robot"></i></div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">AI Assistant</span>
-                  <span class="sl-chats-preview" contenteditable="true">Ask about RFQs, milestones, suppliers</span>
-                </div>
-              </div>
-              <div class="sl-chats-item" onclick="selectSlChat(this, 'REQ-250801 | Engine Bracket', 'fa-users')">
-                <div class="sl-chats-avatar" style="background:#8b5cf6;">BA</div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">Bajaj Auto Ltd. (OEM)</span>
-                  <span class="sl-chats-preview" contenteditable="true">Please find attached the drawing...</span>
-                </div>
-                <span class="sl-chats-badge" contenteditable="true">3</span>
-              </div>
-              <div class="sl-chats-item" onclick="selectSlChat(this, 'REQ-250802 | Gear Box Housing', 'fa-users')">
-                <div class="sl-chats-avatar" style="background:#f59e0b;">EA</div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">Eicher Auto Ltd.</span>
-                  <span class="sl-chats-preview" contenteditable="true">Quotation received, under review</span>
-                </div>
-                <span class="sl-chats-badge" contenteditable="true">2</span>
-              </div>
-              <div class="sl-chats-item" onclick="selectSlChat(this, 'Sub Chat | ABC Castings', 'fa-comments')">
-                <div class="sl-chats-avatar" style="background:#10b981;">AC</div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">ABC Castings Pvt. Ltd.</span>
-                  <span class="sl-chats-preview" contenteditable="true">Casting trial scheduled 12 Aug</span>
-                </div>
-              </div>
-              <div class="sl-chats-item" onclick="selectSlChat(this, 'Sub Chat | XYZ Forgings', 'fa-comments')">
-                <div class="sl-chats-avatar" style="background:#14b8a6;">XF</div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">XYZ Forgings Ltd.</span>
-                  <span class="sl-chats-preview" contenteditable="true">PO acknowledged, production start</span>
-                </div>
-                <span class="sl-chats-badge" contenteditable="true">1</span>
-              </div>
-              <div class="sl-chats-item" onclick="selectSlChat(this, 'Quality Team | Internal', 'fa-check-circle')">
-                <div class="sl-chats-avatar" style="background:#ef4444;">QT</div>
-                <div class="sl-chats-body">
-                  <span class="sl-chats-name" contenteditable="true">Quality Team (Internal)</span>
-                  <span class="sl-chats-preview" contenteditable="true">CMM report uploaded for batch 1</span>
-                </div>
-              </div>
+        <div class="sc-shell">
+
+          <!-- Module header -->
+          <div class="sc-head">
+            <div>
+              <h2 contenteditable="true">Individual Chats</h2>
+              <span class="sc-head-sub" contenteditable="true">Connect and collaborate with Bajaj &amp; Aashita team members</span>
+            </div>
+            <div class="sc-head-search">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input type="text" placeholder="Search chats, users, messages..." oninput="scGlobalSearch(this.value)">
             </div>
           </div>
 
-          <div class="sl-chats-conv">
-            <div class="sl-chats-conv-header">
-              <span class="sl-chats-conv-title">
-                <i class="fas fa-robot" id="slChatIcon"></i>
-                <span id="slChatTitle" contenteditable="true">Aashita Intelligence AI Assistant</span>
-              </span>
-              <span class="sl-chats-conv-status"><i class="fas fa-circle" style="font-size:7px;"></i> Online</span>
+          <!-- Three-column chats workspace -->
+          <div class="sc-workspace">
+
+            <!-- Column 1: Chat list -->
+            <div class="sc-list-col">
+              <div class="sc-search-row">
+                <div class="sc-search-wrap">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                  <input type="text" class="sc-search-input" id="sc-search" placeholder="Search users or chats..." oninput="scRenderChatList()">
+                </div>
+                <div class="sc-filter-btn" onclick="showSlToast('Filters: unread, attachments, organisation', 'info')"><i class="fa-solid fa-sliders"></i></div>
+              </div>
+
+              <div class="sc-tabs">
+                <span class="sc-tab active" onclick="scSwitchTab(this, 'all')">All Chats</span>
+                <span class="sc-tab" onclick="scSwitchTab(this, 'unread')">Unread</span>
+                <span class="sc-tab" onclick="scSwitchTab(this, 'recent')">Recent</span>
+              </div>
+
+              <div class="sc-scroll" id="sc-list">
+                <!-- Rendered via JS -->
+              </div>
             </div>
-            <div class="sl-chats-messages" id="slChatMessages">
-              <div class="sl-chat-msg bot">Hello! I am your AI Supply Chain Assistant. Ask me anything about your active RFQs, milestones, or supplier ratings!</div>
-              <div class="sl-chat-msg bot">Try asking: <em>"What is the status of shift fork project?"</em></div>
+
+            <!-- Column 2: Active chat timeline -->
+            <div class="sc-chat-col">
+              <div class="sc-pane-head">
+                <div class="sc-hc-details">
+                  <div class="sc-hc-avatar" id="sc-head-avatar" style="background:#2563eb;">RD</div>
+                  <div class="sc-hc-info">
+                    <span class="sc-hc-name">
+                      <span id="sc-head-name">Rohit Deshmukh</span>
+                      <span class="sc-dot sc-dot-online" id="sc-head-dot" style="position:static; display:inline-block; width:8px; height:8px;"></span>
+                      <span class="sc-pill sc-pill-int" id="sc-head-tag">Internal</span>
+                    </span>
+                    <span class="sc-hc-role" id="sc-head-role">Senior Design Engineer, Bajaj Auto Ltd.</span>
+                  </div>
+                </div>
+
+                <div class="sc-hc-actions">
+                  <div class="sc-hc-btn" onclick="scCall('audio')"><i class="fa-solid fa-phone"></i></div>
+                  <div class="sc-hc-btn" onclick="scCall('video')"><i class="fa-solid fa-video"></i></div>
+                  <div class="sc-hc-btn" onclick="scToggleInspector()"><i class="fa-solid fa-circle-info"></i></div>
+                  <div class="sc-hc-btn" onclick="showSlToast('Chat options: mute, pin, export', 'info')"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+                </div>
+              </div>
+
+              <div class="sc-timeline" id="sc-timeline">
+                <!-- Messages rendered dynamically via JS -->
+              </div>
+
+              <div class="sc-composer">
+                <div class="sc-input-row">
+                  <textarea class="sc-textarea" id="sc-input" rows="1" placeholder="Type your message..."
+                    onkeydown="scInputKey(event)" oninput="scGrowInput(this)"></textarea>
+                  <button class="sc-send" onclick="scSendMessage()">
+                    <i class="fa-solid fa-paper-plane" style="font-size:11px;"></i>
+                  </button>
+                </div>
+                <div class="sc-input-actions">
+                  <div class="sc-input-icons">
+                    <i class="fa-solid fa-paperclip" title="Attach file" onclick="showSlToast('Attach a drawing, PO or report', 'info')"></i>
+                    <i class="fa-regular fa-image" title="Send image" onclick="showSlToast('Image picker opened', 'info')"></i>
+                    <i class="fa-regular fa-face-smile" title="Emoji" onclick="showSlToast('Emoji picker opened', 'info')"></i>
+                    <i class="fa-solid fa-microphone" title="Voice note" onclick="showSlToast('Recording voice note…', 'info')"></i>
+                  </div>
+                  <span class="sc-input-hint">Press <strong>Enter</strong> to send · <strong>Shift + Enter</strong> for a new line</span>
+                </div>
+              </div>
             </div>
-            <div class="sl-chats-input">
-              <input type="text" class="sl-chats-textbox" id="slChatTextbox" placeholder="Type your query here..." onkeypress="handleSlChatKeyPress(event)">
-              <div class="sl-chats-send" onclick="sendSlChatMessage()"><i class="fas fa-paper-plane" style="font-size:13px;"></i></div>
+
+            <!-- Column 3: About / Inspector panel -->
+            <div class="sc-inspector" id="sc-inspector">
+              <div class="sc-insp-title">About</div>
+
+              <div class="sc-insp-card">
+                <div class="sc-insp-avatar" id="sc-insp-avatar" style="background:#2563eb;">RD</div>
+                <div class="sc-insp-name" id="sc-insp-name">Rohit Deshmukh</div>
+                <div class="sc-insp-role" id="sc-insp-role">Senior Design Engineer</div>
+                <div class="sc-insp-company" id="sc-insp-company">Bajaj Auto Ltd.</div>
+              </div>
+
+              <div class="sc-insp-details" id="sc-insp-details">
+                <!-- Rendered via JS -->
+              </div>
+
+              <div class="sc-files">
+                <div class="sc-files-head">
+                  <span class="sc-files-title">Shared Files</span>
+                  <a class="sc-files-link" onclick="showSlToast('Opening full file library', 'info')">View All</a>
+                </div>
+                <div id="sc-insp-files">
+                  <!-- Rendered via JS -->
+                </div>
+              </div>
+
+              <button class="sc-insp-btn" onclick="showSlToast('Conversation history exported as PDF')">
+                <i class="fa-solid fa-file-export" style="margin-right:6px;"></i>Export Conversation
+              </button>
             </div>
+
           </div>
         </div>
       </div>
+
       </div><!-- end content-area -->
     </div>
 
@@ -4160,6 +5921,286 @@
         <span style="color: #cbd5e1; margin: 0 8px;">|</span>
         <a href="#" style="color: #64748b;" contenteditable="true">Support</a>
       </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================
+       DASHBOARD ACTION MODALS
+       =================================================================== -->
+
+  <!-- Modal 1: Create RFQ -->
+  <div class="sl-modal-overlay" id="sl-create-rfq-modal" onclick="handleSlModalBackdrop(event)">
+    <div class="sl-modal-card">
+      <div class="sl-modal-head">
+        <span class="sl-modal-title">Create New RFQ Requirement</span>
+        <i class="fa-solid fa-xmark sl-modal-close" onclick="closeSlModal('sl-create-rfq-modal')"></i>
+      </div>
+      <form id="sl-create-rfq-form" onsubmit="handleCreateRfqSubmit(event)">
+        <div class="sl-modal-body">
+          <div class="sl-form-group">
+            <label class="sl-form-label">Part Name / Component Name</label>
+            <input type="text" class="sl-form-input" id="sl-rfq-part-name" placeholder="e.g. Crankcase Cover" required>
+          </div>
+          <div class="sl-form-group">
+            <label class="sl-form-label">Supplier Partner</label>
+            <select class="sl-form-select" id="sl-rfq-supplier" required>
+              <option value="Aashita Enterprises">Aashita Enterprises</option>
+              <option value="ABC Castings Pvt. Ltd.">ABC Castings Pvt. Ltd.</option>
+              <option value="XYZ Forgings Ltd.">XYZ Forgings Ltd.</option>
+              <option value="Precision Machining">Precision Machining</option>
+              <option value="Reliable Industries">Reliable Industries</option>
+            </select>
+          </div>
+          <div class="sl-form-group">
+            <label class="sl-form-label">Initial Status</label>
+            <select class="sl-form-select" id="sl-rfq-status" required>
+              <option value="In Progress">In Progress</option>
+              <option value="In Evaluation">In Evaluation</option>
+              <option value="PO Issued">PO Issued</option>
+              <option value="In Production">In Production</option>
+            </select>
+          </div>
+          <div class="sl-form-group">
+            <label class="sl-form-label">Due Date</label>
+            <input type="text" class="sl-form-input" id="sl-rfq-due-date" placeholder="e.g. 25 Aug 2026" required>
+          </div>
+        </div>
+        <div class="sl-modal-foot">
+          <button type="button" class="sl-btn-secondary" onclick="closeSlModal('sl-create-rfq-modal')">Cancel</button>
+          <button type="submit" class="sl-btn-blue">Create RFQ</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 2: Upload Drawing -->
+  <div class="sl-modal-overlay" id="sl-upload-drawing-modal" onclick="handleSlModalBackdrop(event)">
+    <div class="sl-modal-card">
+      <div class="sl-modal-head">
+        <span class="sl-modal-title">Upload Engineering Drawing</span>
+        <i class="fa-solid fa-xmark sl-modal-close" onclick="closeSlModal('sl-upload-drawing-modal')"></i>
+      </div>
+      <div class="sl-modal-body">
+        <div class="sl-upload-dragzone" onclick="simulateDrawingUpload()">
+          <i class="fa-solid fa-cloud-arrow-up sl-upload-icon"></i>
+          <span class="sl-upload-title">Drag &amp; Drop 2D/3D Drawings here</span>
+          <span class="sl-upload-desc">Supports PDF, DWG, STEP files up to 50MB</span>
+        </div>
+        <div class="sl-upload-progress" id="sl-upload-progress-box">
+          <div class="sl-upload-progress-head">
+            <span>Uploading Clutch_Housing_v3.dwg…</span>
+            <span id="sl-upload-progress-pct">0%</span>
+          </div>
+          <div class="sl-upload-progress-track">
+            <div class="sl-upload-progress-fill" id="sl-upload-progress-fill"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sl-modal-foot">
+        <button class="sl-btn-secondary" onclick="closeSlModal('sl-upload-drawing-modal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: Add Supplier -->
+  <div class="sl-modal-overlay" id="sl-add-supplier-modal" onclick="handleSlModalBackdrop(event)">
+    <div class="sl-modal-card" style="width: 500px;">
+      <div class="sl-modal-head">
+        <span class="sl-modal-title">Register New Supplier Partner</span>
+        <i class="fa-solid fa-xmark sl-modal-close" onclick="closeSlModal('sl-add-supplier-modal')"></i>
+      </div>
+      <form id="sl-add-supplier-form" onsubmit="handleAddSupplierSubmit(event)">
+        <div class="sl-modal-body" style="gap: 16px;">
+          <!-- Pre-filled supplier shortlist -->
+          <div>
+            <span class="sl-modal-subhead" style="margin-bottom: 10px;">Choose from Available Dummy List</span>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div class="sl-dummy-row">
+                <div>
+                  <div class="sl-dummy-name">Apex Auto Components</div>
+                  <div class="sl-dummy-scores">Quality: <strong>4.6</strong> | Delivery: <strong>4.4</strong> | Response: <strong>4.8</strong></div>
+                </div>
+                <button type="button" class="sl-dummy-add-btn" onclick="addDummySupplier('Apex Auto Components', 4.6, 4.4, 4.8)"><i class="fa-solid fa-plus"></i> Add</button>
+              </div>
+              <div class="sl-dummy-row">
+                <div>
+                  <div class="sl-dummy-name">Shree Industries</div>
+                  <div class="sl-dummy-scores">Quality: <strong>4.2</strong> | Delivery: <strong>4.1</strong> | Response: <strong>4.3</strong></div>
+                </div>
+                <button type="button" class="sl-dummy-add-btn" onclick="addDummySupplier('Shree Industries', 4.2, 4.1, 4.3)"><i class="fa-solid fa-plus"></i> Add</button>
+              </div>
+              <div class="sl-dummy-row">
+                <div>
+                  <div class="sl-dummy-name">Dynamic Castings Ltd.</div>
+                  <div class="sl-dummy-scores">Quality: <strong>4.8</strong> | Delivery: <strong>4.7</strong> | Response: <strong>4.9</strong></div>
+                </div>
+                <button type="button" class="sl-dummy-add-btn" onclick="addDummySupplier('Dynamic Castings Ltd.', 4.8, 4.7, 4.9)"><i class="fa-solid fa-plus"></i> Add</button>
+              </div>
+              <div class="sl-dummy-row">
+                <div>
+                  <div class="sl-dummy-name">National Tooling Pvt. Ltd.</div>
+                  <div class="sl-dummy-scores">Quality: <strong>4.5</strong> | Delivery: <strong>4.3</strong> | Response: <strong>4.6</strong></div>
+                </div>
+                <button type="button" class="sl-dummy-add-btn" onclick="addDummySupplier('National Tooling Pvt. Ltd.', 4.5, 4.3, 4.6)"><i class="fa-solid fa-plus"></i> Add</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="sl-modal-divider"></div>
+
+          <!-- Custom supplier -->
+          <div>
+            <span class="sl-modal-subhead" style="margin-bottom: 12px;">Or Register Custom Supplier</span>
+            <div class="sl-form-group" style="margin-bottom: 12px;">
+              <label class="sl-form-label">Company Legal Name</label>
+              <input type="text" class="sl-form-input" id="sl-sup-name" placeholder="e.g. Apex Auto Components">
+            </div>
+            <div class="sl-score-grid">
+              <div class="sl-form-group">
+                <label class="sl-form-label">Quality (1-5)</label>
+                <input type="number" step="0.1" min="1" max="5" class="sl-form-input" id="sl-sup-quality" placeholder="e.g. 4.5">
+              </div>
+              <div class="sl-form-group">
+                <label class="sl-form-label">Delivery (1-5)</label>
+                <input type="number" step="0.1" min="1" max="5" class="sl-form-input" id="sl-sup-delivery" placeholder="e.g. 4.3">
+              </div>
+              <div class="sl-form-group">
+                <label class="sl-form-label">Response (1-5)</label>
+                <input type="number" step="0.1" min="1" max="5" class="sl-form-input" id="sl-sup-response" placeholder="e.g. 4.7">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sl-modal-foot">
+          <button type="button" class="sl-btn-secondary" onclick="closeSlModal('sl-add-supplier-modal')">Cancel</button>
+          <button type="submit" class="sl-btn-blue">Add Custom Supplier</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal 4: Request Approval -->
+  <div class="sl-modal-overlay" id="sl-request-approval-modal" onclick="handleSlModalBackdrop(event)">
+    <div class="sl-modal-card">
+      <div class="sl-modal-head">
+        <span class="sl-modal-title">Submit Design/PPAP Approval Request</span>
+        <i class="fa-solid fa-xmark sl-modal-close" onclick="closeSlModal('sl-request-approval-modal')"></i>
+      </div>
+      <div class="sl-modal-body">
+        <div class="sl-form-group">
+          <label class="sl-form-label">Select Project / Milestone to Approve</label>
+          <select class="sl-form-select" id="sl-approval-project">
+            <option value="REQ-260801">REQ-260801 - Engine Bracket (First Article Approval)</option>
+            <option value="REQ-260512">REQ-260512 - Cover Plate (PPAP Submission)</option>
+            <option value="REQ-260742">REQ-260742 - Gear Housing (Quotation Analysis)</option>
+          </select>
+        </div>
+        <div class="sl-form-group">
+          <label class="sl-form-label">Notes for Approver</label>
+          <input type="text" class="sl-form-input" id="sl-approval-notes"
+            placeholder="e.g. Design verified by Plant Quality Lead. Checked tolerances.">
+        </div>
+        <div class="sl-info-note">
+          <i class="fa-solid fa-circle-info" style="color:#2563eb; margin-top:2px;"></i>
+          <span>This will send a priority approval action item to the Plant Head and Procurement managers on their dashboard alert feed.</span>
+        </div>
+      </div>
+      <div class="sl-modal-foot">
+        <button class="sl-btn-secondary" onclick="closeSlModal('sl-request-approval-modal')">Cancel</button>
+        <button class="sl-btn-blue" onclick="submitApprovalRequest()">Request Approval</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 5: View Reports -->
+  <div class="sl-modal-overlay" id="sl-reports-modal" onclick="handleSlModalBackdrop(event)">
+    <div class="sl-modal-card wide">
+      <div class="sl-modal-head">
+        <span class="sl-modal-title">YTD Spend &amp; Savings Report Summary</span>
+        <i class="fa-solid fa-xmark sl-modal-close" onclick="closeSlModal('sl-reports-modal')"></i>
+      </div>
+      <div class="sl-modal-body">
+        <table class="sl-report-table">
+          <thead>
+            <tr>
+              <th>Month</th>
+              <th>This Year Spend (₹ Cr)</th>
+              <th>Last Year Spend (₹ Cr)</th>
+              <th>YTD Savings (₹ Cr)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>January</td><td>12.5</td><td>10.1</td><td>0.5</td></tr>
+            <tr><td>February</td><td>15.2</td><td>12.3</td><td>0.8</td></tr>
+            <tr><td>March</td><td>14.0</td><td>11.5</td><td>0.7</td></tr>
+            <tr><td>April</td><td>16.8</td><td>13.2</td><td>1.2</td></tr>
+            <tr><td>May</td><td>19.1</td><td>14.6</td><td>1.5</td></tr>
+            <tr><td>June</td><td>18.0</td><td>15.1</td><td>1.4</td></tr>
+            <tr><td>July</td><td>21.5</td><td>16.8</td><td>2.0</td></tr>
+            <tr><td>August</td><td>25.2</td><td>18.0</td><td>2.3</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="sl-modal-foot">
+        <button class="sl-btn-secondary" onclick="window.print()"><i class="fa-solid fa-print"></i> Print</button>
+        <button class="sl-btn-blue" onclick="closeSlModal('sl-reports-modal')">Close Report</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast feed -->
+  <div class="sl-toast-container" id="sl-toast-container"></div>
+
+  <!-- ============ AI ASSISTANT DRAWER (mock-up agent) ============ -->
+  <div class="sl-ai-scrim" id="sl-ai-scrim" onclick="closeSlAiChat()"></div>
+
+  <div class="sl-ai-drawer" id="sl-ai-drawer">
+    <div class="sl-ai-head">
+      <div>
+        <div class="sl-ai-head-title">
+          <i class="fa-solid fa-robot"></i>
+          <span contenteditable="true">Aashita Intelligence AI Assistant</span>
+        </div>
+        <div class="sl-ai-head-sub"><span class="sl-ai-dot"></span> Online — demo mode</div>
+      </div>
+      <i class="fa-solid fa-xmark sl-ai-close" onclick="closeSlAiChat()"></i>
+    </div>
+
+    <div class="sl-ai-body" id="sl-ai-body">
+      <!-- Seeded greeting is injected by resetSlAiChat() -->
+    </div>
+
+    <div class="sl-ai-suggests" id="sl-ai-suggests">
+      <div class="sl-ai-chip" onclick="askSlAi('What is the status of the Shift Fork project?')">Shift Fork status</div>
+      <div class="sl-ai-chip" onclick="askSlAi('Show supplier performance summary')">Supplier performance</div>
+      <div class="sl-ai-chip" onclick="askSlAi('What milestones are due this week?')">Milestones due</div>
+      <div class="sl-ai-chip" onclick="askSlAi('Show me the RFQ pipeline')">RFQ pipeline</div>
+      <div class="sl-ai-chip" onclick="askSlAi('What is our YTD spend and savings?')">Spend &amp; savings</div>
+    </div>
+
+    <div class="sl-ai-foot">
+      <input type="text" class="sl-ai-input" id="sl-ai-input" placeholder="Ask about RFQs, suppliers, milestones..."
+        onkeypress="handleSlAiKey(event)">
+      <button class="sl-ai-send" onclick="sendSlAiMessage()" title="Send"><i class="fa-solid fa-paper-plane"></i></button>
+    </div>
+    <div class="sl-ai-disclaimer">Mock-up assistant — responses are simulated from dashboard data.</div>
+  </div>
+
+  <!-- Chats module: floating document preview -->
+  <div id="sc-floater" onclick="scFloaterBackdrop(event)">
+    <div class="sc-floater-sheet">
+      <div class="sc-floater-head">
+        <span class="sc-floater-title">
+          <i class="fa-solid fa-file-lines" id="sc-floater-icon"></i>
+          <span id="sc-floater-text">Document Preview</span>
+        </span>
+        <div>
+          <button class="sc-floater-btn" title="Download" onclick="showSlToast('Download started', 'info')"><i class="fa-solid fa-download"></i></button>
+          <button class="sc-floater-btn" title="Print" onclick="showSlToast('Sent to printer', 'info')"><i class="fa-solid fa-print"></i></button>
+          <button class="sc-floater-btn" title="Close" onclick="scCloseDoc()"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="sc-floater-body" id="sc-floater-body"></div>
     </div>
   </div>
 
@@ -5017,58 +7058,1176 @@
     // even while the Dashboard module is still hidden.
     window.addEventListener('DOMContentLoaded', drawSlDashboardCharts);
 
-    // ----- Chats module -----
-    function selectSlChat(el, title, iconClass) {
-      document.querySelectorAll('.sl-chats-item').forEach(i => i.classList.remove('active'));
-      el.classList.add('active');
-      const badge = el.querySelector('.sl-chats-badge');
-      if (badge) badge.remove();
-      document.getElementById('slChatTitle').innerText = title;
-      document.getElementById('slChatIcon').className = 'fas ' + iconClass;
+    /* ===================================================================
+       CHATS MODULE — Individual Chats (ported from supplychats.html)
+       Every identifier is prefixed sc/SC so it cannot collide with the
+       requirement-workspace or dashboard code above.
+       group: 'internal' = Bajaj Auto colleagues, 'partner' = Aashita side
+       =================================================================== */
+    const SC_AVATAR_COLORS = ['#2563eb', '#8b5cf6', '#10b981', '#f59e0b', '#06b6d4', '#ec4899'];
+
+    const SC_CONTACTS = [
+      {
+        id: 'rohit', initials: 'RD', color: 1, group: 'internal',
+        name: 'Rohit Deshmukh', role: 'Senior Design Engineer', company: 'Bajaj Auto Ltd.',
+        email: 'rohit.deshmukh@bajajauto.co.in', phone: '+91 98230 44121',
+        dept: 'Product Design — Chakan', online: true, lastSeen: 'Active now',
+        time: '10:42 AM', unread: 0, attach: true,
+        snippet: 'Sharing the revised bracket drawing Rev-C.',
+        files: [
+          { type: 'pdf', name: 'Engine_Bracket_Rev-C.pdf', date: '10 Aug 2026 · 2.4 MB' },
+          { type: 'word', name: 'Design_Change_Note.docx', date: '08 Aug 2026 · 510 KB' },
+          { type: 'excel', name: 'Bracket_Tolerance_Stack.xlsx', date: '05 Aug 2026 · 180 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'Morning Prashant. The casting simulation for the engine bracket is done — porosity is within limits on the revised gating.', time: '10:18 AM' },
+          { side: 'right', text: 'Good to hear. Did you update the drawing with the revised rib thickness we agreed on Friday?', time: '10:24 AM', read: true },
+          {
+            side: 'left', text: 'Yes, Rev-C is out. Rib thickness is now 4.5 mm and the draft angle on the boss face is corrected.',
+            time: '10:31 AM',
+            attachment: { type: 'pdf', name: 'Engine_Bracket_Rev-C.pdf', size: 'PDF · 2.4 MB' }
+          },
+          { divider: '2 New Messages' },
+          { side: 'left', text: 'Please release it to Aashita so they can freeze the pattern. First article is planned for 12 Aug.', time: '10:42 AM' },
+          { typing: true }
+        ]
+      },
+      {
+        id: 'neha', initials: 'NS', color: 2, group: 'internal',
+        name: 'Neha Sharma', role: 'Procurement Officer', company: 'Bajaj Auto Ltd.',
+        email: 'neha.sharma@bajajauto.co.in', phone: '+91 98230 44187',
+        dept: 'Sourcing & Procurement — Chakan', online: true, lastSeen: 'Active now',
+        time: '10:15 AM', unread: 2, attach: false,
+        snippet: 'PO-250801 has been released to Aashita.',
+        files: [
+          { type: 'pdf', name: 'PO-250801_Aashita.pdf', date: '10 Aug 2026 · 320 KB' },
+          { type: 'excel', name: 'Landed_Cost_Comparison.xlsx', date: '07 Aug 2026 · 96 KB' }
+        ],
+        messages: [
+          { side: 'right', text: 'Neha, has the PO for the engine bracket gone out yet?', time: '09:52 AM', read: true },
+          { side: 'left', text: 'Released this morning. PO-250801, 5,000 nos, rate frozen at ₹412 per piece.', time: '10:05 AM' },
+          { divider: '2 Unread Messages' },
+          { side: 'left', text: 'Aashita has acknowledged it. Payment terms are 45 days from GRN as approved by finance.', time: '10:12 AM' },
+          { side: 'left', text: 'I have also asked them for the revised delivery schedule against the same PO.', time: '10:15 AM' }
+        ]
+      },
+      {
+        id: 'vivek', initials: 'VJ', color: 3, group: 'internal',
+        name: 'Vivek Joshi', role: 'Plant Head', company: 'Bajaj Auto Ltd.',
+        email: 'vivek.joshi@bajajauto.co.in', phone: '+91 98230 44002',
+        dept: 'Operations — Chakan Plant', online: false, lastSeen: 'Last seen yesterday, 7:20 PM',
+        time: 'Yesterday', unread: 0, attach: false,
+        snippet: 'Need the line trial slot confirmed by Friday.',
+        files: [
+          { type: 'excel', name: 'Line_Trial_Slots_Aug.xlsx', date: '09 Aug 2026 · 74 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'Prashant, Line 3 is free on 13 and 14 August for the bracket trial. Please confirm which slot you want.', time: '6:48 PM' },
+          { side: 'right', text: 'I will confirm after the first article approval on 12 Aug. Most likely the 14th.', time: '7:02 PM', read: true },
+          { side: 'left', text: 'Alright. Need the confirmation by Friday so maintenance can plan the changeover.', time: '7:20 PM' }
+        ]
+      },
+      {
+        id: 'sandeep', initials: 'SK', color: 4, group: 'internal',
+        name: 'Sandeep Kulkarni', role: 'Quality Manager (SQA)', company: 'Bajaj Auto Ltd.',
+        email: 'sandeep.kulkarni@bajajauto.co.in', phone: '+91 98230 44310',
+        dept: 'Supplier Quality Assurance', online: true, lastSeen: 'Active now',
+        time: 'Yesterday', unread: 1, attach: true,
+        snippet: 'CMM report for batch 1 looks good.',
+        files: [
+          { type: 'word', name: 'CMM_Inspection_Report_B1.docx', date: '09 Aug 2026 · 640 KB' },
+          { type: 'pdf', name: 'Control_Plan_Rev2.pdf', date: '02 Aug 2026 · 1.1 MB' }
+        ],
+        messages: [
+          { side: 'right', text: 'Sandeep, any red flags in the batch 1 dimensional report?', time: '4:10 PM', read: true },
+          {
+            side: 'left', text: 'All 18 characteristics are inside tolerance. Cpk on the critical bore is 1.62.',
+            time: '4:38 PM',
+            attachment: { type: 'word', name: 'CMM_Inspection_Report_B1.docx', size: 'Word · 640 KB' }
+          },
+          { divider: '1 Unread Message' },
+          { side: 'left', text: 'I will still hold PPAP sign-off until the layout inspection on the trial batch is done.', time: '5:02 PM' }
+        ]
+      },
+      {
+        id: 'anita', initials: 'AR', color: 5, group: 'internal',
+        name: 'Anita Rane', role: 'Logistics Coordinator', company: 'Bajaj Auto Ltd.',
+        email: 'anita.rane@bajajauto.co.in', phone: '+91 98230 44455',
+        dept: 'Inbound Logistics — Chakan', online: false, lastSeen: 'Last seen Monday, 6:05 PM',
+        time: 'Mon', unread: 0, attach: false,
+        snippet: 'Dispatch scheduled 14 Aug, two trucks.',
+        files: [
+          { type: 'excel', name: 'Inbound_Schedule_W33.xlsx', date: '05 Aug 2026 · 58 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'Two trucks are blocked for the 14 Aug dispatch from Aurangabad. ETA at Chakan gate is 6 AM on the 15th.', time: '5:40 PM' },
+          { side: 'right', text: 'Noted. Please keep one buffer vehicle in case the trial batch quantity increases.', time: '6:05 PM', read: true }
+        ]
+      },
+      {
+        id: 'kiran', initials: 'KP', color: 6, group: 'internal',
+        name: 'Kiran Patil', role: 'Finance Controller', company: 'Bajaj Auto Ltd.',
+        email: 'kiran.patil@bajajauto.co.in', phone: '+91 98230 44520',
+        dept: 'Finance & Accounts — HQ Pune', online: false, lastSeen: 'Last seen Monday, 3:15 PM',
+        time: 'Mon', unread: 0, attach: false,
+        snippet: 'Invoice INV-4471 cleared for payment.',
+        files: [
+          { type: 'pdf', name: 'INV-4471_Aashita.pdf', date: '04 Aug 2026 · 210 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'Invoice INV-4471 from Aashita Enterprises is cleared. Payment will hit their account on 18 Aug.', time: '2:55 PM' },
+          { side: 'right', text: 'Thanks Kiran. Please flag any invoice raised before the GRN is booked.', time: '3:15 PM', read: true }
+        ]
+      },
+      {
+        id: 'amit', initials: 'AD', color: 1, group: 'partner',
+        name: 'Amit Deshpande', role: 'Business Head', company: 'Aashita Enterprises',
+        email: 'amit.deshpande@aashita.ai', phone: '+91 98600 71204',
+        dept: 'Key Account — Bajaj Auto', online: true, lastSeen: 'Active now',
+        time: '09:58 AM', unread: 3, attach: true,
+        snippet: 'First article ready for approval on 12 Aug.',
+        files: [
+          { type: 'pdf', name: 'FAI_Submission_REQ-250801.pdf', date: '10 Aug 2026 · 3.1 MB' },
+          { type: 'excel', name: 'Production_Plan_Aug26.xlsx', date: '09 Aug 2026 · 142 KB' },
+          { type: 'word', name: 'Capacity_Declaration.docx', date: '01 Aug 2026 · 380 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'Good morning Prashant. Pattern for the Rev-C bracket is frozen and the first mould trial is complete.', time: '09:31 AM' },
+          { side: 'right', text: 'Excellent. When can we expect the first article for approval?', time: '09:40 AM', read: true },
+          { divider: '3 Unread Messages' },
+          {
+            side: 'left', text: 'Samples will be with your SQA team on 12 Aug. Full FAI pack is attached for a pre-read.',
+            time: '09:48 AM',
+            attachment: { type: 'pdf', name: 'FAI_Submission_REQ-250801.pdf', size: 'PDF · 3.1 MB' }
+          },
+          {
+            side: 'left', text: 'Also sharing the monthly production plan against PO-250801.',
+            time: '09:54 AM',
+            attachment: { type: 'excel', name: 'Production_Plan_Aug26.xlsx', size: 'Excel · 142 KB' }
+          },
+          { side: 'left', text: 'If the FAI clears, we can start serial production from 18 Aug at 400 pieces a day.', time: '09:58 AM' }
+        ]
+      },
+      {
+        id: 'priya', initials: 'PN', color: 3, group: 'partner',
+        name: 'Priya Nair', role: 'Production Planner', company: 'Aashita Enterprises',
+        email: 'priya.nair@aashita.ai', phone: '+91 98600 71318',
+        dept: 'Planning & Scheduling', online: true, lastSeen: 'Active now',
+        time: '09:20 AM', unread: 0, attach: false,
+        snippet: 'Casting trial moved to 12 Aug, 8 AM.',
+        files: [
+          { type: 'excel', name: 'Casting_Trial_Schedule.xlsx', date: '08 Aug 2026 · 64 KB' }
+        ],
+        messages: [
+          { side: 'left', text: 'The casting trial has moved from 11 Aug to 12 Aug, 8 AM, because the furnace relining ran over.', time: '09:05 AM' },
+          { side: 'right', text: 'That still keeps us inside the milestone. Please share the updated schedule.', time: '09:14 AM', read: true },
+          { side: 'left', text: 'Sent to your planning inbox. No change to the downstream machining dates.', time: '09:20 AM' }
+        ]
+      },
+      {
+        id: 'rahul', initials: 'RM', color: 2, group: 'partner',
+        name: 'Rahul Mehta', role: 'QA Lead', company: 'Aashita Enterprises',
+        email: 'rahul.mehta@aashita.ai', phone: '+91 98600 71442',
+        dept: 'Quality Assurance', online: false, lastSeen: 'Last seen yesterday, 8:12 PM',
+        time: 'Yesterday', unread: 0, attach: true,
+        snippet: 'Uploaded PPAP Level-3 documents.',
+        files: [
+          { type: 'word', name: 'PPAP_Level3_Pack.docx', date: '09 Aug 2026 · 820 KB' },
+          { type: 'pdf', name: 'Material_Test_Certificate.pdf', date: '09 Aug 2026 · 460 KB' }
+        ],
+        messages: [
+          {
+            side: 'left', text: 'PPAP Level-3 pack is uploaded to the portal. Includes the material test certificate and the process flow.',
+            time: '7:55 PM',
+            attachment: { type: 'word', name: 'PPAP_Level3_Pack.docx', size: 'Word · 820 KB' }
+          },
+          { side: 'right', text: 'Received. Sandeep from SQA will review it along with the layout inspection.', time: '8:12 PM', read: true }
+        ]
+      }
+    ];
+
+    const SC_GROUP_LABELS = {
+      internal: 'Bajaj Auto Ltd. (Internal)',
+      partner: 'Aashita Intelligence (Supplier Partner)'
+    };
+
+    const SC_DOC_ICONS = {
+      pdf: { icon: 'fa-file-pdf', cls: 'sc-ic-pdf' },
+      word: { icon: 'fa-file-word', cls: 'sc-ic-word' },
+      excel: { icon: 'fa-file-excel', cls: 'sc-ic-excel' }
+    };
+
+    let scActiveChatId = 'rohit';
+    let scActiveTab = 'all';
+
+    function scGetContact(id) {
+      return SC_CONTACTS.find(c => c.id === id);
     }
 
-    function sendSlChatMessage() {
-      const input = document.getElementById('slChatTextbox');
+    function scAvatarColor(n) {
+      return SC_AVATAR_COLORS[(n - 1) % SC_AVATAR_COLORS.length];
+    }
+
+    function scEscape(str) {
+      return String(str).replace(/[&<>"']/g, ch => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[ch]);
+    }
+
+    /* ----- Column 1: conversation list ----- */
+    function scRenderChatList() {
+      const container = document.getElementById('sc-list');
+      if (!container) return;
+
+      const query = (document.getElementById('sc-search').value || '').trim().toLowerCase();
+
+      const matches = SC_CONTACTS.filter(c => {
+        if (scActiveTab === 'unread' && !c.unread) return false;
+        if (scActiveTab === 'recent' && !/AM|PM/.test(c.time)) return false;
+        if (!query) return true;
+        return [c.name, c.role, c.company, c.snippet].join(' ').toLowerCase().includes(query);
+      });
+
+      if (!matches.length) {
+        container.innerHTML = '<div class="sc-empty">No conversations match this filter.</div>';
+        return;
+      }
+
+      let html = '';
+      ['internal', 'partner'].forEach(group => {
+        const rows = matches.filter(c => c.group === group);
+        if (!rows.length) return;
+
+        html += `<div class="sc-group-head" contenteditable="true">${SC_GROUP_LABELS[group]}</div>`;
+        rows.forEach(c => {
+          html += `
+            <div class="sc-chat-item${c.id === scActiveChatId ? ' active' : ''}" onclick="scOpenChat('${c.id}')">
+              <div class="sc-avatar-box" style="background:${scAvatarColor(c.color)};">
+                ${c.initials}
+                <span class="sc-dot${c.online ? ' sc-dot-online' : ''}"></span>
+              </div>
+              <div class="sc-item-body">
+                <div class="sc-item-top">
+                  <span class="sc-item-name">${c.name}</span>
+                  <span class="sc-item-time">${c.time}</span>
+                </div>
+                <div class="sc-item-role">${c.role}, ${c.company}</div>
+                <div class="sc-item-snippet">${c.snippet}</div>
+              </div>
+              <div class="sc-item-ind">
+                ${c.unread ? `<span class="sc-unread">${c.unread}</span>` : ''}
+                ${c.attach ? '<i class="fa-solid fa-paperclip sc-attach-ic"></i>' : ''}
+              </div>
+            </div>`;
+        });
+      });
+
+      container.innerHTML = html;
+    }
+
+    // The module header search box drives the same filter as the list search box
+    function scGlobalSearch(value) {
+      const input = document.getElementById('sc-search');
+      if (!input) return;
+      input.value = value;
+      scRenderChatList();
+    }
+
+    function scSwitchTab(el, tabKey) {
+      document.querySelectorAll('#sl-module-chats .sc-tab').forEach(t => t.classList.remove('active'));
+      el.classList.add('active');
+      scActiveTab = tabKey;
+      scRenderChatList();
+    }
+
+    /* ----- Column 2: message timeline ----- */
+    function scRenderMessages(contact) {
+      const pane = document.getElementById('sc-timeline');
+      if (!pane) return;
+
+      pane.innerHTML = contact.messages.map(m => {
+        if (m.divider) {
+          return `
+            <div class="sc-divider">
+              <div class="sc-divider-line"></div>
+              <span class="sc-divider-text">${m.divider}</span>
+            </div>`;
+        }
+
+        if (m.typing) {
+          return `
+            <div class="sc-msg-row sc-msg-left">
+              <div class="sc-msg-avatar" style="background:${scAvatarColor(contact.color)};">${contact.initials}</div>
+              <div class="sc-typing">
+                <span class="sc-dot-bounce"></span>
+                <span class="sc-dot-bounce"></span>
+                <span class="sc-dot-bounce"></span>
+              </div>
+            </div>`;
+        }
+
+        const isMine = m.side === 'right';
+        const avatarInitials = isMine ? 'PS' : contact.initials;
+        const avatarBg = isMine ? '#0f172a' : scAvatarColor(contact.color);
+
+        let attachmentHtml = '';
+        if (m.attachment) {
+          const meta = SC_DOC_ICONS[m.attachment.type] || SC_DOC_ICONS.pdf;
+          attachmentHtml = `
+            <div class="sc-att-card">
+              <div class="sc-att-left">
+                <div class="sc-doc-ic ${meta.cls}"><i class="fa-solid ${meta.icon}"></i></div>
+                <div class="sc-doc-details">
+                  <span class="sc-doc-title" title="${m.attachment.name}">${m.attachment.name}</span>
+                  <span class="sc-doc-size">${m.attachment.size}</span>
+                </div>
+              </div>
+              <div class="sc-att-actions">
+                <div class="sc-doc-btn" title="Preview" onclick="scOpenDoc('${m.attachment.type}', '${m.attachment.name}', event)">
+                  <i class="fa-solid fa-eye"></i>
+                </div>
+                <div class="sc-doc-btn" title="Download" onclick="showSlToast('Downloading ${m.attachment.name}', 'info')">
+                  <i class="fa-solid fa-download"></i>
+                </div>
+              </div>
+            </div>`;
+        }
+
+        return `
+          <div class="sc-msg-row sc-msg-${m.side}">
+            <div class="sc-msg-avatar" style="background:${avatarBg};">${avatarInitials}</div>
+            <div class="sc-bubble-box">
+              <div class="sc-bubble">${m.text}</div>
+              ${attachmentHtml}
+              <div class="sc-msg-meta">
+                <span>${m.time}</span>
+                ${isMine ? `<i class="fa-solid ${m.read ? 'fa-check-double' : 'fa-check'} sc-msg-checks"></i>` : ''}
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+
+      pane.scrollTop = pane.scrollHeight;
+    }
+
+    /* ----- Column 3: profile inspector ----- */
+    function scRenderInspector(contact) {
+      const avatar = document.getElementById('sc-insp-avatar');
+      if (!avatar) return;
+
+      avatar.style.background = scAvatarColor(contact.color);
+      avatar.innerText = contact.initials;
+
+      document.getElementById('sc-insp-name').innerText = contact.name;
+      document.getElementById('sc-insp-role').innerText = contact.role;
+      document.getElementById('sc-insp-company').innerText = contact.company;
+
+      const rows = [
+        ['Email', contact.email],
+        ['Phone', contact.phone],
+        ['Department', contact.dept],
+        ['Status', contact.lastSeen]
+      ];
+
+      document.getElementById('sc-insp-details').innerHTML = rows.map(([label, value]) => `
+        <div class="sc-det-row">
+          <span class="sc-det-lbl">${label}</span>
+          <span class="sc-det-val" contenteditable="true">${value}</span>
+        </div>`).join('');
+
+      document.getElementById('sc-insp-files').innerHTML = contact.files.map(f => {
+        const meta = SC_DOC_ICONS[f.type] || SC_DOC_ICONS.pdf;
+        return `
+          <div class="sc-file-item" onclick="scOpenDoc('${f.type}', '${f.name}', event)">
+            <div class="sc-file-ic ${meta.cls}"><i class="fa-solid ${meta.icon}"></i></div>
+            <div class="sc-file-info">
+              <span class="sc-file-name" title="${f.name}">${f.name}</span>
+              <span class="sc-file-date">${f.date}</span>
+            </div>
+          </div>`;
+      }).join('');
+    }
+
+    /* ----- Open a conversation ----- */
+    function scOpenChat(contactId) {
+      const contact = scGetContact(contactId);
+      if (!contact || !document.getElementById('sc-timeline')) return;
+
+      scActiveChatId = contactId;
+      contact.unread = 0;
+
+      const avatar = document.getElementById('sc-head-avatar');
+      avatar.innerText = contact.initials;
+      avatar.style.background = scAvatarColor(contact.color);
+
+      document.getElementById('sc-head-name').innerText = contact.name;
+      document.getElementById('sc-head-role').innerText = `${contact.role}, ${contact.company}`;
+
+      const dot = document.getElementById('sc-head-dot');
+      dot.className = 'sc-dot' + (contact.online ? ' sc-dot-online' : '');
+
+      const tag = document.getElementById('sc-head-tag');
+      const isInternal = contact.group === 'internal';
+      tag.className = 'sc-pill ' + (isInternal ? 'sc-pill-int' : 'sc-pill-part');
+      tag.innerText = isInternal ? 'Internal' : 'Partner';
+
+      scRenderMessages(contact);
+      scRenderInspector(contact);
+      scRenderChatList();
+      scUpdateNavBadge();
+    }
+
+    function scUpdateNavBadge() {
+      const badge = document.getElementById('sc-nav-badge');
+      if (!badge) return;
+      const total = SC_CONTACTS.reduce((sum, c) => sum + c.unread, 0);
+      badge.innerText = total;
+      badge.style.display = total ? '' : 'none';
+    }
+
+    /* ----- Composer ----- */
+    function scGrowInput(el) {
+      el.style.height = '24px';
+      el.style.height = Math.min(el.scrollHeight, 80) + 'px';
+    }
+
+    function scInputKey(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        scSendMessage();
+      }
+    }
+
+    function scSendMessage() {
+      const input = document.getElementById('sc-input');
       const text = input.value.trim();
       if (!text) return;
 
-      const container = document.getElementById('slChatMessages');
+      const contact = scGetContact(scActiveChatId);
+      const now = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
-      const userMsg = document.createElement('div');
-      userMsg.className = 'sl-chat-msg user';
-      userMsg.innerText = text;
-      container.appendChild(userMsg);
+      // Drop any standing typing indicator, then append the outgoing message
+      contact.messages = contact.messages.filter(m => !m.typing);
+      contact.messages.push({ side: 'right', text: scEscape(text), time: now, read: false });
+      contact.snippet = text;
+      contact.time = now;
 
       input.value = '';
-      container.scrollTop = container.scrollHeight;
+      input.style.height = '24px';
+      scRenderMessages(contact);
+      scRenderChatList();
+
+      // Mark delivered, then simulate the other side replying
+      setTimeout(() => {
+        const sent = contact.messages[contact.messages.length - 1];
+        if (sent) sent.read = true;
+        scRenderMessages(contact);
+      }, 900);
 
       setTimeout(() => {
-        const botMsg = document.createElement('div');
-        botMsg.className = 'sl-chat-msg bot';
+        contact.messages.push({ typing: true });
+        scRenderMessages(contact);
+      }, 1600);
 
-        const q = text.toLowerCase();
-        let reply = "I'm sorry, I couldn't find details on that query. Try asking: 'What is the status of shift fork project?' or 'Show supplier performance summary'.";
+      setTimeout(() => {
+        contact.messages = contact.messages.filter(m => !m.typing);
+        const reply = scBuildReply(text, contact);
+        contact.messages.push({
+          side: 'left', text: reply,
+          time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+        });
+        contact.snippet = reply.replace(/<[^>]+>/g, '');
+        scRenderMessages(contact);
+        scRenderChatList();
+      }, 3200);
+    }
 
-        if (q.includes('shift fork') || q.includes('req-260615')) {
-          reply = 'Project REQ-260615 (Shift Fork) is handled by XYZ Forgings Ltd. The current status is <strong>PO Issued</strong> (80% complete). Next milestone: Production Start is due 10 Aug 2026.';
-        } else if (q.includes('engine bracket') || q.includes('req-260801') || q.includes('req-250801')) {
-          reply = 'Project REQ-260801 (Engine Bracket - Casting) is handled by Aashita Enterprises. The status is <strong>In Progress</strong> (65% complete). Next milestone: First Article Approval due 12 Aug 2026 (3 Days Left).';
-        } else if (q.includes('supplier') || q.includes('performance')) {
-          reply = 'Our top performing supplier is <strong>Aashita Enterprises</strong> with an overall score of 4.8, followed by ABC Castings Pvt. Ltd. at 4.6. All suppliers are green except Reliable Industries at 4.1.';
-        } else if (q.includes('active rfq') || q.includes('rfqs')) {
-          reply = 'There are currently 28 Active RFQs. Breakdown: 8 Published, 7 Quotations Received, 5 Under Evaluation, 5 Drafts and 3 Closed.';
-        } else if (q.includes('spend') || q.includes('savings')) {
-          reply = 'The YTD Total Spend is <strong>₹124.5 Crores</strong> (down 5% vs last year). The YTD Savings achieved are <strong>₹8.7 Crores</strong> (up 18% vs last year).';
-        }
+    function scBuildReply(text, contact) {
+      const q = text.toLowerCase();
 
-        botMsg.innerHTML = reply;
-        container.appendChild(botMsg);
-        container.scrollTop = container.scrollHeight;
+      if (q.includes('drawing') || q.includes('rev')) {
+        return 'The latest release is <strong>Rev-C</strong>. I will re-share it on the drawing portal so the revision history stays clean.';
+      }
+      if (q.includes('po') || q.includes('order') || q.includes('invoice')) {
+        return 'PO-250801 is live for 5,000 pieces at ₹412 each, 45-day terms from GRN. I will send the amendment if the quantity changes.';
+      }
+      if (q.includes('quality') || q.includes('cmm') || q.includes('ppap') || q.includes('inspection')) {
+        return 'All 18 characteristics are inside tolerance and Cpk on the critical bore is 1.62. PPAP sign-off is pending the layout inspection.';
+      }
+      if (q.includes('delivery') || q.includes('dispatch') || q.includes('logistics')) {
+        return 'Dispatch is planned for 14 Aug with two trucks. ETA at the Chakan gate is 6 AM on 15 Aug.';
+      }
+      if (q.includes('trial') || q.includes('schedule') || q.includes('when')) {
+        return 'The casting trial is on <strong>12 Aug at 8 AM</strong>, and the first article reaches SQA the same day.';
+      }
+      return `Noted, Prashant. I will confirm on this and revert before end of day. — ${contact.name.split(' ')[0]}`;
+    }
+
+    /* ----- Header actions ----- */
+    function scCall(kind) {
+      const contact = scGetContact(scActiveChatId);
+      showSlToast(`Starting ${kind === 'video' ? 'video' : 'audio'} call with ${contact.name}…`, 'info');
+    }
+
+    function scToggleInspector() {
+      const panel = document.getElementById('sc-inspector');
+      panel.classList.toggle('sc-collapsed');
+      showSlToast(panel.classList.contains('sc-collapsed') ? 'Profile panel hidden' : 'Profile panel shown', 'info');
+    }
+
+    /* ----- Document preview floater ----- */
+    function scOpenDoc(docType, docName, evt) {
+      if (evt) evt.stopPropagation();
+
+      const meta = SC_DOC_ICONS[docType] || SC_DOC_ICONS.pdf;
+      document.getElementById('sc-floater-icon').className = `fa-solid ${meta.icon}`;
+      document.getElementById('sc-floater-text').innerText = docName;
+      document.getElementById('sc-floater-body').innerHTML = scBuildDocPreview(docType, docName);
+      document.getElementById('sc-floater').classList.add('sc-show');
+    }
+
+    function scCloseDoc() {
+      document.getElementById('sc-floater').classList.remove('sc-show');
+    }
+
+    function scFloaterBackdrop(event) {
+      if (event.target.id === 'sc-floater') scCloseDoc();
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') scCloseDoc();
+    });
+
+    function scBuildDocPreview(docType, docName) {
+      if (docType === 'word') return scBuildWordPreview(docName);
+      if (docType === 'excel') return scBuildExcelPreview(docName);
+      return scBuildPdfPreview(docName);
+    }
+
+    function scBuildPdfPreview(docName) {
+      return `
+        <div class="sc-docpage">
+          <div class="sc-ds-head">
+            <div class="sc-ds-logo"><i class="fa-solid fa-motorcycle"></i> BAJAJ AUTO LTD. · CHAKAN PLANT</div>
+            <div class="sc-ds-meta">
+              Document: ${scEscape(docName)}<br>
+              Generated: 10 Aug 2026 · Confidential
+            </div>
+          </div>
+
+          <div class="sc-ds-title">
+            <h1>Engine Bracket — Technical Release</h1>
+            <p>REQ-250801 · Revision C · Casting &amp; Machining</p>
+          </div>
+
+          <div class="sc-ds-grid">
+            <div class="sc-ds-cell">
+              <span class="sc-ds-lbl">Part No.</span>
+              <span class="sc-ds-val">BA-EB-4471-C</span>
+            </div>
+            <div class="sc-ds-cell">
+              <span class="sc-ds-lbl">Material</span>
+              <span class="sc-ds-val">ADC12 Aluminium</span>
+            </div>
+            <div class="sc-ds-cell">
+              <span class="sc-ds-lbl">Supplier</span>
+              <span class="sc-ds-val">Aashita Enterprises</span>
+            </div>
+            <div class="sc-ds-cell">
+              <span class="sc-ds-lbl">Qty (Annual)</span>
+              <span class="sc-ds-val">60,000 nos</span>
+            </div>
+          </div>
+
+          <div class="sc-ds-sect"><i class="fa-solid fa-ruler-combined"></i> Critical Characteristics</div>
+          <table class="sc-ds-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Characteristic</th>
+                <th>Specification</th>
+                <th>Method</th>
+                <th>Result</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td>Mounting bore diameter</td><td>Ø 24.00 +0.03 / -0.00 mm</td><td>CMM</td><td>24.014 mm</td></tr>
+              <tr><td>2</td><td>Rib thickness</td><td>4.50 ± 0.20 mm</td><td>Vernier</td><td>4.52 mm</td></tr>
+              <tr><td>3</td><td>Flatness — boss face</td><td>0.05 mm max</td><td>CMM</td><td>0.031 mm</td></tr>
+              <tr><td>4</td><td>Hole-to-hole centre distance</td><td>118.00 ± 0.10 mm</td><td>CMM</td><td>118.04 mm</td></tr>
+              <tr><td>5</td><td>Surface porosity</td><td>Grade 2 max (X-ray)</td><td>Radiography</td><td>Grade 1</td></tr>
+            </tbody>
+          </table>
+
+          <div class="sc-ds-sect"><i class="fa-solid fa-clipboard-check"></i> Release Notes</div>
+          <table class="sc-ds-table">
+            <thead>
+              <tr><th>Rev</th><th>Date</th><th>Change Description</th><th>Approved By</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td>18 Jul 2026</td><td>Initial release for quotation</td><td>R. Deshmukh</td></tr>
+              <tr><td>B</td><td>29 Jul 2026</td><td>Gating system revised to reduce porosity</td><td>R. Deshmukh</td></tr>
+              <tr><td>C</td><td>10 Aug 2026</td><td>Rib thickness 4.0 → 4.5 mm, boss draft angle corrected</td><td>P. Sagar</td></tr>
+            </tbody>
+          </table>
+
+          <div class="sc-sign-block">
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Rohit Deshmukh</span>
+              <span class="sc-sign-role">Senior Design Engineer</span>
+              <span class="sc-sign-date">10 Aug 2026</span>
+            </div>
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Sandeep Kulkarni</span>
+              <span class="sc-sign-role">Quality Manager (SQA)</span>
+              <span class="sc-sign-date">10 Aug 2026</span>
+            </div>
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Prashant Sagar</span>
+              <span class="sc-sign-role">Engineering Manager</span>
+              <span class="sc-sign-date">10 Aug 2026</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function scBuildWordPreview(docName) {
+      return `
+        <div class="sc-docpage sc-word">
+          <div class="sc-ds-head">
+            <div class="sc-ds-logo"><i class="fa-solid fa-file-word" style="color:#3b82f6;"></i> ${scEscape(docName)}</div>
+            <div class="sc-ds-meta">Aashita Intelligence · Quality Assurance<br>Page 1 of 4</div>
+          </div>
+
+          <h2 style="margin-top:0;">Dimensional Inspection Report — Batch 1</h2>
+          <p>
+            This report covers the layout inspection of the first production batch of the engine bracket
+            (Part No. BA-EB-4471-C) manufactured against PO-250801. Ten pieces were drawn at random from a
+            lot of 120 and measured on a Zeiss Contura CMM in a temperature-controlled room at 20 ± 1 °C.
+          </p>
+
+          <div class="sc-word-callout">
+            All eighteen inspected characteristics fall inside the drawing tolerance. The process capability
+            index (Cpk) on the critical mounting bore is 1.62, comfortably above the customer requirement of 1.33.
+          </div>
+
+          <h2>1. Scope</h2>
+          <p>
+            The inspection covers dimensional conformance only. Material composition, mechanical properties and
+            radiographic soundness are reported separately in the material test certificate accompanying this pack.
+          </p>
+
+          <h2>2. Observations</h2>
+          <ul>
+            <li>Mounting bore diameter measured between 24.008 mm and 24.021 mm against a specification of Ø 24.00 +0.03 / -0.00 mm.</li>
+            <li>Rib thickness after the Rev-C change is consistently between 4.44 mm and 4.58 mm.</li>
+            <li>Flatness on the boss face averaged 0.031 mm, well within the 0.05 mm limit.</li>
+            <li>No visible shrinkage or cold shut was observed on any of the ten sample pieces.</li>
+          </ul>
+
+          <h2>3. Conclusion &amp; Recommendation</h2>
+          <p>
+            Batch 1 is recommended for acceptance. PPAP sign-off should remain on hold until the layout inspection
+            of the 12 August trial batch is complete, after which serial production may commence at the agreed rate
+            of 400 pieces per day.
+          </p>
+
+          <div class="sc-sign-block">
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Rahul Mehta</span>
+              <span class="sc-sign-role">QA Lead, Aashita Enterprises</span>
+              <span class="sc-sign-date">09 Aug 2026</span>
+            </div>
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Sandeep Kulkarni</span>
+              <span class="sc-sign-role">Quality Manager (SQA), Bajaj Auto</span>
+              <span class="sc-sign-date">Pending</span>
+            </div>
+            <div class="sc-sign-box">
+              <span class="sc-sign-name">Prashant Sagar</span>
+              <span class="sc-sign-role">Engineering Manager, Bajaj Auto</span>
+              <span class="sc-sign-date">Pending</span>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function scBuildExcelPreview(docName) {
+      const columns = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
+      const rows = [
+        ['Week', 'Planned Qty', 'Produced', 'Rejected', 'Yield %', 'Dispatch Date', 'Status'],
+        ['W-32', '1,200', '1,200', '14', '98.8%', '05 Aug 2026', 'track'],
+        ['W-33', '1,400', '1,386', '22', '98.4%', '12 Aug 2026', 'track'],
+        ['W-34', '1,400', '910', '31', '96.6%', '19 Aug 2026', 'review'],
+        ['W-35', '1,000', '0', '0', '—', '26 Aug 2026', 'delay'],
+        ['Total', '5,000', '3,496', '67', '98.1%', '—', '']
+      ];
+
+      const statusLabels = { track: 'On Track', review: 'In Review', delay: 'At Risk' };
+
+      const body = rows.map((row, rIdx) => {
+        const cells = row.map((cell, cIdx) => {
+          if (rIdx === 0) return `<td class="sc-xl-bold">${cell}</td>`;
+          if (cIdx === 6) {
+            return cell
+              ? `<td><span class="sc-xl-tag sc-xl-${cell}">${statusLabels[cell]}</span></td>`
+              : '<td></td>';
+          }
+          const isTotal = rIdx === rows.length - 1;
+          return `<td class="${isTotal ? 'sc-xl-formula' : ''}">${cell}</td>`;
+        }).join('');
+
+        return `<tr><td class="sc-xl-row">${rIdx + 1}</td>${cells}</tr>`;
+      }).join('');
+
+      return `
+        <div class="sc-docpage">
+          <div class="sc-ds-head">
+            <div class="sc-ds-logo"><i class="fa-solid fa-file-excel" style="color:#22c55e;"></i> ${scEscape(docName)}</div>
+            <div class="sc-ds-meta">Sheet: Production_Plan · PO-250801<br>Last edited 09 Aug 2026</div>
+          </div>
+
+          <div class="sc-xl-wrap">
+            <table class="sc-xl-table">
+              <thead>
+                <tr>
+                  <th class="sc-xl-row"></th>
+                  ${columns.map(c => `<th class="sc-xl-col">${c}</th>`).join('')}
+                </tr>
+              </thead>
+              <tbody>${body}</tbody>
+            </table>
+          </div>
+
+          <p style="font-size:10px; color:#64748b;">
+            Row 6 is calculated: <code>=SUM(B2:B5)</code> across the quantity columns and
+            <code>=1-(D6/C6)</code> for the overall yield.
+          </p>
+        </div>`;
+    }
+
+    // Boot the chats module
+    window.addEventListener('DOMContentLoaded', () => scOpenChat(scActiveChatId));
+
+    /* ===================================================================
+       DASHBOARD ACTION MODALS
+       Create RFQ / Upload Drawing / Add Supplier / Request Approval /
+       View Reports — wired to the Quick Actions panel, the metric cards
+       and the panel header icons.
+       =================================================================== */
+
+    function openSlModal(id) {
+      const el = document.getElementById(id);
+      if (el) el.classList.add('active');
+    }
+
+    function closeSlModal(id) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.classList.remove('active');
+
+      // Reset the upload widget so the next open starts clean
+      if (id === 'sl-upload-drawing-modal') {
+        document.getElementById('sl-upload-progress-box').style.display = 'none';
+        document.getElementById('sl-upload-progress-fill').style.width = '0%';
+        document.getElementById('sl-upload-progress-pct').innerText = '0%';
+      }
+    }
+
+    // Clicking the dimmed backdrop (not the card) closes the dialog
+    function handleSlModalBackdrop(event) {
+      if (event.target.classList.contains('sl-modal-overlay')) {
+        closeSlModal(event.target.id);
+      }
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key !== 'Escape') return;
+      document.querySelectorAll('.sl-modal-overlay.active').forEach(m => closeSlModal(m.id));
+    });
+
+    // ----- Toast feed -----
+    function showSlToast(message, type = 'success') {
+      const container = document.getElementById('sl-toast-container');
+      const toast = document.createElement('div');
+      toast.className = `sl-toast ${type}`;
+
+      let icon = '<i class="fa-solid fa-circle-check" style="color:#10b981;"></i>';
+      if (type === 'info') icon = '<i class="fa-solid fa-circle-info" style="color:#60a5fa;"></i>';
+      if (type === 'error') icon = '<i class="fa-solid fa-triangle-exclamation" style="color:#ef4444;"></i>';
+
+      toast.innerHTML = `${icon} <span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.transition = 'all 0.3s ease';
+        toast.style.transform = 'translateX(-120%)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // ----- Create RFQ -----
+    function handleCreateRfqSubmit(event) {
+      event.preventDefault();
+
+      const partName = document.getElementById('sl-rfq-part-name').value.trim();
+      const supplier = document.getElementById('sl-rfq-supplier').value;
+      const status = document.getElementById('sl-rfq-status').value;
+      const dueDate = document.getElementById('sl-rfq-due-date').value.trim();
+
+      const rfqId = `REQ-${260802 + Math.floor(Math.random() * 100)}`;
+
+      // Status drives the badge colour, the starting progress and the bar tint
+      const presets = {
+        'In Progress':   { cls: 'sl-status-progress',   pct: 30, fill: '#2563eb' },
+        'In Evaluation': { cls: 'sl-status-evaluation', pct: 40, fill: '#f59e0b' },
+        'PO Issued':     { cls: 'sl-status-po',         pct: 10, fill: '#8b5cf6' },
+        'In Production': { cls: 'sl-status-production', pct: 70, fill: '#10b981' }
+      };
+      const preset = presets[status] || presets['In Progress'];
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td><a style="color:#2563eb;font-weight:700;" onclick="showSlToast('Opening ${rfqId}', 'info')" contenteditable="true">${rfqId}</a></td>
+        <td contenteditable="true">${partName}</td>
+        <td contenteditable="true">${supplier}</td>
+        <td><span class="sl-status ${preset.cls}" contenteditable="true">${status}</span></td>
+        <td>
+          <div class="sl-progress-wrap">
+            <div class="sl-progress-track"><div class="sl-progress-fill" style="width:${preset.pct}%;background:${preset.fill};"></div></div>
+            <span class="sl-progress-pct" contenteditable="true">${preset.pct}%</span>
+          </div>
+        </td>
+        <td contenteditable="true">Initial Quality Review</td>
+        <td contenteditable="true" style="font-weight:700;">${dueDate}</td>`;
+
+      const tbody = document.getElementById('sl-projects-body');
+      tbody.insertBefore(tr, tbody.firstChild);
+
+      // Bump the Active RFQs metric
+      const metric = document.getElementById('sl-metric-active-rfq');
+      metric.innerText = (parseInt(metric.innerText, 10) || 0) + 1;
+
+      // Feed the new RFQ into the status donut and redraw it
+      const bucket = status === 'In Evaluation' ? 'Under Evaluation' : 'Published';
+      const slice = slRfqData.find(d => d.label === bucket);
+      if (slice) slice.value += 1;
+      drawSlDonut('slRfqDonut', slRfqData, 'slRfqDonutTotal', 'slRfqLegend');
+
+      closeSlModal('sl-create-rfq-modal');
+      showSlToast(`Created RFQ ${rfqId} for ${partName}`, 'success');
+      document.getElementById('sl-create-rfq-form').reset();
+    }
+
+    // ----- Upload drawing -----
+    function simulateDrawingUpload() {
+      const box = document.getElementById('sl-upload-progress-box');
+      const fill = document.getElementById('sl-upload-progress-fill');
+      const pct = document.getElementById('sl-upload-progress-pct');
+
+      box.style.display = 'flex';
+
+      let progress = 0;
+      const timer = setInterval(() => {
+        progress += 10;
+        fill.style.width = `${progress}%`;
+        pct.innerText = `${progress}%`;
+
+        if (progress < 100) return;
+
+        clearInterval(timer);
+        setTimeout(() => {
+          const counter = document.getElementById('sl-doc-drawings-count');
+          counter.innerText = (parseInt(counter.innerText, 10) || 512) + 1;
+          closeSlModal('sl-upload-drawing-modal');
+          showSlToast('Drawing uploaded and processed successfully', 'success');
+        }, 300);
+      }, 150);
+    }
+
+    // ----- Suppliers -----
+    function appendSupplierRow(name, quality, delivery, response) {
+      const overall = ((quality + delivery + response) / 3).toFixed(1);
+      let pillClass = 'sl-pill-red';
+      if (overall >= 4.5) pillClass = 'sl-pill-green';
+      else if (overall >= 4.0) pillClass = 'sl-pill-yellow';
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td contenteditable="true">${name}</td>
+        <td contenteditable="true">${quality.toFixed(1)}</td>
+        <td contenteditable="true">${delivery.toFixed(1)}</td>
+        <td contenteditable="true">${response.toFixed(1)}</td>
+        <td><span class="sl-pill ${pillClass}" contenteditable="true">${overall}</span></td>
+        <td class="sl-delete-col"><i class="fas fa-trash sl-delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete supplier"></i></td>`;
+
+      document.getElementById('sl-suppliers-body').appendChild(tr);
+      return overall;
+    }
+
+    function handleAddSupplierSubmit(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('sl-sup-name').value.trim();
+      if (!name) {
+        showSlToast('Enter a supplier name, or use "Add" in the list above.', 'error');
+        return;
+      }
+
+      const quality = parseFloat(document.getElementById('sl-sup-quality').value) || 0;
+      const delivery = parseFloat(document.getElementById('sl-sup-delivery').value) || 0;
+      const response = parseFloat(document.getElementById('sl-sup-response').value) || 0;
+
+      const overall = appendSupplierRow(name, quality, delivery, response);
+
+      closeSlModal('sl-add-supplier-modal');
+      showSlToast(`Supplier ${name} added with overall rating ${overall}`, 'success');
+      document.getElementById('sl-add-supplier-form').reset();
+    }
+
+    function addDummySupplier(name, quality, delivery, response) {
+      const overall = appendSupplierRow(name, quality, delivery, response);
+      closeSlModal('sl-add-supplier-modal');
+      showSlToast(`Supplier ${name} added with overall rating ${overall}`, 'success');
+    }
+
+    let slSupplierDeleteMode = false;
+
+    function toggleSupplierDeleteMode() {
+      slSupplierDeleteMode = !slSupplierDeleteMode;
+
+      const btn = document.getElementById('sl-toggle-delete-btn');
+      const table = document.getElementById('sl-suppliers-table');
+
+      btn.classList.toggle('armed', slSupplierDeleteMode);
+      table.classList.toggle('delete-mode-active', slSupplierDeleteMode);
+
+      showSlToast(
+        slSupplierDeleteMode
+          ? 'Delete mode on — click a red trash icon to remove a supplier.'
+          : 'Delete mode off.',
+        'info'
+      );
+    }
+
+    function deleteSupplierRow(btnEl) {
+      const row = btnEl.closest('tr');
+      const name = row.cells[0].innerText.trim();
+
+      if (!confirm(`Delete supplier "${name}"?`)) return;
+
+      row.remove();
+      showSlToast(`Supplier "${name}" removed.`, 'success');
+    }
+
+    /* =========================================================
+       AI ASSISTANT (mock-up agent)
+       Simulated replies driven by the dashboard's own data.
+       ========================================================= */
+
+    const SL_AI_GREETING =
+      '<span class="sl-ai-msg-label">Aashita AI</span>' +
+      'Hello! I am your AI Supply Chain Assistant. Ask me anything about your active RFQs, projects, milestones or supplier ratings.';
+
+    const SL_AI_HINT =
+      '<span class="sl-ai-msg-label">Aashita AI</span>' +
+      'Try one of the quick prompts below, or type your own question — for example <em>"What is the status of the Shift Fork project?"</em>';
+
+    // Keyword → canned answer. First match wins.
+    const SL_AI_INTENTS = [
+      {
+        keys: ['shift fork', 'req-260615', '260615'],
+        reply: '<strong>REQ-260615 — Shift Fork</strong><br>Supplier: XYZ Forgings Ltd.<ul>' +
+          '<li>Status: <strong>PO Issued</strong> (80% complete)</li>' +
+          '<li>Next milestone: Production Start</li>' +
+          '<li>Due: 10 Aug 2026</li></ul>'
+      },
+      {
+        keys: ['engine bracket', 'req-260801', '260801'],
+        reply: '<strong>REQ-260801 — Engine Bracket (Casting)</strong><br>Supplier: Aashita Enterprises.<ul>' +
+          '<li>Status: <strong>In Progress</strong> (65% complete)</li>' +
+          '<li>Next milestone: First Article Approval</li>' +
+          '<li>Due: 12 Aug 2026 — 3 days left</li></ul>'
+      },
+      {
+        keys: ['gear housing', 'req-260742', '260742'],
+        reply: '<strong>REQ-260742 — Gear Housing</strong><br>Supplier: ABC Castings Pvt. Ltd.<ul>' +
+          '<li>Status: <strong>In Evaluation</strong> (40% complete)</li>' +
+          '<li>Next milestone: Quotation Analysis</li>' +
+          '<li>Due: 14 Aug 2026 — 5 days left</li></ul>'
+      },
+      {
+        keys: ['cover plate', 'req-260512', '260512', 'ppap submission'],
+        reply: '<strong>REQ-260512 — Cover Plate</strong><br>Supplier: Precision Machining.<ul>' +
+          '<li>Status: <strong>In Progress</strong> (30% complete)</li>' +
+          '<li>Next milestone: PPAP Submission</li>' +
+          '<li>Due: 18 Aug 2026 — 9 days left</li></ul>'
+      },
+      {
+        keys: ['shaft', 'req-260401', '260401', 'dispatch'],
+        reply: '<strong>REQ-260401 — Shaft (Input)</strong><br>Supplier: Reliable Industries.<ul>' +
+          '<li>Status: <strong>In Production</strong> (75% complete)</li>' +
+          '<li>Next milestone: Dispatch</li>' +
+          '<li>Due: 16 Aug 2026 — 7 days left</li></ul>'
+      },
+      {
+        keys: ['milestone', 'due this week', 'deadline', 'upcoming'],
+        reply: '<strong>Upcoming milestones</strong><ul>' +
+          '<li>First Article Approval — Engine Bracket · 12 Aug 2026 (3 days)</li>' +
+          '<li>Quotation Submission — Gear Housing · 14 Aug 2026 (5 days)</li>' +
+          '<li>Dispatch — Shaft Input · 16 Aug 2026 (7 days)</li>' +
+          '<li>PPAP Submission — Cover Plate · 18 Aug 2026 (9 days)</li></ul>' +
+          'The Engine Bracket approval is the most urgent item on your desk.'
+      },
+      {
+        keys: ['supplier', 'performance', 'rating', 'vendor'],
+        reply: '<strong>Supplier performance summary</strong><ul>' +
+          '<li>Aashita Enterprises — <strong>4.8</strong></li>' +
+          '<li>ABC Castings Pvt. Ltd. — 4.6</li>' +
+          '<li>XYZ Forgings Ltd. — 4.4</li>' +
+          '<li>Precision Machining — 4.3</li>' +
+          '<li>Reliable Industries — 4.1 (watch list)</li></ul>' +
+          'All suppliers are in the green band except Reliable Industries, which is amber on delivery.'
+      },
+      {
+        keys: ['rfq', 'pipeline', 'quotation'],
+        reply: '<strong>RFQ pipeline — 28 active</strong><ul>' +
+          '<li>Published — 8 (29%)</li>' +
+          '<li>Quotations Received — 7 (25%)</li>' +
+          '<li>Under Evaluation — 5 (18%)</li>' +
+          '<li>Closed — 3 (11%)</li></ul>' +
+          '5 RFQs are still in draft and have not been floated to suppliers.'
+      },
+      {
+        keys: ['spend', 'saving', 'cost', 'budget', 'ytd'],
+        reply: '<strong>YTD financials</strong><ul>' +
+          '<li>Total spend: <strong>₹124.5 Cr</strong> (down 5% vs last year)</li>' +
+          '<li>Savings achieved: <strong>₹8.7 Cr</strong> (up 18% vs last year)</li></ul>' +
+          'August is the highest spend month so far at ₹25.2 Cr.'
+      },
+      {
+        keys: ['production', 'in production', 'projects'],
+        reply: '<strong>Production overview — 36 projects</strong><ul>' +
+          '<li>In Production — 14 (39%)</li>' +
+          '<li>In Progress — 12 (33%)</li>' +
+          '<li>Pending — 6 (17%)</li>' +
+          '<li>Completed — 4 (11%)</li></ul>'
+      },
+      {
+        keys: ['document', 'drawing', 'ppap', 'sop', 'control plan', 'inspection'],
+        reply: '<strong>Document library</strong><ul>' +
+          '<li>512 Drawings</li><li>126 PPAPs</li><li>342 SOPs</li>' +
+          '<li>189 Control Plans</li><li>390 Inspection Standards</li></ul>'
+      },
+      {
+        keys: ['hello', 'hi ', 'hey', 'help', 'what can you do'],
+        reply: 'I can pull up project status, supplier ratings, upcoming milestones, the RFQ pipeline, ' +
+          'spend and savings, and the document library. Pick a prompt below or just ask in your own words.'
+      }
+    ];
+
+    function slAiScrollToBottom() {
+      const body = document.getElementById('sl-ai-body');
+      body.scrollTop = body.scrollHeight;
+    }
+
+    function appendSlAiMessage(html, who) {
+      const body = document.getElementById('sl-ai-body');
+      const msg = document.createElement('div');
+      msg.className = 'sl-ai-msg ' + who;
+
+      if (who === 'bot' && html.indexOf('sl-ai-msg-label') === -1) {
+        msg.innerHTML = '<span class="sl-ai-msg-label">Aashita AI</span>' + html;
+      } else {
+        msg.innerHTML = html;
+      }
+
+      body.appendChild(msg);
+      slAiScrollToBottom();
+      return msg;
+    }
+
+    function resetSlAiChat() {
+      const body = document.getElementById('sl-ai-body');
+      body.innerHTML = '';
+      appendSlAiMessage(SL_AI_GREETING, 'bot');
+      appendSlAiMessage(SL_AI_HINT, 'bot');
+    }
+
+    function openSlAiChat() {
+      const drawer = document.getElementById('sl-ai-drawer');
+
+      // Only seed the greeting on a fresh conversation
+      if (!document.getElementById('sl-ai-body').children.length) resetSlAiChat();
+
+      document.getElementById('sl-ai-scrim').classList.add('active');
+      drawer.classList.add('active');
+      setTimeout(() => document.getElementById('sl-ai-input').focus(), 300);
+    }
+
+    function closeSlAiChat() {
+      document.getElementById('sl-ai-drawer').classList.remove('active');
+      document.getElementById('sl-ai-scrim').classList.remove('active');
+    }
+
+    function handleSlAiKey(event) {
+      if (event.key === 'Enter') sendSlAiMessage();
+    }
+
+    function askSlAi(question) {
+      document.getElementById('sl-ai-input').value = question;
+      sendSlAiMessage();
+    }
+
+    function resolveSlAiReply(text) {
+      const q = ' ' + text.toLowerCase() + ' ';
+      const hit = SL_AI_INTENTS.find(intent => intent.keys.some(k => q.includes(k)));
+
+      if (hit) return hit.reply;
+
+      return "I couldn't find anything on that in the current workspace. Try asking about a project " +
+        '(Shift Fork, Engine Bracket, Gear Housing), supplier performance, upcoming milestones, ' +
+        'the RFQ pipeline, or YTD spend and savings.';
+    }
+
+    function sendSlAiMessage() {
+      const input = document.getElementById('sl-ai-input');
+      const text = input.value.trim();
+      if (!text) return;
+
+      appendSlAiMessage(text.replace(/</g, '&lt;'), 'user');
+      input.value = '';
+
+      // Typing indicator, then the simulated answer
+      const body = document.getElementById('sl-ai-body');
+      const typing = document.createElement('div');
+      typing.className = 'sl-ai-typing';
+      typing.innerHTML = '<span></span><span></span><span></span>';
+      body.appendChild(typing);
+      slAiScrollToBottom();
+
+      setTimeout(() => {
+        typing.remove();
+        appendSlAiMessage(resolveSlAiReply(text), 'bot');
       }, 700);
     }
 
-    function handleSlChatKeyPress(event) {
-      if (event.key === 'Enter') sendSlChatMessage();
+    // Esc closes the assistant before it reaches the modal handler
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && document.getElementById('sl-ai-drawer').classList.contains('active')) {
+        closeSlAiChat();
+      }
+    });
+
+    // ----- Approval request -----
+    function submitApprovalRequest() {
+      const project = document.getElementById('sl-approval-project').value;
+      const notes = document.getElementById('sl-approval-notes');
+
+      closeSlModal('sl-request-approval-modal');
+      showSlToast(`Approval request sent for ${project}`, 'success');
+      notes.value = '';
     }
   </script>
 </body>
