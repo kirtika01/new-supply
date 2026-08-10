@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Join the Aashita Intelligence Network</title>
-  <meta name="description" content="Aashita Intelligence - Complete your onboarding to start collaborating with Bajaj Auto Ltd.">
+  <title>Create Your Account - Aashita Intelligence</title>
+  <meta name="description" content="Aashita Intelligence Onboarding. Connect. Collaborate. Deliver.">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
@@ -34,12 +34,9 @@
       --accent-green: #10b981;
       --accent-green-light: #ecfdf5;
       
-      --accent-purple: #8b5cf6;
-      --accent-purple-light: #f5f3ff;
-      
       --border-color: #e2e8f0;
-      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
     }
 
     body {
@@ -73,7 +70,6 @@
       color: var(--text-gray-dark);
     }
 
-    /* Sidebar items should have white dashed borders */
     .sidebar [contenteditable="true"]:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
@@ -101,17 +97,20 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 40px 24px;
       border-right: 1px solid #111e35;
       position: sticky;
       top: 0;
       height: 100vh;
       overflow-y: auto;
-      z-index: 10;
+      z-index: 100;
+    }
+
+    .sidebar-top {
+      padding: 32px 24px;
     }
 
     .brand-section {
-      margin-bottom: 30px;
+      margin-bottom: 40px;
     }
 
     .logo-container {
@@ -128,101 +127,48 @@
     }
 
     .logo-text {
-      font-size: 20px;
+      font-size: 18px;
       font-weight: 800;
       letter-spacing: -0.5px;
       color: var(--text-white);
     }
 
     .logo-tagline {
-      font-size: 11px;
+      font-size: 10px;
       font-weight: 500;
       color: var(--text-gray-muted);
       padding-left: 2px;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 0.8px;
     }
 
     .hero-text-section {
-      margin-top: 20px;
-      margin-bottom: 35px;
+      margin-bottom: 36px;
     }
 
     .hero-title {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 800;
-      line-height: 1.25;
+      line-height: 1.3;
       margin-bottom: 12px;
-      letter-spacing: -0.5px;
+      color: var(--text-white);
     }
 
-    .hero-title span.blue-highlight {
+    .blue-highlight {
       color: #3b82f6;
     }
 
     .hero-desc {
-      font-size: 13px;
-      font-weight: 400;
-      color: #94a3b8;
-      line-height: 1.5;
-    }
-
-    /* Feature Items */
-    /* Sidebar navigation � same six destinations as every other page */
-    .sidebar-menu {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-      margin: 0 -24px auto;
-      padding: 0;
-    }
-
-    .menu-item a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 24px;
-      color: #94a3b8;
       font-size: 12.5px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border-left: 3px solid transparent;
-      white-space: nowrap;
+      color: #94a3b8;
+      line-height: 1.6;
     }
 
-    .menu-item a:hover {
-      background: rgba(255, 255, 255, 0.04);
-      color: var(--text-white);
-    }
-
-    .menu-item.active a {
-      background: #111e35;
-      color: var(--text-white);
-      border-left-color: var(--accent-blue);
-      font-weight: 600;
-    }
-
-    .menu-item-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .menu-item i {
-      font-size: 15px;
-      width: 16px;
-      text-align: center;
-      flex-shrink: 0;
-    }
-
+    /* Features List */
     .features-list {
       display: flex;
       flex-direction: column;
-      gap: 22px;
-      margin-bottom: auto;
+      gap: 20px;
     }
 
     .feature-item {
@@ -232,414 +178,569 @@
     }
 
     .feature-icon-wrapper {
-      width: 36px;
-      height: 36px;
-      min-width: 36px;
+      width: 32px;
+      height: 32px;
       border-radius: 8px;
-      background: #111e35;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid rgba(37, 99, 235, 0.25);
+      color: #3b82f6;
       display: flex;
       align-items: center;
       justify-content: center;
-      border: 1px solid #1e293b;
-      transition: all 0.3s ease;
-    }
-
-    .feature-item:hover .feature-icon-wrapper {
-      background: var(--accent-blue);
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
-    }
-
-    .feature-icon-wrapper i {
-      font-size: 15px;
-      color: #60a5fa;
-      transition: color 0.3s ease;
-    }
-
-    .feature-item:hover .feature-icon-wrapper i {
-      color: var(--text-white);
+      flex-shrink: 0;
+      font-size: 14px;
     }
 
     .feature-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
+      flex: 1;
     }
 
     .feature-title {
-      font-size: 13px;
+      font-size: 12.5px;
       font-weight: 600;
       color: var(--text-white);
+      margin-bottom: 3px;
     }
 
     .feature-desc {
-      font-size: 11.5px;
+      font-size: 11px;
       color: #94a3b8;
-      line-height: 1.4;
+      line-height: 1.5;
     }
 
-    /* Floating gears animation section */
-    .gears-container {
-      position: relative;
-      margin: 25px 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    @keyframes float {
-      0% { transform: translateY(0px) rotate(0deg); }
-      50% { transform: translateY(-8px) rotate(2deg); }
-      100% { transform: translateY(0px) rotate(0deg); }
-    }
-
-    .gears-container img {
-      width: 170px;
-      max-width: 100%;
-      height: auto;
-      object-fit: contain;
-      filter: drop-shadow(0 8px 16px rgba(59, 130, 246, 0.25));
-      animation: float 4s ease-in-out infinite;
-    }
-
-    /* Sidebar Footer */
-    .sidebar-footer {
+    /* Need Help Box */
+    .sidebar-bottom {
+      padding: 24px;
       border-top: 1px solid #111e35;
-      padding-top: 20px;
-      margin-top: 15px;
     }
 
-    .account-prompt {
+    .help-card {
+      background: rgba(17, 30, 53, 0.4);
+      border: 1px solid #111e35;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .help-title {
       font-size: 12px;
-      color: #94a3b8;
-      text-align: center;
-      margin-bottom: 12px;
-    }
-
-    .login-now-btn {
-      display: block;
-      width: 100%;
-      text-align: center;
-      padding: 10px 16px;
-      border-radius: 8px;
-      border: 1px solid #1e293b;
-      background: rgba(17, 30, 53, 0.5);
-      color: #60a5fa;
-      font-size: 12px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .login-now-btn:hover {
-      background: var(--accent-blue);
+      font-weight: 700;
       color: var(--text-white);
-      border-color: var(--accent-blue);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+      margin-bottom: 6px;
     }
 
+    .help-desc {
+      font-size: 11px;
+      color: #94a3b8;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
 
-    /* ===== RIGHT MAIN CONTENT AREA ===== */
-    .main-content {
-      flex: 1;
-      background: var(--bg-primary);
+    .help-details {
       display: flex;
       flex-direction: column;
-      min-height: 100vh;
-      overflow-y: auto;
+      gap: 8px;
     }
 
-    /* Top Navigation Bar */
-    .top-bar {
-      height: 64px;
-      background: #ffffff;
+    .help-detail-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: #cbd5e1;
+    }
+
+    .help-detail-item i {
+      width: 14px;
+      color: #3b82f6;
+      text-align: center;
+    }
+
+    /* ===== RIGHT CONTENT AREA ===== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow-y: auto;
+      position: relative;
+    }
+
+    /* Top Bar */
+    .top-header {
+      height: 60px;
+      padding: 0 40px;
       border-bottom: 1px solid var(--border-color);
       display: flex;
-      justify-content: flex-end;
       align-items: center;
-      padding: 0 40px;
-      gap: 20px;
+      justify-content: flex-end;
+      background: #ffffff;
       flex-shrink: 0;
     }
 
-    .top-link {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .login-prompt {
+      font-size: 12px;
       color: var(--text-gray-muted);
-      font-size: 12.5px;
-      font-weight: 500;
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .top-link:hover {
-      color: var(--accent-blue);
-    }
-
-    .top-link i {
-      font-size: 15px;
+      margin-right: 14px;
     }
 
     .login-btn {
-      padding: 8px 20px;
+      padding: 8px 16px;
       border-radius: 6px;
       border: 1px solid var(--border-color);
       background: #ffffff;
       color: var(--text-gray-dark);
-      font-size: 12.5px;
+      font-size: 12px;
       font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
+      transition: all 0.2s ease;
     }
 
     .login-btn:hover {
-      border-color: var(--text-gray-dark);
-      background: var(--bg-primary);
+      background: #f8fafc;
+      border-color: #cbd5e1;
     }
 
-    .register-btn {
-      padding: 8px 20px;
-      border-radius: 6px;
-      background: var(--accent-blue);
-      color: var(--text-white);
-      font-size: 12.5px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
-      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.1);
-    }
-
-    .register-btn:hover {
-      background: var(--accent-blue-hover);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.25);
-    }
-
-    /* Main Section Scrollable Wrapper */
-    .viewport-container {
-      padding: 40px;
-      max-width: 1400px;
-      width: 100%;
-      margin: 0 auto;
+    /* Wizard Content Viewport */
+    .wizard-viewport {
+      flex: 1;
+      padding: 32px 40px;
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      flex-grow: 1;
+      gap: 28px;
     }
 
-    /* Wizard Title & Subtitle */
-    .onboarding-header {
-      margin-bottom: 5px;
+    /* Onboarding Header */
+    .onboarding-title-area {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
     }
 
     .onboarding-title {
-      font-size: 24px;
+      font-size: 22px;
       font-weight: 800;
       color: var(--text-gray-dark);
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
     }
 
-    .onboarding-desc {
+    .onboarding-subtitle {
       font-size: 13px;
       color: var(--text-gray-muted);
-      font-weight: 400;
     }
 
-    /* Stepper Progress Bar */
-    .stepper-container {
+    /* Stepper Timeline */
+    .stepper-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       position: relative;
-      background: #ffffff;
-      padding: 24px 40px;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--card-shadow);
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
-    .stepper-line {
+    .stepper-line-bg {
       position: absolute;
-      top: 36px;
-      left: 60px;
-      right: 60px;
+      top: 14px;
+      left: 30px;
+      right: 30px;
       height: 2px;
       background: #e2e8f0;
       z-index: 1;
     }
 
-    .stepper-progress {
-      position: absolute;
-      top: 0;
-      left: 0;
+    .stepper-line-progress {
       height: 100%;
-      width: 0%; /* Dynamic update */
+      width: 0%;
       background: var(--accent-blue);
-      transition: width 0.4s ease;
+      transition: width 0.3s ease;
     }
 
-    .stepper-step {
+    .step-node {
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 8px;
       position: relative;
       z-index: 2;
       cursor: pointer;
-      flex: 1;
+      width: 100px;
     }
 
     .step-circle {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      background: #f1f5f9;
-      border: 2px solid #e2e8f0;
+      background: #ffffff;
+      border: 2px solid #cbd5e1;
       color: var(--text-gray-muted);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 700;
-      transition: all 0.3s ease;
-      margin-bottom: 10px;
+      transition: all 0.2s ease;
     }
 
-    .step-label {
-      font-size: 11.5px;
-      font-weight: 500;
-      color: var(--text-gray-muted);
-      transition: all 0.3s ease;
-      text-align: center;
-    }
-
-    /* Active Step Styling */
-    .stepper-step.active .step-circle {
-      background: var(--accent-blue);
+    .step-node.active .step-circle {
       border-color: var(--accent-blue);
-      color: var(--text-white);
+      background: var(--accent-blue);
+      color: #ffffff;
       box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.15);
     }
 
-    .stepper-step.active .step-label {
+    .step-node.completed .step-circle {
+      border-color: var(--accent-blue);
+      background: #ffffff;
+      color: var(--accent-blue);
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+      text-align: center;
+      white-space: nowrap;
+      transition: color 0.2s ease;
+    }
+
+    .step-node.active .step-label {
+      color: var(--accent-blue);
+    }
+
+    .step-node.completed .step-label {
+      color: var(--text-gray-dark);
+    }
+
+    /* Form Container Grid (3 Columns) */
+    .form-grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 1.1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* Phase 2 runs on two columns: Contact Details + Review Summary */
+    .form-grid-layout.two-col-layout {
+      grid-template-columns: 1.3fr 1.1fr;
+    }
+
+    .phase-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .phase-content.active {
+      display: grid;
+      opacity: 1;
+    }
+
+    /* Card Panels */
+    .form-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .form-card-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 12px;
+      margin-bottom: 4px;
+    }
+
+    .form-card-subtitle {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-top: 8px;
+    }
+
+    /* Input Fields & Form Styling */
+    .form-group-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .form-item.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .form-label .required-star {
+      color: #ef4444;
+      margin-left: 2px;
+    }
+
+    .form-input, .form-textarea {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-family: inherit;
+      font-size: 12px;
+      color: var(--text-gray-dark);
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .form-input::placeholder, .form-textarea::placeholder {
+      color: #94a3b8;
+    }
+
+    .form-input:focus, .form-textarea:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .form-textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .input-desc {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      margin-top: 2px;
+    }
+
+    /* Select Dropdowns (Custom Styling) */
+    .select-dropdown-container {
+      position: relative;
+      cursor: pointer;
+    }
+
+    .select-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      font-size: 12px;
+      color: var(--text-gray-dark);
+      background: #ffffff;
+      transition: all 0.2s ease;
+    }
+
+    .select-trigger:focus-within {
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .select-trigger span {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .select-trigger span.placeholder {
+      color: #94a3b8;
+    }
+
+    .select-trigger i {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      transition: transform 0.2s;
+    }
+
+    .select-dropdown-container.open .select-trigger i {
+      transform: rotate(180deg);
+    }
+
+    .select-menu-options {
+      position: absolute;
+      top: calc(100% + 4px);
+      left: 0;
+      right: 0;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+      max-height: 180px;
+      overflow-y: auto;
+      z-index: 50;
+      display: none;
+      padding: 4px 0;
+    }
+
+    .select-dropdown-container.open .select-menu-options {
+      display: block;
+    }
+
+    .select-option {
+      padding: 8px 14px;
+      font-size: 12px;
+      color: var(--text-gray-dark);
+      transition: background 0.15s;
+    }
+
+    .select-option:hover {
+      background: #f1f5f9;
+    }
+
+    .select-option.selected {
+      background: var(--accent-blue-light);
       color: var(--accent-blue);
       font-weight: 600;
     }
 
-    /* Completed Step Styling */
-    .stepper-step.completed .step-circle {
-      background: var(--accent-blue-light);
-      border-color: var(--accent-blue);
-      color: var(--accent-blue);
-    }
-
-    .stepper-step.completed .step-label {
-      color: var(--text-gray-dark);
-      font-weight: 500;
-    }
-
-    /* ===== TWO COLUMN MAIN GRID ===== */
-    .main-grid {
+    /* Clickable Cards & Widgets */
+    .intent-cards-wrapper {
       display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-      align-items: start;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
     }
 
-    /* WIZARD CONTAINER CARD */
-    .wizard-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--card-shadow);
-      padding: 32px;
-      min-height: 480px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .step-meta {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--accent-blue);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 6px;
-    }
-
-    .step-title {
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--text-gray-dark);
-      margin-bottom: 6px;
-      letter-spacing: -0.3px;
-    }
-
-    .step-desc {
-      font-size: 12.5px;
-      color: var(--text-gray-muted);
-      margin-bottom: 24px;
-    }
-
-    .wizard-step-content {
-      flex-grow: 1;
-      display: none; /* Controlled by script */
-    }
-
-    .wizard-step-content.active {
-      display: block;
-      animation: fadeIn 0.4s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(5px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* STEP 1: Account Type Cards */
-    .account-cards-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .account-card {
-      position: relative;
+    .intent-card {
       border: 1px solid var(--border-color);
       border-radius: 10px;
-      padding: 24px 16px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      background: #ffffff;
+      padding: 16px 12px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      gap: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: #ffffff;
+      position: relative;
+      text-align: center;
     }
 
-    .account-card:hover {
+    .intent-card:hover {
       border-color: #cbd5e1;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
     }
 
-    .account-card.selected {
+    .intent-card.selected {
       border-color: var(--accent-blue);
       background: var(--accent-blue-light);
-      box-shadow: 0 4px 15px var(--accent-blue-glow);
+      box-shadow: 0 0 0 1px var(--accent-blue);
     }
 
-    /* Radio Indicator */
-    .radio-indicator {
+    .intent-card-checkbox {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 10px;
+      right: 10px;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 1px solid #cbd5e1;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: transparent;
+      transition: all 0.15s;
+    }
+
+    .intent-card.selected .intent-card-checkbox {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .intent-card-icon {
+      font-size: 24px;
+      color: var(--text-gray-muted);
+      transition: color 0.2s;
+    }
+
+    .intent-card.selected .intent-card-icon {
+      color: var(--accent-blue);
+    }
+
+    .intent-card-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .intent-card-desc {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+      line-height: 1.4;
+    }
+
+    /* Account Type Radio Option Selector */
+    .account-type-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .account-type-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .account-type-row:hover {
+      border-color: #cbd5e1;
+    }
+
+    .account-type-row.selected {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+      box-shadow: 0 0 0 1px var(--accent-blue);
+    }
+
+    .account-type-icon {
+      font-size: 16px;
+      color: var(--text-gray-muted);
+      width: 24px;
+      text-align: center;
+    }
+
+    .account-type-row.selected .account-type-icon {
+      color: var(--accent-blue);
+    }
+
+    .account-type-meta {
+      flex: 1;
+    }
+
+    .account-type-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-bottom: 2px;
+    }
+
+    .account-type-desc {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      line-height: 1.4;
+    }
+
+    .account-type-radio {
       width: 16px;
       height: 16px;
       border-radius: 50%;
@@ -648,854 +749,562 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s ease;
+      position: relative;
+      transition: all 0.15s;
     }
 
-    .account-card:hover .radio-indicator {
+    .account-type-row.selected .account-type-radio {
       border-color: var(--accent-blue);
     }
 
-    .account-card.selected .radio-indicator {
-      border-color: var(--accent-blue);
-      background: var(--accent-blue);
-    }
-
-    .radio-indicator::after {
+    .account-type-row.selected .account-type-radio::after {
       content: '';
-      width: 6px;
-      height: 6px;
+      position: absolute;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
-      background: #ffffff;
-      display: block;
-      opacity: 0;
-      transition: all 0.2s ease;
-    }
-
-    .account-card.selected .radio-indicator::after {
-      opacity: 1;
-    }
-
-    /* Account Card Content */
-    .card-icon-container {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      margin-bottom: 14px;
-      transition: all 0.3s;
-    }
-
-    .account-card.selected .card-icon-container {
-      transform: scale(1.05);
-    }
-
-    /* Specific card colors in Step 1 */
-    .card-bajaj .card-icon-container {
-      background: #eff6ff;
-      color: #2563eb;
-    }
-    .card-supplier .card-icon-container {
-      background: #f1f5f9;
-      color: #475569;
-    }
-    .card-individual .card-icon-container {
-      background: #f3e8ff;
-      color: #8b5cf6;
-    }
-
-    .card-title {
-      font-size: 14px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-      margin-bottom: 6px;
-    }
-
-    .card-desc {
-      font-size: 11px;
-      color: var(--text-gray-muted);
-      line-height: 1.4;
-      margin-bottom: 16px;
-      flex-grow: 1;
-    }
-
-    .card-badge {
-      font-size: 11px;
-      font-weight: 600;
-      padding: 4px 12px;
-      border-radius: 12px;
-    }
-
-    .card-bajaj .card-badge {
-      background: #eff6ff;
-      color: #2563eb;
-    }
-    .card-supplier .card-badge {
-      background: #ecfdf5;
-      color: #10b981;
-    }
-    .card-individual .card-badge {
-      background: #f5f3ff;
-      color: #8b5cf6;
-    }
-
-    /* Help Alert banner in Step 1 */
-    .info-banner {
-      background: var(--accent-blue-light);
-      border-radius: 8px;
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .info-banner i {
-      color: var(--accent-blue);
-      font-size: 14px;
-    }
-
-    .info-banner-text {
-      font-size: 12px;
-      color: #1e3a8a;
-      font-weight: 500;
-    }
-
-    .info-banner-text a {
-      color: var(--accent-blue);
-      font-weight: 600;
-      text-decoration: none;
-    }
-
-    .info-banner-text a:hover {
-      text-decoration: underline;
-    }
-
-    /* WIZARD ACTIONS FOOTER */
-    .wizard-actions {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-top: 1px solid var(--border-color);
-      padding-top: 24px;
-      margin-top: auto;
-    }
-
-    .cancel-btn {
-      padding: 10px 24px;
-      border-radius: 6px;
-      border: 1px solid var(--border-color);
-      background: #ffffff;
-      color: var(--text-gray-dark);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .cancel-btn:hover {
-      background: var(--bg-primary);
-      border-color: #cbd5e1;
-    }
-
-    .continue-btn {
-      padding: 10px 24px;
-      border-radius: 6px;
       background: var(--accent-blue);
-      color: var(--text-white);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      transition: all 0.2s;
-      display: flex;
-      align-items: center;
-      gap: 8px;
     }
 
-    .continue-btn:hover {
-      background: var(--accent-blue-hover);
-      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.2);
-    }
-
-    /* STEP 2-5 FORMS */
-    .form-group {
-      margin-bottom: 18px;
-    }
-
-    .form-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .form-label {
-      display: block;
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-gray-dark);
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      width: 100%;
-      padding: 10px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-family: inherit;
-      font-size: 12.5px;
-      color: var(--text-gray-dark);
-      background: #ffffff;
-      transition: all 0.2s;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.08);
-    }
-
-    /* Dropzone Upload Section (Step 4) */
-    .dropzone-container {
-      border: 2px dashed #cbd5e1;
-      border-radius: 10px;
-      padding: 30px 20px;
-      text-align: center;
+    /* Helper Banner Info Cards */
+    .helper-card-banner {
       background: #f8fafc;
-      cursor: pointer;
-      transition: all 0.2s;
-      margin-bottom: 20px;
-    }
-
-    .dropzone-container:hover {
-      border-color: var(--accent-blue);
-      background: var(--accent-blue-light);
-    }
-
-    .dropzone-icon {
-      font-size: 32px;
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      padding: 12px 14px;
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-size: 10px;
       color: var(--text-gray-muted);
-      margin-bottom: 12px;
+      line-height: 1.5;
     }
 
-    .dropzone-container:hover .dropzone-icon {
+    .helper-card-banner i {
       color: var(--accent-blue);
+      font-size: 12px;
+      margin-top: 2px;
     }
 
-    .dropzone-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-gray-dark);
-      margin-bottom: 4px;
+    .helper-card-banner.security-banner {
+      background: #f0fdf4;
+      border-color: rgba(16, 185, 129, 0.25);
+      color: #166534;
     }
 
-    .dropzone-subtext {
-      font-size: 11px;
-      color: var(--text-gray-muted);
+    .helper-card-banner.security-banner i {
+      color: var(--accent-green);
     }
 
-    .file-list {
+    /* Checkbox list widget */
+    .preference-checkbox-list {
       display: flex;
       flex-direction: column;
       gap: 10px;
     }
 
-    .file-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 10px 14px;
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 6px;
-      font-size: 12px;
-    }
-
-    .file-info {
+    .checkbox-item-row {
       display: flex;
       align-items: center;
       gap: 10px;
+      cursor: pointer;
     }
 
-    .file-info i {
-      font-size: 16px;
-      color: var(--accent-blue);
+    .checkbox-box {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+      border: 1.5px solid #cbd5e1;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      color: transparent;
+      transition: all 0.15s;
     }
 
-    .file-name {
+    .checkbox-item-row.checked .checkbox-box {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .checkbox-label {
+      font-size: 11.5px;
+      color: #475569;
       font-weight: 500;
+    }
+
+    /* Business authentication toggle */
+    .auth-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .auth-toggle-row.authenticated {
+      border-color: var(--accent-green);
+      background: var(--accent-green-light);
+    }
+
+    .auth-toggle-switch {
+      flex-shrink: 0;
+      width: 38px;
+      height: 21px;
+      border-radius: 999px;
+      background: #cbd5e1;
+      padding: 3px;
+      transition: background 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-switch {
+      background: var(--accent-green);
+    }
+
+    .auth-toggle-knob {
+      display: block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-knob {
+      transform: translateX(17px);
+    }
+
+    .auth-toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .auth-toggle-title {
+      font-size: 12px;
+      font-weight: 600;
       color: var(--text-gray-dark);
     }
 
-    .file-size {
+    .auth-toggle-row.authenticated .auth-toggle-title {
+      color: #047857;
+    }
+
+    .auth-toggle-desc {
+      font-size: 10.5px;
       color: var(--text-gray-muted);
+    }
+
+    .auth-toggle-check {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--accent-green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-check {
+      opacity: 1;
+    }
+
+    /* Categories Adder widget */
+    .categories-input-wrapper {
+      display: flex;
+      gap: 8px;
+    }
+
+    .categories-pills-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .category-pill {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 20px;
+      background: var(--accent-blue-light);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      color: var(--accent-blue);
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .category-pill i {
+      cursor: pointer;
+      color: #3b82f6;
       font-size: 11px;
+    }
+
+    .category-pill i:hover {
+      color: var(--accent-blue-hover);
+    }
+
+    .add-category-btn {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .add-category-btn:hover {
+      background: #e2e8f0;
+    }
+
+    /* File upload box */
+    .upload-box-area {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      background: #f8fafc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .upload-box-area:hover {
+      border-color: var(--accent-blue);
+      background: var(--accent-blue-light);
+    }
+
+    .upload-icon {
+      font-size: 20px;
+      color: var(--accent-blue);
+    }
+
+    .upload-title {
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-gray-dark);
+    }
+
+    .upload-desc {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .file-uploaded-state {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background: var(--accent-green-light);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      margin-top: 8px;
+    }
+
+    .file-uploaded-state.active {
+      display: flex;
+    }
+
+    .file-uploaded-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: #15803d;
+      font-weight: 500;
+    }
+
+    .file-uploaded-info i {
+      color: var(--accent-green);
     }
 
     .remove-file-btn {
       color: #ef4444;
-      background: none;
-      border: none;
+      font-size: 11px;
       cursor: pointer;
-      font-size: 14px;
+      font-weight: 600;
     }
 
     .remove-file-btn:hover {
-      color: #dc2626;
+      text-decoration: underline;
     }
 
-    /* Review Summary (Step 5) */
-    .summary-section {
-      background: #f8fafc;
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 16px;
-      margin-bottom: 16px;
-    }
-
-    .summary-sec-title {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-      border-bottom: 1px solid var(--border-color);
-      padding-bottom: 6px;
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .summary-edit-link {
-      font-size: 11px;
-      color: var(--accent-blue);
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .summary-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-    }
-
-    .summary-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .summary-label {
-      font-size: 11px;
-      color: var(--text-gray-muted);
-    }
-
-    .summary-val {
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-gray-dark);
-    }
-
-    .summary-fullwidth {
-      grid-column: span 2;
-    }
-
-    .declaration-checkbox {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-top: 15px;
-      font-size: 12px;
-      color: var(--text-gray-dark);
-    }
-
-    .declaration-checkbox input {
-      margin-top: 3px;
-    }
-
-    /* Success Screen */
-    .success-content {
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .success-icon-wrapper {
-      width: 72px;
-      height: 72px;
-      border-radius: 50%;
-      background: #ecfdf5;
-      color: #10b981;
-      font-size: 32px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 10px rgba(16, 185, 129, 0.15);
-    }
-
-    .success-title {
-      font-size: 22px;
-      font-weight: 800;
-      color: var(--text-gray-dark);
-      margin-bottom: 10px;
-    }
-
-    .success-desc {
-      font-size: 13px;
-      color: var(--text-gray-muted);
-      max-width: 460px;
-      margin: 0 auto 24px auto;
-      line-height: 1.5;
-    }
-
-    .success-badge {
-      background: #f1f5f9;
-      padding: 8px 16px;
-      border-radius: 6px;
-      font-family: monospace;
-      font-size: 12px;
-      font-weight: 700;
-      color: #334155;
-      display: inline-block;
-      margin-bottom: 30px;
-    }
-
-    .dashboard-btn {
-      padding: 10px 24px;
-      border-radius: 6px;
-      background: var(--accent-blue);
-      color: var(--text-white);
-      font-size: 13px;
-      font-weight: 600;
-      cursor: pointer;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
-
-    .dashboard-btn:hover {
-      background: var(--accent-blue-hover);
-    }
-
-
-    /* ===== RIGHT COLUMN INFO CARDS ===== */
-    .right-sidebar {
-      display: flex;
-      flex-direction: column;
-      gap: 30px;
-    }
-
-    .info-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--card-shadow);
-      padding: 24px;
-    }
-
-    .info-card-title {
-      font-size: 14.5px;
-      font-weight: 800;
-      color: var(--text-gray-dark);
-      margin-bottom: 18px;
-      letter-spacing: -0.2px;
-    }
-
-    /* Benefits List */
-    .benefits-list {
+    /* Phase 2: Contact, Documents, Review */
+    .contact-card-list {
       display: flex;
       flex-direction: column;
       gap: 16px;
     }
 
-    .benefit-item {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-
-    .benefit-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
-      flex-shrink: 0;
-    }
-
-    /* Benefit custom colors */
-    .benefit-collab .benefit-icon {
-      background: #eff6ff;
-      color: #2563eb;
-    }
-    .benefit-efficiency .benefit-icon {
-      background: #ecfdf5;
-      color: #10b981;
-    }
-    .benefit-compliance .benefit-icon {
-      background: #f5f3ff;
-      color: #8b5cf6;
-    }
-    .benefit-growth .benefit-icon {
-      background: #fff7ed;
-      color: #ea580c;
-    }
-
-    .benefit-content {
-      display: flex;
-      flex-direction: column;
-      gap: 1px;
-    }
-
-    .benefit-name {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-    }
-
-    .benefit-desc {
-      font-size: 10.5px;
-      color: var(--text-gray-muted);
-      line-height: 1.35;
-    }
-
-    /* Secure & Trusted Card */
-    .secure-card {
-      padding: 24px 24px 0 24px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .secure-header {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin-bottom: 14px;
-    }
-
-    .secure-icon {
-      font-size: 16px;
-      color: #1e3a8a;
-      background: #eff6ff;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .secure-info {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .secure-title {
-      font-size: 12.5px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-    }
-
-    .secure-desc {
-      font-size: 11px;
-      color: var(--text-gray-muted);
-      line-height: 1.4;
-    }
-
-    .secure-img-wrapper {
-      width: calc(100% + 48px);
-      margin-left: -24px;
-      margin-right: -24px;
-      margin-top: 15px;
-      height: 140px;
-      overflow: hidden;
-    }
-
-    .secure-img-wrapper img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: transform 0.5s ease;
-    }
-
-    .secure-card:hover .secure-img-wrapper img {
-      transform: scale(1.05);
-    }
-
-
-    /* ===== BOTTOM SECTIONS GRID ===== */
-    .bottom-grid {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 30px;
-      align-items: start;
-    }
-
-    /* What Happens Next Card */
-    .process-card {
-      background: #ffffff;
-      border-radius: 12px;
+    .contact-item-box {
       border: 1px solid var(--border-color);
-      box-shadow: var(--card-shadow);
-      padding: 24px 32px;
+      border-radius: 10px;
+      padding: 16px;
+      background: #ffffff;
+      position: relative;
     }
 
-    .process-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-      margin-bottom: 20px;
+    .remove-contact-box {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      color: #ef4444;
+      cursor: pointer;
+      font-size: 12px;
+      display: none;
     }
 
-    .process-timeline {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
+    .contact-item-box:hover .remove-contact-box {
+      display: block;
     }
 
-    .process-step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      flex: 1;
-    }
-
-    .process-icon-box {
-      width: 38px;
-      height: 38px;
+    .add-contact-btn {
+      padding: 8px 16px;
       border-radius: 8px;
-      background: #eff6ff;
+      border: 1px dashed var(--accent-blue);
+      background: var(--accent-blue-light);
       color: var(--accent-blue);
+      font-size: 11px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 16px;
-      margin-bottom: 10px;
-      border: 1px solid #dbeafe;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    .process-step-name {
+    .add-contact-btn:hover {
+      background: #dbeafe;
+    }
+
+    .document-upload-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Review Summary Section */
+    .summary-card-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .summary-item-card {
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      background: #f8fafc;
+      padding: 14px;
+    }
+
+    .summary-card-header {
       font-size: 11.5px;
       font-weight: 700;
       color: var(--text-gray-dark);
-      margin-bottom: 2px;
-    }
-
-    .process-step-desc {
-      font-size: 10px;
-      color: var(--text-gray-muted);
-      line-height: 1.3;
-      max-width: 120px;
-    }
-
-    .process-arrow {
-      font-size: 12px;
-      color: #94a3b8;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 28px;
-    }
-
-    /* Need Help Desk Card */
-    .help-card {
-      background: #ffffff;
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      box-shadow: var(--card-shadow);
-      padding: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      min-height: 160px;
-    }
-
-    .help-details {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-    }
-
-    .help-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--text-gray-dark);
-      margin-bottom: 4px;
-    }
-
-    .help-desc {
-      font-size: 11px;
-      color: var(--text-gray-muted);
       margin-bottom: 8px;
-      max-width: 220px;
-      line-height: 1.35;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
 
-    .help-contacts {
+    .summary-card-header span.edit-summary-link {
+      font-size: 10px;
+      color: var(--accent-blue);
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .summary-card-body {
       display: flex;
       flex-direction: column;
       gap: 6px;
+      font-size: 11px;
+      color: #475569;
     }
 
-    .help-item {
+    .summary-field-row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .summary-field-label {
+      color: var(--text-gray-muted);
+      font-weight: 500;
+    }
+
+    .summary-field-value {
+      font-weight: 600;
+      color: var(--text-gray-dark);
+      text-align: right;
+    }
+
+    /* Sticky Bottom Action Bar */
+    .bottom-actions-bar {
+      height: 70px;
+      padding: 0 40px;
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .cancel-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: #475569;
+      font-size: 12.5px;
+      font-weight: 600;
+      transition: all 0.2s;
+    }
+
+    .cancel-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .action-right-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .save-continue-btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      font-size: 12.5px;
+      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.2s;
+    }
+
+    .save-continue-btn:hover {
+      background: var(--accent-blue-hover);
+    }
+
+    .save-continue-btn i {
       font-size: 11px;
-      color: #334155;
-      font-weight: 500;
     }
 
-    .help-item i {
-      font-size: 12px;
-      color: var(--accent-blue);
-      width: 14px;
+    .back-btn {
+      padding: 10px 20px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 12.5px;
+      font-weight: 600;
+      display: none;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    .help-headset-circle {
+    .back-btn:hover {
+      background: #f8fafc;
+    }
+
+    .back-btn.visible {
+      display: flex;
+    }
+
+    /* Modal dialog */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: 500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      display: flex;
+      opacity: 1;
+    }
+
+    .modal-card-box {
+      background: #ffffff;
+      border-radius: 16px;
+      padding: 32px;
+      width: 440px;
+      max-width: 90%;
+      box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .modal-icon-circle {
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      background: #eff6ff;
-      color: var(--accent-blue);
+      background: #ecfdf5;
+      color: #10b981;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.08);
-      animation: pulse 2s infinite;
+      font-size: 26px;
+      margin-bottom: 8px;
     }
 
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.2); }
-      70% { box-shadow: 0 0 0 10px rgba(37, 99, 235, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(37, 99, 235, 0); }
+    .modal-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
     }
 
-
-    /* ===== FOOTER ===== */
-    .app-footer {
-      border-top: 1px solid var(--border-color);
-      padding: 20px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 11.5px;
+    .modal-desc {
+      font-size: 12.5px;
       color: var(--text-gray-muted);
-      background: #ffffff;
-      flex-shrink: 0;
+      line-height: 1.5;
     }
 
-    .footer-left {
-      font-weight: 500;
+    .modal-close-btn {
+      padding: 10px 24px;
+      background: var(--accent-blue);
+      color: #ffffff;
+      border-radius: 8px;
+      font-size: 12.5px;
+      font-weight: 600;
+      width: 100%;
+      margin-top: 10px;
+      transition: all 0.2s;
     }
 
-    .footer-right {
-      display: flex;
-      gap: 15px;
-    }
-
-    .footer-right a {
-      color: var(--text-gray-muted);
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    .footer-right a:hover {
-      color: var(--accent-blue);
-    }
-
-
-    /* ===== RESPONSIVE MEDIA QUERIES ===== */
-    @media (max-width: 1120px) {
-      .app-container {
-        flex-direction: column;
-      }
-
-      .sidebar {
-        width: 100%;
-        min-width: 100%;
-        height: auto;
-        position: relative;
-        padding: 30px;
-        border-right: none;
-        border-bottom: 1px solid #111e35;
-      }
-
-      .gears-container {
-        display: none; /* Hide animated gears on small screens to save space */
-      }
-
-      .main-grid,
-      .bottom-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .right-sidebar {
-        flex-direction: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .right-sidebar {
-        grid-template-columns: 1fr;
-      }
-
-      .account-cards-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .stepper-container {
-        padding: 16px 20px;
-      }
-
-      .stepper-line {
-        display: none; /* Hide line when stacked */
-      }
-
-      .stepper-container {
-        flex-wrap: wrap;
-        gap: 15px;
-      }
-
-      .stepper-step {
-        flex: none;
-        width: 45%;
-      }
-
-      .viewport-container {
-        padding: 20px;
-      }
-
-      .process-timeline {
-        flex-direction: column;
-        gap: 20px;
-      }
-
-      .process-arrow {
-        transform: rotate(90deg);
-        margin: 0;
-      }
-
-      .top-bar {
-        padding: 0 20px;
-      }
-
-      .footer-right {
-        gap: 10px;
-      }
+    .modal-close-btn:hover {
+      background: var(--accent-blue-hover);
     }
   </style>
 </head>
@@ -1503,16 +1312,17 @@
 <body>
   <div class="app-container">
 
-    <!-- LEFT SIDEBAR -->
+    <!-- ===== LEFT SIDEBAR ===== -->
     <aside class="sidebar">
       <div class="sidebar-top">
+        <!-- Logo block -->
         <div class="brand-section">
           <div class="logo-container">
             <div class="logo-icon">
-              <!-- Inline SVG Infinitish circles overlapping loop -->
+              <!-- Overlapping loop infinite SVG logo -->
               <svg width="34" height="24" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <circle cx="11" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
-                <circle cx="23" cy="12" r="7" stroke="#ef4444" stroke-width="3" />
+                <circle cx="23" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
               </svg>
             </div>
             <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
@@ -1520,1036 +1330,954 @@
           <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
         </div>
 
+        <!-- Hero text -->
         <div class="hero-text-section">
-          <h1 class="hero-title" contenteditable="true">One Platform.<br><span class="blue-highlight">Endless Possibilities.</span></h1>
-          <p class="hero-desc" contenteditable="true">Digitize your supplier collaboration and drive manufacturing excellence.</p>
+          <h1 class="hero-title" contenteditable="true">Join the Future of<br><span class="blue-highlight">Manufacturing Collaboration</span></h1>
+          <p class="hero-desc" contenteditable="true">One platform for OEMs, Suppliers and Industry Professionals to connect, collaborate and grow together.</p>
         </div>
 
-        <!-- Sidebar navigation -->
-        <ul class="sidebar-menu">
-          <li class="menu-item">
-            <a href="process_documents.html">
-              <div class="menu-item-left">
-                <i class="fa-regular fa-file-lines"></i>
-                <span>Process Documents</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="bajaj.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-gauge-high"></i>
-                <span>Bajaj Auto Dashboard</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="drawing_integration.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-compass-drafting"></i>
-                <span>Drawing Integration</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="index.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-table-columns"></i>
-                <span>Platform Overview</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="supplylink.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-diagram-project"></i>
-                <span>REQ-250801 Workspace</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item active">
-            <a href="register.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-user-plus"></i>
-                <span>Registration</span>
-              </div>
-            </a>
-          </li>
-        </ul>
+        <!-- About Aashita Intelligence Legacy Section -->
+        <div class="about-legacy-section" style="margin-bottom: 24px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 16px; border-left: 3px solid #3b82f6;">
+          <h4 style="font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;" contenteditable="true">
+            <i class="fa-solid fa-landmark" style="color: #3b82f6;"></i>
+            Our Legacy & Vision
+          </h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5; margin-bottom: 8px;" contenteditable="true">
+            Established as a pioneering force in engineering supply networks, <strong>Aashita Intelligence</strong> has transitioned from a localized logistics consultant into a trusted global supply chain ecosystem.
+          </p>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;" contenteditable="true">
+            We partner with leading OEMs like <strong>Bajaj Auto Ltd.</strong> to synchronize complex engineering design releases, supplier RFQ matches, and production milestones in real-time.
+          </p>
+        </div>
+
+        <!-- Feature item value props -->
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-users"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Streamlined Collaboration</div>
+              <div class="feature-desc" contenteditable="true">Work with verified partners in a secure environment.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-chart-line"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">AI-Powered Insights</div>
+              <div class="feature-desc" contenteditable="true">Make smarter decisions with real-time analytics and intelligence.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">End-to-End Visibility</div>
+              <div class="feature-desc" contenteditable="true">Track every stage from RFQ to payment in one place.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Data Security</div>
+              <div class="feature-desc" contenteditable="true">Enterprise-grade security to protect your critical data.</div>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-square-trend-up"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Grow Your Business</div>
+              <div class="feature-desc" contenteditable="true">Discover new opportunities and expand your network.</div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Animated 3D Gears Asset -->
-      <div class="gears-container">
-        <img src="metallic_gears.png" alt="3D Metallic Gears" id="gears-img">
-      </div>
-
+      <!-- Support card footer -->
       <div class="sidebar-bottom">
-        <div class="sidebar-footer">
-          <div class="account-prompt" contenteditable="true">Already have an account?</div>
-          <button class="login-now-btn" id="sidebar-login-btn" contenteditable="true">Login Now</button>
+        <div class="help-card">
+          <div class="help-title" contenteditable="true">Need Help?</div>
+          <div class="help-desc" contenteditable="true">Our support team is here to help you at every step.</div>
+          <div class="help-details">
+            <div class="help-detail-item">
+              <i class="fa-solid fa-phone"></i>
+              <span contenteditable="true">+91 20 2740 7170</span>
+            </div>
+            <div class="help-detail-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span contenteditable="true">support@aashitaintelligence.com</span>
+            </div>
+            <div class="help-detail-item">
+              <i class="fa-solid fa-clock"></i>
+              <span contenteditable="true">Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
+            </div>
+          </div>
         </div>
       </div>
     </aside>
 
-    <!-- RIGHT CONTENT VIEWPORT -->
+    <!-- ===== RIGHT CONTENT VIEWPORT ===== -->
     <main class="main-content">
-      <!-- TOP NAVIGATION -->
-      <header class="top-bar">
-        <a href="#" class="top-link">
-          <i class="fa-regular fa-circle-question"></i>
-          <span contenteditable="true">Need Help?</span>
-        </a>
-        <button class="login-btn" id="top-login-btn" contenteditable="true">Login</button>
-        <button class="register-btn" id="top-register-btn" contenteditable="true">Register</button>
+      <!-- Top header links -->
+      <header class="top-header">
+        <span class="login-prompt" contenteditable="true">Already have an account?</span>
+        <button class="login-btn" onclick="alert('Redirecting to login...')">Login</button>
       </header>
 
-      <!-- VIEWPORT BODY -->
-      <div class="viewport-container">
-
-        <!-- TITLE BAR -->
-        <div class="onboarding-header">
-          <h2 class="onboarding-title" contenteditable="true">Join the Aashita Intelligence Network</h2>
-          <p class="onboarding-desc" contenteditable="true">Complete your onboarding to start collaborating with Bajaj Auto Ltd.</p>
+      <!-- Wizard body view -->
+      <div class="wizard-viewport">
+        <!-- Title bar -->
+        <div class="onboarding-title-area">
+          <h2 class="onboarding-title" contenteditable="true">Create Your Aashita Intelligence Account</h2>
+          <p class="onboarding-subtitle" contenteditable="true">Complete your profile to start collaborating with the right partners</p>
         </div>
 
-        <!-- STEP TIMELINE PROGRESS -->
-        <nav class="stepper-container" id="timeline-stepper">
-          <div class="stepper-line">
-            <div class="stepper-progress" id="stepper-progress-bar"></div>
+        <!-- Horizontal Stepper Progress Timeline -->
+        <nav class="stepper-row">
+          <div class="stepper-line-bg">
+            <div class="stepper-line-progress" id="wizard-progress-bar"></div>
           </div>
           
-          <div class="stepper-step active" data-step="1" onclick="jumpToStep(1)">
+          <div class="step-node active" id="step-node-1" onclick="navigateToStep(1)">
             <div class="step-circle">1</div>
-            <div class="step-label" id="step-label-1" contenteditable="true">Choose Account Type</div>
+            <div class="step-label" contenteditable="true">Intent & Host OEM</div>
           </div>
-
-          <div class="stepper-step" data-step="2" onclick="jumpToStep(2)">
+          
+          <div class="step-node" id="step-node-2" onclick="navigateToStep(2)">
             <div class="step-circle">2</div>
-            <div class="step-label" id="step-label-2" contenteditable="true">Organization Details</div>
+            <div class="step-label" contenteditable="true">Organization Details</div>
           </div>
 
-          <div class="stepper-step" data-step="3" onclick="jumpToStep(3)">
+          <div class="step-node" id="step-node-3" onclick="navigateToStep(3)">
             <div class="step-circle">3</div>
-            <div class="step-label" id="step-label-3" contenteditable="true">Individual Details</div>
+            <div class="step-label" contenteditable="true">Business & Compliance</div>
           </div>
 
-          <div class="stepper-step" data-step="4" onclick="jumpToStep(4)">
+          <div class="step-node" id="step-node-4" onclick="navigateToStep(4)">
             <div class="step-circle">4</div>
-            <div class="step-label" id="step-label-4" contenteditable="true">Documents</div>
+            <div class="step-label" contenteditable="true">Contact Details</div>
           </div>
 
-          <div class="stepper-step" data-step="5" onclick="jumpToStep(5)">
+          <div class="step-node" id="step-node-5" onclick="navigateToStep(5)">
             <div class="step-circle">5</div>
-            <div class="step-label" id="step-label-5" contenteditable="true">Review & Submit</div>
+            <div class="step-label" contenteditable="true">Review & Submit</div>
           </div>
         </nav>
 
-        <!-- MAIN DUAL SECTION -->
-        <div class="main-grid">
-
-          <!-- LEFT: THE FORM CARD -->
-          <section class="wizard-card">
-            
-            <!-- STEP 1 CONTAINER -->
-            <div class="wizard-step-content active" id="step-1-content">
-              <div class="step-meta" contenteditable="true">Step 1 of 5</div>
-              <h3 class="step-title" contenteditable="true">Choose Account Type</h3>
-              <p class="step-desc" contenteditable="true">Select how you want to join the Aashita Intelligence platform.</p>
-
-              <div class="account-cards-grid">
-                <!-- Bajaj Card -->
-                <div class="account-card card-bajaj selected" onclick="selectAccountType('bajaj')">
-                  <div class="radio-indicator"></div>
-                  <div class="card-icon-container">
-                    <i class="fa-solid fa-building"></i>
-                  </div>
-                  <h4 class="card-title" contenteditable="true">Bajaj Auto Ltd.</h4>
-                  <p class="card-desc" contenteditable="true">For Bajaj employees to access the platform and collaborate internally with suppliers.</p>
-                  <span class="card-badge" contenteditable="true">Internal Account</span>
-                </div>
-
-                <!-- Supplier Card -->
-                <div class="account-card card-supplier" onclick="selectAccountType('supplier')">
-                  <div class="radio-indicator"></div>
-                  <div class="card-icon-container">
-                    <i class="fa-solid fa-industry"></i>
-                  </div>
-                  <h4 class="card-title" contenteditable="true">Supplier / Vendor</h4>
-                  <p class="card-desc" contenteditable="true">For suppliers, vendors and partners to collaborate with Bajaj Auto Ltd.</p>
-                  <span class="card-badge" contenteditable="true">External Account</span>
-                </div>
-
-                <!-- Individual Card -->
-                <div class="account-card card-individual" onclick="selectAccountType('individual')">
-                  <div class="radio-indicator"></div>
-                  <div class="card-icon-container">
-                    <i class="fa-solid fa-user"></i>
-                  </div>
-                  <h4 class="card-title" contenteditable="true">Individual</h4>
-                  <p class="card-desc" contenteditable="true">For independent professionals or consultants working with Bajaj Auto Ltd. or its suppliers.</p>
-                  <span class="card-badge" contenteditable="true">Individual Account</span>
-                </div>
-              </div>
-
-              <!-- Information Helper Banner -->
-              <div class="info-banner">
-                <i class="fa-solid fa-circle-info"></i>
-                <div class="info-banner-text" contenteditable="true">
-                  Not sure which account type to choose? <a href="#" onclick="event.preventDefault(); alert('Learn more clicked!');">Learn more about account types <i class="fa-solid fa-chevron-right" style="font-size: 10px;"></i></a>
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 2 CONTAINER (Dynamic text based on Account Choice) -->
-            <div class="wizard-step-content" id="step-2-content">
-              <div class="step-meta" id="step-2-meta" contenteditable="true">Step 2 of 5</div>
-              <h3 class="step-title" id="step-2-title" contenteditable="true">Organization Details</h3>
-              <p class="step-desc" id="step-2-desc" contenteditable="true">Provide your official organization details below.</p>
-
-              <!-- Dynamic form fields -->
-              <div id="step-2-form-fields">
-                <!-- Default fields for Supplier / Vendor (will change in script) -->
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Company Legal Name</label>
-                  <input type="text" class="form-input" id="org-name-input" placeholder="e.g. Aashita Enterprises" value="Aashita Enterprises">
-                </div>
-                <div class="form-row">
-                  <div class="form-group">
-                    <label class="form-label" contenteditable="true">GSTIN / Tax ID</label>
-                    <input type="text" class="form-input" id="org-gst-input" placeholder="e.g. 27AAACA1234A1Z1" value="27AAACA1234A1Z1">
-                  </div>
-                  <div class="form-group">
-                    <label class="form-label" contenteditable="true">Company Registration No.</label>
-                    <input type="text" class="form-input" id="org-reg-input" placeholder="e.g. U12345MH2026PTC123456" value="U12345MH2026PTC123456">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Registered Address</label>
-                  <input type="text" class="form-input" id="org-address-input" placeholder="Enter complete corporate street address" value="Plot No. 45, MIDC Industrial Area, Chakan, Pune - 410501">
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 3 CONTAINER -->
-            <div class="wizard-step-content" id="step-3-content">
-              <div class="step-meta" contenteditable="true">Step 3 of 5</div>
-              <h3 class="step-title" contenteditable="true">Individual Details</h3>
-              <p class="step-desc" contenteditable="true">Provide your personal contact and professional identity information.</p>
-
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Full Name</label>
-                  <input type="text" class="form-input" id="ind-name-input" placeholder="e.g. Prashant Sagar" value="Prashant Sagar">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Designation / Role</label>
-                  <input type="text" class="form-input" id="ind-role-input" placeholder="e.g. Sales Director" value="Sales Director">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Contact Email</label>
-                  <input type="email" class="form-input" id="ind-email-input" placeholder="e.g. prashant@aashita.ai" value="prashant@aashita.ai">
-                </div>
-                <div class="form-group">
-                  <label class="form-label" contenteditable="true">Contact Phone</label>
-                  <input type="tel" class="form-input" id="ind-phone-input" placeholder="e.g. +91 98765 43210" value="+91 98765 43210">
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 4 CONTAINER -->
-            <div class="wizard-step-content" id="step-4-content">
-              <div class="step-meta" contenteditable="true">Step 4 of 5</div>
-              <h3 class="step-title" contenteditable="true">Upload Documents</h3>
-              <p class="step-desc" contenteditable="true">Upload business proofs or identity documents to verify your application.</p>
-
-              <div class="dropzone-container" onclick="simulateFileUpload()">
-                <div class="dropzone-icon">
-                  <i class="fa-solid fa-cloud-arrow-up"></i>
-                </div>
-                <div class="dropzone-text" contenteditable="true">Drag & drop files here, or click to upload</div>
-                <div class="dropzone-subtext" contenteditable="true">Supports PDF, PNG, JPG (Max 5MB each)</div>
-              </div>
-
-              <div class="file-list" id="uploaded-files-list">
-                <!-- Simulating initially uploaded files -->
-                <div class="file-item" id="file-1">
-                  <div class="file-info">
-                    <i class="fa-regular fa-file-pdf"></i>
-                    <div>
-                      <span class="file-name" contenteditable="true">Business_Registration_Certificate.pdf</span>
-                      <span class="file-size" contenteditable="true">(1.2 MB)</span>
-                    </div>
-                  </div>
-                  <button class="remove-file-btn" onclick="removeFile('file-1')"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-                <div class="file-item" id="file-2">
-                  <div class="file-info">
-                    <i class="fa-regular fa-file-image"></i>
-                    <div>
-                      <span class="file-name" contenteditable="true">Company_PAN_Card.png</span>
-                      <span class="file-size" contenteditable="true">(450 KB)</span>
-                    </div>
-                  </div>
-                  <button class="remove-file-btn" onclick="removeFile('file-2')"><i class="fa-solid fa-trash-can"></i></button>
-                </div>
-              </div>
-            </div>
-
-            <!-- STEP 5 CONTAINER -->
-            <div class="wizard-step-content" id="step-5-content">
-              <div class="step-meta" contenteditable="true">Step 5 of 5</div>
-              <h3 class="step-title" contenteditable="true">Review & Submit</h3>
-              <p class="step-desc" contenteditable="true">Review all details before finalizing your onboarding application.</p>
-
-              <div id="review-summary-container">
-                <!-- Summary of choices will be dynamically injected here -->
-              </div>
-
-              <label class="declaration-checkbox">
-                <input type="checkbox" id="declaration-check" checked>
-                <span contenteditable="true">I declare that the information provided is accurate and correct to the best of my knowledge, and I agree to Aashita Intelligence's standard Terms of Service and Privacy Policy.</span>
-              </label>
-            </div>
-
-            <!-- WIZARD SUBMISSION SUCCESS VIEW -->
-            <div class="wizard-step-content" id="success-step-content">
-              <div class="success-content">
-                <div class="success-icon-wrapper">
-                  <i class="fa-solid fa-check"></i>
-                </div>
-                <h3 class="success-title" contenteditable="true">Application Submitted!</h3>
-                <p class="success-desc" contenteditable="true">Thank you for registering on the Aashita Intelligence Network. We are currently verifying your details. This process typically takes 12 to 24 business hours.</p>
-                <div class="success-badge" contenteditable="true">REFERENCE ID: SL360-REG-9874251</div>
-                <div>
-                  <button class="dashboard-btn" onclick="goToDashboard()" contenteditable="true">Go to Dashboard</button>
-                </div>
-              </div>
-            </div>
-
-            <!-- WIZARD BUTTON ACTIONS -->
-            <div class="wizard-actions" id="wizard-actions-bar">
-              <button class="cancel-btn" id="action-back-btn" onclick="goBack()" contenteditable="true">Cancel</button>
-              <button class="continue-btn" id="action-continue-btn" onclick="goForward()" contenteditable="true">
-                <span>Continue</span>
-                <i class="fa-solid fa-arrow-right"></i>
-              </button>
-            </div>
-          </section>
-
-          <!-- RIGHT Column Panels -->
-          <aside class="right-sidebar">
-            
-            <!-- Benefit list -->
-            <div class="info-card">
-              <h4 class="info-card-title" contenteditable="true">Why Join Aashita Intelligence?</h4>
-              
-              <div class="benefits-list">
-                <div class="benefit-item benefit-collab">
-                  <div class="benefit-icon">
-                    <i class="fa-solid fa-users"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <span class="benefit-name" contenteditable="true">Collaborate Seamlessly</span>
-                    <span class="benefit-desc" contenteditable="true">Work with Bajaj teams and your supply chain in one place.</span>
-                  </div>
-                </div>
-
-                <div class="benefit-item benefit-efficiency">
-                  <div class="benefit-icon">
-                    <i class="fa-solid fa-bolt-lightning"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <span class="benefit-name" contenteditable="true">Increase Efficiency</span>
-                    <span class="benefit-desc" contenteditable="true">Automate processes and reduce manual effort.</span>
-                  </div>
-                </div>
-
-                <div class="benefit-item benefit-compliance">
-                  <div class="benefit-icon">
-                    <i class="fa-solid fa-shield-halved"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <span class="benefit-name" contenteditable="true">Ensure Compliance</span>
-                    <span class="benefit-desc" contenteditable="true">Stay compliant with quality standards and documentation.</span>
-                  </div>
-                </div>
-
-                <div class="benefit-item benefit-growth">
-                  <div class="benefit-icon">
-                    <i class="fa-solid fa-arrow-trend-up"></i>
-                  </div>
-                  <div class="benefit-content">
-                    <span class="benefit-name" contenteditable="true">Drive Growth</span>
-                    <span class="benefit-desc" contenteditable="true">Unlock new opportunities and grow your business with Bajaj.</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Secure & Trusted Panel -->
-            <div class="info-card secure-card">
-              <div class="secure-header">
-                <div class="secure-icon">
-                  <i class="fa-solid fa-lock"></i>
-                </div>
-                <div class="secure-info">
-                  <span class="secure-title" contenteditable="true">Secure & Trusted</span>
-                  <span class="secure-desc" contenteditable="true">Your data is protected with enterprise-grade security and role-based access controls.</span>
-                </div>
-              </div>
-              <div class="secure-img-wrapper">
-                <img src="bajaj_building.png" alt="Bajaj Corporate Building" id="building-img">
-              </div>
-            </div>
-
-          </aside>
-        </div>
-
-        <!-- BOTTOM INFORMATION GRID -->
-        <div class="bottom-grid">
+        <!-- WIZARD STEP VIEWS CONTAINER -->
+        <div class="wizard-forms-wrapper">
           
-          <!-- Process Timeline -->
-          <section class="process-card">
-            <h4 class="process-title" contenteditable="true">What happens next?</h4>
-            <div class="process-timeline">
-              <div class="process-step">
-                <div class="process-icon-box">
-                  <i class="fa-solid fa-user-check"></i>
+          <!-- PHASE 1: Step 1, 2, 3 Grid (Default Active) -->
+          <div class="phase-content active form-grid-layout" id="onboarding-phase-1">
+            
+            <!-- COLUMN 1: Intent & Account Choice -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Intent Select -->
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">What do you want to do on Aashita Intelligence?</div>
+                <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;" contenteditable="true">Select all that apply</div>
+                
+                <div class="intent-cards-wrapper">
+                  <!-- Buy intent card -->
+                  <div class="intent-card selected" id="intent-card-buy" onclick="toggleIntentCard('buy')">
+                    <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="intent-card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="intent-card-title" contenteditable="true">Buy<br><span style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Procurement)</span></div>
+                    <p class="intent-card-desc" contenteditable="true">I want to buy products/services from suppliers</p>
+                  </div>
+                  <!-- Sell intent card -->
+                  <div class="intent-card selected" id="intent-card-sell" onclick="toggleIntentCard('sell')">
+                    <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="intent-card-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="intent-card-title" contenteditable="true">Sell<br><span style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Supply)</span></div>
+                    <p class="intent-card-desc" contenteditable="true">I want to sell my products/services to buyers</p>
+                  </div>
                 </div>
-                <span class="process-step-name" contenteditable="true">Verify & Onboard</span>
-                <p class="process-step-desc" contenteditable="true">We'll verify your details and onboard you.</p>
               </div>
-
-              <div class="process-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-
-              <div class="process-step">
-                <div class="process-icon-box">
-                  <i class="fa-solid fa-gears"></i>
-                </div>
-                <span class="process-step-name" contenteditable="true">Profile Activation</span>
-                <p class="process-step-desc" contenteditable="true">Complete your profile and upload documents.</p>
-              </div>
-
-              <div class="process-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-
-              <div class="process-step">
-                <div class="process-icon-box">
-                  <i class="fa-solid fa-people-arrows"></i>
-                </div>
-                <span class="process-step-name" contenteditable="true">Access Platform</span>
-                <p class="process-step-desc" contenteditable="true">Get access to features and start collaborating.</p>
-              </div>
-
-              <div class="process-arrow">
-                <i class="fa-solid fa-arrow-right"></i>
-              </div>
-
-              <div class="process-step">
-                <div class="process-icon-box">
-                  <i class="fa-solid fa-handshake"></i>
-                </div>
-                <span class="process-step-name" contenteditable="true">Start Collaborating</span>
-                <p class="process-step-desc" contenteditable="true">Connect, collaborate and grow together.</p>
-              </div>
-            </div>
-          </section>
-
-          <!-- Support Desk Card -->
-          <section class="help-card">
-            <div class="help-details">
-              <h4 class="help-title" contenteditable="true">Need Help?</h4>
-              <p class="help-desc" contenteditable="true">Our support team is here to assist you at every step.</p>
-              <div class="help-contacts">
-                <div class="help-item">
-                  <i class="fa-solid fa-phone"></i>
-                  <span contenteditable="true">+91 20 2740 7170</span>
-                </div>
-                <div class="help-item">
-                  <i class="fa-solid fa-envelope"></i>
-                  <span contenteditable="true">supplylink.support@bajajauto.co.in</span>
-                </div>
-                <div class="help-item">
-                  <i class="fa-solid fa-clock"></i>
-                  <span contenteditable="true">Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
+              <!-- About Bajaj Auto Ltd. Card -->
+              <div class="form-card company-about-card">
+                <div class="form-card-title" contenteditable="true">About Bajaj Auto Ltd.</div>
+                <div class="company-about-content">
+                  <div class="company-logo-badge" style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <i class="fa-solid fa-building" style="color: var(--accent-blue); font-size: 20px;"></i>
+                    <div>
+                      <h4 style="font-size: 13px; font-weight: 700; color: var(--text-gray-dark);" contenteditable="true">Bajaj Auto Ltd.</h4>
+                      <span style="font-size: 9px; font-weight: 600; color: var(--accent-green); background: var(--accent-green-light); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;" contenteditable="true">Host OEM</span>
+                    </div>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-gray-muted); line-height: 1.6; margin-bottom: 12px;" contenteditable="true">
+                    Bajaj Auto is a preeminent global manufacturer of two-wheelers and three-wheelers, trusted by millions of customers across 70+ countries.
+                  </p>
+                  <div class="company-stats-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;" contenteditable="true">Headquarters</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Pune, India</strong>
+                    </div>
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;" contenteditable="true">Industry</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Automotive Mfg</strong>
+                    </div>
+                  </div>
+                  <div class="company-building-wrapper" style="width: 100%; height: 120px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 12px; position: relative;">
+                    <img src="bajaj_building.png" alt="Bajaj Corporate Building" style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div style="font-size: 10px; color: var(--text-gray-muted); line-height: 1.5; background: var(--accent-blue-light); border: 1px solid rgba(37, 99, 235, 0.15); border-radius: 8px; padding: 10px; display: flex; gap: 8px; align-items: flex-start;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--accent-blue); margin-top: 2px;"></i>
+                    <span contenteditable="true">By registering, you are applying to join the Bajaj Auto Ltd. partner supply chain network. Your details will be submitted to the Bajaj Procurement team for review.</span>
+                  </div>
                 </div>
               </div>
             </div>
-            <div class="help-headset-circle">
-              <i class="fa-solid fa-headset"></i>
-            </div>
-          </section>
 
+            <!-- COLUMN 2: Organization Info details -->
+            <div class="form-card" id="org-details-form-section">
+              <div class="form-card-title" contenteditable="true">Organization Details</div>
+
+              <!-- Company Information Group -->
+              <div class="form-card-subtitle" contenteditable="true">Company Information</div>
+              
+              <div class="form-group-row">
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Company / Organization Name <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-company-name" placeholder="Enter company name">
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Legal Entity Type <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-legal-entity" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select entity type</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="PVT_LTD">Private Limited</div>
+                      <div class="select-option" data-val="PUBLIC_LTD">Public Limited</div>
+                      <div class="select-option" data-val="PARTNERSHIP">Partnership</div>
+                      <div class="select-option" data-val="LLP">LLP</div>
+                      <div class="select-option" data-val="PROPRIETORSHIP">Sole Proprietorship</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Country <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-country" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span>India</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option selected" data-val="IN">India</div>
+                      <div class="select-option" data-val="US">United States</div>
+                      <div class="select-option" data-val="DE">Germany</div>
+                      <div class="select-option" data-val="JP">Japan</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">State <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-state" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select state</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="MH">Maharashtra</div>
+                      <div class="select-option" data-val="DL">Delhi</div>
+                      <div class="select-option" data-val="KA">Karnataka</div>
+                      <div class="select-option" data-val="TN">Tamil Nadu</div>
+                      <div class="select-option" data-val="GJ">Gujarat</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">City <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-city" placeholder="Enter city">
+                </div>
+              </div>
+
+              <!-- Business Identifiers -->
+              <div class="form-card-subtitle" contenteditable="true">Business Identifiers</div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">GSTIN <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-gstin" placeholder="22AAAAA0000A1Z5">
+                  <span class="input-desc" contenteditable="true">Enter 15-digit GSTIN</span>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">PAN Number <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-pan" placeholder="AAAAA0000A">
+                  <span class="input-desc" contenteditable="true">Enter 10-digit PAN</span>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Udyam Registration Number (MSME)</label>
+                  <input type="text" class="form-input" id="input-udyam" placeholder="UDYAM-MH-20-0001234">
+                  <span class="input-desc" contenteditable="true">If applicable</span>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">MSME Classification</label>
+                  <div class="select-dropdown-container" id="dropdown-msme" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select classification</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="MICRO">Micro</div>
+                      <div class="select-option" data-val="SMALL">Small</div>
+                      <div class="select-option" data-val="MEDIUM">Medium</div>
+                      <div class="select-option" data-val="NONE">Not Applicable</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Industry Type <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-industry" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select industry</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="AUTO">Automotive</div>
+                      <div class="select-option" data-val="AERO">Aerospace</div>
+                      <div class="select-option" data-val="ELEC">Electronics</div>
+                      <div class="select-option" data-val="MACH">Machinery & Tooling</div>
+                      <div class="select-option" data-val="METALS">Metals & Castings</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">IEC Number</label>
+                  <input type="text" class="form-input" id="input-iec" placeholder="AAAAA0000A">
+                  <span class="input-desc" contenteditable="true">10-character Import Export Code, if applicable</span>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Company Website</label>
+                  <input type="text" class="form-input" id="input-website" placeholder="https://www.company.com">
+                </div>
+              </div>
+
+              <!-- Business authentication toggle -->
+              <div class="auth-toggle-row" id="business-auth-toggle" onclick="toggleBusinessAuth(this)">
+                <div class="auth-toggle-switch"><span class="auth-toggle-knob"></span></div>
+                <div class="auth-toggle-text">
+                  <span class="auth-toggle-title" id="business-auth-label">Authenticate business details</span>
+                  <span class="auth-toggle-desc" id="business-auth-desc">Turn on to verify GSTIN, PAN &amp; Udyam records</span>
+                </div>
+                <i class="fa-solid fa-circle-check auth-toggle-check"></i>
+              </div>
+            </div>
+
+            <!-- COLUMN 3: Turnovers, categories, options -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Business Preferences Preferences -->
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">Business Preferences</div>
+                
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">What do you primarily want to?</label>
+                  <div class="preference-checkbox-list">
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy finished goods / components</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy raw materials</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy services</span>
+                    </div>
+                    <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell finished goods / components</span>
+                    </div>
+                    <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell raw materials</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell services</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Categories -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Product / Service Categories <span class="required-star">*</span></label>
+                  <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -4px; margin-bottom: 6px;" contenteditable="true">Select all that apply</div>
+                  <div class="categories-input-wrapper">
+                    <div style="flex: 1;">
+                      <div class="select-dropdown-container" id="dropdown-categories" onclick="toggleCustomSelect(this)">
+                        <div class="select-trigger"><span class="placeholder">Select categories</span><i class="fa-solid fa-chevron-down"></i></div>
+                        <div class="select-menu-options">
+                          <div class="select-option" data-val="Casting">Aluminium Casting</div>
+                          <div class="select-option" data-val="Forging">Forging & Press</div>
+                          <div class="select-option" data-val="Machining">CNC Machining</div>
+                          <div class="select-option" data-val="SheetMetal">Sheet Metal Parts</div>
+                          <div class="select-option" data-val="Fasteners">Fasteners & Bolts</div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="add-category-btn" onclick="addSelectedCategoryTag()"><i class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <!-- Category Pills -->
+                  <div class="categories-pills-container" id="categories-pillbox">
+                    <div class="category-pill" data-val="Casting">
+                      <span>Aluminium Casting</span>
+                      <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
+                    </div>
+                    <div class="category-pill" data-val="Machining">
+                      <span>CNC Machining</span>
+                      <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Annual turnover -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Annual Turnover (Approx.) <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-turnover" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select turnover range</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U1C">Under ₹1 Crore</div>
+                      <div class="select-option" data-val="1C5C">₹1 Crore - ₹5 Crores</div>
+                      <div class="select-option" data-val="5C20C">₹5 Crores - ₹20 Crores</div>
+                      <div class="select-option" data-val="20C100C">₹20 Crores - ₹100 Crores</div>
+                      <div class="select-option" data-val="O100C">Above ₹100 Crores</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Number of employees -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Number of Employees</label>
+                  <div class="select-dropdown-container" id="dropdown-employees" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select range</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U20">1 - 20</div>
+                      <div class="select-option" data-val="20_100">21 - 100</div>
+                      <div class="select-option" data-val="100_500">101 - 500</div>
+                      <div class="select-option" data-val="O500">500+</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Years in business -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Years in Business <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-years" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select range</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U3">Less than 3 years</div>
+                      <div class="select-option" data-val="3_10">3 - 10 years</div>
+                      <div class="select-option" data-val="O10">More than 10 years</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Info banner at bottom -->
+              <div class="helper-card-banner security-banner">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                  <strong style="display: block; margin-bottom: 2px;" contenteditable="true">Your information is secure</strong>
+                  <span contenteditable="true">All data is encrypted and protected. We never share your information with third parties without consent.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHASE 2: Step 4, 5, 6 Grid (Hidden by Default) -->
+          <div class="phase-content form-grid-layout two-col-layout" id="onboarding-phase-2">
+            
+            <!-- COLUMN 1: Contact Details -->
+            <div class="form-card">
+              <div class="form-card-title" contenteditable="true">Contact Details</div>
+              
+              <div class="contact-card-list" id="contact-list-box">
+                <!-- Primary Contact -->
+                <div class="contact-item-box">
+                  <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;" contenteditable="true">Primary Contact (Admin)</div>
+                  <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div class="form-item">
+                      <label class="form-label" contenteditable="true">Full Name <span class="required-star">*</span></label>
+                      <input type="text" class="form-input input-contact-name" placeholder="Enter contact name">
+                    </div>
+                    <div class="form-item">
+                      <label class="form-label" contenteditable="true">Designation / Role <span class="required-star">*</span></label>
+                      <input type="text" class="form-input" placeholder="e.g. Sales Manager">
+                    </div>
+                    <div class="form-group-row">
+                      <div class="form-item">
+                        <label class="form-label" contenteditable="true">Email Address <span class="required-star">*</span></label>
+                        <input type="email" class="form-input" placeholder="name@company.com">
+                      </div>
+                      <div class="form-item">
+                        <label class="form-label" contenteditable="true">Phone Number <span class="required-star">*</span></label>
+                        <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add contact button -->
+              <button class="add-contact-btn" onclick="addNewContactCard()"><i class="fa-solid fa-plus"></i> Add Another Contact</button>
+            </div>
+
+            <!-- COLUMN 2: Review & Submit Summary details -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">Review Summary</div>
+                
+                <div class="summary-card-group">
+                  <!-- Company card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">ORGANIZATION INFO</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(2)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Name:</span>
+                        <span class="summary-field-value" id="summary-org-name">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">GSTIN:</span>
+                        <span class="summary-field-value" id="summary-org-gstin">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Type:</span>
+                        <span class="summary-field-value" id="summary-org-type">--</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Preferences card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">PREFERENCES & DETAILS</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(3)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Categories:</span>
+                        <span class="summary-field-value" id="summary-org-categories">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Turnover:</span>
+                        <span class="summary-field-value" id="summary-org-turnover">--</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Contacts card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">CONTACT PERSON</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(4)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Primary Admin:</span>
+                        <span class="summary-field-value" id="summary-org-contact">--</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Declarative checklist -->
+                <div style="margin-top: 10px;">
+                  <div class="checkbox-item-row" id="declaration-agree-check" onclick="toggleCheckboxItem(this)">
+                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                    <span class="checkbox-label" style="font-size: 10.5px; line-height: 1.4;" contenteditable="true">I hereby declare that all provided details are authentic.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Info banner at bottom -->
+              <div class="helper-card-banner security-banner">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                  <strong style="display: block; margin-bottom: 2px;" contenteditable="true">Ready for submission</strong>
+                  <span contenteditable="true">Once submitted, our team will verify your compliance records within 24 business hours.</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-
       </div>
 
-      <!-- FOOTER -->
-      <footer class="app-footer">
-        <div class="footer-left" contenteditable="true">
-          &copy; 2026 Bajaj Auto Ltd. All rights reserved.
-        </div>
-        <div class="footer-right">
-          <a href="#" contenteditable="true">Privacy Policy</a>
-          <span style="color: #cbd5e1;">|</span>
-          <a href="#" contenteditable="true">Terms of Use</a>
-          <span style="color: #cbd5e1;">|</span>
-          <a href="#" contenteditable="true">Support</a>
+      <!-- STICKY BOTTOM ACTIONS BAR -->
+      <footer class="bottom-actions-bar">
+        <button class="cancel-btn" onclick="alert('Registration cancelled.')">Cancel</button>
+        <div class="action-right-buttons">
+          <button class="back-btn" id="btn-wizard-back" onclick="navigateBackPhase()"><i class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="save-continue-btn" id="btn-wizard-continue" onclick="navigateContinuePhase()">Save & Continue <i class="fa-solid fa-arrow-right"></i></button>
         </div>
       </footer>
     </main>
 
   </div>
 
+  <!-- SUCCESS CONFIRMATION MODAL -->
+  <div class="modal-overlay" id="success-submit-modal">
+    <div class="modal-card-box">
+      <div class="modal-icon-circle">
+        <i class="fa-solid fa-circle-check"></i>
+      </div>
+      <h3 class="modal-title" contenteditable="true">Onboarding Application Submitted!</h3>
+      <p class="modal-desc" contenteditable="true">Thank you for registering. Your details are now under verification by the compliance team. You will receive an email confirmation shortly.</p>
+      <button class="modal-close-btn" onclick="closeSuccessModalAndRedirect()">Go to Platform Overview</button>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT INTERACTIONS ===== -->
   <script>
-    // Global State for the registration process
-    let currentStep = 1;
-    let selectedAccountType = 'bajaj'; // Default selection matches Bajaj Auto Ltd.
+    // Global State management
+    let activeStep = 1;
+    const maxSteps = 5;
     
-    // Setup initial fields
-    document.addEventListener("DOMContentLoaded", () => {
-      // Setup editability listeners to prevent layout destruction
-      const editableElements = document.querySelectorAll('[contenteditable="true"]');
-      editableElements.forEach(el => {
-        el.addEventListener('keydown', (e) => {
-          // If press enter in heading/badges, blur to prevent line breaks
-          if (e.key === 'Enter' && (el.tagName.startsWith('H') || el.classList.contains('card-badge') || el.classList.contains('logo-text') || el.classList.contains('step-label'))) {
-            e.preventDefault();
-            el.blur();
-          }
-        });
-      });
+    // Initializer
+    window.addEventListener('DOMContentLoaded', () => {
+      updateTimelineStepperUI();
       
-      // Select the default account type initially
-      selectAccountType('bajaj');
+      // Monitor live input to bind review summary updates
+      document.getElementById('input-company-name').addEventListener('input', updateReviewSummary);
+      document.getElementById('input-gstin').addEventListener('input', updateReviewSummary);
+      document.querySelector('.input-contact-name').addEventListener('input', updateReviewSummary);
     });
 
-    // Handle account type selection (Step 1)
-    function selectAccountType(type) {
-      selectedAccountType = type;
-      
-      // Update styling
-      document.querySelectorAll('.account-card').forEach(card => {
-        card.classList.remove('selected');
-      });
-      
-      const selectedCard = document.querySelector(`.card-${type}`);
-      if (selectedCard) {
-        selectedCard.classList.add('selected');
-      }
-      
-      // Update dynamic form fields on Step 2
-      updateStep2Fields(type);
-    }
-
-    // Update Step 2 HTML form fields based on the selected account type
-    function updateStep2Fields(type) {
-      const formFieldsContainer = document.getElementById('step-2-form-fields');
-      const step2Title = document.getElementById('step-2-title');
-      const step2Desc = document.getElementById('step-2-desc');
-      const step2Label = document.getElementById('step-label-2');
-
-      if (type === 'bajaj') {
-        step2Title.textContent = "Employee Verification";
-        step2Desc.textContent = "Confirm your internal Bajaj employee credentials to gain immediate internal system access.";
-        step2Label.textContent = "Employee Details";
-        
-        formFieldsContainer.innerHTML = `
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">Bajaj Employee ID</label>
-              <input type="text" class="form-input" id="emp-id-input" placeholder="e.g. BAJ-EMP-4127" value="BAJ-EMP-4127">
-            </div>
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">Department</label>
-              <input type="text" class="form-input" id="emp-dept-input" placeholder="e.g. Engineering" value="Engineering">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Plant Location</label>
-            <input type="text" class="form-input" id="emp-plant-input" placeholder="e.g. Chakan Plant, Pune" value="Chakan Plant, Pune">
-          </div>
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Supervisor / Manager Name</label>
-            <input type="text" class="form-input" id="emp-manager-input" placeholder="e.g. Arvind Kumar (Plant Head)" value="Arvind Kumar">
-          </div>
-        `;
-      } else if (type === 'supplier') {
-        step2Title.textContent = "Organization Details";
-        step2Desc.textContent = "Provide your official organization details below.";
-        step2Label.textContent = "Organization Details";
-
-        formFieldsContainer.innerHTML = `
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Company Legal Name</label>
-            <input type="text" class="form-input" id="org-name-input" placeholder="e.g. Aashita Enterprises" value="Aashita Enterprises">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">GSTIN / Tax ID</label>
-              <input type="text" class="form-input" id="org-gst-input" placeholder="e.g. 27AAACA1234A1Z1" value="27AAACA1234A1Z1">
-            </div>
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">Company Registration No.</label>
-              <input type="text" class="form-input" id="org-reg-input" placeholder="e.g. U12345MH2026PTC123456" value="U12345MH2026PTC123456">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Registered Address</label>
-            <input type="text" class="form-input" id="org-address-input" placeholder="Enter complete corporate street address" value="Plot No. 45, MIDC Industrial Area, Chakan, Pune - 410501">
-          </div>
-        `;
-      } else if (type === 'individual') {
-        step2Title.textContent = "Professional Details";
-        step2Desc.textContent = "Enter your professional parameters as an independent contractor or consultant.";
-        step2Label.textContent = "Individual Details";
-
-        formFieldsContainer.innerHTML = `
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Primary Area of Expertise</label>
-            <input type="text" class="form-input" id="ind-expert-input" placeholder="e.g. Quality Assurance Consultant" value="Quality Assurance Consultant">
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">Permanent Account Number (PAN)</label>
-              <input type="text" class="form-input" id="ind-pan-input" placeholder="e.g. ABCDE1234F" value="ABCDE1234F">
-            </div>
-            <div class="form-group">
-              <label class="form-label" contenteditable="true">Years of Business Experience</label>
-              <input type="number" class="form-input" id="ind-exp-years-input" placeholder="e.g. 8" value="8">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="form-label" contenteditable="true">Billing / Residence Address</label>
-            <input type="text" class="form-input" id="ind-address-input" placeholder="Enter complete home or billing address" value="Sector 2, Viman Nagar, Pune - 411014">
-          </div>
-        `;
+    // Toggle Intent Cards (Buy / Sell)
+    function toggleIntentCard(type) {
+      const card = document.getElementById(`intent-card-${type}`);
+      if (card) {
+        card.classList.toggle('selected');
       }
     }
 
-    // Navigation and rendering of Wizard steps
-    function renderStep(step) {
-      // Hide all step sections
-      document.querySelectorAll('.wizard-step-content').forEach(section => {
-        section.classList.remove('active');
-      });
-
-      // Show the selected step
-      const activeSection = document.getElementById(`step-${step}-content`);
-      if (activeSection) {
-        activeSection.classList.add('active');
+    // Toggle Account Type Rows
+    function selectAccountTypeRow(type) {
+      const rows = document.querySelectorAll('.account-type-row');
+      rows.forEach(r => r.classList.remove('selected'));
+      
+      const target = document.getElementById(`account-row-${type}`);
+      if (target) {
+        target.classList.add('selected');
       }
+    }
 
-      // Update stepper container graphics
-      document.querySelectorAll('.stepper-step').forEach(node => {
-        const nodeStep = parseInt(node.getAttribute('data-step'));
-        node.classList.remove('active', 'completed');
-        
-        if (nodeStep === step) {
-          node.classList.add('active');
-        } else if (nodeStep < step) {
-          node.classList.add('completed');
-        }
-      });
+    // Toggle Selection Checkboxes
+    function toggleCheckboxItem(element) {
+      element.classList.toggle('checked');
+    }
 
-      // Update horizontal line progress
-      const stepperProgressBar = document.getElementById('stepper-progress-bar');
-      const progressPercentage = ((step - 1) / 4) * 100;
-      stepperProgressBar.style.width = `${progressPercentage}%`;
+    // Business authentication toggle (Organization Info step)
+    function toggleBusinessAuth(element) {
+      const isOn = element.classList.toggle('authenticated');
+      const label = document.getElementById('business-auth-label');
+      const desc = document.getElementById('business-auth-desc');
 
-      // Update control buttons texts and displays
-      const backBtn = document.getElementById('action-back-btn');
-      const continueBtn = document.getElementById('action-continue-btn');
-      const actionsBar = document.getElementById('wizard-actions-bar');
-
-      actionsBar.style.display = 'flex'; // Ensure actions visible
-
-      if (step === 1) {
-        backBtn.textContent = 'Cancel';
+      if (isOn) {
+        label.textContent = 'Business Authentication Successful';
+        desc.textContent = 'GSTIN, PAN & Udyam records verified';
       } else {
-        backBtn.textContent = 'Back';
-      }
-
-      if (step === 5) {
-        continueBtn.innerHTML = '<span>Submit Application</span> <i class="fa-solid fa-check"></i>';
-        renderReviewSummary(); // Assemble review list
-      } else {
-        continueBtn.innerHTML = '<span>Continue</span> <i class="fa-solid fa-arrow-right"></i>';
+        label.textContent = 'Authenticate business details';
+        desc.textContent = 'Turn on to verify GSTIN, PAN & Udyam records';
       }
     }
 
-    // Direct stepper item click
-    function jumpToStep(step) {
-      if (step > currentStep) {
-        // Validate intermediate steps before jumping forward
-        for (let i = currentStep; i < step; i++) {
-          if (!validateStep(i)) return;
-        }
-      }
-      currentStep = step;
-      renderStep(currentStep);
+    // Custom select dropdown overlay toggler
+    function toggleCustomSelect(container) {
+      // Close other select containers
+      const allSelects = document.querySelectorAll('.select-dropdown-container');
+      allSelects.forEach(sel => {
+        if (sel !== container) sel.classList.remove('open');
+      });
+
+      container.classList.toggle('open');
+      
+      // Stop propagation to prevent document click closing immediately
+      event.stopPropagation();
     }
 
-    // Landing page once onboarding is complete
-    function goToDashboard() {
-      window.location.href = 'process_documents.html';
-    }
+    // Document click binder to close open dropdowns
+    document.addEventListener('click', () => {
+      const allSelects = document.querySelectorAll('.select-dropdown-container');
+      allSelects.forEach(sel => sel.classList.remove('open'));
+    });
 
-    // Move forward one step
-    function goForward() {
-      if (currentStep === 5) {
-        // Handle Final Submit
-        const declarationChecked = document.getElementById('declaration-check').checked;
-        if (!declarationChecked) {
-          alert("Please check the declaration box to submit your onboarding request.");
-          return;
-        }
+    // Custom select option selection handler
+    document.querySelectorAll('.select-option').forEach(option => {
+      option.addEventListener('click', function(e) {
+        const container = this.closest('.select-dropdown-container');
+        const triggerSpan = container.querySelector('.select-trigger span');
+        
+        // Remove select state from siblings
+        container.querySelectorAll('.select-option').forEach(opt => opt.classList.remove('selected'));
+        
+        // Set selected state
+        this.classList.add('selected');
+        triggerSpan.innerText = this.innerText;
+        triggerSpan.classList.remove('placeholder');
+        
+        // Save value attribute on container
+        container.dataset.val = this.dataset.val;
+        
+        // Close menu
+        container.classList.remove('open');
+        e.stopPropagation();
+        
+        // Update summary if needed
+        updateReviewSummary();
+      });
+    });
 
-        // Onboarding done -> open the main app
-        goToDashboard();
+    // Add category tag pill logic
+    function addSelectedCategoryTag() {
+      const dropdown = document.getElementById('dropdown-categories');
+      const selectedOption = dropdown.querySelector('.select-option.selected');
+      
+      if (!selectedOption) {
+        alert('Please select a category first!');
         return;
       }
+      
+      const tagText = selectedOption.innerText;
+      const tagVal = selectedOption.dataset.val;
+      const pillbox = document.getElementById('categories-pillbox');
+      
+      // Check if tag already exists
+      const existing = pillbox.querySelector(`[data-val="${tagVal}"]`);
+      if (existing) {
+        alert('Category is already added!');
+        return;
+      }
+      
+      // Build new Category Pill item
+      const pill = document.createElement('div');
+      pill.className = 'category-pill';
+      pill.dataset.val = tagVal;
+      pill.innerHTML = `
+        <span>${tagText}</span>
+        <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
+      `;
+      
+      pillbox.appendChild(pill);
+      updateReviewSummary();
+    }
 
-      if (validateStep(currentStep)) {
-        currentStep++;
-        renderStep(currentStep);
+    // Remove Category tag pill
+    function removeCategoryTag(iconElement) {
+      const pill = iconElement.closest('.category-pill');
+      if (pill) {
+        pill.remove();
+        updateReviewSummary();
       }
     }
 
-    // Move backward one step
-    function goBack() {
-      if (currentStep === 1) {
-        if (confirm("Are you sure you want to cancel the onboarding process? All details will be reset.")) {
-          resetForm();
+    // Trigger File input click
+    function triggerFileInput(id) {
+      document.getElementById(id).click();
+    }
+
+    // Handle Upload file select
+    function handleFileSelect(inputElement, stateDivId) {
+      if (inputElement.files.length > 0) {
+        const fileName = inputElement.files[0].name;
+        const uploadBox = inputElement.closest('.form-item').querySelector('.upload-box-area');
+        const stateDiv = document.getElementById(stateDivId);
+        
+        uploadBox.style.display = 'none';
+        stateDiv.querySelector('.file-name-span').innerText = fileName;
+        stateDiv.classList.add('active');
+      }
+    }
+
+    // Remove Uploaded file
+    function removeUploadedFile(inputId, stateDivId) {
+      event.stopPropagation();
+      const input = document.getElementById(inputId);
+      const stateDiv = document.getElementById(stateDivId);
+      const uploadBox = input.closest('.form-item').querySelector('.upload-box-area');
+      
+      input.value = '';
+      stateDiv.classList.remove('active');
+      uploadBox.style.display = 'flex';
+    }
+
+    // Dynamic contact card generator
+    function addNewContactCard() {
+      const container = document.getElementById('contact-list-box');
+      const boxCount = container.querySelectorAll('.contact-item-box').length + 1;
+      
+      const card = document.createElement('div');
+      card.className = 'contact-item-box';
+      card.innerHTML = `
+        <i class="fa-solid fa-trash remove-contact-box" onclick="removeContactCard(this)"></i>
+        <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;" contenteditable="true">Additional Contact #${boxCount}</div>
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div class="form-item">
+            <label class="form-label" contenteditable="true">Full Name <span class="required-star">*</span></label>
+            <input type="text" class="form-input" placeholder="Enter contact name">
+          </div>
+          <div class="form-item">
+            <label class="form-label" contenteditable="true">Designation / Role <span class="required-star">*</span></label>
+            <input type="text" class="form-input" placeholder="e.g. Quality Engineer">
+          </div>
+          <div class="form-group-row">
+            <div class="form-item">
+              <label class="form-label" contenteditable="true">Email Address <span class="required-star">*</span></label>
+              <input type="email" class="form-input" placeholder="name@company.com">
+            </div>
+            <div class="form-item">
+              <label class="form-label" contenteditable="true">Phone Number <span class="required-star">*</span></label>
+              <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX">
+            </div>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    }
+
+    // Remove contact card
+    function removeContactCard(iconElement) {
+      const box = iconElement.closest('.contact-item-box');
+      if (box) {
+        box.remove();
+      }
+    }
+
+    // Update review summary inputs dynamically
+    function updateReviewSummary() {
+      const companyVal = document.getElementById('input-company-name').value || '--';
+      const gstinVal = document.getElementById('input-gstin').value || '--';
+      
+      const dropdownEntity = document.getElementById('dropdown-legal-entity');
+      const entityText = dropdownEntity.querySelector('.select-trigger span').innerText;
+      const entityVal = dropdownEntity.dataset.val ? entityText : '--';
+      
+      const dropdownTurnover = document.getElementById('dropdown-turnover');
+      const turnoverText = dropdownTurnover.querySelector('.select-trigger span').innerText;
+      const turnoverVal = dropdownTurnover.dataset.val ? turnoverText : '--';
+      
+      const contactVal = document.querySelector('.input-contact-name').value || '--';
+      
+      // Get category list
+      const pills = document.querySelectorAll('#categories-pillbox .category-pill span');
+      let catArray = [];
+      pills.forEach(p => catArray.push(p.innerText));
+      const categoriesText = catArray.length > 0 ? catArray.join(', ') : '--';
+
+      // Update summaries
+      document.getElementById('summary-org-name').innerText = companyVal;
+      document.getElementById('summary-org-gstin').innerText = gstinVal;
+      document.getElementById('summary-org-type').innerText = entityVal;
+      document.getElementById('summary-org-turnover').innerText = turnoverVal;
+      document.getElementById('summary-org-categories').innerText = categoriesText;
+      document.getElementById('summary-org-contact').innerText = contactVal;
+    }
+
+    // Multi-step navigation logic
+    function navigateToStep(step) {
+      activeStep = step;
+      updateTimelineStepperUI();
+      
+      const phase1 = document.getElementById('onboarding-phase-1');
+      const phase2 = document.getElementById('onboarding-phase-2');
+      const btnBack = document.getElementById('btn-wizard-back');
+      const btnContinue = document.getElementById('btn-wizard-continue');
+
+      if (step <= 3) {
+        // Show Phase 1, Hide Phase 2
+        phase2.classList.remove('active');
+        phase1.classList.add('active');
+        
+        btnBack.classList.remove('visible');
+        btnContinue.innerHTML = 'Save & Continue <i class="fa-solid fa-arrow-right"></i>';
+      } else {
+        // Show Phase 2, Hide Phase 1
+        phase1.classList.remove('active');
+        phase2.classList.add('active');
+        
+        btnBack.classList.add('visible');
+        
+        if (step === 5) {
+          btnContinue.innerHTML = 'Submit Registration <i class="fa-solid fa-circle-check"></i>';
+        } else {
+          btnContinue.innerHTML = 'Save & Continue <i class="fa-solid fa-arrow-right"></i>';
+        }
+      }
+
+      // Update review summary when opening the final step
+      if (step === 5) {
+        updateReviewSummary();
+      }
+    }
+
+    // Timeline stepper circles & progress lines sync
+    function updateTimelineStepperUI() {
+      const stepPercent = ((activeStep - 1) / (maxSteps - 1)) * 100;
+      document.getElementById('wizard-progress-bar').style.width = `${stepPercent}%`;
+      
+      for (let i = 1; i <= maxSteps; i++) {
+        const node = document.getElementById(`step-node-${i}`);
+        if (i === activeStep) {
+          node.className = 'step-node active';
+        } else if (i < activeStep) {
+          node.className = 'step-node completed';
+        } else {
+          node.className = 'step-node';
+        }
+      }
+    }
+
+    // Continue Phase logic (Save & Continue button click)
+    function navigateContinuePhase() {
+      if (activeStep < 5) {
+        // Save state values, move to next logical step / phase
+        if (activeStep <= 3) {
+          navigateToStep(4);
+        } else {
+          navigateToStep(activeStep + 1);
         }
       } else {
-        currentStep--;
-        renderStep(currentStep);
-      }
-    }
-
-    // Form input validation for safety/integrity
-    function validateStep(step) {
-      if (step === 1) {
-        // Step 1: Account Type always has a default selection
-        return true;
-      }
-      
-      if (step === 2) {
-        if (selectedAccountType === 'bajaj') {
-          const empId = document.getElementById('emp-id-input').value.trim();
-          if (!empId) {
-            alert("Please enter your Bajaj Employee ID.");
-            return false;
-          }
-        } else if (selectedAccountType === 'supplier') {
-          const orgName = document.getElementById('org-name-input').value.trim();
-          const gst = document.getElementById('org-gst-input').value.trim();
-          if (!orgName || !gst) {
-            alert("Please fill in both Company Legal Name and GSTIN.");
-            return false;
-          }
-        } else if (selectedAccountType === 'individual') {
-          const expert = document.getElementById('ind-expert-input').value.trim();
-          const pan = document.getElementById('ind-pan-input').value.trim();
-          if (!expert || !pan) {
-            alert("Please fill in your Area of Expertise and PAN Number.");
-            return false;
-          }
+        // Final step: Validate declaration check before final submission
+        const agreeCheck = document.getElementById('declaration-agree-check');
+        if (!agreeCheck.classList.contains('checked')) {
+          alert('Please declare that all details are authentic by checking the declaration statement.');
+          return;
         }
-        return true;
-      }
-
-      if (step === 3) {
-        const name = document.getElementById('ind-name-input').value.trim();
-        const email = document.getElementById('ind-email-input').value.trim();
-        if (!name || !email) {
-          alert("Please enter both your Full Name and Contact Email Address.");
-          return false;
-        }
-        // Email match checks
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(email)) {
-          alert("Please enter a valid email address.");
-          return false;
-        }
-        return true;
-      }
-
-      if (step === 4) {
-        // Allow moving forward if files are present.
-        const filesContainer = document.getElementById('uploaded-files-list');
-        if (filesContainer.children.length === 0) {
-          if (!confirm("No documents have been uploaded. Do you want to proceed anyway?")) {
-            return false;
-          }
-        }
-        return true;
-      }
-
-      return true;
-    }
-
-    // Build the Summary Details dynamically for Step 5 Review screen
-    function renderReviewSummary() {
-      const summaryContainer = document.getElementById('review-summary-container');
-      
-      let accountTypeName = '';
-      if (selectedAccountType === 'bajaj') accountTypeName = 'Bajaj Auto Ltd. (Internal Account)';
-      if (selectedAccountType === 'supplier') accountTypeName = 'Supplier / Vendor (External Account)';
-      if (selectedAccountType === 'individual') accountTypeName = 'Individual Consultant (Individual Account)';
-
-      let step2SummaryHTML = '';
-      if (selectedAccountType === 'bajaj') {
-        const id = document.getElementById('emp-id-input').value;
-        const dept = document.getElementById('emp-dept-input').value;
-        const plant = document.getElementById('emp-plant-input').value;
-        const mgr = document.getElementById('emp-manager-input').value;
         
-        step2SummaryHTML = `
-          <div class="summary-item">
-            <div class="summary-label">Employee ID</div>
-            <div class="summary-val">${id}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">Department</div>
-            <div class="summary-val">${dept}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">Plant Location</div>
-            <div class="summary-val">${plant}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">Supervisor Name</div>
-            <div class="summary-val">${mgr}</div>
-          </div>
-        `;
-      } else if (selectedAccountType === 'supplier') {
-        const name = document.getElementById('org-name-input').value;
-        const gst = document.getElementById('org-gst-input').value;
-        const reg = document.getElementById('org-reg-input').value;
-        const addr = document.getElementById('org-address-input').value;
-
-        step2SummaryHTML = `
-          <div class="summary-item summary-fullwidth">
-            <div class="summary-label">Company Legal Name</div>
-            <div class="summary-val">${name}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">GSTIN / Tax ID</div>
-            <div class="summary-val">${gst}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">Registration No.</div>
-            <div class="summary-val">${reg}</div>
-          </div>
-          <div class="summary-item summary-fullwidth">
-            <div class="summary-label">Registered Corporate Address</div>
-            <div class="summary-val">${addr}</div>
-          </div>
-        `;
-      } else if (selectedAccountType === 'individual') {
-        const expert = document.getElementById('ind-expert-input').value;
-        const pan = document.getElementById('ind-pan-input').value;
-        const exp = document.getElementById('ind-exp-years-input').value;
-        const addr = document.getElementById('ind-address-input').value;
-
-        step2SummaryHTML = `
-          <div class="summary-item summary-fullwidth">
-            <div class="summary-label">Area of Expertise</div>
-            <div class="summary-val">${expert}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">PAN Number</div>
-            <div class="summary-val">${pan}</div>
-          </div>
-          <div class="summary-item">
-            <div class="summary-label">Experience (Years)</div>
-            <div class="summary-val">${exp} Years</div>
-          </div>
-          <div class="summary-item summary-fullwidth">
-            <div class="summary-label">Billing Address</div>
-            <div class="summary-val">${addr}</div>
-          </div>
-        `;
-      }
-
-      // Step 3 values
-      const pName = document.getElementById('ind-name-input').value;
-      const pRole = document.getElementById('ind-role-input').value;
-      const pEmail = document.getElementById('ind-email-input').value;
-      const pPhone = document.getElementById('ind-phone-input').value;
-
-      // Step 4 files list
-      const filesList = [];
-      document.querySelectorAll('.file-item').forEach(item => {
-        const fName = item.querySelector('.file-name').textContent;
-        filesList.push(fName);
-      });
-      const filesDisplay = filesList.length > 0 ? filesList.join(", ") : "No files uploaded";
-
-      summaryContainer.innerHTML = `
-        <!-- Account type section -->
-        <div class="summary-section">
-          <div class="summary-sec-title">
-            <span>Account Parameters</span>
-            <a onclick="jumpToStep(1)" class="summary-edit-link">Edit</a>
-          </div>
-          <div class="summary-grid">
-            <div class="summary-item summary-fullwidth">
-              <div class="summary-label">Selected Account Profile</div>
-              <div class="summary-val">${accountTypeName}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 Section -->
-        <div class="summary-section">
-          <div class="summary-sec-title">
-            <span>Verification Credentials</span>
-            <a onclick="jumpToStep(2)" class="summary-edit-link">Edit</a>
-          </div>
-          <div class="summary-grid">
-            ${step2SummaryHTML}
-          </div>
-        </div>
-
-        <!-- Step 3 Section -->
-        <div class="summary-section">
-          <div class="summary-sec-title">
-            <span>Identity Details</span>
-            <a onclick="jumpToStep(3)" class="summary-edit-link">Edit</a>
-          </div>
-          <div class="summary-grid">
-            <div class="summary-item">
-              <div class="summary-label">Contact Person</div>
-              <div class="summary-val">${pName}</div>
-            </div>
-            <div class="summary-item">
-              <div class="summary-label">Designation / Role</div>
-              <div class="summary-val">${pRole}</div>
-            </div>
-            <div class="summary-item">
-              <div class="summary-label">Official Email</div>
-              <div class="summary-val">${pEmail}</div>
-            </div>
-            <div class="summary-item">
-              <div class="summary-label">Phone Number</div>
-              <div class="summary-val">${pPhone}</div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4 Documents Section -->
-        <div class="summary-section">
-          <div class="summary-sec-title">
-            <span>Supporting Documents</span>
-            <a onclick="jumpToStep(4)" class="summary-edit-link">Edit</a>
-          </div>
-          <div class="summary-grid">
-            <div class="summary-item summary-fullwidth">
-              <div class="summary-label">Uploaded Files</div>
-              <div class="summary-val" style="font-size: 11.5px; color: #475569; font-weight: 500;">
-                <i class="fa-solid fa-paperclip" style="color: var(--accent-blue); margin-right: 4px;"></i>
-                ${filesDisplay}
-              </div>
-            </div>
-          </div>
-        </div>
-      `;
-    }
-
-    // Simulate file uploading for interactive design
-    function simulateFileUpload() {
-      const fileNames = [
-        "Incorporation_Certificate_2026.pdf",
-        "Tax_Clearance_Declaration.pdf",
-        "Financial_Audit_2025.pdf",
-        "Quality_Control_ISO_9001.png",
-        "Partner_Onboarding_Reference.pdf"
-      ];
-      
-      const selectedName = fileNames[Math.floor(Math.random() * fileNames.length)];
-      const randomSize = (Math.random() * (4.2 - 0.5) + 0.5).toFixed(1);
-      const isPdf = selectedName.endsWith('.pdf');
-      const fileId = 'file-' + Date.now();
-
-      const fileListContainer = document.getElementById('uploaded-files-list');
-
-      const fileItemHTML = `
-        <div class="file-item" id="${fileId}" style="animation: fadeIn 0.3s ease;">
-          <div class="file-info">
-            <i class="fa-regular ${isPdf ? 'fa-file-pdf' : 'fa-file-image'}"></i>
-            <div>
-              <span class="file-name" contenteditable="true">${selectedName}</span>
-              <span class="file-size" contenteditable="true">(${randomSize} MB)</span>
-            </div>
-          </div>
-          <button class="remove-file-btn" onclick="removeFile('${fileId}')"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-      `;
-
-      fileListContainer.insertAdjacentHTML('beforeend', fileItemHTML);
-    }
-
-    // Remove file item from Step 4 list
-    function removeFile(id) {
-      const fileItem = document.getElementById(id);
-      if (fileItem) {
-        fileItem.style.opacity = '0';
-        fileItem.style.transform = 'scale(0.95)';
-        setTimeout(() => {
-          fileItem.remove();
-        }, 200);
+        // Registration submitted -> go to the REQ-250801 Workspace (supply link) page
+        window.location.href = 'supplylink.html';
       }
     }
 
-    // Reset Form back to initial state
-    function resetForm() {
-      currentStep = 1;
-      selectAccountType('bajaj');
-      
-      // Clear inputs to defaults
-      document.getElementById('ind-name-input').value = "Prashant Sagar";
-      document.getElementById('ind-role-input').value = "Sales Director";
-      document.getElementById('ind-email-input').value = "prashant@aashita.ai";
-      document.getElementById('ind-phone-input').value = "+91 98765 43210";
-      
-      // Reset files list to original 2 files
-      const fileListContainer = document.getElementById('uploaded-files-list');
-      fileListContainer.innerHTML = `
-        <div class="file-item" id="file-1">
-          <div class="file-info">
-            <i class="fa-regular fa-file-pdf"></i>
-            <div>
-              <span class="file-name" contenteditable="true">Business_Registration_Certificate.pdf</span>
-              <span class="file-size" contenteditable="true">(1.2 MB)</span>
-            </div>
-          </div>
-          <button class="remove-file-btn" onclick="removeFile('file-1')"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-        <div class="file-item" id="file-2">
-          <div class="file-info">
-            <i class="fa-regular fa-file-image"></i>
-            <div>
-              <span class="file-name" contenteditable="true">Company_PAN_Card.png</span>
-              <span class="file-size" contenteditable="true">(450 KB)</span>
-            </div>
-          </div>
-          <button class="remove-file-btn" onclick="removeFile('file-2')"><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-      `;
+    // Back button Phase transition
+    function navigateBackPhase() {
+      if (activeStep > 3) {
+        navigateToStep(3);
+      }
+    }
 
-      // Reset checkbox
-      document.getElementById('declaration-check').checked = true;
-
-      // Render step 1
-      renderStep(1);
+    // Close success overlay and redirect
+    function closeSuccessModalAndRedirect() {
+      document.getElementById('success-submit-modal').classList.remove('active');
+      alert('Redirecting to Platform Overview...');
+      window.location.href = 'index.html';
     }
   </script>
 </body>
