@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aashita Intelligence 360 — RFQ REQ-250801</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  
+  <style>
+    /* ===== PALETTE & ROOT ===== */
+    :root {
+      --bg-app: #f8fafc;
+      --bg-sidebar: #0b1329;
+      --bg-sidebar-hover: #1e293b;
+      --bg-sidebar-active: #2563eb;
+      --text-sidebar: #94a3b8;
+      --text-sidebar-active: #ffffff;
+      --border-sidebar: rgba(255, 255, 255, 0.06);
+      
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-soft: #eff6ff;
+      --accent-blue-border: #bfdbfe;
+      
+      --accent-green: #10b981;
+      --accent-green-soft: #ecfdf5;
+      --accent-green-border: #a7f3d0;
+      
+      --accent-orange: #f59e0b;
+      --accent-orange-soft: #fffbeb;
+      --accent-orange-border: #fde68a;
+      
+      --accent-purple: #8b5cf6;
+      --accent-purple-soft: #f5f3ff;
+      --accent-purple-border: #ddd6fe;
+      
+      --border-color: #e2e8f0;
+      --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-primary);
+      background-color: var(--bg-app);
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+    }
+
+    /* Editable highlight */
+    [contenteditable="true"] {
+      position: relative;
+      outline: none;
+      border-radius: 4px;
+      padding: 1px 4px;
+      transition: background 0.15s;
+    }
+    [contenteditable="true"]:hover {
+      background: rgba(37, 99, 235, 0.05);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+    [contenteditable="true"]:focus {
+      background: rgba(37, 99, 235, 0.08);
+      box-shadow: 0 0 0 2px var(--accent-blue);
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* ===== APP GRID LAYOUT ===== */
+    .app-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 240px;
+      background-color: var(--bg-sidebar);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 50;
+      color: var(--text-sidebar);
+      border-right: 1px solid var(--border-sidebar);
+    }
+
+    .sidebar.collapsed {
+      width: 68px;
+    }
+
+    .sidebar-header {
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-sidebar);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .logo-container {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .logo-container i {
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .logo-info {
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.2s;
+    }
+    .sidebar.collapsed .logo-info {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .logo-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo-subtitle {
+      font-size: 9px;
+      color: var(--text-sidebar);
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+
+    /* Nav Items */
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 8px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-item i {
+      font-size: 15px;
+      width: 24px;
+      text-align: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+      transition: margin 0.2s;
+    }
+
+    .sidebar.collapsed .nav-item i {
+      margin-right: 0;
+    }
+
+    .nav-item span {
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .sidebar.collapsed .nav-item span {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .nav-item:hover {
+      background-color: var(--bg-sidebar-hover);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background-color: var(--bg-sidebar-active);
+      color: var(--text-sidebar-active);
+      font-weight: 600;
+    }
+
+    .nav-badge {
+      position: absolute;
+      right: 12px;
+      background-color: #ef4444;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .sidebar.collapsed .nav-badge {
+      top: 4px;
+      right: 4px;
+    }
+
+    /* Sidebar User profile */
+    .sidebar-footer {
+      padding: 12px;
+      border-top: 1px solid var(--border-sidebar);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-user-card {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      gap: 10px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .sidebar-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--accent-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .sidebar-user-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 11px;
+      transition: opacity 0.2s;
+    }
+    .sidebar.collapsed .sidebar-user-info,
+    .sidebar.collapsed .sidebar-user-chevron {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+    .sidebar-user-name {
+      font-weight: 600;
+      color: #fff;
+    }
+    .sidebar-user-role {
+      color: var(--text-sidebar);
+      opacity: 0.8;
+      font-size: 10px;
+    }
+    .sidebar-user-chevron {
+      margin-left: auto;
+      font-size: 10px;
+    }
+
+    /* Organization Switcher */
+    .sidebar-org-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.2);
+      font-size: 11px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+    .sidebar-org-switcher i {
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+    .sidebar-org-info {
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.2s;
+    }
+    .sidebar.collapsed .sidebar-org-info,
+    .sidebar.collapsed .sidebar-org-chevron {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+    .sidebar-org-label {
+      font-size: 9px;
+      color: var(--text-sidebar);
+      opacity: 0.6;
+    }
+    .sidebar-org-name {
+      color: #fff;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+    .sidebar-org-chevron {
+      margin-left: auto;
+      font-size: 9px;
+    }
+
+    /* Collapse Menu Button */
+    .collapse-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      color: var(--text-sidebar);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border-top: 1px solid var(--border-sidebar);
+    }
+    .collapse-btn i {
+      font-size: 14px;
+      width: 24px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .sidebar.collapsed .collapse-btn i {
+      transform: rotate(180deg);
+    }
+    .sidebar.collapsed .collapse-btn span {
+      opacity: 0;
+      width: 0;
+      pointer-events: none;
+    }
+
+    /* ===== MAIN CONTENT WRAPPER ===== */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* ===== TOP HEADER ===== */
+    .top-header {
+      background-color: #fff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .top-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .breadcrumbs a:hover {
+      color: var(--accent-blue);
+    }
+    .breadcrumbs i {
+      font-size: 10px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-row h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1;
+    }
+    .badge-negotiation {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+    .badge-casting {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+    .badge-pending {
+      background-color: var(--accent-orange-soft);
+      color: var(--accent-orange);
+      border: 1px solid var(--accent-orange-border);
+    }
+    .badge-signed {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .subtitle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .top-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all 0.15s;
+    }
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      background-color: #fff;
+    }
+    .btn-outline:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+    .btn-purple {
+      background-color: var(--accent-purple);
+      color: #fff;
+    }
+    .btn-purple:hover {
+      background-color: #7c3aed;
+    }
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
+      position: relative;
+    }
+    .btn-icon .btn-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #ef4444;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      min-width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+    .user-badge-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 11px;
+      text-align: right;
+    }
+    .user-badge-name {
+      font-weight: 600;
+    }
+    .user-badge-company {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Actions dropdown wrapper */
+    .dropdown-container {
+      position: relative;
+    }
+    .actions-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 160px;
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+      margin-top: 4px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+    }
+    .actions-dropdown.show {
+      display: flex;
+    }
+    .dropdown-item {
+      padding: 10px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .dropdown-item:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* ===== CONTENT WORKSPACE ===== */
+    .content-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Scrollable center workspace */
+    .workspace-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Sidebar right timeline pane */
+    .timeline-pane {
+      width: 280px;
+      border-left: 1px solid var(--border-color);
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      padding: 24px 18px;
+      gap: 24px;
+    }
+
+    /* ===== WORKFLOW STEPPER ===== */
+    .stepper-container {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .stepper-line-container {
+      position: absolute;
+      top: 14px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background-color: #e2e8f0;
+      z-index: 1;
+    }
+    .stepper-line-progress {
+      width: 14.28%; /* Active up to step 2 */
+      height: 100%;
+      background-color: var(--accent-green);
+      transition: width 0.3s;
+    }
+
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      position: relative;
+      width: 80px;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 2px solid #cbd5e1;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .step-node.completed .step-circle {
+      background-color: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .step-node.active .step-circle {
+      background-color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .step-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      white-space: nowrap;
+    }
+    .step-node.completed .step-title,
+    .step-node.active .step-title {
+      color: var(--text-primary);
+    }
+
+    .step-subtitle {
+      font-size: 8px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ===== THREE CARD SUMMARY GRID ===== */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .summary-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .summary-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+    .summary-card-header i {
+      color: var(--accent-blue);
+    }
+
+    /* RFQ info style */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+    .info-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      font-size: 12px;
+    }
+    .info-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .info-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Docs list style */
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+    .doc-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+    .doc-item:hover {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+    .doc-icon {
+      color: #ef4444; /* PDF color */
+      font-size: 16px;
+    }
+    .doc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+    }
+    .doc-name {
+      font-weight: 600;
+      font-size: 11.5px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .doc-size {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .doc-lock {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+    .doc-item.unlocked .doc-lock {
+      color: var(--accent-green);
+      transform: scale(0.9);
+    }
+
+    /* Supplier details card style */
+    .supplier-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      padding: 12px 0;
+      flex: 1;
+    }
+    .supplier-logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #f1f5f9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+    .supplier-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .supplier-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .supplier-info-box {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .supplier-info-box span a {
+      color: var(--accent-blue);
+    }
+    .supplier-info-box span a:hover {
+      text-decoration: underline;
+    }
+
+    .card-footer-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-top: 16px;
+      cursor: pointer;
+    }
+    .card-footer-link:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* ===== NDA CARD & BANNER ===== */
+    .nda-section-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nda-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .nda-header-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--accent-purple-soft);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+    .nda-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .nda-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .nda-header-subtitle {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Left - Center - Right graphic */
+    .nda-graph-row {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 2fr;
+      align-items: center;
+      gap: 20px;
+      background-color: #fafbfc;
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+    }
+    @media (max-width: 800px) {
+      .nda-graph-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .nda-party-box {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+    .party-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .party-name-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .party-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 10px;
+    }
+    .party-logo.bajaj-logo {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+    }
+    .party-name {
+      font-weight: 700;
+      font-size: 12px;
+    }
+    .party-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+    .party-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .party-meta-row i {
+      color: var(--text-muted);
+      width: 14px;
+    }
+
+    /* Central mutual NDA box */
+    .nda-mutual-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      position: relative;
+    }
+    .nda-mutual-icon-container {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--accent-purple-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
+      font-size: 18px;
+      border: 2px solid var(--accent-purple-border);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      z-index: 5;
+    }
+    .nda-mutual-box.signed .nda-mutual-icon-container {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border-color: var(--accent-green-border);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+    .nda-mutual-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+    .nda-mutual-sub {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    /* Connection dashed arrows */
+    .nda-mutual-arrows {
+      position: absolute;
+      top: 22px;
+      width: calc(100% + 100px);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 1;
+    }
+    .nda-arrow {
+      height: 1px;
+      border-top: 2px dashed #cbd5e1;
+      width: 40%;
+    }
+    @media (max-width: 800px) {
+      .nda-mutual-arrows { display: none; }
+    }
+
+    /* Info Alert bar */
+    .nda-alert-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background-color: var(--accent-blue-soft);
+      border: 1px solid var(--accent-blue-border);
+      color: var(--accent-blue);
+      font-weight: 500;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+    .nda-alert-bar.success {
+      background-color: var(--accent-green-soft);
+      border-color: var(--accent-green-border);
+      color: var(--accent-green);
+    }
+
+    /* ===== SUPPLIER RESPONSE STEPS ===== */
+    .supplier-response-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .response-section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .response-section-title h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .response-section-title span {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .response-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .response-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .response-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+    .response-icon-box.completed {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+    }
+    .response-icon-box.pending {
+      background-color: var(--accent-orange-soft);
+      color: var(--accent-orange);
+    }
+
+    .response-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .response-details-title {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+    .response-details-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* ===== TIMELINE PANE ===== */
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 20px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background-color: #f1f5f9;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: -20px;
+      top: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .timeline-item.completed .timeline-node {
+      background-color: var(--accent-green);
+      box-shadow: 0 0 0 2px var(--accent-green-soft);
+    }
+    .timeline-item.active .timeline-node {
+      background-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px var(--accent-blue-soft);
+    }
+
+    .timeline-header {
+      font-weight: 600;
+      font-size: 11.5px;
+      color: var(--text-primary);
+    }
+    .timeline-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+    .timeline-time {
+      font-size: 9px;
+      color: var(--text-muted);
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+
+    /* ===== NEED HELP PANE ===== */
+    .help-card {
+      background: linear-gradient(135deg, #1e1b4b, #311042);
+      border-radius: 12px;
+      padding: 16px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .help-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+    .help-title {
+      font-weight: 700;
+      font-size: 13px;
+    }
+    .help-subtitle {
+      font-size: 10px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 2px;
+    }
+
+    .help-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #d946ef);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .help-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11px;
+    }
+    .help-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .help-contact-item i {
+      color: rgba(255,255,255,0.6);
+      width: 14px;
+      text-align: center;
+    }
+
+    /* ===== MODAL DIALOGS ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-container {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+      overflow: hidden;
+      animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+    .modal-close-btn {
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .modal-close-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      background-color: #f8fafc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Signing form styles */
+    .nda-document-viewer {
+      background-color: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #334155;
+      height: 240px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+    .nda-document-viewer h4 {
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .signature-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .signature-label {
+      font-weight: 600;
+      font-size: 12px;
+    }
+    .signature-input-wrapper {
+      position: relative;
+    }
+    .signature-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 13px;
+    }
+    .signature-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    }
+    .signature-preview {
+      margin-top: 8px;
+      padding: 12px;
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      background-color: #fafbfc;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: #1e3a8a;
+    }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideIn {
+      from { transform: scale(0.95) translateY(10px); opacity: 0; }
+      to { transform: scale(1) translateY(0); opacity: 1; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+    
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <i class="fas fa-infinity"></i>
+        </div>
+        <div class="logo-info">
+          <span class="logo-title" contenteditable="true">Aashita Intelligence 360</span>
+          <span class="logo-subtitle" contenteditable="true">Connect. Collaborate. Deliver.</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item" href="supplylink.html">
+          <i class="fas fa-chart-pie"></i>
+          <span>Dashboard</span>
+        </a>
+        <a class="nav-item active" href="supplylink_360.html">
+          <i class="fas fa-file-invoice"></i>
+          <span>Requirements (RFQ)</span>
+        </a>
+        <a class="nav-item" href="index.html">
+          <i class="fas fa-folder"></i>
+          <span>My Projects</span>
+        </a>
+        <a class="nav-item" href="supplychats.html">
+          <i class="fas fa-comment-dots"></i>
+          <span>Chats</span>
+          <span class="nav-badge">6</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-users"></i>
+          <span>Suppliers</span>
+        </a>
+        <a class="nav-item" href="process_documents.html">
+          <i class="fas fa-file-alt"></i>
+          <span>Process Documents</span>
+        </a>
+        <a class="nav-item" href="drawing_integration.html">
+          <i class="fas fa-drafting-compass"></i>
+          <span>Drawing Integration</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-chart-line"></i>
+          <span>Production Tracking</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-shield-alt"></i>
+          <span>Quality Management</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-truck"></i>
+          <span>Deliveries & Logistics</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-wallet"></i>
+          <span>Accounts & Finance</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-chart-bar"></i>
+          <span>Reports & Analytics</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-brain"></i>
+          <span>AI Assistant</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-bell"></i>
+          <span>Notifications</span>
+          <span class="nav-badge">12</span>
+        </a>
+        <a class="nav-item" href="#">
+          <i class="fas fa-cog"></i>
+          <span>Settings</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar footer user info & switcher -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar">JS</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name" contenteditable="true">Jasneek Singh</span>
+            <span class="sidebar-user-role" contenteditable="true">Engineering Manager</span>
+          </div>
+          <i class="fas fa-chevron-down sidebar-user-chevron"></i>
+        </div>
+
+        <div class="sidebar-org-switcher">
+          <i class="fas fa-building"></i>
+          <div class="sidebar-org-info">
+            <span class="sidebar-org-label">Switch Organization</span>
+            <span class="sidebar-org-name" contenteditable="true">Bajaj Auto Ltd. (Plant: Chakan)</span>
+          </div>
+          <i class="fas fa-chevron-down sidebar-org-chevron"></i>
+        </div>
+      </div>
+
+      <div class="collapse-btn" onclick="toggleSidebar()">
+        <i class="fas fa-arrow-left" id="collapseArrow"></i>
+        <span>Collapse Menu</span>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT WRAPPER ===== -->
+    <main class="main-wrapper">
+      
+      <!-- ===== TOP HEADER ===== -->
+      <header class="top-header">
+        <div class="top-header-left">
+          <div class="breadcrumbs">
+            <a href="#">Dashboard</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="#">RFQ</a>
+            <i class="fas fa-chevron-right"></i>
+            <span contenteditable="true">REQ-250801</span>
+          </div>
+          <div class="title-row">
+            <h1 contenteditable="true">RFQ Details – REQ-250801</h1>
+            <span class="badge badge-negotiation" contenteditable="true">In Negotiation</span>
+          </div>
+          <div class="subtitle-row">
+            <span contenteditable="true">Engine Bracket – Casting</span>
+            <span class="badge badge-casting" contenteditable="true">Casting</span>
+            <span>•</span>
+            <span contenteditable="true">Bajaj Auto Ltd. (Chakan Plant)</span>
+          </div>
+        </div>
+
+        <div class="top-header-right">
+          <button class="btn btn-outline" onclick="window.history.back()"><i class="fas fa-arrow-left"></i> Back</button>
+          
+          <!-- Actions button with custom dropdown -->
+          <div class="dropdown-container">
+            <button class="btn btn-primary" onclick="toggleActionsDropdown(event)">Actions <i class="fas fa-chevron-down"></i></button>
+            <div class="actions-dropdown" id="actionsDropdown">
+              <div class="dropdown-item" onclick="alert('Updating RFQ Stage...')">Change Status</div>
+              <div class="dropdown-item" onclick="alert('Opening RFQ settings...')">RFQ Settings</div>
+              <div class="dropdown-item" onclick="alert('Inviting sub-suppliers...')">Manage Team</div>
+            </div>
+          </div>
+          
+          <button class="btn btn-outline" onclick="alert('Exporting RFQ Document...')">Export RFQ</button>
+          
+          <button class="btn btn-primary" style="background-color: var(--accent-green);" onclick="openCreateRfqModal()">
+            <i class="fas fa-plus"></i> Create RFQ
+          </button>
+          
+          <button class="btn btn-outline btn-icon" title="Notifications" onclick="alert('Opening Notifications...')">
+            <i class="fas fa-bell"></i>
+            <span class="btn-badge">12</span>
+          </button>
+          
+          <div class="user-badge" onclick="alert('Viewing profile...')">
+            <div class="user-badge-info">
+              <span class="user-badge-name" contenteditable="true">Jasneek Singh</span>
+              <span class="user-badge-company" contenteditable="true">Bajaj Auto Ltd.</span>
+            </div>
+            <div class="sidebar-user-avatar" style="width: 28px; height: 28px; font-size: 10px;">JS</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== WORKSPACE PANE SYSTEM ===== -->
+      <div class="content-body">
+        
+        <!-- Left center scrollable area -->
+        <div class="workspace-pane">
+          
+          <!-- HORIZONTAL STEPPER -->
+          <div class="stepper-container">
+            <div class="stepper">
+              <div class="stepper-line-container">
+                <div class="stepper-line-progress" id="stepperProgressBar"></div>
+              </div>
+              
+              <div class="step-node completed" id="stepNode-1">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <span class="step-title" contenteditable="true">RFQ Created</span>
+                <span class="step-subtitle" contenteditable="true">09 Aug 2026</span>
+              </div>
+              
+              <div class="step-node active" id="stepNode-2">
+                <div class="step-circle" id="stepCircle-2">2</div>
+                <span class="step-title" contenteditable="true">Sent to Supplier</span>
+                <span class="step-subtitle" contenteditable="true">09 Aug 2026</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-3">
+                <div class="step-circle" id="stepCircle-3">3</div>
+                <span class="step-title" contenteditable="true">Supplier Response</span>
+                <span class="step-subtitle" id="stepSub-3" contenteditable="true">Pending</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-4">
+                <div class="step-circle" id="stepCircle-4">4</div>
+                <span class="step-title" contenteditable="true">NDA & Agreements</span>
+                <span class="step-subtitle" id="stepSub-4" contenteditable="true">Pending</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-5">
+                <div class="step-circle">5</div>
+                <span class="step-title" contenteditable="true">Quotation Submitted</span>
+                <span class="step-subtitle" contenteditable="true">Pending</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-6">
+                <div class="step-circle">6</div>
+                <span class="step-title" contenteditable="true">Evaluation</span>
+                <span class="step-subtitle" contenteditable="true">Pending</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-7">
+                <div class="step-circle">7</div>
+                <span class="step-title" contenteditable="true">PO Issued</span>
+                <span class="step-subtitle" contenteditable="true">Pending</span>
+              </div>
+              
+              <div class="step-node" id="stepNode-8">
+                <div class="step-circle">8</div>
+                <span class="step-title" contenteditable="true">Closed</span>
+                <span class="step-subtitle" contenteditable="true">Pending</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUMMARY GRID: THREE CARDS -->
+          <div class="summary-grid">
+            
+            <!-- Card 1: RFQ Info -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-file-contract"></i>
+                <span contenteditable="true">RFQ Information</span>
+              </div>
+              <div class="info-list">
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">RFQ Number</span>
+                  <span class="info-value" contenteditable="true">REQ-250801</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Part Name</span>
+                  <span class="info-value" contenteditable="true">Engine Bracket - Casting</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Part Number</span>
+                  <span class="info-value" contenteditable="true">EB-CAST-001</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Quantity (Annual)</span>
+                  <span class="info-value" contenteditable="true">50,000 Nos</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Delivery Location</span>
+                  <span class="info-value" contenteditable="true">Bajaj Plant, Chakan, Pune</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Target Price</span>
+                  <span class="info-value" contenteditable="true">₹ 412.50 / - Per Part</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Target Delivery</span>
+                  <span class="info-value" contenteditable="true">30 Sep 2026</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label" contenteditable="true">Payment Terms</span>
+                  <span class="info-value" contenteditable="true">45 Days from GRN</span>
+                </div>
+              </div>
+              <div class="card-footer-link" onclick="alert('Viewing full RFQ details...')">
+                <span>View Full RFQ Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 2: Documents Shared -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-folder-open"></i>
+                <span contenteditable="true">Documents Shared</span>
+              </div>
+              <div class="docs-list" id="sharedDocsList">
+                <div class="doc-item" onclick="handleDocDownload('Engine_Bracket_Rev_D.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name" contenteditable="true">Engine_Bracket_Rev_D.pdf</span>
+                    <span class="doc-size" contenteditable="true">2.4 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-1"></i>
+                </div>
+                
+                <div class="doc-item" onclick="handleDocDownload('Technical_Specifications.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name" contenteditable="true">Technical_Specifications.pdf</span>
+                    <span class="doc-size" contenteditable="true">1.1 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-2"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Material_Specification.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name" contenteditable="true">Material_Specification.pdf</span>
+                    <span class="doc-size" contenteditable="true">0.8 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-3"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Process_Requirements.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name" contenteditable="true">Process_Requirements.pdf</span>
+                    <span class="doc-size" contenteditable="true">1.6 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-4"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Quality_Requirements.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name" contenteditable="true">Quality_Requirements.pdf</span>
+                    <span class="doc-size" contenteditable="true">1.2 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-5"></i>
+                </div>
+              </div>
+              <div class="card-footer-link" onclick="alert('Viewing all documents...')">
+                <span id="docCountText">View All Documents (8)</span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 3: Supplier ae -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-users-cog"></i>
+                <span contenteditable="true">Sent To Supplier</span>
+              </div>
+              <div class="supplier-profile">
+                <div class="supplier-logo-circle" contenteditable="true">AE</div>
+                <div class="supplier-meta-row">
+                  <span class="supplier-name" contenteditable="true">Aashita Enterprises</span>
+                  <span class="badge badge-negotiation" style="padding: 2px 6px; font-size: 8px;" contenteditable="true">Invited</span>
+                </div>
+                <div class="supplier-info-box">
+                  <span contenteditable="true">Supplier Code: SUP-01234</span>
+                  <span>Email: <a href="mailto:info@aashitaenterprises.com" contenteditable="true">info@aashitaenterprises.com</a></span>
+                  <span contenteditable="true">Contact: +91 98765 43210</span>
+                </div>
+              </div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="alert('Redirecting to supplier profile...')">View Supplier Profile</button>
+            </div>
+
+          </div>
+
+          <!-- NDA CARD -->
+          <div class="nda-section-card">
+            <div class="nda-header">
+              <div class="nda-header-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="nda-header-text">
+                <span class="nda-header-title" contenteditable="true">NDA & Confidentiality Agreement</span>
+                <span class="nda-header-subtitle" contenteditable="true">To protect confidential information and drawings shared for this RFQ, an NDA must be signed before proceeding further.</span>
+              </div>
+            </div>
+
+            <!-- Graph Connection -->
+            <div class="nda-graph-row">
+              <!-- Bajaj -->
+              <div class="nda-party-box">
+                <div class="party-title-row">
+                  <div class="party-name-container">
+                    <div class="party-logo bajaj-logo">BJ</div>
+                    <span class="party-name" contenteditable="true">Bajaj Auto Ltd.</span>
+                  </div>
+                  <span class="badge badge-signed" contenteditable="true">Signed</span>
+                </div>
+                <div class="party-meta">
+                  <div class="party-meta-row">
+                    <i class="fas fa-user"></i>
+                    <span contenteditable="true">Manoj Kumar (Manager - Legal)</span>
+                  </div>
+                  <div class="party-meta-row">
+                    <i class="far fa-calendar-check"></i>
+                    <span contenteditable="true">09 Aug 2026, 11:20 AM</span>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-icon" style="width: 100%; border-radius: 6px; height: 28px;" onclick="alert('Opening Signed NDA document...')">
+                  <i class="far fa-file-pdf"></i> View Signed NDA
+                </button>
+              </div>
+
+              <!-- Center Connection -->
+              <div class="nda-mutual-box" id="mutualNdaBox">
+                <div class="nda-mutual-icon-container">
+                  <i class="fas fa-file-signature" id="mutualNdaIcon"></i>
+                </div>
+                <span class="nda-mutual-label" contenteditable="true">Mutual NDA</span>
+                <span class="nda-mutual-sub" contenteditable="true">Confidentiality Agreement</span>
+                <span class="badge badge-pending" id="mutualNdaBadge" style="margin-top: 4px;" contenteditable="true">Awaiting Supplier Signature</span>
+                
+                <div class="nda-mutual-arrows">
+                  <div class="nda-arrow"></div>
+                  <div class="nda-arrow"></div>
+                </div>
+              </div>
+
+              <!-- Aashita -->
+              <div class="nda-party-box">
+                <div class="party-title-row">
+                  <div class="party-name-container">
+                    <div class="party-logo">AE</div>
+                    <span class="party-name" contenteditable="true">Aashita Enterprises</span>
+                  </div>
+                  <span class="badge badge-pending" id="supplierNdaBadge" contenteditable="true">Pending</span>
+                </div>
+                <div class="party-meta">
+                  <div class="party-meta-row">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="supplierNdaStatus" contenteditable="true">Awaiting Review & Signature</span>
+                  </div>
+                  <div class="party-meta-row">
+                    <i class="far fa-clock"></i>
+                    <span id="supplierNdaTime" contenteditable="true">Requested: 09 Aug 2026, 11:20 AM</span>
+                  </div>
+                </div>
+                <button class="btn btn-purple" id="ndaSignBtn" style="width: 100%; height: 28px; border-radius: 6px;" onclick="openNdaModal()">
+                  Review & Sign NDA
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Warning / Success banner -->
+            <div class="nda-alert-bar" id="ndaAlertBar">
+              <i class="fas fa-info-circle" id="ndaAlertIcon"></i>
+              <span id="ndaAlertText" contenteditable="true">Supplier must sign the NDA to access all confidential documents and submit quotation.</span>
+            </div>
+          </div>
+
+          <!-- SUPPLIER RESPONSE SECTION -->
+          <div class="supplier-response-section">
+            <div class="response-section-title">
+              <h3 contenteditable="true">Supplier Response</h3>
+              <span contenteditable="true">Supplier has been invited to review the RFQ and respond.</span>
+            </div>
+            
+            <div class="response-grid">
+              
+              <div class="response-card">
+                <div class="response-icon-box completed">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title" contenteditable="true">RFQ Viewed</span>
+                  <span class="response-details-sub" contenteditable="true">09 Aug 2026, 10:05 AM</span>
+                  <span class="badge badge-negotiation" style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;" contenteditable="true">Completed</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box completed">
+                  <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title" contenteditable="true">Interested to Quote</span>
+                  <span class="response-details-sub" contenteditable="true">Aashita has shown interest</span>
+                  <span class="badge badge-negotiation" style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;" contenteditable="true">Completed</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box pending" id="respCardIcon-3">
+                  <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title" contenteditable="true">NDA Signed</span>
+                  <span class="response-details-sub" id="respCardSub-3" contenteditable="true">Awaiting supplier signature</span>
+                  <span class="badge badge-pending" id="respCardBadge-3" style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;" contenteditable="true">Pending</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box pending">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title" contenteditable="true">Quotation Submission</span>
+                  <span class="response-details-sub" contenteditable="true">Not submitted yet</span>
+                  <span class="badge badge-pending" style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;" contenteditable="true">Pending</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT TIMELINE PANE -->
+        <aside class="timeline-pane">
+          <span class="timeline-title" contenteditable="true">RFQ Activity Timeline</span>
+          
+          <div class="timeline" id="timelineList">
+            
+            <div class="timeline-item completed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">RFQ Created</span>
+              <span class="timeline-sub" contenteditable="true">by Rohit Deshmukh (Bajaj Auto Ltd.)</span>
+              <span class="timeline-time" contenteditable="true">09 Aug 2026, 09:15 AM</span>
+            </div>
+
+            <div class="timeline-item completed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">RFQ Sent to Supplier</span>
+              <span class="timeline-sub" contenteditable="true">Aashita Enterprises</span>
+              <span class="timeline-time" contenteditable="true">09 Aug 2026, 09:30 AM</span>
+            </div>
+
+            <div class="timeline-item completed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">Supplier Viewed RFQ</span>
+              <span class="timeline-sub" contenteditable="true">09 Aug 2026, 10:05 AM</span>
+              <span class="timeline-time" contenteditable="true">09 Aug 2026, 10:05 AM</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">Supplier Response</span>
+              <span class="timeline-time" contenteditable="true">Pending</span>
+            </div>
+
+            <div class="timeline-item" id="timelineNodeNDA">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" id="timelineHeaderNDA" contenteditable="true">NDA & Agreements</span>
+              <span class="timeline-time" id="timelineTimeNDA" contenteditable="true">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">Quotation Submission</span>
+              <span class="timeline-time" contenteditable="true">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">Evaluation</span>
+              <span class="timeline-time" contenteditable="true">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">PO Issuance</span>
+              <span class="timeline-time" contenteditable="true">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" contenteditable="true">Closed</span>
+              <span class="timeline-time" contenteditable="true">Pending</span>
+            </div>
+
+          </div>
+
+          <!-- NEED HELP CARD -->
+          <div class="help-card" style="margin-top: auto;">
+            <div class="help-header-row">
+              <div>
+                <span class="help-title" contenteditable="true">Need Help?</span>
+                <p class="help-subtitle" contenteditable="true">Our support team is here to help you.</p>
+              </div>
+              <div class="help-icon-circle">
+                <i class="fas fa-headset"></i>
+              </div>
+            </div>
+            
+            <div class="help-contacts">
+              <div class="help-contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span contenteditable="true">+91 20 2740 7170</span>
+              </div>
+              <div class="help-contact-item">
+                <i class="fas fa-envelope"></i>
+                <span contenteditable="true">support@aashitaintelligence360.com</span>
+              </div>
+              <div class="help-contact-item">
+                <i class="fas fa-clock"></i>
+                <span contenteditable="true">Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ===== NDA REVIEW & SIGN MODAL ===== -->
+  <div class="modal-overlay" id="ndaSignModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="modal-title">Mutual Non-Disclosure Agreement (NDA)</span>
+        <i class="fas fa-times modal-close-btn" onclick="closeNdaModal()"></i>
+      </div>
+      <div class="modal-body">
+        <div class="nda-document-viewer">
+          <h4>MUTUAL CONFIDENTIALITY & NON-DISCLOSURE AGREEMENT</h4>
+          <p>This Mutual Non-Disclosure Agreement (the "Agreement") is entered into as of August 09, 2026, by and between <strong>Bajaj Auto Ltd.</strong>, having its principal place of business at Chakan Plant, Pune, and <strong>Aashita Enterprises</strong>, having its principal place of business at Nashik.</p>
+          <br>
+          <p><strong>1. Purpose:</strong> The parties wish to evaluate a potential business relationship concerning the sourcing and manufacturing of <strong>Engine Bracket Casting (EB-CAST-001)</strong>. In connection with this evaluation, both parties will share certain proprietary drawings, processes, specifications, and commercial estimations.</p>
+          <br>
+          <p><strong>2. Confidential Information:</strong> Confidential Information includes all drawings, specifications, CAD models (specifically EB-CAST-001 revisions), manufacturing details, quality reports, and commercial bids shared during the RFQ cycle.</p>
+          <br>
+          <p><strong>3. Term & Obligations:</strong> The receiving party shall hold all Confidential Information in strict confidence for a period of five (5) years from disclosure. Under no circumstances shall information be distributed to external sub-suppliers without prior written approval.</p>
+        </div>
+
+        <div class="signature-input-group">
+          <label class="signature-label">Type your name to sign digitally:</label>
+          <input type="text" class="signature-input" id="sigInput" placeholder="Aashita Enterprises Representative" oninput="updateSignaturePreview()">
+          <div class="signature-preview" id="sigPreview">Your Signature Preview</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeNdaModal()">Cancel</button>
+        <button class="btn btn-purple" id="submitSigBtn" disabled onclick="completeNdaSigning()">Sign & Complete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CREATE RFQ MODAL ===== -->
+  <div class="modal-overlay" id="createRfqModal">
+    <div class="modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <span class="modal-title">Create New RFQ</span>
+        <i class="fas fa-times modal-close-btn" onclick="closeCreateRfqModal()"></i>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">RFQ Number</label>
+          <input type="text" id="newRfqNumber" value="REQ-250805" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Part Name</label>
+          <input type="text" id="newRfqPartName" placeholder="e.g. Cylinder Head" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Part Number</label>
+          <input type="text" id="newRfqPartNumber" placeholder="e.g. CH-AL-901" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Annual Quantity</label>
+            <input type="text" id="newRfqQty" placeholder="e.g. 20,000 Nos" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Target Price</label>
+            <input type="text" id="newRfqPrice" placeholder="e.g. ₹ 1,200.00" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Sourcing Supplier</label>
+          <input type="text" id="newRfqSupplier" value="Aashita Enterprises" style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeCreateRfqModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitCreateRfq()">Create RFQ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT LOGIC ===== -->
+  <script>
+    let isNdaSigned = false;
+
+    // Create RFQ Modal logic
+    function openCreateRfqModal() {
+      const currentRfqNum = document.querySelector('.breadcrumbs span').innerText;
+      let nextNum = "REQ-250805";
+      if (currentRfqNum.startsWith("REQ-")) {
+        const numPart = parseInt(currentRfqNum.split("-")[1]);
+        if (!isNaN(numPart)) {
+          nextNum = "REQ-" + (numPart + 1);
+        }
+      }
+      document.getElementById('newRfqNumber').value = nextNum;
+      document.getElementById('createRfqModal').classList.add('show');
+    }
+
+    function closeCreateRfqModal() {
+      document.getElementById('createRfqModal').classList.remove('show');
+    }
+
+    function submitCreateRfq() {
+      const rfqNum = document.getElementById('newRfqNumber').value || "REQ-250805";
+      const partName = document.getElementById('newRfqPartName').value || "Cylinder Head";
+      const partNum = document.getElementById('newRfqPartNumber').value || "CH-AL-901";
+      const qty = document.getElementById('newRfqQty').value || "20,000 Nos";
+      const price = document.getElementById('newRfqPrice').value || "₹ 1,200.00";
+      const supplierName = document.getElementById('newRfqSupplier').value || "Aashita Enterprises";
+
+      isNdaSigned = false;
+
+      // Update Titles
+      document.title = "Aashita Intelligence 360 — RFQ " + rfqNum;
+      document.querySelector('.breadcrumbs span').innerText = rfqNum;
+      document.querySelector('.title-row h1').innerText = "RFQ Details – " + rfqNum;
+      document.querySelector('.subtitle-row span:first-child').innerText = partName + " – Casting";
+
+      // Reset Stepper Progress & Nodes
+      document.getElementById('stepperProgressBar').style.width = "14.28%";
+      
+      const step2 = document.getElementById('stepNode-2');
+      step2.className = "step-node active";
+      document.getElementById('stepCircle-2').innerHTML = "2";
+      
+      const step3 = document.getElementById('stepNode-3');
+      step3.className = "step-node";
+      document.getElementById('stepCircle-3').innerHTML = "3";
+      document.getElementById('stepSub-3').innerText = "Pending";
+      
+      const step4 = document.getElementById('stepNode-4');
+      step4.className = "step-node";
+      document.getElementById('stepCircle-4').innerHTML = "4";
+      document.getElementById('stepSub-4').innerText = "Pending";
+
+      // Update RFQ Info Card values
+      const infoValues = document.querySelectorAll('.info-value');
+      if (infoValues.length >= 8) {
+        infoValues[0].innerText = rfqNum;
+        infoValues[1].innerText = partName + " - Casting";
+        infoValues[2].innerText = partNum;
+        infoValues[3].innerText = qty;
+        infoValues[5].innerText = price + " / - Per Part";
+      }
+
+      // Update Documents Shared card to default locked state for new part
+      const cleanPartName = partName.replace(/\s+/g, '_');
+      const docsList = document.getElementById('sharedDocsList');
+      docsList.innerHTML = `
+        <div class="doc-item" onclick="handleDocDownload('${cleanPartName}_Specification.pdf', this)">
+          <i class="far fa-file-pdf doc-icon"></i>
+          <div class="doc-info">
+            <span class="doc-name">${cleanPartName}_Specification.pdf</span>
+            <span class="doc-size">1.5 MB • PDF</span>
+          </div>
+          <i class="fas fa-lock doc-lock" id="lock-doc-1"></i>
+        </div>
+        <div class="doc-item" onclick="handleDocDownload('${cleanPartName}_Drawing.pdf', this)">
+          <i class="far fa-file-pdf doc-icon"></i>
+          <div class="doc-info">
+            <span class="doc-name">${cleanPartName}_Drawing.pdf</span>
+            <span class="doc-size">2.8 MB • PDF</span>
+          </div>
+          <i class="fas fa-lock doc-lock" id="lock-doc-2"></i>
+        </div>
+      `;
+      document.getElementById('docCountText').innerText = "View All Documents (2)";
+
+      // Update Supplier ae card logo & name
+      document.querySelector('.supplier-name').innerText = supplierName;
+      const logoText = supplierName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
+      document.querySelector('.supplier-logo-circle').innerText = logoText;
+
+      // Reset NDA graph status to pending
+      const mutualBox = document.getElementById('mutualNdaBox');
+      mutualBox.className = "nda-mutual-box";
+      mutualBox.classList.remove('signed');
+      
+      const mutualBadge = document.getElementById('mutualNdaBadge');
+      mutualBadge.className = "badge badge-pending";
+      mutualBadge.innerText = "Awaiting Supplier Signature";
+      
+      const supplierBadge = document.getElementById('supplierNdaBadge');
+      supplierBadge.className = "badge badge-pending";
+      supplierBadge.innerText = "Pending";
+      
+      document.getElementById('supplierNdaStatus').innerText = "Awaiting Review & Signature";
+      document.getElementById('supplierNdaTime').innerText = "Requested: Just Now";
+      
+      // Restore Review & Sign button
+      const signBtn = document.getElementById('ndaSignBtn');
+      signBtn.className = "btn btn-purple";
+      signBtn.style.height = "28px";
+      signBtn.style.borderRadius = "6px";
+      signBtn.innerText = "Review & Sign NDA";
+      signBtn.onclick = openNdaModal;
+
+      // Update Alert banner
+      const alertBar = document.getElementById('ndaAlertBar');
+      alertBar.className = "nda-alert-bar";
+      document.getElementById('ndaAlertIcon').className = "fas fa-info-circle";
+      document.getElementById('ndaAlertText').innerText = "Supplier must sign the NDA to access all confidential documents and submit quotation.";
+
+      // Reset Response Cards
+      const respCardIcon = document.getElementById('respCardIcon-3');
+      respCardIcon.className = "response-icon-box pending";
+      document.getElementById('respCardSub-3').innerText = "Awaiting supplier signature";
+      
+      const respCardBadge = document.getElementById('respCardBadge-3');
+      respCardBadge.className = "badge badge-pending";
+      respCardBadge.innerText = "Pending";
+
+      // Reset Timeline
+      const timeline = document.getElementById('timelineList');
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + `, ` + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      
+      timeline.innerHTML = `
+        <div class="timeline-item completed">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">RFQ Created</span>
+          <span class="timeline-sub">by Jasneek Singh (Bajaj Auto Ltd.)</span>
+          <span class="timeline-time">${timeStr}</span>
+        </div>
+        <div class="timeline-item completed">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">RFQ Sent to Supplier</span>
+          <span class="timeline-sub">${supplierName}</span>
+          <span class="timeline-time">${timeStr}</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Supplier Viewed RFQ</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Supplier Response</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item" id="timelineNodeNDA">
+          <div class="timeline-node"></div>
+          <span class="timeline-header" id="timelineHeaderNDA">NDA & Agreements</span>
+          <span class="timeline-time" id="timelineTimeNDA">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Quotation Submission</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Evaluation</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">PO Issuance</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Closed</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+      `;
+
+      closeCreateRfqModal();
+      alert("Successfully created New RFQ " + rfqNum + "! Sourcing workflow initialized.");
+    }
+
+    // Toggle Sidebar collapse
+    function toggleSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const arrow = document.getElementById('collapseArrow');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    // Toggle Top Actions Dropdown
+    function toggleActionsDropdown(e) {
+      e.stopPropagation();
+      const dd = document.getElementById('actionsDropdown');
+      dd.classList.toggle('show');
+    }
+
+    // Close actions dropdown on outside click
+    document.addEventListener('click', function() {
+      const dd = document.getElementById('actionsDropdown');
+      if (dd && dd.classList.contains('show')) {
+        dd.classList.remove('show');
+      }
+    });
+
+    // Open/Close NDA modal
+    function openNdaModal() {
+      if (isNdaSigned) {
+        alert("The NDA is already signed and validated!");
+        return;
+      }
+      document.getElementById('ndaSignModal').classList.add('show');
+    }
+    
+    function closeNdaModal() {
+      document.getElementById('ndaSignModal').classList.remove('show');
+    }
+
+    // Interactive Signature input handler
+    function updateSignaturePreview() {
+      const val = document.getElementById('sigInput').value;
+      const preview = document.getElementById('sigPreview');
+      const btn = document.getElementById('submitSigBtn');
+      
+      if (val.trim()) {
+        preview.innerText = val;
+        btn.removeAttribute('disabled');
+      } else {
+        preview.innerText = "Your Signature Preview";
+        btn.setAttribute('disabled', 'true');
+      }
+    }
+
+    // NDA complete signing workflow
+    function completeNdaSigning() {
+      const signName = document.getElementById('sigInput').value;
+      isNdaSigned = true;
+      closeNdaModal();
+
+      // Get current date/time
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + `, ` + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Update NDA status section in Graph row
+      const mutualBox = document.getElementById('mutualNdaBox');
+      mutualBox.classList.add('signed');
+      
+      const mutualBadge = document.getElementById('mutualNdaBadge');
+      mutualBadge.className = "badge badge-signed";
+      mutualBadge.innerText = "Signed & Verified";
+      
+      const supplierBadge = document.getElementById('supplierNdaBadge');
+      supplierBadge.className = "badge badge-signed";
+      supplierBadge.innerText = "Signed";
+      
+      document.getElementById('supplierNdaStatus').innerText = signName + " (Director)";
+      document.getElementById('supplierNdaTime').innerText = "Signed On: " + timeStr;
+      
+      // Update warning banner to success banner
+      const alertBar = document.getElementById('ndaAlertBar');
+      alertBar.className = "nda-alert-bar success";
+      document.getElementById('ndaAlertIcon').className = "fas fa-check-circle";
+      document.getElementById('ndaAlertText').innerText = "Mutual NDA signed and verified. Confidential engineering files unlocked.";
+
+      // Update Sign Button to View button
+      const signBtn = document.getElementById('ndaSignBtn');
+      signBtn.className = "btn btn-outline btn-icon";
+      signBtn.style.height = "28px";
+      signBtn.style.borderRadius = "6px";
+      signBtn.innerHTML = `<i class="far fa-file-pdf"></i> View Signed NDA`;
+      signBtn.onclick = function() { alert("Opening Signed NDA document signed by " + signName); };
+
+      // Update Stepper Progress & Nodes
+      document.getElementById('stepperProgressBar').style.width = "42.84%"; // Progress through step 4
+      
+      const step3 = document.getElementById('stepNode-3');
+      step3.className = "step-node completed";
+      document.getElementById('stepCircle-3').innerHTML = `<i class="fas fa-check"></i>`;
+      document.getElementById('stepSub-3').innerText = "Completed";
+
+      const step4 = document.getElementById('stepNode-4');
+      step4.className = "step-node active";
+      document.getElementById('stepCircle-4').innerHTML = `4`;
+      document.getElementById('stepSub-4').innerText = "In Progress";
+
+      // Update Supplier Response Card
+      const respCardIcon = document.getElementById('respCardIcon-3');
+      respCardIcon.className = "response-icon-box completed";
+      document.getElementById('respCardSub-3').innerText = "Signed on " + timeStr;
+      
+      const respCardBadge = document.getElementById('respCardBadge-3');
+      respCardBadge.className = "badge badge-negotiation";
+      respCardBadge.innerText = "Completed";
+
+      // Unlock documents
+      const docs = document.querySelectorAll('.doc-item');
+      docs.forEach(doc => {
+        doc.classList.add('unlocked');
+        const lock = doc.querySelector('.doc-lock');
+        if (lock) {
+          lock.className = "fas fa-lock-open doc-lock";
+          lock.title = "Document Unlocked";
+        }
+      });
+
+      // Add timeline item to the activity timeline
+      const timeline = document.getElementById('timelineList');
+      
+      // Create new timeline item
+      const newItem = document.createElement('div');
+      newItem.className = "timeline-item completed";
+      newItem.innerHTML = `
+        <div class="timeline-node"></div>
+        <span class="timeline-header" contenteditable="true">NDA Signed & Confirmed</span>
+        <span class="timeline-sub" contenteditable="true">by ${signName} (Aashita Enterprises)</span>
+        <span class="timeline-time" contenteditable="true">${timeStr}</span>
+      `;
+      // Insert at position 3 (above Supplier Response Pending)
+      timeline.insertBefore(newItem, timeline.children[3]);
+
+      // Update NDA timeline node
+      const timelineNDA = document.getElementById('timelineNodeNDA');
+      timelineNDA.className = "timeline-item completed";
+      document.getElementById('timelineHeaderNDA').innerText = "NDA & Agreements Signed";
+      document.getElementById('timelineTimeNDA').innerText = timeStr;
+
+      alert("NDA Signed successfully! Confidential drawings and requirements are now fully unlocked.");
+    }
+
+    // Document download simulator
+    function handleDocDownload(name, elem) {
+      if (!isNdaSigned) {
+        alert("ACCESS DENIED: Please sign the NDA & Confidentiality Agreement to unlock and view this document.");
+      } else {
+        alert("Downloading " + name + "...");
+      }
+    }
+  </script>
+</body>
+
+</html>
