@@ -1826,7 +1826,7 @@
                         <div class="sig-party-title">For Aashita Enterprises</div>
 
                         <!-- Initially locked/awaiting, clickable after Bajaj signs -->
-                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()"
+                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openAashitaSignModal()"
                           style="border-color: #cbd5e1; background: #fafafa; cursor: not-allowed; opacity: 0.7;">
                           <i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i>
                           <div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>
@@ -2814,8 +2814,18 @@
 
     // Recipient Bajaj Signing Modals
     function openBajajSignModal() {
+      openEsignModal();
+    }
+
+    // Aashita Enterprises Signing Modal Trigger
+    function openAashitaSignModal() {
+      if (!isStampDutyPaid) {
+        showToast("Stamp Duty Payment is required before signing.");
+        openPaymentModal();
+        return;
+      }
       if (currentSignState === 0) {
-        showToast("Please sign as Aashita Enterprises first.");
+        showToast("Please sign as Bajaj Auto Limited first.");
         return;
       }
       openEsignModal();
