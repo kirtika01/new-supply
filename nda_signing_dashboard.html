@@ -2302,10 +2302,13 @@
     let currentSignState = 0;
     let isStampDutyPaid = false; // default stamp duty payment status
 
-    // Initialize Page
-    document.addEventListener("DOMContentLoaded", () => {
-      loadState();
-    });
+     // Initialize Page
+     document.addEventListener("DOMContentLoaded", () => {
+       // Start fresh on every reload so the page is always locked by default
+       currentSignState = 0;
+       isStampDutyPaid = false;
+       applyStateUI();
+     });
 
     // Save/Restore State using LocalStorage
     function saveState() {
