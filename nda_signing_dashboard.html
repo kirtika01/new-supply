@@ -558,108 +558,59 @@
       position: relative;
     }
 
-    /* e-Stamp paper graphic */
+    /* e-Stamp paper graphic (Real Scanned Stamp Header) */
     .estamp-paper {
-      border: 10px double #f87171;
-      padding: 16px;
-      background-color: #fff9fa;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M0 40 C 20 20, 60 20, 80 40 C 60 60, 20 60, 0 40 Z' fill='none' stroke='%23fecaca' stroke-width='0.5' opacity='0.25'/%3E%3Cpath d='M40 0 C 20 20, 20 60, 40 80 C 60 60, 60 20, 40 0 Z' fill='none' stroke='%23fecaca' stroke-width='0.5' opacity='0.25'/%3E%3C/svg%3E");
-      border-radius: 4px;
+      border: 1px solid #e2e8f0;
+      background-color: #ffffff;
+      border-radius: 8px;
       margin-bottom: 30px;
-      box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.03);
-    }
-
-    .estamp-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-    }
-
-    .estamp-col-left,
-    .estamp-col-right {
-      flex: 1;
-      color: #b91c1c;
-    }
-
-    .estamp-col-left {
-      text-align: left;
-    }
-
-    .estamp-col-right {
-      text-align: right;
-    }
-
-    .stamp-hindi-text {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.2px;
-    }
-
-    .stamp-hindi-text.large {
-      font-size: 17px;
-      margin-top: 6px;
-    }
-
-    .stamp-sub-text {
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.8px;
-    }
-
-    .stamp-eng-text {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.8px;
-    }
-
-    .stamp-value {
-      font-size: 22px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .stamp-value-symbol {
-      font-size: 26px;
-      font-weight: 800;
-      margin-top: 2px;
-    }
-
-    .estamp-center-emblem {
+      overflow: hidden;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 0 12px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
     }
 
-    .emblem-svg {
-      width: 70px;
-      height: 70px;
+    .estamp-real-img {
+      width: 100%;
+      height: auto;
+      display: block;
     }
 
-    .estamp-footer {
+    .estamp-footer-real {
       display: flex;
       justify-content: space-between;
-      align-items: flex-end;
-      border-top: 1px dashed #fca5a5;
-      padding-top: 8px;
-      margin-top: 12px;
+      align-items: center;
+      padding: 12px 20px;
+      background-color: #f8fafc;
+      border-top: 1px dashed #cbd5e1;
     }
 
-    .estamp-footer-title {
-      font-size: 10px;
+    .estamp-footer-title-real {
+      font-size: 10.5px;
       font-weight: 700;
-      color: #b91c1c;
+      color: #64748b;
       letter-spacing: 1px;
+      text-transform: uppercase;
     }
 
     .estamp-serial {
       font-family: 'Courier New', Courier, monospace;
-      font-size: 13px;
+      font-size: 14px;
       font-weight: 700;
       color: #ef4444;
       letter-spacing: 0.5px;
+      padding: 2px 6px;
+      border-radius: 4px;
+      transition: background-color 0.2s;
+    }
+
+    .estamp-serial:hover {
+      background-color: rgba(239, 68, 68, 0.05);
+    }
+
+    .estamp-serial:focus {
+      outline: 2px solid #ef4444;
+      background-color: rgba(239, 68, 68, 0.08);
     }
 
     /* Document Legal Text Layout */
@@ -1779,52 +1730,11 @@
             <!-- Page content sheet -->
             <div class="doc-sheet-container">
               <div class="doc-sheet">
-                <!-- e-Stamp Paper Graphic -->
+                <!-- e-Stamp Paper Graphic (Real Scanned Stamp Header) -->
                 <div class="estamp-paper">
-                  <div class="estamp-header">
-                    <div class="estamp-col-left">
-                      <div class="stamp-hindi-text">भारतीय गैर न्यायिक</div>
-                      <div class="stamp-sub-text">भारत INDIA</div>
-                      <div class="stamp-hindi-text large">पाँच सौ रुपये</div>
-                      <div class="stamp-value">रु. 500</div>
-                    </div>
-
-                    <div class="estamp-center-emblem">
-                      <svg class="emblem-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Chakra Base -->
-                        <circle cx="50" cy="78" r="8" fill="none" stroke="#b91c1c" stroke-width="2.5" />
-                        <circle cx="50" cy="78" r="2.5" fill="#b91c1c" />
-                        <line x1="50" y1="70" x2="50" y2="86" stroke="#b91c1c" stroke-width="1.5" />
-                        <line x1="42" y1="78" x2="58" y2="78" stroke="#b91c1c" stroke-width="1.5" />
-                        <line x1="44.3" y1="72.3" x2="55.7" y2="83.7" stroke="#b91c1c" stroke-width="1" />
-                        <line x1="44.3" y1="83.7" x2="55.7" y2="72.3" stroke="#b91c1c" stroke-width="1" />
-                        <!-- Pillars and animal base -->
-                        <path d="M38 68 L62 68 L59 70 L41 70 Z" fill="#b91c1c" />
-                        <!-- Lions body -->
-                        <path d="M42 35 C42 20, 58 20, 58 35 L55 65 L45 65 Z" fill="#b91c1c" />
-                        <!-- Front lion face -->
-                        <circle cx="50" cy="30" r="8" fill="#b91c1c" />
-                        <circle cx="48" cy="29" r="1.5" fill="#fff" />
-                        <circle cx="52" cy="29" r="1.5" fill="#fff" />
-                        <path d="M47 33 Q50 35 53 33" fill="none" stroke="#fff" stroke-width="1" />
-                        <!-- Left Lion profile -->
-                        <path d="M42 33 C37 33, 36 26, 43 23" fill="#b91c1c" />
-                        <!-- Right Lion profile -->
-                        <path d="M58 33 C63 33, 64 26, 57 23" fill="#b91c1c" />
-                        <text x="50" y="94" text-anchor="middle" font-size="8" font-weight="900" fill="#b91c1c"
-                          font-family="'Inter', sans-serif">सत्यमेव जयते</text>
-                      </svg>
-                    </div>
-
-                    <div class="estamp-col-right">
-                      <div class="stamp-eng-text">INDIA NON JUDICIAL</div>
-                      <div class="stamp-value" style="opacity: 0;">&nbsp;</div>
-                      <div class="stamp-value-symbol">₹ 500</div>
-                    </div>
-                  </div>
-
-                  <div class="estamp-footer">
-                    <div class="estamp-footer-title">भारत INDIA NON-JUDICIAL</div>
+                  <img src="stamp_header_real.png" alt="India Non Judicial Stamp Paper 500 Rupees" class="estamp-real-img">
+                  <div class="estamp-footer-real">
+                    <div class="estamp-footer-title-real">भारत INDIA NON-JUDICIAL</div>
                     <div class="estamp-serial" contenteditable="true" id="stamp-serial-no">IN 51234567890123</div>
                   </div>
                 </div>
