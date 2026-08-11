@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Process Documents - Aashita Intelligence</title>
   <meta name="description" content="Central repository for all manufacturing and quality process documents.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
@@ -23,24 +24,24 @@
       --bg-sidebar: #050b18;
       --sidebar-width: 250px;
       --sidebar-collapsed-width: 70px;
-      
+
       --text-white: #ffffff;
       --text-gray-light: #cbd5e1;
       --text-gray-dark: #1e293b;
       --text-gray-muted: #64748b;
-      
+
       --accent-blue: #2563eb;
       --accent-blue-hover: #1d4ed8;
       --accent-blue-light: #eff6ff;
       --accent-blue-glow: rgba(37, 99, 235, 0.15);
-      
+
       --accent-green: #10b981;
       --accent-green-hover: #059669;
       --accent-green-light: #ecfdf5;
-      
+
       --accent-purple: #8b5cf6;
       --accent-purple-light: #f5f3ff;
-      
+
       --border-color: #e2e8f0;
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -56,20 +57,20 @@
     }
 
     /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
-    [contenteditable="true"] {
+    [] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable="true"]:hover {
+    []:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable="true"]:focus {
+    []:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -78,12 +79,12 @@
     }
 
     /* Sidebar items should have white dashed borders */
-    .sidebar [contenteditable="true"]:hover {
+    .sidebar []:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
-    
-    .sidebar [contenteditable="true"]:focus {
+
+    .sidebar []:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -625,12 +626,35 @@
       font-size: 12px;
     }
 
-    .metric-total .metric-icon-box { background: #eff6ff; color: #2563eb; }
-    .metric-ppap .metric-icon-box { background: #eff6ff; color: #3b82f6; }
-    .metric-sop .metric-icon-box { background: #f5f3ff; color: #8b5cf6; }
-    .metric-cp .metric-icon-box { background: #fff7ed; color: #f97316; }
-    .metric-is .metric-icon-box { background: #ecfdf5; color: #10b981; }
-    .metric-other .metric-icon-box { background: #f5f3ff; color: #a855f7; }
+    .metric-total .metric-icon-box {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .metric-ppap .metric-icon-box {
+      background: #eff6ff;
+      color: #3b82f6;
+    }
+
+    .metric-sop .metric-icon-box {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .metric-cp .metric-icon-box {
+      background: #fff7ed;
+      color: #f97316;
+    }
+
+    .metric-is .metric-icon-box {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .metric-other .metric-icon-box {
+      background: #f5f3ff;
+      color: #a855f7;
+    }
 
     .metric-name {
       font-size: 11px;
@@ -881,9 +905,17 @@
       align-items: center;
     }
 
-    .icon-pdf { color: #ef4444; }
-    .icon-word { color: #2563eb; }
-    .icon-excel { color: #10b981; }
+    .icon-pdf {
+      color: #ef4444;
+    }
+
+    .icon-word {
+      color: #2563eb;
+    }
+
+    .icon-excel {
+      color: #10b981;
+    }
 
     .doc-name-cell {
       font-weight: 600;
@@ -905,13 +937,40 @@
       border-radius: 12px;
     }
 
-    .badge-ppap { background: #eff6ff; color: #2563eb; }
-    .badge-sop { background: #f1f5f9; color: #475569; }
-    .badge-cp { background: #ecfdf5; color: #10b981; }
-    .badge-pfmea { background: #fff1f2; color: #f43f5e; }
-    .badge-is { background: #eff6ff; color: #1d4ed8; }
-    .badge-rp { background: #f5f3ff; color: #8b5cf6; }
-    .badge-sm { background: #ecfdf5; color: #059669; }
+    .badge-ppap {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .badge-sop {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .badge-cp {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .badge-pfmea {
+      background: #fff1f2;
+      color: #f43f5e;
+    }
+
+    .badge-is {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .badge-rp {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .badge-sm {
+      background: #ecfdf5;
+      color: #059669;
+    }
 
     .link-part {
       font-family: monospace;
@@ -928,9 +987,23 @@
       border-radius: 12px;
     }
 
-    .status-approved { background: #ecfdf5; color: #10b981; border: 1.5px solid #a7f3d0; }
-    .status-review { background: #eff6ff; color: #2563eb; border: 1.5px solid #bfdbfe; }
-    .status-progress { background: #fff7ed; color: #ea580c; border: 1.5px solid #ffedd5; }
+    .status-approved {
+      background: #ecfdf5;
+      color: #10b981;
+      border: 1.5px solid #a7f3d0;
+    }
+
+    .status-review {
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1.5px solid #bfdbfe;
+    }
+
+    .status-progress {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1.5px solid #ffedd5;
+    }
 
     .updated-date {
       font-size: 11px;
@@ -1135,15 +1208,50 @@
       font-size: 10px;
     }
 
-    .cat-ppap .category-circle-icon { background: #fef2f2; color: #ef4444; }
-    .cat-sop .category-circle-icon { background: #eff6ff; color: #2563eb; }
-    .cat-cp .category-circle-icon { background: #ecfdf5; color: #10b981; }
-    .cat-pfmea .category-circle-icon { background: #fff7ed; color: #f97316; }
-    .cat-is .category-circle-icon { background: #eff6ff; color: #475569; }
-    .cat-rp .category-circle-icon { background: #f5f3ff; color: #8b5cf6; }
-    .cat-sm .category-circle-icon { background: #ecfdf5; color: #059669; }
-    .cat-wi .category-circle-icon { background: #f0fdf4; color: #15803d; }
-    .cat-other .category-circle-icon { background: #fffbeb; color: #d97706; }
+    .cat-ppap .category-circle-icon {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+
+    .cat-sop .category-circle-icon {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .cat-cp .category-circle-icon {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .cat-pfmea .category-circle-icon {
+      background: #fff7ed;
+      color: #f97316;
+    }
+
+    .cat-is .category-circle-icon {
+      background: #eff6ff;
+      color: #475569;
+    }
+
+    .cat-rp .category-circle-icon {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .cat-sm .category-circle-icon {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    .cat-wi .category-circle-icon {
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .cat-other .category-circle-icon {
+      background: #fffbeb;
+      color: #d97706;
+    }
 
     .category-name {
       font-weight: 500;
@@ -1232,8 +1340,15 @@
       box-shadow: 0 0 0 4px #ffffff;
     }
 
-    .dot-check { background: #d1fae5; color: #10b981; }
-    .dot-upload { background: #dbeafe; color: #2563eb; }
+    .dot-check {
+      background: #d1fae5;
+      color: #10b981;
+    }
+
+    .dot-upload {
+      background: #dbeafe;
+      color: #2563eb;
+    }
 
     .activity-details {
       display: flex;
@@ -1373,8 +1488,15 @@
     }
 
     @keyframes slideUp {
-      from { transform: translateY(15px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(15px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .modal-header {
@@ -1511,13 +1633,25 @@
     }
 
     @keyframes slideInRight {
-      from { transform: translateX(50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from {
+        transform: translateX(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
 
@@ -1526,9 +1660,11 @@
       .portal-grid {
         grid-template-columns: 1fr;
       }
+
       .metrics-row {
         grid-template-columns: repeat(3, 1fr);
       }
+
       .guidelines-row {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -1538,12 +1674,16 @@
       .metrics-row {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .guidelines-row {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .top-bar-left {
-        display: none; /* Hide top location bars to save space */
+        display: none;
+        /* Hide top location bars to save space */
       }
+
       .search-box-container {
         width: 100%;
       }
@@ -1609,7 +1749,7 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 18px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
     }
 
     .preview-dummy-title {
@@ -1685,8 +1825,15 @@
       text-transform: uppercase;
     }
 
-    .status-ok { background: var(--accent-green-light); color: var(--accent-green); }
-    .status-warning { background: #fff7ed; color: #f97316; }
+    .status-ok {
+      background: var(--accent-green-light);
+      color: var(--accent-green);
+    }
+
+    .status-warning {
+      background: #fff7ed;
+      color: #f97316;
+    }
 
     /* SOP steps styling */
     .preview-sop-steps {
@@ -1732,7 +1879,8 @@
       margin-top: 8px;
     }
 
-    .preview-matrix-table th, .preview-matrix-table td {
+    .preview-matrix-table th,
+    .preview-matrix-table td {
       border: 1px solid var(--border-color);
       padding: 6px 8px;
       text-align: center;
@@ -1752,10 +1900,21 @@
       background: #cbd5e1;
     }
 
-    .skill-dot.level-1 { background: #cbd5e1; }
-    .skill-dot.level-2 { background: #93c5fd; }
-    .skill-dot.level-3 { background: #3b82f6; }
-    .skill-dot.level-4 { background: #1d4ed8; }
+    .skill-dot.level-1 {
+      background: #cbd5e1;
+    }
+
+    .skill-dot.level-2 {
+      background: #93c5fd;
+    }
+
+    .skill-dot.level-3 {
+      background: #3b82f6;
+    }
+
+    .skill-dot.level-4 {
+      background: #1d4ed8;
+    }
 
     /* ===== CENTERED DOCUMENT FLOATER SECTION ===== */
     .document-floater-overlay {
@@ -1792,8 +1951,15 @@
     }
 
     @keyframes zoomIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .floater-header {
@@ -1832,7 +1998,8 @@
       padding: 40px;
       flex: 1;
       overflow-y: auto;
-      background: #e2e8f0; /* Gray table surface to make the A4 document stand out */
+      background: #e2e8f0;
+      /* Gray table surface to make the A4 document stand out */
       display: flex;
       justify-content: center;
     }
@@ -1943,7 +2110,8 @@
       font-size: 11px;
     }
 
-    .doc-formal-table th, .doc-formal-table td {
+    .doc-formal-table th,
+    .doc-formal-table td {
       border: 1px solid #94a3b8;
       padding: 8px 10px;
       text-align: left;
@@ -2002,7 +2170,8 @@
         <div class="sidebar-brand">
           <div class="logo-container">
             <!-- Inline SVG Infinitish circles overlapping loop -->
-            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="11" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
               <circle cx="23" cy="12" r="7" stroke="#ef4444" stroke-width="3" />
             </svg>
@@ -2104,7 +2273,8 @@
       <header class="top-bar">
         <div class="top-bar-left">
           <div class="location-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
             </svg>
             <span>Bajaj Auto Ltd.</span>
@@ -2237,16 +2407,17 @@
 
         <!-- MAIN DUAL COLUMN VIEWPORT -->
         <div class="portal-grid">
-          
+
           <!-- LEFT SIDE WORKSPACE -->
           <div class="workspace-area">
-            
+
             <!-- Filters Bar -->
             <section class="filter-card">
               <div class="filter-inputs-row">
                 <div class="filter-search-box">
                   <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text" class="table-search-input" id="table-search-box" oninput="performFiltering()" placeholder="Search by document name, part no., supplier...">
+                  <input type="text" class="table-search-input" id="table-search-box" oninput="performFiltering()"
+                    placeholder="Search by document name, part no., supplier...">
                 </div>
 
                 <select class="filter-dropdown" id="filter-type" onchange="performFiltering()">
@@ -2298,8 +2469,10 @@
                 <div class="filter-tab" data-tab="SOP" onclick="filterByTab('SOP')">SOP</div>
                 <div class="filter-tab" data-tab="Control Plan" onclick="filterByTab('Control Plan')">Control Plan</div>
                 <div class="filter-tab" data-tab="PFMEA" onclick="filterByTab('PFMEA')">PFMEA</div>
-                <div class="filter-tab" data-tab="Inspection Standard" onclick="filterByTab('Inspection Standard')">Inspection Standards</div>
-                <div class="filter-tab" data-tab="Reaction Plan" onclick="filterByTab('Reaction Plan')">Reaction Plan</div>
+                <div class="filter-tab" data-tab="Inspection Standard" onclick="filterByTab('Inspection Standard')">
+                  Inspection Standards</div>
+                <div class="filter-tab" data-tab="Reaction Plan" onclick="filterByTab('Reaction Plan')">Reaction Plan
+                </div>
                 <div class="filter-tab" data-tab="Skill Matrix" onclick="filterByTab('Skill Matrix')">Skill Matrix</div>
               </div>
             </section>
@@ -2323,9 +2496,11 @@
                 </thead>
                 <tbody id="table-rows-body">
                   <!-- Row 1 -->
-                  <tr class="table-row" data-type="PPAP" data-status="Approved" data-name="PPAP_Engine_Mounting_Bracket.pdf" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="PPAP" data-status="Approved"
+                    data-name="PPAP_Engine_Mounting_Bracket.pdf" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
-                      <button class="star-btn starred" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
+                      <button class="star-btn starred" onclick="toggleStar(this)"><i
+                          class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
@@ -2336,11 +2511,16 @@
                     <td>Aashita Enterprises</td>
                     <td>A</td>
                     <td><span class="status-badge status-approved">Approved</span></td>
-                    <td class="updated-date">12 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">10:15 AM</span></td>
+                    <td class="updated-date">12 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">10:15 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('PPAP_Engine_Mounting_Bracket.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('PPAP_Engine_Mounting_Bracket.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2350,7 +2530,8 @@
                   </tr>
 
                   <!-- Row 2 -->
-                  <tr class="table-row" data-type="SOP" data-status="In Review" data-name="SOP_Engine_Bracket_Assy.docx" data-part="Engine Bracket Assembly">
+                  <tr class="table-row" data-type="SOP" data-status="In Review" data-name="SOP_Engine_Bracket_Assy.docx"
+                    data-part="Engine Bracket Assembly">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2363,11 +2544,16 @@
                     <td>Aashita Enterprises</td>
                     <td>B</td>
                     <td><span class="status-badge status-review">In Review</span></td>
-                    <td class="updated-date">11 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">04:30 PM</span></td>
+                    <td class="updated-date">11 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">04:30 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Engine_Bracket_Assy.docx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Engine_Bracket_Assy.docx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2377,7 +2563,8 @@
                   </tr>
 
                   <!-- Row 3 -->
-                  <tr class="table-row" data-type="Control Plan" data-status="Approved" data-name="Control_Plan_Engine_Bracket.xlsx" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="Control Plan" data-status="Approved"
+                    data-name="Control_Plan_Engine_Bracket.xlsx" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2390,11 +2577,16 @@
                     <td>Aashita Enterprises</td>
                     <td>A</td>
                     <td><span class="status-badge status-approved">Approved</span></td>
-                    <td class="updated-date">10 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">11:20 AM</span></td>
+                    <td class="updated-date">10 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">11:20 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Control_Plan_Engine_Bracket.xlsx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Control_Plan_Engine_Bracket.xlsx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2404,7 +2596,8 @@
                   </tr>
 
                   <!-- Row 4 -->
-                  <tr class="table-row" data-type="PFMEA" data-status="In Progress" data-name="PFMEA_Engine_Bracket.pdf" data-part="Engine Bracket Assembly">
+                  <tr class="table-row" data-type="PFMEA" data-status="In Progress" data-name="PFMEA_Engine_Bracket.pdf"
+                    data-part="Engine Bracket Assembly">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2417,11 +2610,16 @@
                     <td>Aashita Enterprises</td>
                     <td>B</td>
                     <td><span class="status-badge status-progress">In Progress</span></td>
-                    <td class="updated-date">09 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">02:46 PM</span></td>
+                    <td class="updated-date">09 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">02:46 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('PFMEA_Engine_Bracket.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('PFMEA_Engine_Bracket.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2431,24 +2629,32 @@
                   </tr>
 
                   <!-- Row 5 -->
-                  <tr class="table-row" data-type="Inspection Standard" data-status="Approved" data-name="Inspection_Standard_ENG_MTG_001.pdf" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="Inspection Standard" data-status="Approved"
+                    data-name="Inspection_Standard_ENG_MTG_001.pdf" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Inspection_Standard_ENG_MTG_001.pdf</td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Inspection_Standard_ENG_MTG_001.pdf
+                    </td>
                     <td><span class="type-badge badge-is">Inspection Standard</span></td>
                     <td class="link-part">AE-BRKT-ENG-MTG-001</td>
                     <td>Aashita Enterprises</td>
                     <td>A</td>
                     <td><span class="status-badge status-approved">Approved</span></td>
-                    <td class="updated-date">08 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">09:10 AM</span></td>
+                    <td class="updated-date">08 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">09:10 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Inspection_Standard_ENG_MTG_001.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="simulateDownload('Inspection_Standard_ENG_MTG_001.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2458,7 +2664,8 @@
                   </tr>
 
                   <!-- Row 6 -->
-                  <tr class="table-row" data-type="Reaction Plan" data-status="Approved" data-name="Reaction_Plan_Heat_Treatment.pdf" data-part="Heat Treatment Process">
+                  <tr class="table-row" data-type="Reaction Plan" data-status="Approved"
+                    data-name="Reaction_Plan_Heat_Treatment.pdf" data-part="Heat Treatment Process">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2471,11 +2678,16 @@
                     <td>Aashita Enterprises</td>
                     <td>A</td>
                     <td><span class="status-badge status-approved">Approved</span></td>
-                    <td class="updated-date">07 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">05:35 PM</span></td>
+                    <td class="updated-date">07 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">05:35 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Reaction_Plan_Heat_Treatment.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Reaction_Plan_Heat_Treatment.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2485,7 +2697,8 @@
                   </tr>
 
                   <!-- Row 7 -->
-                  <tr class="table-row" data-type="Skill Matrix" data-status="In Review" data-name="Skill_Matrix_Production_Team.xlsx" data-part="Production Department">
+                  <tr class="table-row" data-type="Skill Matrix" data-status="In Review"
+                    data-name="Skill_Matrix_Production_Team.xlsx" data-part="Production Department">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2498,11 +2711,16 @@
                     <td>Aashita Enterprises</td>
                     <td>C</td>
                     <td><span class="status-badge status-review">In Review</span></td>
-                    <td class="updated-date">06 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">03:15 PM</span></td>
+                    <td class="updated-date">06 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">03:15 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Skill_Matrix_Production_Team.xlsx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Skill_Matrix_Production_Team.xlsx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2512,7 +2730,8 @@
                   </tr>
 
                   <!-- Row 8 -->
-                  <tr class="table-row" data-type="SOP" data-status="Approved" data-name="SOP_Coating_Process.pdf" data-part="Coating Process">
+                  <tr class="table-row" data-type="SOP" data-status="Approved" data-name="SOP_Coating_Process.pdf"
+                    data-part="Coating Process">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
@@ -2525,11 +2744,16 @@
                     <td>Aashita Enterprises</td>
                     <td>A</td>
                     <td><span class="status-badge status-approved">Approved</span></td>
-                    <td class="updated-date">05 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">10:05 AM</span></td>
+                    <td class="updated-date">05 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">10:05 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Coating_Process.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Coating_Process.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2543,9 +2767,10 @@
               <!-- Table Pagination block -->
               <footer class="table-footer">
                 <span class="pagination-span" id="table-range-text">Showing 1 to 8 of 1,248 documents</span>
-                
+
                 <div class="pagination-controls">
-                  <button class="page-nav-btn" onclick="alert('Previous page!')"><i class="fa-solid fa-chevron-left"></i></button>
+                  <button class="page-nav-btn" onclick="alert('Previous page!')"><i
+                      class="fa-solid fa-chevron-left"></i></button>
                   <button class="page-nav-btn active" onclick="alert('Page 1 active!')">1</button>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 2!')">2</button>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 3!')">3</button>
@@ -2553,7 +2778,8 @@
                   <button class="page-nav-btn" onclick="alert('Navigating to page 5!')">5</button>
                   <span class="page-nav-ellipsis">...</span>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 156!')">156</button>
-                  <button class="page-nav-btn" onclick="alert('Next page!')"><i class="fa-solid fa-chevron-right"></i></button>
+                  <button class="page-nav-btn" onclick="alert('Next page!')"><i
+                      class="fa-solid fa-chevron-right"></i></button>
                 </div>
 
                 <select class="page-size-dropdown" id="page-size-select" onchange="alert('Page limit changed!')">
@@ -2568,7 +2794,7 @@
             <section class="guidelines-section">
               <h4 class="guidelines-title">Document Standards & Guidelines</h4>
               <p class="guidelines-desc">Ensure consistency and compliance with Bajaj standards.</p>
-              
+
               <div class="guidelines-row">
                 <!-- Guide 1 -->
                 <div class="guide-card" onclick="alert('Viewing standards document!')">
@@ -2650,14 +2876,14 @@
 
           <!-- ===== RIGHT SIDEBAR INFO PANELS ===== -->
           <aside class="right-sidebar">
-            
+
             <!-- Document Categories -->
             <div class="sidebar-card">
               <div class="sidebar-card-header">
                 <h4 class="sidebar-card-title">Document Categories</h4>
                 <a class="view-all-link">View All</a>
               </div>
-              
+
               <div class="categories-list">
                 <!-- PPAPs -->
                 <div class="category-item cat-ppap" onclick="filterByTab('PPAP')">
@@ -2777,7 +3003,7 @@
                 <h4 class="sidebar-card-title">Recent Activity</h4>
                 <a class="view-all-link">View All</a>
               </div>
-              
+
               <div class="activity-timeline" id="recent-activity-list">
                 <!-- Activity 1 -->
                 <div class="activity-node" id="activity-1">
@@ -2837,7 +3063,8 @@
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label">Document Name</label>
-          <input type="text" class="form-input" id="new-doc-name" placeholder="e.g. PPAP_Connecting_Rod_Assy.pdf" value="PPAP_Connecting_Rod_Assy.pdf">
+          <input type="text" class="form-input" id="new-doc-name" placeholder="e.g. PPAP_Connecting_Rod_Assy.pdf"
+            value="PPAP_Connecting_Rod_Assy.pdf">
         </div>
         <div class="form-group">
           <label class="form-label">Document Type</label>
@@ -2853,11 +3080,13 @@
         </div>
         <div class="form-group">
           <label class="form-label">Linked Part / Process</label>
-          <input type="text" class="form-input" id="new-doc-part" placeholder="e.g. AE-CON-ROD-004" value="AE-CON-ROD-004">
+          <input type="text" class="form-input" id="new-doc-part" placeholder="e.g. AE-CON-ROD-004"
+            value="AE-CON-ROD-004">
         </div>
         <div class="form-group">
           <label class="form-label">Select File Path</label>
-          <input type="file" class="form-input" style="padding-top: 5px; height: 36px;" id="new-file-selector" onclick="event.preventDefault(); alert('File browser mock triggered!')">
+          <input type="file" class="form-input" style="padding-top: 5px; height: 36px;" id="new-file-selector"
+            onclick="event.preventDefault(); alert('File browser mock triggered!')">
         </div>
 
         <div class="modal-progress-bar-container" id="modal-upload-bar">
@@ -2888,14 +3117,15 @@
             <span class="status-badge status-approved" id="preview-status-badge">Approved</span>
           </div>
         </div>
-        <button class="modal-close-btn" style="font-size: 20px; margin-top: -4px;" onclick="closePreviewDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close-btn" style="font-size: 20px; margin-top: -4px;" onclick="closePreviewDrawer()"><i
+            class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
-    
+
     <div class="drawer-content" id="preview-content-body">
       <!-- Dummy data will be injected here -->
     </div>
-    
+
     <footer class="drawer-footer">
       <button class="modal-cancel-btn" style="flex: 1;" onclick="closePreviewDrawer()">Close</button>
       <button class="new-doc-btn" style="flex: 1.5; justify-content: center;" onclick="downloadFromPreview()">
@@ -2914,12 +3144,15 @@
           <h3 class="floater-title" id="floater-filename" oninput="syncFloaterNameToAll()">Document_Preview.pdf</h3>
         </div>
         <div style="display: flex; align-items: center; gap: 14px;">
-          <button class="floater-action-btn" onclick="window.print()" title="Print Document"><i class="fa-solid fa-print"></i></button>
-          <button class="floater-action-btn" onclick="downloadFromFloater()" title="Download PDF"><i class="fa-solid fa-download"></i></button>
-          <button class="modal-close-btn" style="font-size: 22px;" onclick="closeDocumentFloaterDirect()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="floater-action-btn" onclick="window.print()" title="Print Document"><i
+              class="fa-solid fa-print"></i></button>
+          <button class="floater-action-btn" onclick="downloadFromFloater()" title="Download PDF"><i
+              class="fa-solid fa-download"></i></button>
+          <button class="modal-close-btn" style="font-size: 22px;" onclick="closeDocumentFloaterDirect()"><i
+              class="fa-solid fa-xmark"></i></button>
         </div>
       </header>
-      
+
       <div class="floater-body" id="floater-document-body">
         <!-- Render full document layout sheet with dummy data -->
       </div>
@@ -2929,7 +3162,7 @@
   <script>
     // Global Filter variables
     let activeTab = 'All';
-    
+
     // Close dropdown menu click listener
     window.addEventListener('click', (e) => {
       if (!e.target.matches('.fa-ellipsis-vertical') && !e.target.closest('.action-icon-btn')) {
@@ -2943,9 +3176,9 @@
     function toggleSidebar() {
       const sidebar = document.getElementById('app-sidebar');
       const icon = document.getElementById('collapse-icon');
-      
+
       sidebar.classList.toggle('collapsed');
-      
+
       if (sidebar.classList.contains('collapsed')) {
         icon.className = "fa-solid fa-arrow-right";
       } else {
@@ -2958,12 +3191,12 @@
       event.stopPropagation();
       const parentCell = button.closest('.action-cell');
       const dropdown = parentCell.querySelector('.dropdown-menu');
-      
+
       // Close other dropdowns
       document.querySelectorAll('.dropdown-menu').forEach(menu => {
         if (menu !== dropdown) menu.classList.remove('show');
       });
-      
+
       dropdown.classList.toggle('show');
     }
 
@@ -3002,7 +3235,7 @@
       // Show upload progress
       const progressContainer = document.getElementById('modal-upload-bar');
       const fillBar = document.getElementById('modal-upload-fill');
-      
+
       progressContainer.style.display = 'block';
       let progress = 0;
 
@@ -3012,12 +3245,12 @@
 
         if (progress >= 100) {
           clearInterval(uploadInterval);
-          
+
           // Complete insertion
           insertNewTableRow(docName, docType, linkedPart);
           updateSummaryMetrics(docType);
           updateRecentActivity(docName);
-          
+
           closeUploadModal();
           triggerToastNotification(`Document "${docName}" uploaded successfully.`);
         }
@@ -3027,7 +3260,7 @@
     // Insert new row to the data table
     function insertNewTableRow(name, type, part) {
       const tableBody = document.getElementById('table-rows-body');
-      
+
       // Determine file extension
       let iconClass = 'icon-pdf';
       let fontAwesomeIcon = 'fa-regular fa-file-pdf';
@@ -3064,7 +3297,7 @@
           <td>Aashita Enterprises</td>
           <td>A</td>
           <td><span class="status-badge status-review">In Review</span></td>
-          <td class="updated-date">Today<br><span style="font-size:10px;color:var(--text-gray-muted)">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></td>
+          <td class="updated-date">Today<br><span style="font-size:10px;color:var(--text-gray-muted)">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></td>
           <td class="action-cell">
             <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
             <button class="action-icon-btn" onclick="simulateDownload('${name}')"><i class="fa-solid fa-download"></i></button>
@@ -3087,11 +3320,11 @@
       const row = item.closest('.table-row');
       const docType = row.getAttribute('data-type');
       const docName = row.getAttribute('data-name');
-      
+
       if (confirm(`Are you sure you want to delete "${docName}"?`)) {
         row.style.opacity = '0';
         row.style.transform = 'scale(0.95)';
-        
+
         setTimeout(() => {
           row.remove();
           decrementSummaryMetrics(docType);
@@ -3168,7 +3401,7 @@
     // Prepend item to Recent Activity timeline
     function updateRecentActivity(name) {
       const activityTimeline = document.getElementById('recent-activity-list');
-      
+
       const newActivityHTML = `
         <div class="activity-node" style="animation: fadeIn 0.4s ease;">
           <div class="activity-dot dot-upload">
@@ -3181,14 +3414,14 @@
           </div>
         </div>
       `;
-      
+
       activityTimeline.insertAdjacentHTML('afterbegin', newActivityHTML);
     }
 
     // Filtering Core logic
     function filterByTab(tabName) {
       activeTab = tabName;
-      
+
       // Update Active tab styling
       document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
@@ -3271,7 +3504,7 @@
       document.getElementById('filter-process').value = 'all';
       document.getElementById('filter-supplier').value = 'all';
       document.getElementById('filter-status').value = 'all';
-      
+
       filterByTab('All');
     }
 
@@ -3279,10 +3512,10 @@
     function simulateDownload(filename) {
       const toast = document.getElementById('download-toast-msg');
       const toastText = document.getElementById('toast-text-content');
-      
+
       toastText.textContent = `Downloading "${filename}"...`;
       toast.style.display = 'flex';
-      
+
       setTimeout(() => {
         toastText.textContent = `Successfully downloaded "${filename}"!`;
         setTimeout(() => {
@@ -3299,10 +3532,10 @@
     function triggerToastNotification(msgText) {
       const toast = document.getElementById('download-toast-msg');
       const toastText = document.getElementById('toast-text-content');
-      
+
       toastText.textContent = msgText;
       toast.style.display = 'flex';
-      
+
       setTimeout(() => {
         toast.style.opacity = '0';
         setTimeout(() => {
@@ -3357,7 +3590,7 @@
       // Populate floater sheet elements
       const floaterFilename = document.getElementById('floater-filename');
       floaterFilename.textContent = docName;
-      
+
       const floaterFileIcon = document.getElementById('floater-file-icon');
       floaterFileIcon.className = 'fa-regular';
       if (docName.endsWith('.docx') || docName.endsWith('.doc')) {
@@ -4335,7 +4568,7 @@
     function closeDocumentFloaterDirect() {
       document.getElementById('document-floater-overlay').classList.remove('show');
     }
-    
+
     function closeDocumentFloater(event) {
       if (event.target.id === 'document-floater-overlay') {
         closeDocumentFloaterDirect();
@@ -4350,22 +4583,22 @@
     }
 
     // Global Row Delegation Click Event Listener
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const row = e.target.closest('.table-row');
       if (row) {
         // Exclude interactive items
-        if (e.target.closest('.star-cell') || 
-            e.target.closest('.action-cell') || 
-            e.target.closest('.dropdown-menu') || 
-            e.target.closest('button')) {
+        if (e.target.closest('.star-cell') ||
+          e.target.closest('.action-cell') ||
+          e.target.closest('.dropdown-menu') ||
+          e.target.closest('button')) {
           return;
         }
-        
+
         // Exclude clicking on an already active editing cell to let them type
         if (e.target.classList.contains('doc-name-cell') && document.activeElement === e.target) {
           return;
         }
-        
+
         // Find doc-name-cell and trigger preview
         const nameCell = row.querySelector('.doc-name-cell');
         if (nameCell) {

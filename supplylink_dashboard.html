@@ -65,20 +65,20 @@
     }
 
     /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
-    [contenteditable="true"] {
+    [] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable="true"]:hover {
+    []:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable="true"]:focus {
+    []:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -86,12 +86,12 @@
       color: var(--text-gray-dark);
     }
 
-    .sidebar [contenteditable="true"]:hover {
+    .sidebar []:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .sidebar [contenteditable="true"]:focus {
+    .sidebar []:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -1975,65 +1975,81 @@
         <div class="modal-body" style="display: flex; flex-direction: column; gap: 16px;">
           <!-- Pre-filled Dummy Suppliers List -->
           <div>
-            <span style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 10px; display: block;">Choose from Available Dummy List</span>
+            <span
+              style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 10px; display: block;">Choose
+              from Available Dummy List</span>
             <div style="display: flex; flex-direction: column; gap: 8px;">
-              
+
               <!-- Dummy Supplier Item 1 -->
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
                 <div>
-                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Apex Auto Components</div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Apex Auto Components
+                  </div>
                   <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
-                    Quality: <strong style="color: var(--text-gray-dark);">4.6</strong> | 
-                    Delivery: <strong style="color: var(--text-gray-dark);">4.4</strong> | 
+                    Quality: <strong style="color: var(--text-gray-dark);">4.6</strong> |
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.4</strong> |
                     Response: <strong style="color: var(--text-gray-dark);">4.8</strong>
                   </div>
                 </div>
-                <button type="button" class="btn-primary" onclick="addDummySupplier('Apex Auto Components', 4.6, 4.4, 4.8)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                <button type="button" class="btn-primary"
+                  onclick="addDummySupplier('Apex Auto Components', 4.6, 4.4, 4.8)"
+                  style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
                   <i class="fa-solid fa-plus"></i> Add
                 </button>
               </div>
 
               <!-- Dummy Supplier Item 2 -->
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
                 <div>
                   <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Shree Industries</div>
                   <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
-                    Quality: <strong style="color: var(--text-gray-dark);">4.2</strong> | 
-                    Delivery: <strong style="color: var(--text-gray-dark);">4.1</strong> | 
+                    Quality: <strong style="color: var(--text-gray-dark);">4.2</strong> |
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.1</strong> |
                     Response: <strong style="color: var(--text-gray-dark);">4.3</strong>
                   </div>
                 </div>
-                <button type="button" class="btn-primary" onclick="addDummySupplier('Shree Industries', 4.2, 4.1, 4.3)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                <button type="button" class="btn-primary" onclick="addDummySupplier('Shree Industries', 4.2, 4.1, 4.3)"
+                  style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
                   <i class="fa-solid fa-plus"></i> Add
                 </button>
               </div>
 
               <!-- Dummy Supplier Item 3 -->
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
                 <div>
-                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Dynamic Castings Ltd.</div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">Dynamic Castings Ltd.
+                  </div>
                   <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
-                    Quality: <strong style="color: var(--text-gray-dark);">4.8</strong> | 
-                    Delivery: <strong style="color: var(--text-gray-dark);">4.7</strong> | 
+                    Quality: <strong style="color: var(--text-gray-dark);">4.8</strong> |
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.7</strong> |
                     Response: <strong style="color: var(--text-gray-dark);">4.9</strong>
                   </div>
                 </div>
-                <button type="button" class="btn-primary" onclick="addDummySupplier('Dynamic Castings Ltd.', 4.8, 4.7, 4.9)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                <button type="button" class="btn-primary"
+                  onclick="addDummySupplier('Dynamic Castings Ltd.', 4.8, 4.7, 4.9)"
+                  style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
                   <i class="fa-solid fa-plus"></i> Add
                 </button>
               </div>
 
               <!-- Dummy Supplier Item 4 -->
-              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
+              <div
+                style="display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; background: #f8fafc;">
                 <div>
-                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">National Tooling Pvt. Ltd.</div>
+                  <div style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark);">National Tooling Pvt.
+                    Ltd.</div>
                   <div style="font-size: 9.5px; color: var(--text-gray-muted); margin-top: 2px;">
-                    Quality: <strong style="color: var(--text-gray-dark);">4.5</strong> | 
-                    Delivery: <strong style="color: var(--text-gray-dark);">4.3</strong> | 
+                    Quality: <strong style="color: var(--text-gray-dark);">4.5</strong> |
+                    Delivery: <strong style="color: var(--text-gray-dark);">4.3</strong> |
                     Response: <strong style="color: var(--text-gray-dark);">4.6</strong>
                   </div>
                 </div>
-                <button type="button" class="btn-primary" onclick="addDummySupplier('National Tooling Pvt. Ltd.', 4.5, 4.3, 4.6)" style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
+                <button type="button" class="btn-primary"
+                  onclick="addDummySupplier('National Tooling Pvt. Ltd.', 4.5, 4.3, 4.6)"
+                  style="font-size: 10.5px; padding: 4px 10px; border-radius: 6px; display: flex; align-items: center; gap: 4px; border: none; background: var(--accent-blue); color: #fff; cursor: pointer; font-weight: 600;">
                   <i class="fa-solid fa-plus"></i> Add
                 </button>
               </div>
@@ -2046,7 +2062,9 @@
 
           <!-- Custom Form Option -->
           <div>
-            <span style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 12px; display: block;">Or Register Custom Supplier</span>
+            <span
+              style="font-size: 11.5px; font-weight: 700; color: var(--text-gray-dark); margin-bottom: 12px; display: block;">Or
+              Register Custom Supplier</span>
             <div class="modal-form-group" style="margin-bottom: 12px;">
               <label class="modal-label">Company Legal Name</label>
               <input type="text" class="modal-input" id="sup-company-name" placeholder="e.g. Apex Auto Components">
@@ -2350,7 +2368,7 @@
         viewKey = selectEl ? selectEl.value : 'ytd';
       }
       const data = spendViews[viewKey];
-      
+
       const svg = document.getElementById('spend-line-svg');
       svg.innerHTML = '';
 
@@ -2736,7 +2754,7 @@
       supplierDeleteModeActive = !supplierDeleteModeActive;
       const btn = document.getElementById('toggle-delete-supplier-btn');
       const table = document.getElementById('suppliers-perf-table');
-      
+
       if (supplierDeleteModeActive) {
         btn.style.color = 'var(--accent-red)';
         table.classList.add('delete-mode-active');
@@ -2751,7 +2769,7 @@
     function deleteSupplierRow(btnEl) {
       const row = btnEl.closest('tr');
       const supplierName = row.cells[0].innerText;
-      
+
       if (confirm(`Are you sure you want to delete supplier "${supplierName}"?`)) {
         row.remove();
         showToast(`Supplier "${supplierName}" has been removed.`, 'success');

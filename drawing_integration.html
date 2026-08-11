@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Drawing Integration - Aashita Intelligence</title>
   <meta name="description" content="Integrate CAD drawing and convert to Aashita Supplier Template format.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
@@ -22,21 +23,21 @@
       --bg-primary: #f8fafc;
       --bg-sidebar: #050b18;
       --sidebar-width: 250px;
-      
+
       --text-white: #ffffff;
       --text-gray-light: #cbd5e1;
       --text-gray-dark: #1e293b;
       --text-gray-muted: #64748b;
-      
+
       --accent-blue: #2563eb;
       --accent-blue-hover: #1d4ed8;
       --accent-blue-light: #eff6ff;
       --accent-blue-glow: rgba(37, 99, 235, 0.15);
-      
+
       --accent-green: #10b981;
       --accent-green-hover: #059669;
       --accent-green-light: #ecfdf5;
-      
+
       --border-color: #e2e8f0;
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -52,20 +53,20 @@
     }
 
     /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
-    [contenteditable="true"] {
+    [] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable="true"]:hover {
+    []:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable="true"]:focus {
+    []:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -74,12 +75,12 @@
     }
 
     /* Sidebar items should have white dashed borders */
-    .sidebar [contenteditable="true"]:hover {
+    .sidebar []:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
-    
-    .sidebar [contenteditable="true"]:focus {
+
+    .sidebar []:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -705,7 +706,8 @@
       border-radius: 6px;
       font-size: 11px;
       margin-bottom: 14px;
-      display: none; /* Injected by JS */
+      display: none;
+      /* Injected by JS */
       animation: fadeIn 0.3s ease;
     }
 
@@ -810,7 +812,9 @@
       pointer-events: none;
     }
 
-    .drawing-image-frame:hover .drawing-zoom-hint { opacity: 1; }
+    .drawing-image-frame:hover .drawing-zoom-hint {
+      opacity: 1;
+    }
 
     .drawing-image-missing {
       display: flex;
@@ -850,7 +854,9 @@
       animation: fadeIn 0.2s ease;
     }
 
-    .drawing-lightbox.open { display: flex; }
+    .drawing-lightbox.open {
+      display: flex;
+    }
 
     .dlb-bar {
       display: flex;
@@ -863,7 +869,10 @@
       border-bottom: 1px solid rgba(148, 163, 184, 0.28);
     }
 
-    .dlb-tabs { display: flex; gap: 6px; }
+    .dlb-tabs {
+      display: flex;
+      gap: 6px;
+    }
 
     .dlb-tab {
       display: flex;
@@ -881,7 +890,10 @@
       transition: all 0.16s ease;
     }
 
-    .dlb-tab:hover { background: rgba(148, 163, 184, 0.26); color: #f1f5f9; }
+    .dlb-tab:hover {
+      background: rgba(148, 163, 184, 0.26);
+      color: #f1f5f9;
+    }
 
     .dlb-tab.active {
       background: var(--primary-blue, #2563eb);
@@ -897,7 +909,11 @@
       text-transform: uppercase;
     }
 
-    .dlb-tools { display: flex; align-items: center; gap: 6px; }
+    .dlb-tools {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
 
     .dlb-btn {
       display: flex;
@@ -914,8 +930,14 @@
       transition: background 0.16s ease;
     }
 
-    .dlb-btn:hover { background: rgba(148, 163, 184, 0.34); }
-    .dlb-btn.dlb-close:hover { background: #dc2626; color: #ffffff; }
+    .dlb-btn:hover {
+      background: rgba(148, 163, 184, 0.34);
+    }
+
+    .dlb-btn.dlb-close:hover {
+      background: #dc2626;
+      color: #ffffff;
+    }
 
     .dlb-zoom {
       min-width: 46px;
@@ -936,7 +958,9 @@
       cursor: grab;
     }
 
-    .dlb-stage.is-panning { cursor: grabbing; }
+    .dlb-stage.is-panning {
+      cursor: grabbing;
+    }
 
     .dlb-image {
       max-width: 100%;
@@ -982,7 +1006,8 @@
       color: #065f46;
       font-weight: 600;
       margin-bottom: 12px;
-      display: none; /* Triggered by JS */
+      display: none;
+      /* Triggered by JS */
       animation: fadeIn 0.3s ease;
     }
 
@@ -1014,13 +1039,22 @@
       background: var(--accent-blue);
       box-shadow: 0 0 8px rgba(37, 99, 235, 0.8);
       z-index: 10;
-      display: none; /* Controlled by JS */
+      display: none;
+      /* Controlled by JS */
     }
 
     @keyframes scanAnimation {
-      0% { top: 0%; }
-      50% { top: 100%; }
-      100% { top: 0%; }
+      0% {
+        top: 0%;
+      }
+
+      50% {
+        top: 100%;
+      }
+
+      100% {
+        top: 0%;
+      }
     }
 
     .details-list {
@@ -1049,7 +1083,8 @@
     .details-item i.check-ok {
       color: var(--accent-green);
       font-size: 12px;
-      opacity: 0; /* Animated checked by JS */
+      opacity: 0;
+      /* Animated checked by JS */
       transition: opacity 0.3s;
     }
 
@@ -1152,9 +1187,20 @@
 
     /* Paper plane animation */
     @keyframes flyAway {
-      0% { transform: translate(0, 0) scale(1); opacity: 1; }
-      30% { transform: translate(-10px, 10px) scale(0.9); opacity: 0.8; }
-      100% { transform: translate(300px, -300px) scale(0.3); opacity: 0; }
+      0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+      }
+
+      30% {
+        transform: translate(-10px, 10px) scale(0.9);
+        opacity: 0.8;
+      }
+
+      100% {
+        transform: translate(300px, -300px) scale(0.3);
+        opacity: 0;
+      }
     }
 
     .flying-plane {
@@ -1431,7 +1477,8 @@
         <div class="sidebar-brand">
           <div class="logo-container">
             <!-- Inline SVG Infinitish circles overlapping loop -->
-            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="11" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
               <circle cx="23" cy="12" r="7" stroke="#ef4444" stroke-width="3" />
             </svg>
@@ -1528,7 +1575,8 @@
       <header class="top-bar">
         <div class="top-bar-left">
           <div class="location-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
             </svg>
             <span>Bajaj Auto Ltd.</span>
@@ -1586,7 +1634,7 @@
           <div class="stepper-line">
             <div class="stepper-progress" id="stepper-progress-bar"></div>
           </div>
-          
+
           <div class="stepper-step active" data-step="1" onclick="jumpToStep(1)">
             <div class="step-circle">1</div>
             <div class="step-label" id="step-label-1">Upload Drawing</div>
@@ -1610,16 +1658,17 @@
 
         <!-- THREE PANEL FLOW STAGES -->
         <div class="stages-layout">
-          
+
           <!-- PANEL 1: Upload Drawing -->
           <section class="stage-panel active-glow" id="panel-1">
             <div class="stage-header">1. Upload Drawing (From Bajaj)</div>
-            
+
             <div class="upload-zone" onclick="simulateFileUpload()">
               <div class="upload-icon">
                 <i class="fa-solid fa-cloud-arrow-up"></i>
               </div>
-              <div class="upload-text">Drag and drop your drawing file here or <span class="browse-link">Browse Files</span></div>
+              <div class="upload-text">Drag and drop your drawing file here or <span class="browse-link">Browse
+                  Files</span></div>
               <div class="upload-subtext">Supported formats: PDF, DWG, DXF, JPG, PNG | Max file size: 25MB</div>
               <div class="upload-progress-bar" id="upload-progress-bar"></div>
             </div>
@@ -1630,7 +1679,8 @@
                 <i class="fa-regular fa-file-pdf"></i>
                 <div class="file-item-details">
                   <span class="file-item-name" id="uploaded-file-name">DH101334_COLLAR_SPROCKET_R04.pdf</span>
-                  <span class="file-item-size">2.4 MB &bull; Sheet A3 297 x 420 &bull; Uploaded on 12 Aug 2026, 10:15 AM</span>
+                  <span class="file-item-size">2.4 MB &bull; Sheet A3 297 x 420 &bull; Uploaded on 12 Aug 2026, 10:15
+                    AM</span>
                 </div>
               </div>
               <i class="fa-solid fa-circle-check file-item-check"></i>
@@ -1639,19 +1689,22 @@
             <!-- Drawing Preview SVG -->
             <div class="preview-box">
               <span class="preview-title-watermark">Drawing Preview</span>
-              
+
               <!-- Blank state layout before upload, SVG after upload -->
-              <div id="panel-1-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
-                <i class="fa-solid fa-file-import" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+              <div id="panel-1-placeholder"
+                style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
+                <i class="fa-solid fa-file-import"
+                  style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
                 Upload an engineering document drawing to generate preview.
               </div>
 
               <div id="panel-1-svg-container" style="display: none; width: 100%; height: 100%;">
                 <!-- Original Bajaj drawing sheet exactly as received (title block + border intact) -->
-                <div class="drawing-image-frame" onclick="openDrawingPreview('original')" title="Click to preview full size">
+                <div class="drawing-image-frame" onclick="openDrawingPreview('original')"
+                  title="Click to preview full size">
                   <img id="drawing-original-img" class="drawing-image" src="drawing_original.png"
-                       alt="Bajaj drawing sheet DH101334 - Collar Sprocket, full sheet with title block"
-                       onerror="markDrawingImageMissing(this)">
+                    alt="Bajaj drawing sheet DH101334 - Collar Sprocket, full sheet with title block"
+                    onerror="markDrawingImageMissing(this)">
                   <span class="drawing-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Preview</span>
                 </div>
               </div>
@@ -1666,7 +1719,7 @@
           <!-- PANEL 2: Cropped & Processed Drawing -->
           <section class="stage-panel locked" id="panel-2">
             <div class="stage-header">2. Cropped & Processed Drawing</div>
-            
+
             <div class="success-alert" id="panel-2-success-alert">
               <i class="fa-solid fa-circle-check"></i>
               <span>Drawing cropped and processed successfully.</span>
@@ -1675,19 +1728,22 @@
             <!-- Drawing Area with scan lines -->
             <div class="scanner-container">
               <div class="scanner-laser" id="laser-effect"></div>
-              
+
               <!-- Blank state layout before scan, Cropped blueprint after scan -->
-              <div id="panel-2-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
-                <i class="fa-solid fa-crop-simple" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+              <div id="panel-2-placeholder"
+                style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%;">
+                <i class="fa-solid fa-crop-simple"
+                  style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
                 Await upload completion to start cropping.
               </div>
 
               <div id="panel-2-svg-container" style="display: none; width: 90%; height: 95%;">
                 <!-- Same sheet after auto-crop: title block, border and frame notes stripped -->
-                <div class="drawing-image-frame" onclick="openDrawingPreview('cropped')" title="Click to preview full size">
+                <div class="drawing-image-frame" onclick="openDrawingPreview('cropped')"
+                  title="Click to preview full size">
                   <img id="drawing-cropped-img" class="drawing-image" src="drawing_cropped.png"
-                       alt="DH101334 Collar Sprocket drawing after auto-crop, title block removed"
-                       onerror="markDrawingImageMissing(this)">
+                    alt="DH101334 Collar Sprocket drawing after auto-crop, title block removed"
+                    onerror="markDrawingImageMissing(this)">
                   <span class="drawing-zoom-hint"><i class="fa-solid fa-magnifying-glass-plus"></i> Preview</span>
                 </div>
               </div>
@@ -1746,39 +1802,45 @@
           <!-- PANEL 3: Applied on Aashita Template -->
           <section class="stage-panel locked" id="panel-3">
             <div class="stage-header">3. Applied on Aashita Template</div>
-            
+
             <div class="template-box">
-              
+
               <!-- Blank state display, Drawing border SVG after map -->
-              <div id="panel-3-placeholder" style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%; margin: auto;">
-                <i class="fa-solid fa-object-group" style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
+              <div id="panel-3-placeholder"
+                style="color: var(--text-gray-muted); font-size: 11.5px; text-align: center; width: 80%; margin: auto;">
+                <i class="fa-solid fa-object-group"
+                  style="font-size: 32px; display: block; margin-bottom: 8px; color: #cbd5e1;"></i>
                 Map cropped outputs onto supplier drawing standard frame.
               </div>
 
               <div id="panel-3-svg-container" style="display: none; width: 100%; height: 100%; flex-direction: column;">
-                <svg class="cad-drawing-svg" viewBox="0 0 300 220" fill="none" style="flex-grow: 1;" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <svg class="cad-drawing-svg" viewBox="0 0 300 220" fill="none" style="flex-grow: 1;"
+                  xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <!-- AASHITA ENTERPRISES CARD BORDER -->
-                  <rect x="2" y="2" width="296" height="216" stroke="#1e3a8a" stroke-width="1.2"/>
-                  <line x1="2" y1="70" x2="298" y2="70" stroke="#1e3a8a" stroke-width="1.2"/>
-                  
+                  <rect x="2" y="2" width="296" height="216" stroke="#1e3a8a" stroke-width="1.2" />
+                  <line x1="2" y1="70" x2="298" y2="70" stroke="#1e3a8a" stroke-width="1.2" />
+
                   <!-- Aashita template header logo and parameters -->
                   <text x="10" y="20" font-size="9" font-weight="800" fill="#1e3a8a">AASHITA ENTERPRISES</text>
                   <text x="10" y="32" font-size="7" font-weight="700" fill="#475569">SUPPLIER DRAWING TEMPLATE</text>
-                  
-                  <!-- Aashita Logo Icon -->
-                  <path d="M 270,12 L 282,32 L 258,32 Z" fill="#1e3a8a"/>
-                  <text x="270" y="40" font-size="5" font-weight="750" fill="#1e3a8a" text-anchor="middle">AASHITA</text>
 
-                  <line x1="2" y1="44" x2="298" y2="44" stroke="#e2e8f0" stroke-width="0.8"/>
-                  <line x1="180" y1="44" x2="180" y2="70" stroke="#1e3a8a" stroke-width="0.8"/>
-                  <line x1="250" y1="44" x2="250" y2="70" stroke="#1e3a8a" stroke-width="0.8"/>
+                  <!-- Aashita Logo Icon -->
+                  <path d="M 270,12 L 282,32 L 258,32 Z" fill="#1e3a8a" />
+                  <text x="270" y="40" font-size="5" font-weight="750" fill="#1e3a8a"
+                    text-anchor="middle">AASHITA</text>
+
+                  <line x1="2" y1="44" x2="298" y2="44" stroke="#e2e8f0" stroke-width="0.8" />
+                  <line x1="180" y1="44" x2="180" y2="70" stroke="#1e3a8a" stroke-width="0.8" />
+                  <line x1="250" y1="44" x2="250" y2="70" stroke="#1e3a8a" stroke-width="0.8" />
 
                   <!-- Header text values -->
                   <text x="10" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NO.</text>
-                  <text x="10" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-no">AE-DH101334</text>
-                  
+                  <text x="10" y="63" font-size="7.5" font-weight="800" fill="#1e293b"
+                    id="tpl-part-no">AE-DH101334</text>
+
                   <text x="105" y="53" font-size="5.5" font-weight="700" fill="#64748b">PART NAME</text>
-                  <text x="105" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-name">COLLAR SPROCKET</text>
+                  <text x="105" y="63" font-size="7.5" font-weight="800" fill="#1e293b" id="tpl-part-name">COLLAR
+                    SPROCKET</text>
 
                   <text x="185" y="53" font-size="5.5" font-weight="700" fill="#64748b">DATE</text>
                   <text x="185" y="63" font-size="7" font-weight="800" fill="#1e293b" id="tpl-date">12-08-2026</text>
@@ -1790,27 +1852,33 @@
                   <text x="255" y="63" font-size="6" font-weight="800" fill="#1e293b" id="tpl-material">16MnCr5Si</text>
 
                   <!-- Cropped Bajaj geometry mapped into the Aashita supplier frame -->
-                  <image href="drawing_cropped.png" xlink:href="drawing_cropped.png"
-                         x="8" y="74" width="284" height="102" preserveAspectRatio="xMidYMid meet"/>
+                  <image href="drawing_cropped.png" xlink:href="drawing_cropped.png" x="8" y="74" width="284"
+                    height="102" preserveAspectRatio="xMidYMid meet" />
 
                   <!-- Revision table details border lines at bottom of template -->
-                  <line x1="2" y1="178" x2="298" y2="178" stroke="#1e3a8a" stroke-width="1.2"/>
-                  <line x1="25" y1="178" x2="25" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
-                  <line x1="150" y1="178" x2="150" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
-                  <line x1="200" y1="178" x2="200" y2="218" stroke="#1e3a8a" stroke-width="0.8"/>
+                  <line x1="2" y1="178" x2="298" y2="178" stroke="#1e3a8a" stroke-width="1.2" />
+                  <line x1="25" y1="178" x2="25" y2="218" stroke="#1e3a8a" stroke-width="0.8" />
+                  <line x1="150" y1="178" x2="150" y2="218" stroke="#1e3a8a" stroke-width="0.8" />
+                  <line x1="200" y1="178" x2="200" y2="218" stroke="#1e3a8a" stroke-width="0.8" />
 
                   <!-- Table cells content text -->
                   <text x="13" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">REV</text>
                   <text x="13" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">04</text>
 
-                  <text x="87" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DESCRIPTION</text>
-                  <text x="87" y="202" font-size="6" font-weight="700" fill="#1e293b" text-anchor="middle">DETAIL J UPDATED</text>
+                  <text x="87" y="186" font-size="5.5" font-weight="700" fill="#64748b"
+                    text-anchor="middle">DESCRIPTION</text>
+                  <text x="87" y="202" font-size="6" font-weight="700" fill="#1e293b" text-anchor="middle">DETAIL J
+                    UPDATED</text>
 
-                  <text x="175" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">DATE</text>
-                  <text x="175" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">12-08-2026</text>
+                  <text x="175" y="186" font-size="5.5" font-weight="700" fill="#64748b"
+                    text-anchor="middle">DATE</text>
+                  <text x="175" y="202" font-size="6.5" font-weight="700" fill="#1e293b"
+                    text-anchor="middle">12-08-2026</text>
 
-                  <text x="249" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">APPROVED BY</text>
-                  <text x="249" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">J. SINGH</text>
+                  <text x="249" y="186" font-size="5.5" font-weight="700" fill="#64748b" text-anchor="middle">APPROVED
+                    BY</text>
+                  <text x="249" y="202" font-size="6.5" font-weight="700" fill="#1e293b" text-anchor="middle">J.
+                    SINGH</text>
                 </svg>
               </div>
             </div>
@@ -1831,7 +1899,7 @@
 
         <!-- BOTTOM AREA: Next steps, recent conversions, support -->
         <div class="bottom-grid">
-          
+
           <div class="bottom-grid-left">
             <!-- Timeline Process Card -->
             <div class="info-card">
@@ -1932,16 +2000,17 @@
           <div class="help-card">
             <!-- Inline SVG Blueprint motor grid silhouette in card background -->
             <svg class="help-blueprint-bg" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <circle cx="50" cy="50" r="40" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2,2"/>
-              <circle cx="50" cy="50" r="28" stroke="#2563eb" stroke-width="0.8"/>
-              <path d="M 50,10 L 50,90 M 10,50 L 90,50" stroke="#2563eb" stroke-width="0.4" stroke-dasharray="4,4"/>
-              <rect x="35" y="35" width="30" height="30" stroke="#2563eb" stroke-width="0.6"/>
-              <circle cx="50" cy="50" r="6" fill="#2563eb"/>
+              <circle cx="50" cy="50" r="40" stroke="#2563eb" stroke-width="0.5" stroke-dasharray="2,2" />
+              <circle cx="50" cy="50" r="28" stroke="#2563eb" stroke-width="0.8" />
+              <path d="M 50,10 L 50,90 M 10,50 L 90,50" stroke="#2563eb" stroke-width="0.4" stroke-dasharray="4,4" />
+              <rect x="35" y="35" width="30" height="30" stroke="#2563eb" stroke-width="0.6" />
+              <circle cx="50" cy="50" r="6" fill="#2563eb" />
             </svg>
 
             <div class="help-info">
               <h4 class="help-title">Need Help?</h4>
-              <p class="help-desc">Learn more about drawing integration, mapping formulas, and template customization options.</p>
+              <p class="help-desc">Learn more about drawing integration, mapping formulas, and template customization
+                options.</p>
             </div>
             <button class="view-guide-btn" onclick="alert('Displaying drawing integration handbook PDF!')">
               <i class="fa-solid fa-book-open"></i>
@@ -1977,11 +2046,11 @@
     let isDrawingUploaded = false;
     let isDrawingCropped = false;
     let isDrawingMapped = false;
-    
+
     // Page load setup
     document.addEventListener("DOMContentLoaded", () => {
       // Prevent broken layout linebreaks in headings / links on contenteditable keypress
-      const editableElements = document.querySelectorAll('[contenteditable="true"]');
+      const editableElements = document.querySelectorAll('[]');
       editableElements.forEach(el => {
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' && (el.tagName.startsWith('H') || el.classList.contains('menu-badge') || el.classList.contains('step-label') || el.classList.contains('completed-badge'))) {
@@ -2051,7 +2120,7 @@
         renderStep(1);
         return;
       }
-      
+
       if (step === 2) {
         if (!isDrawingUploaded) {
           alert("Please upload a drawing in Stage 1 first.");
@@ -2085,25 +2154,25 @@
     // Simulate file upload (Panel 1)
     function simulateFileUpload() {
       if (isDrawingUploaded || uploadInProgress) return;
-      
+
       uploadInProgress = true;
       const progressBar = document.getElementById('upload-progress-bar');
       let progress = 0;
-      
+
       const interval = setInterval(() => {
         progress += 10;
         progressBar.style.width = `${progress}%`;
-        
+
         if (progress >= 100) {
           clearInterval(interval);
           uploadInProgress = false;
           isDrawingUploaded = true;
-          
+
           // Hide placeholder, show file details, show raw CAD drawing preview
           document.getElementById('panel-1-placeholder').style.display = 'none';
           document.getElementById('panel-1-svg-container').style.display = 'block';
           document.getElementById('uploaded-file-block').style.display = 'flex';
-          
+
           // Advance to Step 2
           setTimeout(() => {
             currentStep = 2;
@@ -2124,14 +2193,14 @@
 
       laser.style.display = 'block';
       laser.style.animation = 'scanAnimation 1.6s ease-in-out infinite';
-      
+
       // Hide initial checkmarks and reset status labels
       for (let i = 1; i <= 5; i++) {
         document.getElementById(`check-${i}`).style.opacity = '0';
         document.getElementById(`val-${i}`).textContent = 'Analyzing...';
         document.getElementById(`val-${i}`).style.color = 'var(--text-gray-muted)';
       }
-      
+
       p2Placeholder.style.display = 'none';
       successAlert.style.display = 'none';
 
@@ -2162,13 +2231,13 @@
     // Simulate mapping onto Aashita Template frame (Panel 3)
     function triggerTemplateMapping() {
       if (!isDrawingCropped) return;
-      
+
       const p3Placeholder = document.getElementById('panel-3-placeholder');
       const p3SvgContainer = document.getElementById('panel-3-svg-container');
 
       p3Placeholder.style.display = 'none';
       p3SvgContainer.style.display = 'flex';
-      
+
       isDrawingMapped = true;
     }
 
@@ -2186,10 +2255,10 @@
       setTimeout(() => {
         // Reset classes
         plane.className = "fa-solid fa-paper-plane";
-        
+
         // Show success alert popup
         alert("Success! Converted CAD drawing AE-DH101334 (COLLAR SPROCKET) has been dispatched to XYZ Supplier successfully. Collaborations thread spawned in Sub Chats.");
-        
+
         // Move stepper to completed step 4
         currentStep = 4;
         renderStep(4);
@@ -2199,7 +2268,7 @@
         const newRowHTML = `
           <tr style="animation: fadeIn 0.4s ease;">
             <td class="file-code">AE-DH101334</td>
-            <td class="date-val">Integrated Today, ${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</td>
+            <td class="date-val">Integrated Today, ${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</td>
             <td><span class="completed-badge">Completed</span></td>
           </tr>
         `;
@@ -2211,7 +2280,7 @@
        ============================================================ */
     const DRAWING_SOURCES = {
       original: { src: 'drawing_original.png', caption: 'DH101334 \u2014 Collar Sprocket \u00b7 Original Bajaj sheet (A3 297 x 420)' },
-      cropped:  { src: 'drawing_cropped.png',  caption: 'DH101334 \u2014 Collar Sprocket \u00b7 Cropped, title block removed' }
+      cropped: { src: 'drawing_cropped.png', caption: 'DH101334 \u2014 Collar Sprocket \u00b7 Cropped, title block removed' }
     };
 
     let dlbCurrent = 'original';
@@ -2228,10 +2297,10 @@
       frame.onclick = null;
       frame.innerHTML =
         '<div class="drawing-image-missing">' +
-          '<i class="fa-solid fa-triangle-exclamation" style="font-size:18px;"></i>' +
-          '<span>Drawing image not found</span>' +
-          '<code>' + img.getAttribute('src') + '</code>' +
-          '<span style="font-weight:500;">Save it next to drawing_integration.html</span>' +
+        '<i class="fa-solid fa-triangle-exclamation" style="font-size:18px;"></i>' +
+        '<span>Drawing image not found</span>' +
+        '<code>' + img.getAttribute('src') + '</code>' +
+        '<span style="font-weight:500;">Save it next to drawing_integration.html</span>' +
         '</div>';
     }
 
@@ -2280,7 +2349,7 @@
     }
 
     (function initDrawingPreview() {
-      const box   = document.getElementById('drawing-lightbox');
+      const box = document.getElementById('drawing-lightbox');
       const stage = document.getElementById('dlb-stage');
       if (!box || !stage) return;
 
@@ -2337,17 +2406,22 @@
       </div>
       <div class="dlb-caption" id="dlb-caption">DH101334 &mdash; Collar Sprocket</div>
       <div class="dlb-tools">
-        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(-1)" title="Zoom out"><i class="fa-solid fa-magnifying-glass-minus"></i></button>
+        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(-1)" title="Zoom out"><i
+            class="fa-solid fa-magnifying-glass-minus"></i></button>
         <span class="dlb-zoom" id="dlb-zoom">100%</span>
-        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(1)" title="Zoom in"><i class="fa-solid fa-magnifying-glass-plus"></i></button>
-        <button type="button" class="dlb-btn" onclick="resetDrawingPreview()" title="Fit to screen"><i class="fa-solid fa-expand"></i></button>
-        <button type="button" class="dlb-btn dlb-close" onclick="closeDrawingPreview()" title="Close (Esc)"><i class="fa-solid fa-xmark"></i></button>
+        <button type="button" class="dlb-btn" onclick="zoomDrawingPreview(1)" title="Zoom in"><i
+            class="fa-solid fa-magnifying-glass-plus"></i></button>
+        <button type="button" class="dlb-btn" onclick="resetDrawingPreview()" title="Fit to screen"><i
+            class="fa-solid fa-expand"></i></button>
+        <button type="button" class="dlb-btn dlb-close" onclick="closeDrawingPreview()" title="Close (Esc)"><i
+            class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
     <div class="dlb-stage" id="dlb-stage">
       <img id="dlb-image" class="dlb-image" src="" alt="Drawing preview" draggable="false">
     </div>
-    <div class="dlb-foot">Scroll to zoom &bull; drag to pan &bull; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to switch &bull; <kbd>Esc</kbd> to close</div>
+    <div class="dlb-foot">Scroll to zoom &bull; drag to pan &bull; <kbd>&larr;</kbd> <kbd>&rarr;</kbd> to switch &bull;
+      <kbd>Esc</kbd> to close</div>
   </div>
 </body>
 
