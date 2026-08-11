@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Process Documents - Aashita Intelligence</title>
   <meta name="description" content="Central repository for all manufacturing and quality process documents.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
   <style>
     /* ===== RESET & BASE ===== */
@@ -23,24 +24,24 @@
       --bg-sidebar: #050b18;
       --sidebar-width: 250px;
       --sidebar-collapsed-width: 70px;
-      
+
       --text-white: #ffffff;
       --text-gray-light: #cbd5e1;
       --text-gray-dark: #1e293b;
       --text-gray-muted: #64748b;
-      
+
       --accent-blue: #2563eb;
       --accent-blue-hover: #1d4ed8;
       --accent-blue-light: #eff6ff;
       --accent-blue-glow: rgba(37, 99, 235, 0.15);
-      
+
       --accent-green: #10b981;
       --accent-green-hover: #059669;
       --accent-green-light: #ecfdf5;
-      
+
       --accent-purple: #8b5cf6;
       --accent-purple-light: #f5f3ff;
-      
+
       --border-color: #e2e8f0;
       --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
       --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
@@ -56,20 +57,20 @@
     }
 
     /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
-    [contenteditable="true"] {
+    [contenteditable] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable="true"]:hover {
+    [contenteditable]:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable="true"]:focus {
+    [contenteditable]:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -78,12 +79,12 @@
     }
 
     /* Sidebar items should have white dashed borders */
-    .sidebar [contenteditable="true"]:hover {
+    .sidebar [contenteditable]:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
-    
-    .sidebar [contenteditable="true"]:focus {
+
+    .sidebar [contenteditable]:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -625,12 +626,35 @@
       font-size: 12px;
     }
 
-    .metric-total .metric-icon-box { background: #eff6ff; color: #2563eb; }
-    .metric-ppap .metric-icon-box { background: #eff6ff; color: #3b82f6; }
-    .metric-sop .metric-icon-box { background: #f5f3ff; color: #8b5cf6; }
-    .metric-cp .metric-icon-box { background: #fff7ed; color: #f97316; }
-    .metric-is .metric-icon-box { background: #ecfdf5; color: #10b981; }
-    .metric-other .metric-icon-box { background: #f5f3ff; color: #a855f7; }
+    .metric-total .metric-icon-box {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .metric-ppap .metric-icon-box {
+      background: #eff6ff;
+      color: #3b82f6;
+    }
+
+    .metric-sop .metric-icon-box {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .metric-cp .metric-icon-box {
+      background: #fff7ed;
+      color: #f97316;
+    }
+
+    .metric-is .metric-icon-box {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .metric-other .metric-icon-box {
+      background: #f5f3ff;
+      color: #a855f7;
+    }
 
     .metric-name {
       font-size: 11px;
@@ -881,9 +905,17 @@
       align-items: center;
     }
 
-    .icon-pdf { color: #ef4444; }
-    .icon-word { color: #2563eb; }
-    .icon-excel { color: #10b981; }
+    .icon-pdf {
+      color: #ef4444;
+    }
+
+    .icon-word {
+      color: #2563eb;
+    }
+
+    .icon-excel {
+      color: #10b981;
+    }
 
     .doc-name-cell {
       font-weight: 600;
@@ -905,13 +937,40 @@
       border-radius: 12px;
     }
 
-    .badge-ppap { background: #eff6ff; color: #2563eb; }
-    .badge-sop { background: #f1f5f9; color: #475569; }
-    .badge-cp { background: #ecfdf5; color: #10b981; }
-    .badge-pfmea { background: #fff1f2; color: #f43f5e; }
-    .badge-is { background: #eff6ff; color: #1d4ed8; }
-    .badge-rp { background: #f5f3ff; color: #8b5cf6; }
-    .badge-sm { background: #ecfdf5; color: #059669; }
+    .badge-ppap {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .badge-sop {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .badge-cp {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .badge-pfmea {
+      background: #fff1f2;
+      color: #f43f5e;
+    }
+
+    .badge-is {
+      background: #eff6ff;
+      color: #1d4ed8;
+    }
+
+    .badge-rp {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .badge-sm {
+      background: #ecfdf5;
+      color: #059669;
+    }
 
     .link-part {
       font-family: monospace;
@@ -928,9 +987,23 @@
       border-radius: 12px;
     }
 
-    .status-approved { background: #ecfdf5; color: #10b981; border: 1.5px solid #a7f3d0; }
-    .status-review { background: #eff6ff; color: #2563eb; border: 1.5px solid #bfdbfe; }
-    .status-progress { background: #fff7ed; color: #ea580c; border: 1.5px solid #ffedd5; }
+    .status-approved {
+      background: #ecfdf5;
+      color: #10b981;
+      border: 1.5px solid #a7f3d0;
+    }
+
+    .status-review {
+      background: #eff6ff;
+      color: #2563eb;
+      border: 1.5px solid #bfdbfe;
+    }
+
+    .status-progress {
+      background: #fff7ed;
+      color: #ea580c;
+      border: 1.5px solid #ffedd5;
+    }
 
     .updated-date {
       font-size: 11px;
@@ -1135,15 +1208,50 @@
       font-size: 10px;
     }
 
-    .cat-ppap .category-circle-icon { background: #fef2f2; color: #ef4444; }
-    .cat-sop .category-circle-icon { background: #eff6ff; color: #2563eb; }
-    .cat-cp .category-circle-icon { background: #ecfdf5; color: #10b981; }
-    .cat-pfmea .category-circle-icon { background: #fff7ed; color: #f97316; }
-    .cat-is .category-circle-icon { background: #eff6ff; color: #475569; }
-    .cat-rp .category-circle-icon { background: #f5f3ff; color: #8b5cf6; }
-    .cat-sm .category-circle-icon { background: #ecfdf5; color: #059669; }
-    .cat-wi .category-circle-icon { background: #f0fdf4; color: #15803d; }
-    .cat-other .category-circle-icon { background: #fffbeb; color: #d97706; }
+    .cat-ppap .category-circle-icon {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+
+    .cat-sop .category-circle-icon {
+      background: #eff6ff;
+      color: #2563eb;
+    }
+
+    .cat-cp .category-circle-icon {
+      background: #ecfdf5;
+      color: #10b981;
+    }
+
+    .cat-pfmea .category-circle-icon {
+      background: #fff7ed;
+      color: #f97316;
+    }
+
+    .cat-is .category-circle-icon {
+      background: #eff6ff;
+      color: #475569;
+    }
+
+    .cat-rp .category-circle-icon {
+      background: #f5f3ff;
+      color: #8b5cf6;
+    }
+
+    .cat-sm .category-circle-icon {
+      background: #ecfdf5;
+      color: #059669;
+    }
+
+    .cat-wi .category-circle-icon {
+      background: #f0fdf4;
+      color: #15803d;
+    }
+
+    .cat-other .category-circle-icon {
+      background: #fffbeb;
+      color: #d97706;
+    }
 
     .category-name {
       font-weight: 500;
@@ -1232,8 +1340,15 @@
       box-shadow: 0 0 0 4px #ffffff;
     }
 
-    .dot-check { background: #d1fae5; color: #10b981; }
-    .dot-upload { background: #dbeafe; color: #2563eb; }
+    .dot-check {
+      background: #d1fae5;
+      color: #10b981;
+    }
+
+    .dot-upload {
+      background: #dbeafe;
+      color: #2563eb;
+    }
 
     .activity-details {
       display: flex;
@@ -1373,8 +1488,15 @@
     }
 
     @keyframes slideUp {
-      from { transform: translateY(15px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
+      from {
+        transform: translateY(15px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
     }
 
     .modal-header {
@@ -1511,13 +1633,25 @@
     }
 
     @keyframes slideInRight {
-      from { transform: translateX(50px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
+      from {
+        transform: translateX(50px);
+        opacity: 0;
+      }
+
+      to {
+        transform: translateX(0);
+        opacity: 1;
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
     }
 
 
@@ -1526,9 +1660,11 @@
       .portal-grid {
         grid-template-columns: 1fr;
       }
+
       .metrics-row {
         grid-template-columns: repeat(3, 1fr);
       }
+
       .guidelines-row {
         grid-template-columns: repeat(3, 1fr);
       }
@@ -1538,12 +1674,16 @@
       .metrics-row {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .guidelines-row {
         grid-template-columns: repeat(2, 1fr);
       }
+
       .top-bar-left {
-        display: none; /* Hide top location bars to save space */
+        display: none;
+        /* Hide top location bars to save space */
       }
+
       .search-box-container {
         width: 100%;
       }
@@ -1609,7 +1749,7 @@
       border: 1px solid var(--border-color);
       border-radius: 8px;
       padding: 18px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.01);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.01);
     }
 
     .preview-dummy-title {
@@ -1685,8 +1825,15 @@
       text-transform: uppercase;
     }
 
-    .status-ok { background: var(--accent-green-light); color: var(--accent-green); }
-    .status-warning { background: #fff7ed; color: #f97316; }
+    .status-ok {
+      background: var(--accent-green-light);
+      color: var(--accent-green);
+    }
+
+    .status-warning {
+      background: #fff7ed;
+      color: #f97316;
+    }
 
     /* SOP steps styling */
     .preview-sop-steps {
@@ -1732,7 +1879,8 @@
       margin-top: 8px;
     }
 
-    .preview-matrix-table th, .preview-matrix-table td {
+    .preview-matrix-table th,
+    .preview-matrix-table td {
       border: 1px solid var(--border-color);
       padding: 6px 8px;
       text-align: center;
@@ -1752,10 +1900,21 @@
       background: #cbd5e1;
     }
 
-    .skill-dot.level-1 { background: #cbd5e1; }
-    .skill-dot.level-2 { background: #93c5fd; }
-    .skill-dot.level-3 { background: #3b82f6; }
-    .skill-dot.level-4 { background: #1d4ed8; }
+    .skill-dot.level-1 {
+      background: #cbd5e1;
+    }
+
+    .skill-dot.level-2 {
+      background: #93c5fd;
+    }
+
+    .skill-dot.level-3 {
+      background: #3b82f6;
+    }
+
+    .skill-dot.level-4 {
+      background: #1d4ed8;
+    }
 
     /* ===== CENTERED DOCUMENT FLOATER SECTION ===== */
     .document-floater-overlay {
@@ -1792,8 +1951,15 @@
     }
 
     @keyframes zoomIn {
-      from { transform: scale(0.95); opacity: 0; }
-      to { transform: scale(1); opacity: 1; }
+      from {
+        transform: scale(0.95);
+        opacity: 0;
+      }
+
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .floater-header {
@@ -1832,7 +1998,8 @@
       padding: 40px;
       flex: 1;
       overflow-y: auto;
-      background: #e2e8f0; /* Gray table surface to make the A4 document stand out */
+      background: #e2e8f0;
+      /* Gray table surface to make the A4 document stand out */
       display: flex;
       justify-content: center;
     }
@@ -1943,7 +2110,8 @@
       font-size: 11px;
     }
 
-    .doc-formal-table th, .doc-formal-table td {
+    .doc-formal-table th,
+    .doc-formal-table td {
       border: 1px solid #94a3b8;
       padding: 8px 10px;
       text-align: left;
@@ -2002,13 +2170,14 @@
         <div class="sidebar-brand">
           <div class="logo-container">
             <!-- Inline SVG Infinitish circles overlapping loop -->
-            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="28" height="20" viewBox="0 0 34 24" fill="none" style="margin-top: 2px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="11" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
               <circle cx="23" cy="12" r="7" stroke="#ef4444" stroke-width="3" />
             </svg>
-            <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
+            <span class="logo-text">Aashita Intelligence</span>
           </div>
-          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
+          <div class="logo-tagline">Connect. Collaborate. Deliver.</div>
         </div>
 
         <ul class="sidebar-menu">
@@ -2076,8 +2245,8 @@
           <div class="brand-logo-block">
             <div class="brand-logo-icon">BAJAJ</div>
             <div class="brand-logo-details">
-              <span class="brand-name" contenteditable="true">Bajaj Auto Ltd.</span>
-              <span class="brand-tag" contenteditable="true">THE WORLD'S FAVOURITE INDIAN</span>
+              <span class="brand-name">Bajaj Auto Ltd.</span>
+              <span class="brand-tag">THE WORLD'S FAVOURITE INDIAN</span>
             </div>
           </div>
           <i class="fa-solid fa-chevron-down" style="font-size: 10px; color: #94a3b8;"></i>
@@ -2086,14 +2255,14 @@
         <div class="user-profile-card">
           <div class="user-avatar">BP</div>
           <div class="user-profile-details">
-            <span class="user-email" contenteditable="true">bajaj.planthead@bajajauto.co.in</span>
-            <span class="user-role" contenteditable="true">Plant Head</span>
+            <span class="user-email">bajaj.planthead@bajajauto.co.in</span>
+            <span class="user-role">Plant Head</span>
           </div>
         </div>
 
         <a class="collapse-menu-btn" onclick="toggleSidebar()">
           <i class="fa-solid fa-arrow-left" id="collapse-icon"></i>
-          <span class="collapse-text" contenteditable="true">Collapse Menu</span>
+          <span class="collapse-text">Collapse Menu</span>
         </a>
       </div>
     </aside>
@@ -2104,18 +2273,19 @@
       <header class="top-bar">
         <div class="top-bar-left">
           <div class="location-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;" xmlns="http://www.w3.org/2000/svg">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" style="margin-top: 1px;"
+              xmlns="http://www.w3.org/2000/svg">
               <circle cx="12" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
             </svg>
-            <span contenteditable="true">Bajaj Auto Ltd.</span>
+            <span>Bajaj Auto Ltd.</span>
           </div>
           <div class="location-badge">
             <i class="fa-solid fa-building"></i>
-            <span contenteditable="true">Plant: Chakan, Pune</span>
+            <span>Plant: Chakan, Pune</span>
           </div>
           <div class="location-badge">
             <i class="fa-solid fa-network-wired"></i>
-            <span contenteditable="true">Division: R&D - Powertrain</span>
+            <span>Division: R&D - Powertrain</span>
           </div>
         </div>
 
@@ -2145,17 +2315,17 @@
         <!-- HEADER TITLE -->
         <div class="page-header">
           <div>
-            <h2 class="page-title" contenteditable="true">Process Documents</h2>
-            <p class="page-desc" contenteditable="true">Central repository for all manufacturing and quality process documents.</p>
+            <h2 class="page-title">Process Documents</h2>
+            <p class="page-desc">Central repository for all manufacturing and quality process documents.</p>
           </div>
           <div class="header-actions">
             <button class="upload-doc-btn" onclick="openUploadModal()">
               <i class="fa-solid fa-cloud-arrow-up"></i>
-              <span contenteditable="true">Upload Document</span>
+              <span>Upload Document</span>
             </button>
             <button class="new-doc-btn" onclick="openUploadModal()">
               <i class="fa-solid fa-plus"></i>
-              <span contenteditable="true">New Document</span>
+              <span>New Document</span>
             </button>
           </div>
         </div>
@@ -2165,88 +2335,89 @@
           <!-- Total -->
           <div class="metric-card metric-total" onclick="filterByTab('All')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">Total Documents</span>
+              <span class="metric-name">Total Documents</span>
               <div class="metric-icon-box">
                 <i class="fa-regular fa-file"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-total" contenteditable="true">1,248</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 12% vs last month</span>
+            <span class="metric-val" id="count-total">1,248</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 12% vs last month</span>
           </div>
 
           <!-- PPAPs -->
           <div class="metric-card metric-ppap" onclick="filterByTab('PPAP')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">PPAPs</span>
+              <span class="metric-name">PPAPs</span>
               <div class="metric-icon-box">
                 <i class="fa-solid fa-shield-halved"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-ppap" contenteditable="true">126</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 8% vs last month</span>
+            <span class="metric-val" id="count-ppap">126</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 8% vs last month</span>
           </div>
 
           <!-- SOPs -->
           <div class="metric-card metric-sop" onclick="filterByTab('SOP')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">SOPs</span>
+              <span class="metric-name">SOPs</span>
               <div class="metric-icon-box">
                 <i class="fa-solid fa-list-check"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-sop" contenteditable="true">342</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 10% vs last month</span>
+            <span class="metric-val" id="count-sop">342</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 10% vs last month</span>
           </div>
 
           <!-- Control Plans -->
           <div class="metric-card metric-cp" onclick="filterByTab('Control Plan')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">Control Plans</span>
+              <span class="metric-name">Control Plans</span>
               <div class="metric-icon-box">
                 <i class="fa-solid fa-crosshairs"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-cp" contenteditable="true">189</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 15% vs last month</span>
+            <span class="metric-val" id="count-cp">189</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 15% vs last month</span>
           </div>
 
           <!-- Inspection Standards -->
           <div class="metric-card metric-is" onclick="filterByTab('Inspection Standard')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">Inspection Standards</span>
+              <span class="metric-name">Inspection Standards</span>
               <div class="metric-icon-box">
                 <i class="fa-solid fa-circle-check"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-is" contenteditable="true">201</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 7% vs last month</span>
+            <span class="metric-val" id="count-is">201</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 7% vs last month</span>
           </div>
 
           <!-- Other Documents -->
           <div class="metric-card metric-other" onclick="filterByTab('Other')">
             <div class="metric-header">
-              <span class="metric-name" contenteditable="true">Other Documents</span>
+              <span class="metric-name">Other Documents</span>
               <div class="metric-icon-box">
                 <i class="fa-solid fa-paperclip"></i>
               </div>
             </div>
-            <span class="metric-val" id="count-other" contenteditable="true">390</span>
-            <span class="metric-trend" contenteditable="true"><i class="fa-solid fa-arrow-trend-up"></i> 9% vs last month</span>
+            <span class="metric-val" id="count-other">390</span>
+            <span class="metric-trend"><i class="fa-solid fa-arrow-trend-up"></i> 9% vs last month</span>
           </div>
         </section>
 
         <!-- MAIN DUAL COLUMN VIEWPORT -->
         <div class="portal-grid">
-          
+
           <!-- LEFT SIDE WORKSPACE -->
           <div class="workspace-area">
-            
+
             <!-- Filters Bar -->
             <section class="filter-card">
               <div class="filter-inputs-row">
                 <div class="filter-search-box">
                   <i class="fa-solid fa-magnifying-glass"></i>
-                  <input type="text" class="table-search-input" id="table-search-box" oninput="performFiltering()" placeholder="Search by document name, part no., supplier...">
+                  <input type="text" class="table-search-input" id="table-search-box" oninput="performFiltering()"
+                    placeholder="Search by document name, part no., supplier...">
                 </div>
 
                 <select class="filter-dropdown" id="filter-type" onchange="performFiltering()">
@@ -2282,12 +2453,12 @@
 
                 <button class="more-filters-btn">
                   <i class="fa-solid fa-sliders"></i>
-                  <span contenteditable="true">More Filters</span>
+                  <span>More Filters</span>
                 </button>
 
                 <a class="reset-filters-link" onclick="resetAllFilters()">
                   <i class="fa-solid fa-rotate-left"></i>
-                  <span contenteditable="true">Reset</span>
+                  <span>Reset</span>
                 </a>
               </div>
 
@@ -2298,8 +2469,10 @@
                 <div class="filter-tab" data-tab="SOP" onclick="filterByTab('SOP')">SOP</div>
                 <div class="filter-tab" data-tab="Control Plan" onclick="filterByTab('Control Plan')">Control Plan</div>
                 <div class="filter-tab" data-tab="PFMEA" onclick="filterByTab('PFMEA')">PFMEA</div>
-                <div class="filter-tab" data-tab="Inspection Standard" onclick="filterByTab('Inspection Standard')">Inspection Standards</div>
-                <div class="filter-tab" data-tab="Reaction Plan" onclick="filterByTab('Reaction Plan')">Reaction Plan</div>
+                <div class="filter-tab" data-tab="Inspection Standard" onclick="filterByTab('Inspection Standard')">
+                  Inspection Standards</div>
+                <div class="filter-tab" data-tab="Reaction Plan" onclick="filterByTab('Reaction Plan')">Reaction Plan
+                </div>
                 <div class="filter-tab" data-tab="Skill Matrix" onclick="filterByTab('Skill Matrix')">Skill Matrix</div>
               </div>
             </section>
@@ -2311,36 +2484,43 @@
                   <tr>
                     <th class="star-cell"></th>
                     <th class="file-icon-cell"></th>
-                    <th contenteditable="true">Document Name</th>
-                    <th contenteditable="true">Document Type</th>
-                    <th contenteditable="true">Linked To (Part / Process)</th>
-                    <th contenteditable="true">Supplier / Owner</th>
-                    <th contenteditable="true">Revision</th>
-                    <th contenteditable="true">Status</th>
-                    <th contenteditable="true">Last Updated</th>
-                    <th style="width: 80px;" contenteditable="true">Actions</th>
+                    <th>Document Name</th>
+                    <th>Document Type</th>
+                    <th>Linked To (Part / Process)</th>
+                    <th>Supplier / Owner</th>
+                    <th>Revision</th>
+                    <th>Status</th>
+                    <th>Last Updated</th>
+                    <th style="width: 80px;">Actions</th>
                   </tr>
                 </thead>
                 <tbody id="table-rows-body">
                   <!-- Row 1 -->
-                  <tr class="table-row" data-type="PPAP" data-status="Approved" data-name="PPAP_Engine_Mounting_Bracket.pdf" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="PPAP" data-status="Approved"
+                    data-name="PPAP_Engine_Mounting_Bracket.pdf" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
-                      <button class="star-btn starred" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
+                      <button class="star-btn starred" onclick="toggleStar(this)"><i
+                          class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">PPAP_Engine_Mounting_Bracket.pdf</td>
-                    <td><span class="type-badge badge-ppap" contenteditable="true">PPAP</span></td>
-                    <td class="link-part" contenteditable="true">AE-BRKT-ENG-MTG-001</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">A</td>
-                    <td><span class="status-badge status-approved" contenteditable="true">Approved</span></td>
-                    <td class="updated-date" contenteditable="true">12 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">10:15 AM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">PPAP_Engine_Mounting_Bracket.pdf</td>
+                    <td><span class="type-badge badge-ppap">PPAP</span></td>
+                    <td class="link-part">AE-BRKT-ENG-MTG-001</td>
+                    <td>Aashita Enterprises</td>
+                    <td>A</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="updated-date">12 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">10:15 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('PPAP_Engine_Mounting_Bracket.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('PPAP_Engine_Mounting_Bracket.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2350,24 +2530,30 @@
                   </tr>
 
                   <!-- Row 2 -->
-                  <tr class="table-row" data-type="SOP" data-status="In Review" data-name="SOP_Engine_Bracket_Assy.docx" data-part="Engine Bracket Assembly">
+                  <tr class="table-row" data-type="SOP" data-status="In Review" data-name="SOP_Engine_Bracket_Assy.docx"
+                    data-part="Engine Bracket Assembly">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-word"><i class="fa-regular fa-file-word"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">SOP_Engine_Bracket_Assy.docx</td>
-                    <td><span class="type-badge badge-sop" contenteditable="true">SOP</span></td>
-                    <td class="link-part" contenteditable="true">Engine Bracket Assembly</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">B</td>
-                    <td><span class="status-badge status-review" contenteditable="true">In Review</span></td>
-                    <td class="updated-date" contenteditable="true">11 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">04:30 PM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">SOP_Engine_Bracket_Assy.docx</td>
+                    <td><span class="type-badge badge-sop">SOP</span></td>
+                    <td class="link-part">Engine Bracket Assembly</td>
+                    <td>Aashita Enterprises</td>
+                    <td>B</td>
+                    <td><span class="status-badge status-review">In Review</span></td>
+                    <td class="updated-date">11 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">04:30 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Engine_Bracket_Assy.docx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Engine_Bracket_Assy.docx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2377,24 +2563,30 @@
                   </tr>
 
                   <!-- Row 3 -->
-                  <tr class="table-row" data-type="Control Plan" data-status="Approved" data-name="Control_Plan_Engine_Bracket.xlsx" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="Control Plan" data-status="Approved"
+                    data-name="Control_Plan_Engine_Bracket.xlsx" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-excel"><i class="fa-regular fa-file-excel"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">Control_Plan_Engine_Bracket.xlsx</td>
-                    <td><span class="type-badge badge-cp" contenteditable="true">Control Plan</span></td>
-                    <td class="link-part" contenteditable="true">AE-BRKT-ENG-MTG-001</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">A</td>
-                    <td><span class="status-badge status-approved" contenteditable="true">Approved</span></td>
-                    <td class="updated-date" contenteditable="true">10 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">11:20 AM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Control_Plan_Engine_Bracket.xlsx</td>
+                    <td><span class="type-badge badge-cp">Control Plan</span></td>
+                    <td class="link-part">AE-BRKT-ENG-MTG-001</td>
+                    <td>Aashita Enterprises</td>
+                    <td>A</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="updated-date">10 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">11:20 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Control_Plan_Engine_Bracket.xlsx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Control_Plan_Engine_Bracket.xlsx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2404,24 +2596,30 @@
                   </tr>
 
                   <!-- Row 4 -->
-                  <tr class="table-row" data-type="PFMEA" data-status="In Progress" data-name="PFMEA_Engine_Bracket.pdf" data-part="Engine Bracket Assembly">
+                  <tr class="table-row" data-type="PFMEA" data-status="In Progress" data-name="PFMEA_Engine_Bracket.pdf"
+                    data-part="Engine Bracket Assembly">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">PFMEA_Engine_Bracket.pdf</td>
-                    <td><span class="type-badge badge-pfmea" contenteditable="true">PFMEA</span></td>
-                    <td class="link-part" contenteditable="true">Engine Bracket Assembly</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">B</td>
-                    <td><span class="status-badge status-progress" contenteditable="true">In Progress</span></td>
-                    <td class="updated-date" contenteditable="true">09 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">02:46 PM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">PFMEA_Engine_Bracket.pdf</td>
+                    <td><span class="type-badge badge-pfmea">PFMEA</span></td>
+                    <td class="link-part">Engine Bracket Assembly</td>
+                    <td>Aashita Enterprises</td>
+                    <td>B</td>
+                    <td><span class="status-badge status-progress">In Progress</span></td>
+                    <td class="updated-date">09 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">02:46 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('PFMEA_Engine_Bracket.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('PFMEA_Engine_Bracket.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2431,24 +2629,32 @@
                   </tr>
 
                   <!-- Row 5 -->
-                  <tr class="table-row" data-type="Inspection Standard" data-status="Approved" data-name="Inspection_Standard_ENG_MTG_001.pdf" data-part="AE-BRKT-ENG-MTG-001">
+                  <tr class="table-row" data-type="Inspection Standard" data-status="Approved"
+                    data-name="Inspection_Standard_ENG_MTG_001.pdf" data-part="AE-BRKT-ENG-MTG-001">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">Inspection_Standard_ENG_MTG_001.pdf</td>
-                    <td><span class="type-badge badge-is" contenteditable="true">Inspection Standard</span></td>
-                    <td class="link-part" contenteditable="true">AE-BRKT-ENG-MTG-001</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">A</td>
-                    <td><span class="status-badge status-approved" contenteditable="true">Approved</span></td>
-                    <td class="updated-date" contenteditable="true">08 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">09:10 AM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Inspection_Standard_ENG_MTG_001.pdf
+                    </td>
+                    <td><span class="type-badge badge-is">Inspection Standard</span></td>
+                    <td class="link-part">AE-BRKT-ENG-MTG-001</td>
+                    <td>Aashita Enterprises</td>
+                    <td>A</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="updated-date">08 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">09:10 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Inspection_Standard_ENG_MTG_001.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="simulateDownload('Inspection_Standard_ENG_MTG_001.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2458,24 +2664,30 @@
                   </tr>
 
                   <!-- Row 6 -->
-                  <tr class="table-row" data-type="Reaction Plan" data-status="Approved" data-name="Reaction_Plan_Heat_Treatment.pdf" data-part="Heat Treatment Process">
+                  <tr class="table-row" data-type="Reaction Plan" data-status="Approved"
+                    data-name="Reaction_Plan_Heat_Treatment.pdf" data-part="Heat Treatment Process">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">Reaction_Plan_Heat_Treatment.pdf</td>
-                    <td><span class="type-badge badge-rp" contenteditable="true">Reaction Plan</span></td>
-                    <td class="link-part" contenteditable="true">Heat Treatment Process</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">A</td>
-                    <td><span class="status-badge status-approved" contenteditable="true">Approved</span></td>
-                    <td class="updated-date" contenteditable="true">07 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">05:35 PM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Reaction_Plan_Heat_Treatment.pdf</td>
+                    <td><span class="type-badge badge-rp">Reaction Plan</span></td>
+                    <td class="link-part">Heat Treatment Process</td>
+                    <td>Aashita Enterprises</td>
+                    <td>A</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="updated-date">07 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">05:35 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Reaction_Plan_Heat_Treatment.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Reaction_Plan_Heat_Treatment.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2485,24 +2697,30 @@
                   </tr>
 
                   <!-- Row 7 -->
-                  <tr class="table-row" data-type="Skill Matrix" data-status="In Review" data-name="Skill_Matrix_Production_Team.xlsx" data-part="Production Department">
+                  <tr class="table-row" data-type="Skill Matrix" data-status="In Review"
+                    data-name="Skill_Matrix_Production_Team.xlsx" data-part="Production Department">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-excel"><i class="fa-regular fa-file-excel"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">Skill_Matrix_Production_Team.xlsx</td>
-                    <td><span class="type-badge badge-sm" contenteditable="true">Skill Matrix</span></td>
-                    <td class="link-part" contenteditable="true">Production Department</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">C</td>
-                    <td><span class="status-badge status-review" contenteditable="true">In Review</span></td>
-                    <td class="updated-date" contenteditable="true">06 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">03:15 PM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">Skill_Matrix_Production_Team.xlsx</td>
+                    <td><span class="type-badge badge-sm">Skill Matrix</span></td>
+                    <td class="link-part">Production Department</td>
+                    <td>Aashita Enterprises</td>
+                    <td>C</td>
+                    <td><span class="status-badge status-review">In Review</span></td>
+                    <td class="updated-date">06 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">03:15 PM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('Skill_Matrix_Production_Team.xlsx')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('Skill_Matrix_Production_Team.xlsx')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2512,24 +2730,30 @@
                   </tr>
 
                   <!-- Row 8 -->
-                  <tr class="table-row" data-type="SOP" data-status="Approved" data-name="SOP_Coating_Process.pdf" data-part="Coating Process">
+                  <tr class="table-row" data-type="SOP" data-status="Approved" data-name="SOP_Coating_Process.pdf"
+                    data-part="Coating Process">
                     <td class="star-cell">
                       <button class="star-btn" onclick="toggleStar(this)"><i class="fa-solid fa-star"></i></button>
                     </td>
                     <td class="file-icon-cell">
                       <div class="file-icon-wrapper icon-pdf"><i class="fa-regular fa-file-pdf"></i></div>
                     </td>
-                    <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">SOP_Coating_Process.pdf</td>
-                    <td><span class="type-badge badge-sop" contenteditable="true">SOP</span></td>
-                    <td class="link-part" contenteditable="true">Coating Process</td>
-                    <td contenteditable="true">Aashita Enterprises</td>
-                    <td contenteditable="true">A</td>
-                    <td><span class="status-badge status-approved" contenteditable="true">Approved</span></td>
-                    <td class="updated-date" contenteditable="true">05 Aug 2026<br><span style="font-size:10px;color:var(--text-gray-muted)">10:05 AM</span></td>
+                    <td class="doc-name-cell" onclick="openDocumentPreview(this)">SOP_Coating_Process.pdf</td>
+                    <td><span class="type-badge badge-sop">SOP</span></td>
+                    <td class="link-part">Coating Process</td>
+                    <td>Aashita Enterprises</td>
+                    <td>A</td>
+                    <td><span class="status-badge status-approved">Approved</span></td>
+                    <td class="updated-date">05 Aug 2026<br><span
+                        style="font-size:10px;color:var(--text-gray-muted)">10:05 AM</span></td>
                     <td class="action-cell">
-                      <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
-                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Coating_Process.pdf')"><i class="fa-solid fa-download"></i></button>
-                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i class="fa-solid fa-ellipsis-vertical"></i></button>
+                      <button class="action-icon-btn"
+                        onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))"
+                        title="Preview Document"><i class="fa-regular fa-eye"></i></button>
+                      <button class="action-icon-btn" onclick="simulateDownload('SOP_Coating_Process.pdf')"><i
+                          class="fa-solid fa-download"></i></button>
+                      <button class="action-icon-btn" onclick="toggleDropdown(event, this)"><i
+                          class="fa-solid fa-ellipsis-vertical"></i></button>
                       <div class="dropdown-menu">
                         <div class="dropdown-menu-item" onclick="alert('Sharing Document!')">Share</div>
                         <div class="dropdown-menu-item" onclick="alert('Approval requested!')">Request Approval</div>
@@ -2542,10 +2766,11 @@
 
               <!-- Table Pagination block -->
               <footer class="table-footer">
-                <span class="pagination-span" id="table-range-text" contenteditable="true">Showing 1 to 8 of 1,248 documents</span>
-                
+                <span class="pagination-span" id="table-range-text">Showing 1 to 8 of 1,248 documents</span>
+
                 <div class="pagination-controls">
-                  <button class="page-nav-btn" onclick="alert('Previous page!')"><i class="fa-solid fa-chevron-left"></i></button>
+                  <button class="page-nav-btn" onclick="alert('Previous page!')"><i
+                      class="fa-solid fa-chevron-left"></i></button>
                   <button class="page-nav-btn active" onclick="alert('Page 1 active!')">1</button>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 2!')">2</button>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 3!')">3</button>
@@ -2553,7 +2778,8 @@
                   <button class="page-nav-btn" onclick="alert('Navigating to page 5!')">5</button>
                   <span class="page-nav-ellipsis">...</span>
                   <button class="page-nav-btn" onclick="alert('Navigating to page 156!')">156</button>
-                  <button class="page-nav-btn" onclick="alert('Next page!')"><i class="fa-solid fa-chevron-right"></i></button>
+                  <button class="page-nav-btn" onclick="alert('Next page!')"><i
+                      class="fa-solid fa-chevron-right"></i></button>
                 </div>
 
                 <select class="page-size-dropdown" id="page-size-select" onchange="alert('Page limit changed!')">
@@ -2566,9 +2792,9 @@
 
             <!-- Document Standards & Guidelines -->
             <section class="guidelines-section">
-              <h4 class="guidelines-title" contenteditable="true">Document Standards & Guidelines</h4>
-              <p class="guidelines-desc" contenteditable="true">Ensure consistency and compliance with Bajaj standards.</p>
-              
+              <h4 class="guidelines-title">Document Standards & Guidelines</h4>
+              <p class="guidelines-desc">Ensure consistency and compliance with Bajaj standards.</p>
+
               <div class="guidelines-row">
                 <!-- Guide 1 -->
                 <div class="guide-card" onclick="alert('Viewing standards document!')">
@@ -2576,11 +2802,11 @@
                     <i class="fa-solid fa-landmark"></i>
                   </div>
                   <div>
-                    <div class="guide-info-title" contenteditable="true">Bajaj Standards</div>
-                    <p class="guide-info-desc" contenteditable="true">Access all Bajaj Auto standards and guidelines.</p>
+                    <div class="guide-info-title">Bajaj Standards</div>
+                    <p class="guide-info-desc">Access all Bajaj Auto standards and guidelines.</p>
                   </div>
                   <a class="guide-link">
-                    <span contenteditable="true">View Standards</span>
+                    <span>View Standards</span>
                     <i class="fa-solid fa-arrow-right"></i>
                   </a>
                 </div>
@@ -2591,11 +2817,11 @@
                     <i class="fa-solid fa-tag"></i>
                   </div>
                   <div>
-                    <div class="guide-info-title" contenteditable="true">Document Naming</div>
-                    <p class="guide-info-desc" contenteditable="true">Standard naming convention for all documents.</p>
+                    <div class="guide-info-title">Document Naming</div>
+                    <p class="guide-info-desc">Standard naming convention for all documents.</p>
                   </div>
                   <a class="guide-link">
-                    <span contenteditable="true">View Guide</span>
+                    <span>View Guide</span>
                     <i class="fa-solid fa-arrow-right"></i>
                   </a>
                 </div>
@@ -2606,11 +2832,11 @@
                     <i class="fa-solid fa-arrows-spin"></i>
                   </div>
                   <div>
-                    <div class="guide-info-title" contenteditable="true">Revision Control</div>
-                    <p class="guide-info-desc" contenteditable="true">Learn about revision levels and document control.</p>
+                    <div class="guide-info-title">Revision Control</div>
+                    <p class="guide-info-desc">Learn about revision levels and document control.</p>
                   </div>
                   <a class="guide-link">
-                    <span contenteditable="true">View Policy</span>
+                    <span>View Policy</span>
                     <i class="fa-solid fa-arrow-right"></i>
                   </a>
                 </div>
@@ -2621,11 +2847,11 @@
                     <i class="fa-solid fa-signature"></i>
                   </div>
                   <div>
-                    <div class="guide-info-title" contenteditable="true">Approval Workflow</div>
-                    <p class="guide-info-desc" contenteditable="true">Document approval process and responsibilities.</p>
+                    <div class="guide-info-title">Approval Workflow</div>
+                    <p class="guide-info-desc">Document approval process and responsibilities.</p>
                   </div>
                   <a class="guide-link">
-                    <span contenteditable="true">View Workflow</span>
+                    <span>View Workflow</span>
                     <i class="fa-solid fa-arrow-right"></i>
                   </a>
                 </div>
@@ -2636,11 +2862,11 @@
                     <i class="fa-solid fa-graduation-cap"></i>
                   </div>
                   <div>
-                    <div class="guide-info-title" contenteditable="true">Training Materials</div>
-                    <p class="guide-info-desc" contenteditable="true">Guidelines and training for document management.</p>
+                    <div class="guide-info-title">Training Materials</div>
+                    <p class="guide-info-desc">Guidelines and training for document management.</p>
                   </div>
                   <a class="guide-link">
-                    <span contenteditable="true">View Training</span>
+                    <span>View Training</span>
                     <i class="fa-solid fa-arrow-right"></i>
                   </a>
                 </div>
@@ -2650,94 +2876,94 @@
 
           <!-- ===== RIGHT SIDEBAR INFO PANELS ===== -->
           <aside class="right-sidebar">
-            
+
             <!-- Document Categories -->
             <div class="sidebar-card">
               <div class="sidebar-card-header">
-                <h4 class="sidebar-card-title" contenteditable="true">Document Categories</h4>
-                <a class="view-all-link" contenteditable="true">View All</a>
+                <h4 class="sidebar-card-title">Document Categories</h4>
+                <a class="view-all-link">View All</a>
               </div>
-              
+
               <div class="categories-list">
                 <!-- PPAPs -->
                 <div class="category-item cat-ppap" onclick="filterByTab('PPAP')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-shield-halved"></i></div>
-                    <span class="category-name" contenteditable="true">PPAP</span>
+                    <span class="category-name">PPAP</span>
                   </div>
-                  <span class="category-count" id="cat-count-ppap" contenteditable="true">126</span>
+                  <span class="category-count" id="cat-count-ppap">126</span>
                 </div>
 
                 <!-- SOPs -->
                 <div class="category-item cat-sop" onclick="filterByTab('SOP')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-list-check"></i></div>
-                    <span class="category-name" contenteditable="true">SOP</span>
+                    <span class="category-name">SOP</span>
                   </div>
-                  <span class="category-count" id="cat-count-sop" contenteditable="true">342</span>
+                  <span class="category-count" id="cat-count-sop">342</span>
                 </div>
 
                 <!-- Control Plans -->
                 <div class="category-item cat-cp" onclick="filterByTab('Control Plan')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-crosshairs"></i></div>
-                    <span class="category-name" contenteditable="true">Control Plan</span>
+                    <span class="category-name">Control Plan</span>
                   </div>
-                  <span class="category-count" id="cat-count-cp" contenteditable="true">189</span>
+                  <span class="category-count" id="cat-count-cp">189</span>
                 </div>
 
                 <!-- PFMEAs -->
                 <div class="category-item cat-pfmea" onclick="filterByTab('PFMEA')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-triangle-exclamation"></i></div>
-                    <span class="category-name" contenteditable="true">PFMEA</span>
+                    <span class="category-name">PFMEA</span>
                   </div>
-                  <span class="category-count" id="cat-count-pfmea" contenteditable="true">156</span>
+                  <span class="category-count" id="cat-count-pfmea">156</span>
                 </div>
 
                 <!-- Inspection Standards -->
                 <div class="category-item cat-is" onclick="filterByTab('Inspection Standard')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-circle-check"></i></div>
-                    <span class="category-name" contenteditable="true">Inspection Standards</span>
+                    <span class="category-name">Inspection Standards</span>
                   </div>
-                  <span class="category-count" id="cat-count-is" contenteditable="true">201</span>
+                  <span class="category-count" id="cat-count-is">201</span>
                 </div>
 
                 <!-- Reaction Plans -->
                 <div class="category-item cat-rp" onclick="filterByTab('Reaction Plan')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-arrow-rotate-left"></i></div>
-                    <span class="category-name" contenteditable="true">Reaction Plan</span>
+                    <span class="category-name">Reaction Plan</span>
                   </div>
-                  <span class="category-count" id="cat-count-rp" contenteditable="true">78</span>
+                  <span class="category-count" id="cat-count-rp">78</span>
                 </div>
 
                 <!-- Skill Matrix -->
                 <div class="category-item cat-sm" onclick="filterByTab('Skill Matrix')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-users-gear"></i></div>
-                    <span class="category-name" contenteditable="true">Skill Matrix</span>
+                    <span class="category-name">Skill Matrix</span>
                   </div>
-                  <span class="category-count" id="cat-count-sm" contenteditable="true">74</span>
+                  <span class="category-count" id="cat-count-sm">74</span>
                 </div>
 
                 <!-- Work Instructions -->
                 <div class="category-item cat-wi" onclick="alert('Filtering work instructions!')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-chalkboard-user"></i></div>
-                    <span class="category-name" contenteditable="true">Work Instructions</span>
+                    <span class="category-name">Work Instructions</span>
                   </div>
-                  <span class="category-count" contenteditable="true">45</span>
+                  <span class="category-count">45</span>
                 </div>
 
                 <!-- Others -->
                 <div class="category-item cat-other" onclick="filterByTab('Other')">
                   <div class="category-item-left">
                     <div class="category-circle-icon"><i class="fa-solid fa-ellipsis"></i></div>
-                    <span class="category-name" contenteditable="true">Others</span>
+                    <span class="category-name">Others</span>
                   </div>
-                  <span class="category-count" id="cat-count-other" contenteditable="true">37</span>
+                  <span class="category-count" id="cat-count-other">37</span>
                 </div>
               </div>
             </div>
@@ -2745,28 +2971,28 @@
             <!-- Quick Actions -->
             <div class="sidebar-card">
               <div class="sidebar-card-header" style="margin-bottom: 12px;">
-                <h4 class="sidebar-card-title" contenteditable="true">Quick Actions</h4>
+                <h4 class="sidebar-card-title">Quick Actions</h4>
               </div>
               <div class="actions-list">
                 <button class="action-item-btn" onclick="openUploadModal()">
                   <i class="fa-solid fa-cloud-arrow-up"></i>
-                  <span contenteditable="true">Upload Document</span>
+                  <span>Upload Document</span>
                 </button>
                 <button class="action-item-btn" onclick="alert('Folder creator simulation!')">
                   <i class="fa-solid fa-folder-plus"></i>
-                  <span contenteditable="true">Create Folder</span>
+                  <span>Create Folder</span>
                 </button>
                 <button class="action-item-btn" onclick="alert('Bulk approval wizard launched!')">
                   <i class="fa-solid fa-check-double"></i>
-                  <span contenteditable="true">Request Approval</span>
+                  <span>Request Approval</span>
                 </button>
                 <button class="action-item-btn" onclick="alert('Preparing bulk download zip archives...')">
                   <i class="fa-solid fa-download"></i>
-                  <span contenteditable="true">Bulk Download</span>
+                  <span>Bulk Download</span>
                 </button>
                 <button class="action-item-btn" onclick="alert('Opening templates library catalog!')">
                   <i class="fa-regular fa-file-code"></i>
-                  <span contenteditable="true">Document Templates</span>
+                  <span>Document Templates</span>
                 </button>
               </div>
             </div>
@@ -2774,10 +3000,10 @@
             <!-- Recent Activity Timeline -->
             <div class="sidebar-card">
               <div class="sidebar-card-header">
-                <h4 class="sidebar-card-title" contenteditable="true">Recent Activity</h4>
-                <a class="view-all-link" contenteditable="true">View All</a>
+                <h4 class="sidebar-card-title">Recent Activity</h4>
+                <a class="view-all-link">View All</a>
               </div>
-              
+
               <div class="activity-timeline" id="recent-activity-list">
                 <!-- Activity 1 -->
                 <div class="activity-node" id="activity-1">
@@ -2785,9 +3011,9 @@
                     <i class="fa-solid fa-check"></i>
                   </div>
                   <div class="activity-details">
-                    <span class="activity-title" id="act-title-1" contenteditable="true">PPAP_Engine_Mounting_Bracket.pdf</span>
-                    <span class="activity-desc" id="act-desc-1" contenteditable="true">Approved by bajaj.quality@bajajauto.co.in</span>
-                    <span class="activity-desc" style="color:var(--text-gray-muted);" contenteditable="true">12 Aug 2026, 10:20 AM</span>
+                    <span class="activity-title" id="act-title-1">PPAP_Engine_Mounting_Bracket.pdf</span>
+                    <span class="activity-desc" id="act-desc-1">Approved by bajaj.quality@bajajauto.co.in</span>
+                    <span class="activity-desc" style="color:var(--text-gray-muted);">12 Aug 2026, 10:20 AM</span>
                   </div>
                 </div>
 
@@ -2797,9 +3023,9 @@
                     <i class="fa-solid fa-arrow-up"></i>
                   </div>
                   <div class="activity-details">
-                    <span class="activity-title" id="act-title-2" contenteditable="true">SOP_Engine_Bracket_Assy.docx</span>
-                    <span class="activity-desc" id="act-desc-2" contenteditable="true">Uploaded by aashita.engineering@aashita.com</span>
-                    <span class="activity-desc" style="color:var(--text-gray-muted);" contenteditable="true">11 Aug 2026, 04:30 PM</span>
+                    <span class="activity-title" id="act-title-2">SOP_Engine_Bracket_Assy.docx</span>
+                    <span class="activity-desc" id="act-desc-2">Uploaded by aashita.engineering@aashita.com</span>
+                    <span class="activity-desc" style="color:var(--text-gray-muted);">11 Aug 2026, 04:30 PM</span>
                   </div>
                 </div>
               </div>
@@ -2812,15 +3038,15 @@
 
       <!-- FOOTER -->
       <footer class="app-footer">
-        <div class="footer-left" contenteditable="true">
+        <div class="footer-left">
           &copy; 2026 Bajaj Auto Ltd. All rights reserved.
         </div>
         <div class="footer-right">
-          <a href="#" contenteditable="true">Privacy Policy</a>
+          <a href="#">Privacy Policy</a>
           <span style="color: #cbd5e1;">|</span>
-          <a href="#" contenteditable="true">Terms of Use</a>
+          <a href="#">Terms of Use</a>
           <span style="color: #cbd5e1;">|</span>
-          <a href="#" contenteditable="true">Support</a>
+          <a href="#">Support</a>
         </div>
       </footer>
     </main>
@@ -2837,7 +3063,8 @@
       <div class="modal-body">
         <div class="form-group">
           <label class="form-label">Document Name</label>
-          <input type="text" class="form-input" id="new-doc-name" placeholder="e.g. PPAP_Connecting_Rod_Assy.pdf" value="PPAP_Connecting_Rod_Assy.pdf">
+          <input type="text" class="form-input" id="new-doc-name" placeholder="e.g. PPAP_Connecting_Rod_Assy.pdf"
+            value="PPAP_Connecting_Rod_Assy.pdf">
         </div>
         <div class="form-group">
           <label class="form-label">Document Type</label>
@@ -2853,11 +3080,13 @@
         </div>
         <div class="form-group">
           <label class="form-label">Linked Part / Process</label>
-          <input type="text" class="form-input" id="new-doc-part" placeholder="e.g. AE-CON-ROD-004" value="AE-CON-ROD-004">
+          <input type="text" class="form-input" id="new-doc-part" placeholder="e.g. AE-CON-ROD-004"
+            value="AE-CON-ROD-004">
         </div>
         <div class="form-group">
           <label class="form-label">Select File Path</label>
-          <input type="file" class="form-input" style="padding-top: 5px; height: 36px;" id="new-file-selector" onclick="event.preventDefault(); alert('File browser mock triggered!')">
+          <input type="file" class="form-input" style="padding-top: 5px; height: 36px;" id="new-file-selector"
+            onclick="event.preventDefault(); alert('File browser mock triggered!')">
         </div>
 
         <div class="modal-progress-bar-container" id="modal-upload-bar">
@@ -2882,20 +3111,21 @@
     <div class="drawer-header">
       <div style="display: flex; align-items: flex-start; justify-content: space-between; width: 100%;">
         <div style="display: flex; flex-direction: column; gap: 4px; width: calc(100% - 30px);">
-          <h3 class="drawer-filename" id="preview-filename" contenteditable="true" oninput="syncFilenameToTable()">Document_Name.pdf</h3>
+          <h3 class="drawer-filename" id="preview-filename" oninput="syncFilenameToTable()">Document_Name.pdf</h3>
           <div style="display: flex; gap: 8px; align-items: center; margin-top: 4px;">
             <span class="type-badge badge-ppap" id="preview-type-badge">PPAP</span>
             <span class="status-badge status-approved" id="preview-status-badge">Approved</span>
           </div>
         </div>
-        <button class="modal-close-btn" style="font-size: 20px; margin-top: -4px;" onclick="closePreviewDrawer()"><i class="fa-solid fa-xmark"></i></button>
+        <button class="modal-close-btn" style="font-size: 20px; margin-top: -4px;" onclick="closePreviewDrawer()"><i
+            class="fa-solid fa-xmark"></i></button>
       </div>
     </div>
-    
+
     <div class="drawer-content" id="preview-content-body">
       <!-- Dummy data will be injected here -->
     </div>
-    
+
     <footer class="drawer-footer">
       <button class="modal-cancel-btn" style="flex: 1;" onclick="closePreviewDrawer()">Close</button>
       <button class="new-doc-btn" style="flex: 1.5; justify-content: center;" onclick="downloadFromPreview()">
@@ -2911,15 +3141,18 @@
       <header class="floater-header">
         <div style="display: flex; align-items: center; gap: 10px;">
           <i class="fa-regular fa-file-pdf" style="font-size: 20px; color: #ef4444;" id="floater-file-icon"></i>
-          <h3 class="floater-title" id="floater-filename" contenteditable="true" oninput="syncFloaterNameToAll()">Document_Preview.pdf</h3>
+          <h3 class="floater-title" id="floater-filename" oninput="syncFloaterNameToAll()">Document_Preview.pdf</h3>
         </div>
         <div style="display: flex; align-items: center; gap: 14px;">
-          <button class="floater-action-btn" onclick="window.print()" title="Print Document"><i class="fa-solid fa-print"></i></button>
-          <button class="floater-action-btn" onclick="downloadFromFloater()" title="Download PDF"><i class="fa-solid fa-download"></i></button>
-          <button class="modal-close-btn" style="font-size: 22px;" onclick="closeDocumentFloaterDirect()"><i class="fa-solid fa-xmark"></i></button>
+          <button class="floater-action-btn" onclick="window.print()" title="Print Document"><i
+              class="fa-solid fa-print"></i></button>
+          <button class="floater-action-btn" onclick="downloadFromFloater()" title="Download PDF"><i
+              class="fa-solid fa-download"></i></button>
+          <button class="modal-close-btn" style="font-size: 22px;" onclick="closeDocumentFloaterDirect()"><i
+              class="fa-solid fa-xmark"></i></button>
         </div>
       </header>
-      
+
       <div class="floater-body" id="floater-document-body">
         <!-- Render full document layout sheet with dummy data -->
       </div>
@@ -2929,7 +3162,7 @@
   <script>
     // Global Filter variables
     let activeTab = 'All';
-    
+
     // Close dropdown menu click listener
     window.addEventListener('click', (e) => {
       if (!e.target.matches('.fa-ellipsis-vertical') && !e.target.closest('.action-icon-btn')) {
@@ -2943,9 +3176,9 @@
     function toggleSidebar() {
       const sidebar = document.getElementById('app-sidebar');
       const icon = document.getElementById('collapse-icon');
-      
+
       sidebar.classList.toggle('collapsed');
-      
+
       if (sidebar.classList.contains('collapsed')) {
         icon.className = "fa-solid fa-arrow-right";
       } else {
@@ -2958,12 +3191,12 @@
       event.stopPropagation();
       const parentCell = button.closest('.action-cell');
       const dropdown = parentCell.querySelector('.dropdown-menu');
-      
+
       // Close other dropdowns
       document.querySelectorAll('.dropdown-menu').forEach(menu => {
         if (menu !== dropdown) menu.classList.remove('show');
       });
-      
+
       dropdown.classList.toggle('show');
     }
 
@@ -3002,7 +3235,7 @@
       // Show upload progress
       const progressContainer = document.getElementById('modal-upload-bar');
       const fillBar = document.getElementById('modal-upload-fill');
-      
+
       progressContainer.style.display = 'block';
       let progress = 0;
 
@@ -3012,12 +3245,12 @@
 
         if (progress >= 100) {
           clearInterval(uploadInterval);
-          
+
           // Complete insertion
           insertNewTableRow(docName, docType, linkedPart);
           updateSummaryMetrics(docType);
           updateRecentActivity(docName);
-          
+
           closeUploadModal();
           triggerToastNotification(`Document "${docName}" uploaded successfully.`);
         }
@@ -3027,7 +3260,7 @@
     // Insert new row to the data table
     function insertNewTableRow(name, type, part) {
       const tableBody = document.getElementById('table-rows-body');
-      
+
       // Determine file extension
       let iconClass = 'icon-pdf';
       let fontAwesomeIcon = 'fa-regular fa-file-pdf';
@@ -3058,13 +3291,13 @@
           <td class="file-icon-cell">
             <div class="file-icon-wrapper ${iconClass}"><i class="${fontAwesomeIcon}"></i></div>
           </td>
-          <td class="doc-name-cell" onclick="openDocumentPreview(this)" contenteditable="true">${name}</td>
-          <td><span class="type-badge ${badgeClass}" contenteditable="true">${type}</span></td>
-          <td class="link-part" contenteditable="true">${part}</td>
-          <td contenteditable="true">Aashita Enterprises</td>
-          <td contenteditable="true">A</td>
-          <td><span class="status-badge status-review" contenteditable="true">In Review</span></td>
-          <td class="updated-date" contenteditable="true">Today<br><span style="font-size:10px;color:var(--text-gray-muted)">${new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span></td>
+          <td class="doc-name-cell" onclick="openDocumentPreview(this)">${name}</td>
+          <td><span class="type-badge ${badgeClass}">${type}</span></td>
+          <td class="link-part">${part}</td>
+          <td>Aashita Enterprises</td>
+          <td>A</td>
+          <td><span class="status-badge status-review">In Review</span></td>
+          <td class="updated-date">Today<br><span style="font-size:10px;color:var(--text-gray-muted)">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span></td>
           <td class="action-cell">
             <button class="action-icon-btn" onclick="openDocumentPreview(this.closest('.table-row').querySelector('.doc-name-cell'))" title="Preview Document"><i class="fa-regular fa-eye"></i></button>
             <button class="action-icon-btn" onclick="simulateDownload('${name}')"><i class="fa-solid fa-download"></i></button>
@@ -3087,11 +3320,11 @@
       const row = item.closest('.table-row');
       const docType = row.getAttribute('data-type');
       const docName = row.getAttribute('data-name');
-      
+
       if (confirm(`Are you sure you want to delete "${docName}"?`)) {
         row.style.opacity = '0';
         row.style.transform = 'scale(0.95)';
-        
+
         setTimeout(() => {
           row.remove();
           decrementSummaryMetrics(docType);
@@ -3168,27 +3401,27 @@
     // Prepend item to Recent Activity timeline
     function updateRecentActivity(name) {
       const activityTimeline = document.getElementById('recent-activity-list');
-      
+
       const newActivityHTML = `
         <div class="activity-node" style="animation: fadeIn 0.4s ease;">
           <div class="activity-dot dot-upload">
             <i class="fa-solid fa-arrow-up"></i>
           </div>
           <div class="activity-details">
-            <span class="activity-title" contenteditable="true">${name}</span>
-            <span class="activity-desc" contenteditable="true">Uploaded by bajaj.planthead@bajajauto.co.in</span>
-            <span class="activity-desc" style="color:var(--text-gray-muted);" contenteditable="true">Just Now</span>
+            <span class="activity-title">${name}</span>
+            <span class="activity-desc">Uploaded by bajaj.planthead@bajajauto.co.in</span>
+            <span class="activity-desc" style="color:var(--text-gray-muted);">Just Now</span>
           </div>
         </div>
       `;
-      
+
       activityTimeline.insertAdjacentHTML('afterbegin', newActivityHTML);
     }
 
     // Filtering Core logic
     function filterByTab(tabName) {
       activeTab = tabName;
-      
+
       // Update Active tab styling
       document.querySelectorAll('.filter-tab').forEach(tab => {
         tab.classList.remove('active');
@@ -3271,7 +3504,7 @@
       document.getElementById('filter-process').value = 'all';
       document.getElementById('filter-supplier').value = 'all';
       document.getElementById('filter-status').value = 'all';
-      
+
       filterByTab('All');
     }
 
@@ -3279,10 +3512,10 @@
     function simulateDownload(filename) {
       const toast = document.getElementById('download-toast-msg');
       const toastText = document.getElementById('toast-text-content');
-      
+
       toastText.textContent = `Downloading "${filename}"...`;
       toast.style.display = 'flex';
-      
+
       setTimeout(() => {
         toastText.textContent = `Successfully downloaded "${filename}"!`;
         setTimeout(() => {
@@ -3299,10 +3532,10 @@
     function triggerToastNotification(msgText) {
       const toast = document.getElementById('download-toast-msg');
       const toastText = document.getElementById('toast-text-content');
-      
+
       toastText.textContent = msgText;
       toast.style.display = 'flex';
-      
+
       setTimeout(() => {
         toast.style.opacity = '0';
         setTimeout(() => {
@@ -3357,7 +3590,7 @@
       // Populate floater sheet elements
       const floaterFilename = document.getElementById('floater-filename');
       floaterFilename.textContent = docName;
-      
+
       const floaterFileIcon = document.getElementById('floater-file-icon');
       floaterFileIcon.className = 'fa-regular';
       if (docName.endsWith('.docx') || docName.endsWith('.doc')) {
@@ -3414,7 +3647,7 @@
 
       // Universal Metadata Card
       html += `
-        <div class="preview-dummy-card" contenteditable="true">
+        <div class="preview-dummy-card">
           <div class="preview-dummy-title">Document Metadata</div>
           <div class="preview-grid-2">
             <div class="preview-field">
@@ -3439,7 +3672,7 @@
 
       if (type === 'PPAP') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">PPAP Checklist (Submission Level 3)</div>
             <div class="preview-list">
               <div class="preview-list-item">
@@ -3496,7 +3729,7 @@
         `;
       } else if (type === 'SOP') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Standard Operating Procedure</div>
             <div class="preview-sop-steps">
               <div class="preview-sop-step">
@@ -3532,7 +3765,7 @@
         `;
       } else if (type === 'Control Plan') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Process Control Parameters</div>
             <div class="preview-list">
               <div class="preview-list-item">
@@ -3564,7 +3797,7 @@
         `;
       } else if (type === 'PFMEA') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Failure Mode & Effects Analysis (PFMEA)</div>
             <div class="preview-list">
               <div class="preview-list-item">
@@ -3596,7 +3829,7 @@
         `;
       } else if (type === 'Inspection Standard') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Quality Inspection Standards</div>
             <div class="preview-list">
               <div class="preview-list-item">
@@ -3624,7 +3857,7 @@
         `;
       } else if (type === 'Reaction Plan') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Defect Escalation / Reaction Plan</div>
             <div class="preview-sop-steps">
               <div class="preview-sop-step">
@@ -3660,7 +3893,7 @@
         `;
       } else if (type === 'Skill Matrix') {
         html += `
-          <div class="preview-dummy-card" contenteditable="true">
+          <div class="preview-dummy-card">
             <div class="preview-dummy-title">Skill Matrix - Powertrain Team</div>
             <p style="font-size:10px;color:var(--text-gray-muted);margin-bottom:8px;">Proficiency levels: L1 (Basic) to L4 (Trainer/Expert)</p>
             <table class="preview-matrix-table">
@@ -3716,7 +3949,7 @@
       }
 
       html += `
-        <div class="document-page-view" contenteditable="true">
+        <div class="document-page-view">
           <!-- Page Header -->
           <div class="doc-sheet-header">
             <span class="doc-sheet-logo"><i class="fa-solid fa-industry" style="color:var(--accent-blue);"></i> BAJAJ AUTO QUALITY STANDARDS</span>
@@ -4335,7 +4568,7 @@
     function closeDocumentFloaterDirect() {
       document.getElementById('document-floater-overlay').classList.remove('show');
     }
-    
+
     function closeDocumentFloater(event) {
       if (event.target.id === 'document-floater-overlay') {
         closeDocumentFloaterDirect();
@@ -4350,22 +4583,22 @@
     }
 
     // Global Row Delegation Click Event Listener
-    document.addEventListener('click', function(e) {
+    document.addEventListener('click', function (e) {
       const row = e.target.closest('.table-row');
       if (row) {
         // Exclude interactive items
-        if (e.target.closest('.star-cell') || 
-            e.target.closest('.action-cell') || 
-            e.target.closest('.dropdown-menu') || 
-            e.target.closest('button')) {
+        if (e.target.closest('.star-cell') ||
+          e.target.closest('.action-cell') ||
+          e.target.closest('.dropdown-menu') ||
+          e.target.closest('button')) {
           return;
         }
-        
+
         // Exclude clicking on an already active editing cell to let them type
         if (e.target.classList.contains('doc-name-cell') && document.activeElement === e.target) {
           return;
         }
-        
+
         // Find doc-name-cell and trigger preview
         const nameCell = row.querySelector('.doc-name-cell');
         if (nameCell) {

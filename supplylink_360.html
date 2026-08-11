@@ -1,0 +1,3836 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aashita Intelligence — RFQ REQ-250801</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    /* ===== PALETTE & ROOT ===== */
+    :root {
+      --bg-app: #f8fafc;
+      --bg-sidebar: #0b1329;
+      --bg-sidebar-hover: #1e293b;
+      --bg-sidebar-active: #2563eb;
+      --text-sidebar: #94a3b8;
+      --text-sidebar-active: #ffffff;
+      --border-sidebar: rgba(255, 255, 255, 0.06);
+
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+
+      --accent-blue: #2563eb;
+      --accent-blue-soft: #eff6ff;
+      --accent-blue-border: #bfdbfe;
+
+      --accent-green: #10b981;
+      --accent-green-soft: #ecfdf5;
+      --accent-green-border: #a7f3d0;
+
+      --accent-orange: #f59e0b;
+      --accent-orange-soft: #fffbeb;
+      --accent-orange-border: #fde68a;
+
+      --accent-purple: #8b5cf6;
+      --accent-purple-soft: #f5f3ff;
+      --accent-purple-border: #ddd6fe;
+
+      --border-color: #e2e8f0;
+      --card-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
+      --card-shadow-hover: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    }
+
+    /* ===== RESET ===== */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      height: 100%;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: var(--text-primary);
+      background-color: var(--bg-app);
+      overflow: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button {
+      border: none;
+      background: none;
+      font-family: inherit;
+      font-size: inherit;
+      cursor: pointer;
+    }
+
+    /* Editable highlight */
+    [contenteditable] {
+      position: relative;
+      outline: none;
+      border-radius: 4px;
+      padding: 1px 4px;
+      transition: background 0.15s;
+    }
+
+    [contenteditable]:hover {
+      background: rgba(37, 99, 235, 0.05);
+      box-shadow: 0 0 0 1px rgba(37, 99, 235, 0.2);
+    }
+
+    [contenteditable]:focus {
+      background: rgba(37, 99, 235, 0.08);
+      box-shadow: 0 0 0 2px var(--accent-blue);
+    }
+
+    /* Custom scrollbars */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+
+    /* ===== APP GRID LAYOUT ===== */
+    .app-container {
+      display: flex;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .sidebar {
+      width: 240px;
+      background-color: var(--bg-sidebar);
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 50;
+      color: var(--text-sidebar);
+      border-right: 1px solid var(--border-sidebar);
+    }
+
+    .sidebar.collapsed {
+      width: 68px;
+    }
+
+    .sidebar-header {
+      padding: 20px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-bottom: 1px solid var(--border-sidebar);
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    .logo-container {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+
+    .logo-container i {
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .logo-info {
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.2s;
+    }
+
+    .sidebar.collapsed .logo-info {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .logo-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .logo-subtitle {
+      font-size: 9px;
+      color: var(--text-sidebar);
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+
+    /* Nav Items */
+    .sidebar-nav {
+      flex: 1;
+      padding: 16px 8px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .nav-item i {
+      font-size: 15px;
+      width: 24px;
+      text-align: center;
+      margin-right: 12px;
+      flex-shrink: 0;
+      transition: margin 0.2s;
+    }
+
+    .sidebar.collapsed .nav-item i {
+      margin-right: 0;
+    }
+
+    .nav-item span {
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+
+    .sidebar.collapsed .nav-item span {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .nav-item:hover {
+      background-color: var(--bg-sidebar-hover);
+      color: #fff;
+    }
+
+    .nav-item.active {
+      background-color: var(--bg-sidebar-active);
+      color: var(--text-sidebar-active);
+      font-weight: 600;
+    }
+
+    .nav-badge {
+      position: absolute;
+      right: 12px;
+      background-color: #ef4444;
+      color: #fff;
+      font-size: 9px;
+      font-weight: 700;
+      min-width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .sidebar.collapsed .nav-badge {
+      top: 4px;
+      right: 4px;
+    }
+
+    /* Sidebar User profile */
+    .sidebar-footer {
+      padding: 12px;
+      border-top: 1px solid var(--border-sidebar);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
+    .sidebar-user-card {
+      display: flex;
+      align-items: center;
+      padding: 8px;
+      border-radius: 8px;
+      background-color: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      gap: 10px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .sidebar-user-avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--accent-blue);
+      color: #fff;
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-user-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 11px;
+      transition: opacity 0.2s;
+    }
+
+    .sidebar.collapsed .sidebar-user-info,
+    .sidebar.collapsed .sidebar-user-chevron {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .sidebar-user-name {
+      font-weight: 600;
+      color: #fff;
+    }
+
+    .sidebar-user-role {
+      color: var(--text-sidebar);
+      opacity: 0.8;
+      font-size: 10px;
+    }
+
+    .sidebar-user-chevron {
+      margin-left: auto;
+      font-size: 10px;
+    }
+
+    /* Organization Switcher */
+    .sidebar-org-switcher {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      background-color: rgba(0, 0, 0, 0.2);
+      font-size: 11px;
+      cursor: pointer;
+      overflow: hidden;
+    }
+
+    .sidebar-org-switcher i {
+      font-size: 12px;
+      flex-shrink: 0;
+    }
+
+    .sidebar-org-info {
+      display: flex;
+      flex-direction: column;
+      transition: opacity 0.2s;
+    }
+
+    .sidebar.collapsed .sidebar-org-info,
+    .sidebar.collapsed .sidebar-org-chevron {
+      opacity: 0;
+      pointer-events: none;
+      width: 0;
+    }
+
+    .sidebar-org-label {
+      font-size: 9px;
+      color: var(--text-sidebar);
+      opacity: 0.6;
+    }
+
+    .sidebar-org-name {
+      color: #fff;
+      font-weight: 500;
+      white-space: nowrap;
+    }
+
+    .sidebar-org-chevron {
+      margin-left: auto;
+      font-size: 9px;
+    }
+
+    /* Collapse Menu Button */
+    .collapse-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      color: var(--text-sidebar);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      border-top: 1px solid var(--border-sidebar);
+    }
+
+    .collapse-btn i {
+      font-size: 14px;
+      width: 24px;
+      text-align: center;
+      transition: transform 0.3s;
+    }
+
+    .sidebar.collapsed .collapse-btn i {
+      transform: rotate(180deg);
+    }
+
+    .sidebar.collapsed .collapse-btn span {
+      opacity: 0;
+      width: 0;
+      pointer-events: none;
+    }
+
+    /* ===== MAIN CONTENT WRAPPER ===== */
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    /* ===== TOP HEADER ===== */
+    .top-header {
+      background-color: #fff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .top-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .breadcrumbs {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .breadcrumbs a:hover {
+      color: var(--accent-blue);
+    }
+
+    .breadcrumbs i {
+      font-size: 10px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .title-row h1 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-size: 10px;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .badge-negotiation {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .badge-casting {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+      border: 1px solid var(--accent-blue-border);
+    }
+
+    .badge-pending {
+      background-color: var(--accent-orange-soft);
+      color: var(--accent-orange);
+      border: 1px solid var(--accent-orange-border);
+    }
+
+    .badge-signed {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border: 1px solid var(--accent-green-border);
+    }
+
+    .subtitle-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .top-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      height: 32px;
+      padding: 0 12px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all 0.15s;
+    }
+
+    .btn-outline {
+      border: 1px solid var(--border-color);
+      color: var(--text-secondary);
+      background-color: #fff;
+    }
+
+    .btn-outline:hover {
+      background-color: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn-primary {
+      background-color: var(--accent-blue);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background-color: #1d4ed8;
+    }
+
+    .btn-purple {
+      background-color: var(--accent-purple);
+      color: #fff;
+    }
+
+    .btn-purple:hover {
+      background-color: #7c3aed;
+    }
+
+    .btn-icon {
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 50%;
+      position: relative;
+    }
+
+    .btn-icon .btn-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #ef4444;
+      color: #fff;
+      font-size: 8px;
+      font-weight: 700;
+      min-width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .user-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding-left: 8px;
+      border-left: 1px solid var(--border-color);
+      cursor: pointer;
+    }
+
+    .user-badge-info {
+      display: flex;
+      flex-direction: column;
+      font-size: 11px;
+      text-align: right;
+    }
+
+    .user-badge-name {
+      font-weight: 600;
+    }
+
+    .user-badge-company {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* Actions dropdown wrapper */
+    .dropdown-container {
+      position: relative;
+    }
+
+    .actions-dropdown {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 160px;
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+      margin-top: 4px;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 100;
+    }
+
+    .actions-dropdown.show {
+      display: flex;
+    }
+
+    .dropdown-item {
+      padding: 10px 14px;
+      font-size: 12px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .dropdown-item:hover {
+      background-color: #f1f5f9;
+    }
+
+    /* ===== CONTENT WORKSPACE ===== */
+    .content-body {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+    }
+
+    /* Scrollable center workspace */
+    .workspace-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    /* Sidebar right timeline pane */
+    .timeline-pane {
+      width: 280px;
+      border-left: 1px solid var(--border-color);
+      background-color: #fff;
+      display: flex;
+      flex-direction: column;
+      flex-shrink: 0;
+      overflow-y: auto;
+      padding: 24px 18px;
+      gap: 24px;
+    }
+
+    /* ===== WORKFLOW STEPPER ===== */
+    .stepper-container {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 16px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .stepper-line-container {
+      position: absolute;
+      top: 14px;
+      left: 30px;
+      right: 30px;
+      height: 2px;
+      background-color: #e2e8f0;
+      z-index: 1;
+    }
+
+    .stepper-line-progress {
+      width: 14.28%;
+      /* Active up to step 2 */
+      height: 100%;
+      background-color: var(--accent-green);
+      transition: width 0.3s;
+    }
+
+    .step-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      z-index: 2;
+      position: relative;
+      width: 80px;
+      text-align: center;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background-color: #fff;
+      border: 2px solid #cbd5e1;
+      color: var(--text-muted);
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .step-node.completed .step-circle {
+      background-color: var(--accent-green);
+      border-color: var(--accent-green);
+      color: #fff;
+    }
+
+    .step-node.active .step-circle {
+      background-color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: #fff;
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    }
+
+    .step-title {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-top: 8px;
+      white-space: nowrap;
+    }
+
+    .step-node.completed .step-title,
+    .step-node.active .step-title {
+      color: var(--text-primary);
+    }
+
+    .step-subtitle {
+      font-size: 8px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ===== THREE CARD SUMMARY GRID ===== */
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .summary-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .summary-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-hover);
+    }
+
+    .summary-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .summary-card-header i {
+      color: var(--accent-blue);
+    }
+
+    /* RFQ info style */
+    .info-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+    }
+
+    .info-item {
+      display: grid;
+      grid-template-columns: 100px 1fr;
+      font-size: 12px;
+    }
+
+    .info-label {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .info-value {
+      color: var(--text-primary);
+      font-weight: 600;
+    }
+
+    /* Docs list style */
+    .docs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .doc-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      background-color: #f8fafc;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .doc-item:hover {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+    }
+
+    .doc-icon {
+      color: #ef4444;
+      /* PDF color */
+      font-size: 16px;
+    }
+
+    .doc-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      overflow: hidden;
+    }
+
+    .doc-name {
+      font-weight: 600;
+      font-size: 11.5px;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .doc-size {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .doc-lock {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--text-muted);
+      transition: transform 0.3s;
+    }
+
+    .doc-item.unlocked .doc-lock {
+      color: var(--accent-green);
+      transform: scale(0.9);
+    }
+
+    /* Supplier details card style */
+    .supplier-profile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 12px;
+      padding: 12px 0;
+      flex: 1;
+    }
+
+    .supplier-logo-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background-color: #f1f5f9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      color: var(--text-primary);
+      font-size: 16px;
+    }
+
+    .supplier-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .supplier-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .supplier-info-box {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .supplier-info-box span a {
+      color: var(--accent-blue);
+    }
+
+    .supplier-info-box span a:hover {
+      text-decoration: underline;
+    }
+
+    .card-footer-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      margin-top: 16px;
+      cursor: pointer;
+    }
+
+    .card-footer-link:hover {
+      color: #1d4ed8;
+      text-decoration: underline;
+    }
+
+    /* ===== NDA CARD & BANNER ===== */
+    .nda-section-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .nda-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+
+    .nda-header-icon {
+      width: 32px;
+      height: 32px;
+      background-color: var(--accent-purple-soft);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    .nda-header-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nda-header-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .nda-header-subtitle {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    /* Left - Center - Right graphic */
+    .nda-graph-row {
+      display: grid;
+      grid-template-columns: 2fr 1.5fr 2fr;
+      align-items: center;
+      gap: 20px;
+      background-color: #fafbfc;
+      border: 1px dashed var(--border-color);
+      border-radius: 12px;
+      padding: 20px;
+    }
+
+    @media (max-width: 800px) {
+      .nda-graph-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+    }
+
+    .nda-party-box {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+    }
+
+    .party-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .party-name-container {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .party-logo {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 10px;
+    }
+
+    .party-logo.bajaj-logo {
+      background-color: var(--accent-blue-soft);
+      color: var(--accent-blue);
+    }
+
+    .party-name {
+      font-weight: 700;
+      font-size: 12px;
+    }
+
+    .party-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-size: 11px;
+      color: var(--text-secondary);
+    }
+
+    .party-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .party-meta-row i {
+      color: var(--text-muted);
+      width: 14px;
+    }
+
+    /* Central mutual NDA box */
+    .nda-mutual-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 8px;
+      position: relative;
+    }
+
+    .nda-mutual-icon-container {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: var(--accent-purple-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-purple);
+      font-size: 18px;
+      border: 2px solid var(--accent-purple-border);
+      box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+      z-index: 5;
+    }
+
+    .nda-mutual-box.signed .nda-mutual-icon-container {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+      border-color: var(--accent-green-border);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+    }
+
+    .nda-mutual-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .nda-mutual-sub {
+      font-size: 9px;
+      color: var(--text-muted);
+    }
+
+    /* Connection dashed arrows */
+    .nda-mutual-arrows {
+      position: absolute;
+      top: 22px;
+      width: calc(100% + 100px);
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .nda-arrow {
+      height: 1px;
+      border-top: 2px dashed #cbd5e1;
+      width: 40%;
+    }
+
+    @media (max-width: 800px) {
+      .nda-mutual-arrows {
+        display: none;
+      }
+    }
+
+    /* Info Alert bar */
+    .nda-alert-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 8px;
+      background-color: var(--accent-blue-soft);
+      border: 1px solid var(--accent-blue-border);
+      color: var(--accent-blue);
+      font-weight: 500;
+      font-size: 12px;
+      transition: all 0.3s;
+    }
+
+    .nda-alert-bar.success {
+      background-color: var(--accent-green-soft);
+      border-color: var(--accent-green-border);
+      color: var(--accent-green);
+    }
+
+    /* ===== SUPPLIER RESPONSE STEPS ===== */
+    .supplier-response-section {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .response-section-title {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .response-section-title h3 {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .response-section-title span {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .response-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .response-card {
+      background-color: #fff;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .response-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .response-icon-box.completed {
+      background-color: var(--accent-green-soft);
+      color: var(--accent-green);
+    }
+
+    .response-icon-box.pending {
+      background-color: var(--accent-orange-soft);
+      color: var(--accent-orange);
+    }
+
+    .response-details {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .response-details-title {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--text-primary);
+    }
+
+    .response-details-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    /* ===== TIMELINE PANE ===== */
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 8px;
+    }
+
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      padding-left: 20px;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 4px;
+      bottom: 4px;
+      width: 2px;
+      background-color: #f1f5f9;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-bottom: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .timeline-item:last-child {
+      padding-bottom: 0;
+    }
+
+    .timeline-node {
+      position: absolute;
+      left: -20px;
+      top: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background-color: #cbd5e1;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 2px #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .timeline-item.completed .timeline-node {
+      background-color: var(--accent-green);
+      box-shadow: 0 0 0 2px var(--accent-green-soft);
+    }
+
+    .timeline-item.active .timeline-node {
+      background-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px var(--accent-blue-soft);
+    }
+
+    .timeline-header {
+      font-weight: 600;
+      font-size: 11.5px;
+      color: var(--text-primary);
+    }
+
+    .timeline-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .timeline-time {
+      font-size: 9px;
+      color: var(--text-muted);
+      opacity: 0.8;
+      margin-top: 1px;
+    }
+
+    /* ===== NEED HELP PANE ===== */
+    .help-card {
+      background: linear-gradient(135deg, #1e1b4b, #311042);
+      border-radius: 12px;
+      padding: 16px;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .help-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .help-title {
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .help-subtitle {
+      font-size: 10px;
+      color: rgba(255, 255, 255, 0.7);
+      margin-top: 2px;
+    }
+
+    .help-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #6366f1, #d946ef);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .help-contacts {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .help-contact-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .help-contact-item i {
+      color: rgba(255, 255, 255, 0.6);
+      width: 14px;
+      text-align: center;
+    }
+
+    /* ===== MODAL DIALOGS ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      animation: fadeIn 0.2s ease-out;
+    }
+
+    .modal-overlay.show {
+      display: flex;
+    }
+
+    .modal-container {
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      width: 100%;
+      max-width: 620px;
+      display: flex;
+      flex-direction: column;
+      max-height: 85vh;
+      overflow: hidden;
+      animation: slideIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+    }
+
+    .modal-close-btn {
+      color: var(--text-muted);
+      font-size: 16px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .modal-close-btn:hover {
+      color: var(--text-primary);
+    }
+
+    .modal-body {
+      padding: 24px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border-color);
+      background-color: #f8fafc;
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    /* Signing form styles */
+    .nda-document-viewer {
+      background-color: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 16px;
+      font-family: Georgia, serif;
+      font-size: 12px;
+      line-height: 1.6;
+      color: #334155;
+      height: 240px;
+      overflow-y: auto;
+      margin-bottom: 20px;
+    }
+
+    .nda-document-viewer h4 {
+      text-align: center;
+      margin-bottom: 12px;
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text-primary);
+    }
+
+    .signature-input-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .signature-label {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .signature-input-wrapper {
+      position: relative;
+    }
+
+    .signature-input {
+      width: 100%;
+      height: 38px;
+      padding: 0 12px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-family: inherit;
+      font-size: 13px;
+    }
+
+    .signature-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+    }
+
+    .signature-preview {
+      margin-top: 8px;
+      padding: 12px;
+      border: 1px dashed var(--border-color);
+      border-radius: 8px;
+      background-color: #fafbfc;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 24px;
+      color: #1e3a8a;
+    }
+
+    /* ===== PDF VIEWER MODAL STYLE ===== */
+    .pdf-viewer-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .pdf-viewer-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .pdf-viewer-container {
+      width: 92%;
+      max-width: 1100px;
+      height: 88vh;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transform: scale(0.95) translateY(10px);
+      transition: transform 0.3s ease;
+    }
+
+    .pdf-viewer-overlay.show .pdf-viewer-container {
+      transform: scale(1) translateY(0);
+    }
+
+    .pdf-toolbar {
+      height: 52px;
+      background-color: #0f172a;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 18px;
+      border-bottom: 1px solid #1e293b;
+      user-select: none;
+    }
+
+    .pdf-toolbar-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pdf-doc-title-icon {
+      color: #ef4444;
+      font-size: 18px;
+    }
+
+    .pdf-doc-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: #f8fafc;
+    }
+
+    .pdf-toolbar-center {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .pdf-page-indicator {
+      font-size: 12px;
+      background-color: #1e293b;
+      padding: 4px 10px;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    .pdf-zoom-controls {
+      display: flex;
+      align-items: center;
+      background-color: #1e293b;
+      border-radius: 6px;
+      border: 1px solid #334155;
+      overflow: hidden;
+    }
+
+    .pdf-zoom-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      padding: 6px 12px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.2s;
+    }
+
+    .pdf-zoom-btn:hover {
+      color: #f8fafc;
+      background-color: #334155;
+    }
+
+    .pdf-zoom-value {
+      font-size: 11px;
+      padding: 0 8px;
+      color: #e2e8f0;
+      min-width: 40px;
+      text-align: center;
+      border-left: 1px solid #334155;
+      border-right: 1px solid #334155;
+    }
+
+    .pdf-toolbar-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pdf-action-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .pdf-action-btn:hover {
+      color: #f8fafc;
+      background-color: #1e293b;
+    }
+
+    .pdf-close-btn {
+      color: #f43f5e;
+    }
+
+    .pdf-close-btn:hover {
+      background-color: rgba(244, 63, 94, 0.1);
+      color: #fda4af;
+    }
+
+    .pdf-main-layout {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      background-color: #334155;
+    }
+
+    .pdf-sidebar {
+      width: 260px;
+      background-color: #f8fafc;
+      border-right: 1px solid #e2e8f0;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .pdf-meta-section {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pdf-meta-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .pdf-meta-box {
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .pdf-meta-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      font-size: 11.5px;
+    }
+
+    .pdf-meta-label {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .pdf-meta-value {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .pdf-status-tag {
+      align-self: flex-start;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .pdf-status-unlocked {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.2);
+    }
+
+    .pdf-page-container {
+      flex: 1;
+      padding: 28px;
+      overflow-y: auto;
+      display: flex;
+      justify-content: center;
+      scroll-behavior: smooth;
+    }
+
+    .pdf-page-paper {
+      background-color: #fff;
+      width: 100%;
+      max-width: 780px;
+      min-height: 1020px;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+      padding: 48px;
+      box-sizing: border-box;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .pdf-paper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid #0f172a;
+      padding-bottom: 12px;
+      margin-bottom: 24px;
+    }
+
+    .pdf-header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pdf-header-classification {
+      font-size: 10px;
+      font-weight: 800;
+      color: #dc2626;
+      letter-spacing: 0.1em;
+    }
+
+    .pdf-header-company {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+    }
+
+    .pdf-header-title {
+      font-size: 18px;
+      font-weight: 800;
+      color: #0f172a;
+      margin-top: 2px;
+    }
+
+    .pdf-header-right {
+      text-align: right;
+      font-size: 11px;
+      color: #64748b;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .pdf-paper-footer {
+      margin-top: auto;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 12px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 10px;
+      color: #94a3b8;
+    }
+
+    /* Document-specific Styles */
+    .pdf-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0;
+      font-size: 12px;
+    }
+
+    .pdf-table th {
+      background-color: #f1f5f9;
+      color: #1e293b;
+      font-weight: 700;
+      text-align: left;
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+    }
+
+    .pdf-table td {
+      padding: 8px 12px;
+      border: 1px solid #cbd5e1;
+      color: #334155;
+    }
+
+    .pdf-section-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #0f172a;
+      margin: 18px 0 8px 0;
+      padding-bottom: 4px;
+      border-bottom: 1px solid #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .pdf-text-p {
+      font-size: 11.5px;
+      line-height: 1.6;
+      color: #334155;
+      margin-bottom: 12px;
+    }
+
+    .pdf-drawing-container {
+      border: 1px solid #cbd5e1;
+      background-color: #fff;
+      border-radius: 6px;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 14px 0;
+    }
+
+    .pdf-drawing-image {
+      max-width: 100%;
+      max-height: 320px;
+      object-fit: contain;
+    }
+
+    /* ===== SUPPLIER PROFILE MODAL STYLE ===== */
+    .profile-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 2100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+
+    .profile-modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .profile-modal-container {
+      width: 90%;
+      max-width: 650px;
+      background-color: #fff;
+      border-radius: 16px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+      overflow: hidden;
+      transform: scale(0.95) translateY(15px);
+      transition: transform 0.3s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .profile-modal-overlay.show .profile-modal-container {
+      transform: scale(1) translateY(0);
+    }
+
+    .profile-modal-header {
+      background: linear-gradient(135deg, #4f46e5, #7c3aed);
+      color: #fff;
+      padding: 24px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .profile-header-avatar {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 22px;
+      color: #fff;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    }
+
+    .profile-header-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .profile-header-name {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .profile-header-sub {
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.8);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .profile-close-icon {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .profile-close-icon:hover {
+      color: #fff;
+    }
+
+    .profile-modal-body {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-height: 70vh;
+      overflow-y: auto;
+      background-color: #f8fafc;
+    }
+
+    .profile-grid-cols {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 580px) {
+      .profile-grid-cols {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .profile-section-card {
+      background-color: #fff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .profile-section-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: #64748b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-bottom: 1px solid #f1f5f9;
+      padding-bottom: 6px;
+    }
+
+    .profile-section-title i {
+      color: #4f46e5;
+    }
+
+    .profile-info-row {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 12px;
+      font-size: 12.5px;
+      padding: 5px 0;
+      align-items: start;
+    }
+
+    .profile-info-label {
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .profile-info-value {
+      color: #334155;
+      font-weight: 600;
+    }
+
+    .profile-progress-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .profile-progress-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .profile-progress-bar-bg {
+      height: 8px;
+      background-color: #f1f5f9;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .profile-progress-bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.8s ease-out;
+    }
+
+    .fill-green {
+      background: linear-gradient(90deg, #10b981, #34d399);
+    }
+
+    .fill-blue {
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+    }
+
+    .fill-purple {
+      background: linear-gradient(90deg, #7c3aed, #a78bfa);
+    }
+
+    .profile-tags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .profile-tag {
+      font-size: 11px;
+      background-color: #f1f5f9;
+      color: #475569;
+      padding: 4px 10px;
+      border-radius: 6px;
+      border: 1px solid #e2e8f0;
+      font-weight: 600;
+    }
+
+    .profile-footer {
+      border-top: 1px solid #e2e8f0;
+      padding: 16px 24px;
+      display: flex;
+      justify-content: flex-end;
+      background-color: #fff;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app-container">
+
+    <!-- ===== SIDEBAR NAVIGATION ===== -->
+    <aside class="sidebar" id="appSidebar">
+      <div class="sidebar-header">
+        <div class="logo-container">
+          <i class="fas fa-infinity"></i>
+        </div>
+        <div class="logo-info">
+          <span class="logo-title">Aashita Intelligence</span>
+          <span class="logo-subtitle">Connect. Collaborate. Deliver.</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <a class="nav-item active" href="supplylink.html">
+          <i class="fas fa-arrow-left"></i>
+          <span>REQ-250801 Workspace</span>
+        </a>
+      </nav>
+
+      <!-- Sidebar footer user info & switcher -->
+      <div class="sidebar-footer">
+        <div class="sidebar-user-card">
+          <div class="sidebar-user-avatar">JS</div>
+          <div class="sidebar-user-info">
+            <span class="sidebar-user-name">Jasneek Singh</span>
+            <span class="sidebar-user-role">Engineering Manager</span>
+          </div>
+          <i class="fas fa-chevron-down sidebar-user-chevron"></i>
+        </div>
+
+        <div class="sidebar-org-switcher">
+          <i class="fas fa-building"></i>
+          <div class="sidebar-org-info">
+            <span class="sidebar-org-label">Switch Organization</span>
+            <span class="sidebar-org-name">Bajaj Auto Ltd. (Plant: Chakan)</span>
+          </div>
+          <i class="fas fa-chevron-down sidebar-org-chevron"></i>
+        </div>
+      </div>
+
+      <div class="collapse-btn" onclick="toggleSidebar()">
+        <i class="fas fa-arrow-left" id="collapseArrow"></i>
+        <span>Collapse Menu</span>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT WRAPPER ===== -->
+    <main class="main-wrapper">
+
+      <!-- ===== TOP HEADER ===== -->
+      <header class="top-header">
+        <div class="top-header-left">
+          <div class="breadcrumbs">
+            <a href="#">Dashboard</a>
+            <i class="fas fa-chevron-right"></i>
+            <a href="#">RFQ</a>
+            <i class="fas fa-chevron-right"></i>
+            <span>REQ-250801</span>
+          </div>
+          <div class="title-row">
+            <h1>RFQ Details – REQ-250801</h1>
+            <span class="badge badge-negotiation">In Negotiation</span>
+          </div>
+          <div class="subtitle-row">
+            <span>Engine Bracket – Casting</span>
+            <span class="badge badge-casting">Casting</span>
+            <span>•</span>
+            <span>Bajaj Auto Ltd. (Chakan Plant)</span>
+          </div>
+        </div>
+
+        <div class="top-header-right">
+          <button class="btn btn-outline" onclick="window.history.back()"><i class="fas fa-arrow-left"></i>
+            Back</button>
+
+          <!-- Actions button with custom dropdown -->
+          <div class="dropdown-container">
+            <button class="btn btn-primary" onclick="toggleActionsDropdown(event)">Actions <i
+                class="fas fa-chevron-down"></i></button>
+            <div class="actions-dropdown" id="actionsDropdown">
+              <div class="dropdown-item" onclick="alert('Updating RFQ Stage...')">Change Status</div>
+              <div class="dropdown-item" onclick="alert('Opening RFQ settings...')">RFQ Settings</div>
+              <div class="dropdown-item" onclick="alert('Inviting sub-suppliers...')">Manage Team</div>
+            </div>
+          </div>
+
+          <button class="btn btn-outline" onclick="alert('Exporting RFQ Document...')">Export RFQ</button>
+
+          <button class="btn btn-primary" style="background-color: var(--accent-green);" onclick="openCreateRfqModal()">
+            <i class="fas fa-plus"></i> Create RFQ
+          </button>
+
+          <button class="btn btn-outline btn-icon" title="Notifications" onclick="alert('Opening Notifications...')">
+            <i class="fas fa-bell"></i>
+            <span class="btn-badge">12</span>
+          </button>
+
+          <div class="user-badge" onclick="alert('Viewing profile...')">
+            <div class="user-badge-info">
+              <span class="user-badge-name">Jasneek Singh</span>
+              <span class="user-badge-company">Bajaj Auto Ltd.</span>
+            </div>
+            <div class="sidebar-user-avatar" style="width: 28px; height: 28px; font-size: 10px;">JS</div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===== WORKSPACE PANE SYSTEM ===== -->
+      <div class="content-body">
+
+        <!-- Left center scrollable area -->
+        <div class="workspace-pane">
+
+          <!-- HORIZONTAL STEPPER -->
+          <div class="stepper-container">
+            <div class="stepper">
+              <div class="stepper-line-container">
+                <div class="stepper-line-progress" id="stepperProgressBar"></div>
+              </div>
+
+              <div class="step-node completed" id="stepNode-1">
+                <div class="step-circle"><i class="fas fa-check"></i></div>
+                <span class="step-title">RFQ Created</span>
+                <span class="step-subtitle">09 Aug 2026</span>
+              </div>
+
+              <div class="step-node active" id="stepNode-2">
+                <div class="step-circle" id="stepCircle-2">2</div>
+                <span class="step-title">Sent to Supplier</span>
+                <span class="step-subtitle">09 Aug 2026</span>
+              </div>
+
+              <div class="step-node" id="stepNode-3">
+                <div class="step-circle" id="stepCircle-3">3</div>
+                <span class="step-title">Supplier Response</span>
+                <span class="step-subtitle" id="stepSub-3">Pending</span>
+              </div>
+
+              <div class="step-node" id="stepNode-4">
+                <div class="step-circle" id="stepCircle-4">4</div>
+                <span class="step-title">NDA & Agreements</span>
+                <span class="step-subtitle" id="stepSub-4">Pending</span>
+              </div>
+
+              <div class="step-node" id="stepNode-5">
+                <div class="step-circle" id="stepCircle-5">5</div>
+                <span class="step-title">Quotation Submitted</span>
+                <span class="step-subtitle" id="stepSub-5">Pending</span>
+              </div>
+
+              <div class="step-node" id="stepNode-6">
+                <div class="step-circle" id="stepCircle-6">6</div>
+                <span class="step-title">Evaluation</span>
+                <span class="step-subtitle" id="stepSub-6">Pending</span>
+              </div>
+
+              <div class="step-node" id="stepNode-7">
+                <div class="step-circle" id="stepCircle-7">7</div>
+                <span class="step-title">PO Issued</span>
+                <span class="step-subtitle" id="stepSub-7">Pending</span>
+              </div>
+
+              <div class="step-node" id="stepNode-8">
+                <div class="step-circle" id="stepCircle-8">8</div>
+                <span class="step-title">Closed</span>
+                <span class="step-subtitle" id="stepSub-8">Pending</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- SUMMARY GRID: THREE CARDS -->
+          <div class="summary-grid">
+
+            <!-- Card 1: RFQ Info -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-file-contract"></i>
+                <span>RFQ Information</span>
+              </div>
+              <div class="info-list">
+                <div class="info-item">
+                  <span class="info-label">RFQ Number</span>
+                  <span class="info-value">REQ-250801</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Part Name</span>
+                  <span class="info-value">Engine Bracket - Casting</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Part Number</span>
+                  <span class="info-value">EB-CAST-001</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Quantity (Annual)</span>
+                  <span class="info-value">50,000 Nos</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Delivery Location</span>
+                  <span class="info-value">Bajaj Plant, Chakan, Pune</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Target Price</span>
+                  <span class="info-value">₹ 412.50 / - Per Part</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Target Delivery</span>
+                  <span class="info-value">30 Sep 2026</span>
+                </div>
+                <div class="info-item">
+                  <span class="info-label">Payment Terms</span>
+                  <span class="info-value">45 Days from GRN</span>
+                </div>
+              </div>
+              <div class="card-footer-link" onclick="alert('Viewing full RFQ details...')">
+                <span>View Full RFQ Details</span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 2: Documents Shared -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-folder-open"></i>
+                <span>Documents Shared</span>
+              </div>
+              <div class="docs-list" id="sharedDocsList">
+                <div class="doc-item" onclick="handleDocDownload('Engine_Bracket_Rev_D.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name">Engine_Bracket_Rev_D.pdf</span>
+                    <span class="doc-size">2.4 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-1"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Technical_Specifications.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name">Technical_Specifications.pdf</span>
+                    <span class="doc-size">1.1 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-2"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Material_Specification.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name">Material_Specification.pdf</span>
+                    <span class="doc-size">0.8 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-3"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Process_Requirements.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name">Process_Requirements.pdf</span>
+                    <span class="doc-size">1.6 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-4"></i>
+                </div>
+
+                <div class="doc-item" onclick="handleDocDownload('Quality_Requirements.pdf', this)">
+                  <i class="far fa-file-pdf doc-icon"></i>
+                  <div class="doc-info">
+                    <span class="doc-name">Quality_Requirements.pdf</span>
+                    <span class="doc-size">1.2 MB • PDF</span>
+                  </div>
+                  <i class="fas fa-lock doc-lock" id="lock-doc-5"></i>
+                </div>
+              </div>
+              <div class="card-footer-link" onclick="alert('Viewing all documents...')">
+                <span id="docCountText">View All Documents (8)</span>
+                <i class="fas fa-arrow-right"></i>
+              </div>
+            </div>
+
+            <!-- Card 3: Supplier ae -->
+            <div class="summary-card">
+              <div class="summary-card-header">
+                <i class="fas fa-users-cog"></i>
+                <span>Sent To Supplier</span>
+              </div>
+              <div class="supplier-profile">
+                <div class="supplier-logo-circle">AE</div>
+                <div class="supplier-meta-row">
+                  <span class="supplier-name">Aashita Enterprises</span>
+                  <span class="badge badge-negotiation" style="padding: 2px 6px; font-size: 8px;">Invited</span>
+                </div>
+                <div class="supplier-info-box">
+                  <span>Supplier Code: SUP-01234</span>
+                  <span>Email: <a href="mailto:info@aashitaenterprises.com">info@aashitaenterprises.com</a></span>
+                  <span>Contact: +91 98765 43210</span>
+                </div>
+              </div>
+              <button class="btn btn-outline" style="width: 100%;" onclick="openSupplierProfile()">View Supplier
+                Profile</button>
+            </div>
+
+          </div>
+
+          <!-- NDA CARD -->
+          <div class="nda-section-card">
+            <div class="nda-header">
+              <div class="nda-header-icon"><i class="fas fa-shield-alt"></i></div>
+              <div class="nda-header-text">
+                <span class="nda-header-title">NDA & Confidentiality Agreement</span>
+                <span class="nda-header-subtitle">To protect confidential information and
+                  drawings shared for this RFQ, an NDA must be signed before proceeding further.</span>
+              </div>
+            </div>
+
+            <!-- Graph Connection -->
+            <div class="nda-graph-row">
+              <!-- Bajaj -->
+              <div class="nda-party-box">
+                <div class="party-title-row">
+                  <div class="party-name-container">
+                    <div class="party-logo bajaj-logo">BJ</div>
+                    <span class="party-name">Bajaj Auto Ltd.</span>
+                  </div>
+                  <span class="badge badge-signed">Signed</span>
+                </div>
+                <div class="party-meta">
+                  <div class="party-meta-row">
+                    <i class="fas fa-user"></i>
+                    <span>Manoj Kumar (Manager - Legal)</span>
+                  </div>
+                  <div class="party-meta-row">
+                    <i class="far fa-calendar-check"></i>
+                    <span>09 Aug 2026, 11:20 AM</span>
+                  </div>
+                </div>
+                <button class="btn btn-outline btn-icon" style="width: 100%; border-radius: 6px; height: 28px;"
+                  onclick="alert('Opening Signed NDA document...')">
+                  <i class="far fa-file-pdf"></i> View Signed NDA
+                </button>
+              </div>
+
+              <!-- Center Connection -->
+              <div class="nda-mutual-box" id="mutualNdaBox">
+                <div class="nda-mutual-icon-container">
+                  <i class="fas fa-file-signature" id="mutualNdaIcon"></i>
+                </div>
+                <span class="nda-mutual-label">Mutual NDA</span>
+                <span class="nda-mutual-sub">Confidentiality Agreement</span>
+                <span class="badge badge-pending" id="mutualNdaBadge" style="margin-top: 4px;">Awaiting Supplier
+                  Signature</span>
+
+                <div class="nda-mutual-arrows">
+                  <div class="nda-arrow"></div>
+                  <div class="nda-arrow"></div>
+                </div>
+              </div>
+
+              <!-- Aashita -->
+              <div class="nda-party-box">
+                <div class="party-title-row">
+                  <div class="party-name-container">
+                    <div class="party-logo">AE</div>
+                    <span class="party-name">Aashita Enterprises</span>
+                  </div>
+                  <span class="badge badge-pending" id="supplierNdaBadge">Pending</span>
+                </div>
+                <div class="party-meta">
+                  <div class="party-meta-row">
+                    <i class="fas fa-info-circle"></i>
+                    <span id="supplierNdaStatus">Awaiting Review & Signature</span>
+                  </div>
+                  <div class="party-meta-row">
+                    <i class="far fa-clock"></i>
+                    <span id="supplierNdaTime">Requested: 09 Aug 2026, 11:20 AM</span>
+                  </div>
+                </div>
+                <button class="btn btn-purple" id="ndaSignBtn" style="width: 100%; height: 28px; border-radius: 6px;"
+                  onclick="openNdaModal()">
+                  Review & Sign NDA
+                </button>
+              </div>
+            </div>
+
+            <!-- Bottom Warning / Success banner -->
+            <div class="nda-alert-bar" id="ndaAlertBar">
+              <i class="fas fa-info-circle" id="ndaAlertIcon"></i>
+              <span id="ndaAlertText">Supplier must sign the NDA to access all confidential
+                documents and submit quotation.</span>
+            </div>
+          </div>
+
+          <!-- SUPPLIER RESPONSE SECTION -->
+          <div class="supplier-response-section">
+            <div class="response-section-title">
+              <h3>Supplier Response</h3>
+              <span>Supplier has been invited to review the RFQ and respond.</span>
+            </div>
+
+            <div class="response-grid">
+
+              <div class="response-card">
+                <div class="response-icon-box completed">
+                  <i class="fas fa-eye"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title">RFQ Viewed</span>
+                  <span class="response-details-sub">09 Aug 2026, 10:05 AM</span>
+                  <span class="badge badge-negotiation"
+                    style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;">Completed</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box completed">
+                  <i class="fas fa-thumbs-up"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title">Interested to Quote</span>
+                  <span class="response-details-sub">Aashita has shown interest</span>
+                  <span class="badge badge-negotiation"
+                    style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;">Completed</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box pending" id="respCardIcon-3">
+                  <i class="fas fa-file-signature"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title">NDA Signed</span>
+                  <span class="response-details-sub" id="respCardSub-3">Awaiting supplier
+                    signature</span>
+                  <span class="badge badge-pending" id="respCardBadge-3"
+                    style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;">Pending</span>
+                </div>
+              </div>
+
+              <div class="response-card">
+                <div class="response-icon-box pending">
+                  <i class="fas fa-file-invoice-dollar"></i>
+                </div>
+                <div class="response-details">
+                  <span class="response-details-title">Quotation Submission</span>
+                  <span class="response-details-sub">Not submitted yet</span>
+                  <span class="badge badge-pending"
+                    style="margin-top: 4px; align-self: flex-start; padding: 2px 6px;">Pending</span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- RIGHT TIMELINE PANE -->
+        <aside class="timeline-pane">
+          <span class="timeline-title">RFQ Activity Timeline</span>
+
+          <div class="timeline" id="timelineList">
+
+            <div class="timeline-item completed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">RFQ Created</span>
+              <span class="timeline-sub">by Rohit Deshmukh (Bajaj Auto Ltd.)</span>
+              <span class="timeline-time">09 Aug 2026, 09:15 AM</span>
+            </div>
+
+            <div class="timeline-item completed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">RFQ Sent to Supplier</span>
+              <span class="timeline-sub">Aashita Enterprises</span>
+              <span class="timeline-time">09 Aug 2026, 09:30 AM</span>
+            </div>
+
+            <div class="timeline-item completed" id="timelineNodeViewed">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" id="timelineHeaderViewed">Supplier Viewed RFQ</span>
+              <span class="timeline-sub" id="timelineSubViewed">09 Aug 2026, 10:05 AM</span>
+              <span class="timeline-time" id="timelineTimeViewed">09 Aug 2026, 10:05 AM</span>
+            </div>
+
+            <div class="timeline-item" id="timelineNodeResponse">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" id="timelineHeaderResponse">Supplier Response</span>
+              <span class="timeline-time" id="timelineTimeResponse">Pending</span>
+            </div>
+
+            <div class="timeline-item" id="timelineNodeNDA">
+              <div class="timeline-node"></div>
+              <span class="timeline-header" id="timelineHeaderNDA">NDA & Agreements</span>
+              <span class="timeline-time" id="timelineTimeNDA">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">Quotation Submission</span>
+              <span class="timeline-time">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">Evaluation</span>
+              <span class="timeline-time">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">PO Issuance</span>
+              <span class="timeline-time">Pending</span>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-node"></div>
+              <span class="timeline-header">Closed</span>
+              <span class="timeline-time">Pending</span>
+            </div>
+
+          </div>
+
+          <!-- NEED HELP CARD -->
+          <div class="help-card" style="margin-top: auto;">
+            <div class="help-header-row">
+              <div>
+                <span class="help-title">Need Help?</span>
+                <p class="help-subtitle">Our support team is here to help you.</p>
+              </div>
+              <div class="help-icon-circle">
+                <i class="fas fa-headset"></i>
+              </div>
+            </div>
+
+            <div class="help-contacts">
+              <div class="help-contact-item">
+                <i class="fas fa-phone-alt"></i>
+                <span>+91 20 2740 7170</span>
+              </div>
+              <div class="help-contact-item">
+                <i class="fas fa-envelope"></i>
+                <span>support@aashitaintelligence360.com</span>
+              </div>
+              <div class="help-contact-item">
+                <i class="fas fa-clock"></i>
+                <span>Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- ===== NDA REVIEW & SIGN MODAL ===== -->
+  <div class="modal-overlay" id="ndaSignModal">
+    <div class="modal-container">
+      <div class="modal-header">
+        <span class="modal-title">Mutual Non-Disclosure Agreement (NDA)</span>
+        <i class="fas fa-times modal-close-btn" onclick="closeNdaModal()"></i>
+      </div>
+      <div class="modal-body">
+        <div class="nda-document-viewer">
+          <h4>MUTUAL CONFIDENTIALITY & NON-DISCLOSURE AGREEMENT</h4>
+          <p>This Mutual Non-Disclosure Agreement (the "Agreement") is entered into as of August 09, 2026, by and
+            between <strong>Bajaj Auto Ltd.</strong>, having its principal place of business at Chakan Plant, Pune, and
+            <strong>Aashita Enterprises</strong>, having its principal place of business at Jaipur.
+          </p>
+          <br>
+          <p><strong>1. Purpose:</strong> The parties wish to evaluate a potential business relationship concerning the
+            sourcing and manufacturing of <strong>Engine Bracket Casting (EB-CAST-001)</strong>. In connection with this
+            evaluation, both parties will share certain proprietary drawings, processes, specifications, and commercial
+            estimations.</p>
+          <br>
+          <p><strong>2. Confidential Information:</strong> Confidential Information includes all drawings,
+            specifications, CAD models (specifically EB-CAST-001 revisions), manufacturing details, quality reports, and
+            commercial bids shared during the RFQ cycle.</p>
+          <br>
+          <p><strong>3. Term & Obligations:</strong> The receiving party shall hold all Confidential Information in
+            strict confidence for a period of five (5) years from disclosure. Under no circumstances shall information
+            be distributed to external sub-suppliers without prior written approval.</p>
+        </div>
+
+        <div class="signature-input-group">
+          <label class="signature-label">Type your name to sign digitally:</label>
+          <input type="text" class="signature-input" id="sigInput" placeholder="Aashita Enterprises Representative"
+            oninput="updateSignaturePreview()">
+          <div class="signature-preview" id="sigPreview">Your Signature Preview</div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeNdaModal()">Cancel</button>
+        <button class="btn btn-purple" id="submitSigBtn" disabled onclick="completeNdaSigning()">Sign &
+          Complete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== CREATE RFQ MODAL ===== -->
+  <div class="modal-overlay" id="createRfqModal">
+    <div class="modal-container" style="max-width: 480px;">
+      <div class="modal-header">
+        <span class="modal-title">Create New RFQ</span>
+        <i class="fas fa-times modal-close-btn" onclick="closeCreateRfqModal()"></i>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 14px;">
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">RFQ
+            Number</label>
+          <input type="text" id="newRfqNumber" value="REQ-250805"
+            style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Part
+            Name</label>
+          <input type="text" id="newRfqPartName" placeholder="e.g. Cylinder Head"
+            style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Part
+            Number</label>
+          <input type="text" id="newRfqPartNumber" placeholder="e.g. CH-AL-901"
+            style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <label
+              style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Annual
+              Quantity</label>
+            <input type="text" id="newRfqQty" placeholder="e.g. 20,000 Nos"
+              style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+          </div>
+          <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
+            <label
+              style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Target
+              Price</label>
+            <input type="text" id="newRfqPrice" placeholder="e.g. ₹ 1,200.00"
+              style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <label
+            style="font-weight: 600; font-size: 11px; color: var(--text-muted); text-transform: uppercase;">Sourcing
+            Supplier</label>
+          <input type="text" id="newRfqSupplier" value="Aashita Enterprises"
+            style="width: 100%; height: 36px; padding: 0 12px; border-radius: 6px; border: 1px solid var(--border-color); font-family: inherit;">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-outline" onclick="closeCreateRfqModal()">Cancel</button>
+        <button class="btn btn-primary" onclick="submitCreateRfq()">Create RFQ</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== FLOATING PDF VIEWER MODAL ===== -->
+  <div class="pdf-viewer-overlay" id="pdfPreviewModal">
+    <div class="pdf-viewer-container">
+      <div class="pdf-toolbar">
+        <div class="pdf-toolbar-left">
+          <i class="far fa-file-pdf pdf-doc-title-icon"></i>
+          <span class="pdf-doc-name" id="pdfDocName">Document_Preview.pdf</span>
+        </div>
+        <div class="pdf-toolbar-center">
+          <div class="pdf-page-indicator">Page <span id="pdfCurrentPage">1</span> of 1</div>
+          <div class="pdf-zoom-controls">
+            <button class="pdf-zoom-btn" onclick="adjustPdfZoom(-10)"><i class="fas fa-search-minus"></i></button>
+            <span class="pdf-zoom-value" id="pdfZoomValue">100%</span>
+            <button class="pdf-zoom-btn" onclick="adjustPdfZoom(10)"><i class="fas fa-search-plus"></i></button>
+          </div>
+        </div>
+        <div class="pdf-toolbar-right">
+          <button class="pdf-action-btn" title="Download Document" onclick="triggerMockDownload()"><i
+              class="fas fa-download"></i></button>
+          <button class="pdf-action-btn" title="Print Document" onclick="window.print()"><i
+              class="fas fa-print"></i></button>
+          <button class="pdf-action-btn pdf-close-btn" title="Close Viewer" onclick="closePdfPreview()"><i
+              class="fas fa-times"></i></button>
+        </div>
+      </div>
+      <div class="pdf-main-layout">
+        <div class="pdf-sidebar">
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">Document Status</span>
+            <span class="pdf-status-tag pdf-status-unlocked"><i class="fas fa-lock-open" style="margin-right:4px;"></i>
+              Unlocked</span>
+          </div>
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">File Details</span>
+            <div class="pdf-meta-box">
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">File Size</span>
+                <span class="pdf-meta-value" id="pdfMetaSize">1.5 MB</span>
+              </div>
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">Document Version</span>
+                <span class="pdf-meta-value" id="pdfMetaVersion">Rev 2.4</span>
+              </div>
+              <div class="pdf-meta-item">
+                <span class="pdf-meta-label">Last Modified</span>
+                <span class="pdf-meta-value" id="pdfMetaDate">09 Aug 2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="pdf-meta-section">
+            <span class="pdf-meta-title">Authorized Access</span>
+            <div class="pdf-meta-box">
+              <div class="pdf-meta-item" style="gap:4px;">
+                <span class="pdf-meta-label" style="font-size:10px;">NDA Signee (Aashita)</span>
+                <span class="pdf-meta-value" id="pdfMetaSignee" style="font-size:11px;color:#1e3a8a;">Representative
+                  Name</span>
+              </div>
+              <div class="pdf-meta-item" style="gap:4px;">
+                <span class="pdf-meta-label" style="font-size:10px;">NDA Witness (Bajaj)</span>
+                <span class="pdf-meta-value" style="font-size:11px;">Manoj Kumar (Legal)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="pdf-page-container">
+          <div class="pdf-page-paper" id="pdfPagePaper">
+            <!-- Simulated PDF Document page will be dynamically rendered here -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== SUPPLIER PROFILE MODAL ===== -->
+  <div class="profile-modal-overlay" id="supplierProfileModal">
+    <div class="profile-modal-container">
+      <div class="profile-modal-header">
+        <div class="profile-header-avatar" id="profAvatar">AE</div>
+        <div class="profile-header-meta">
+          <span class="profile-header-name" id="profCompanyName">Aashita Enterprises</span>
+          <span class="profile-header-sub">
+            <span id="profCode">SUP-01234</span> •
+            <span><i class="fas fa-star" style="color:#fbbf24;margin-right:2px;"></i> 4.8 Rating</span> •
+            <span><i class="fas fa-map-marker-alt" style="color:#f87171;margin-right:2px;"></i> <span
+                id="profLocation">Jaipur</span></span>
+          </span>
+        </div>
+        <i class="fas fa-times profile-close-icon" onclick="closeSupplierProfile()"></i>
+      </div>
+      <div class="profile-modal-body">
+
+        <div class="profile-grid-cols">
+          <!-- Card 1: Contact Details -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-id-card"></i> Contact Information</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Contact Person</span>
+              <span class="profile-info-value" id="profContactPerson">Rohit Deshmukh (Director)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Email</span>
+              <span class="profile-info-value" id="profEmail">info@aashitaenterprises.com</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Phone</span>
+              <span class="profile-info-value" id="profPhone">+91 98765 43210</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Factory Address</span>
+              <span class="profile-info-value" id="profAddress">RIICO Industrial Area, Jaipur, RJ</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Operations & Capacity -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-industry"></i> Foundry Capacity</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Primary Process</span>
+              <span class="profile-info-value">HPDC Aluminium Casting</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Machine Tonnage</span>
+              <span class="profile-info-value">800T, 1000T, 1250T HPDC</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">CNC Machining</span>
+              <span class="profile-info-value">3 & 4 Axis Milling</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Monthly Output</span>
+              <span class="profile-info-value">~150 Tons Finished Alloy</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="profile-grid-cols">
+          <!-- Card 3: Performance Metrics -->
+          <div class="profile-section-card">
+            <span class="profile-section-title"><i class="fas fa-chart-line"></i> Performance Metrics</span>
+
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>Quality Compliance Score</span>
+                <span>96.5%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-green" style="width: 96.5%;"></div>
+              </div>
+            </div>
+
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>On-Time Delivery Rate</span>
+                <span>98.0%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-blue" style="width: 98%;"></div>
+              </div>
+            </div>
+
+            <div class="profile-progress-container">
+              <div class="profile-progress-label-row">
+                <span>Commercial Competitiveness</span>
+                <span>88.0%</span>
+              </div>
+              <div class="profile-progress-bar-bg">
+                <div class="profile-progress-bar-fill fill-purple" style="width: 88%;"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 4: Quality & Compliance -->
+          <div class="profile-section-card" style="justify-content: flex-start;">
+            <span class="profile-section-title"><i class="fas fa-certificate"></i> Certifications & Compliance</span>
+            <div class="profile-tags-container">
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> IATF
+                16949</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> ISO
+                9001:2015</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i>
+                OHSAS 18001</span>
+              <span class="profile-tag"><i class="fas fa-check-circle" style="color:#10b981;margin-right:4px;"></i> ZED
+                Gold Certified</span>
+            </div>
+
+            <span class="profile-section-title" style="margin-top: 12px;"><i class="fas fa-clipboard-check"></i> Quality
+              Audit Compliance</span>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Audit Grade</span>
+              <span class="profile-info-value" style="color:#10b981;font-weight:700;">Grade A (94/100)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Rejection PPM</span>
+              <span class="profile-info-value">120 PPM (Target &le; 200)</span>
+            </div>
+            <div class="profile-info-row">
+              <span class="profile-info-label">Capability (Cpk)</span>
+              <span class="profile-info-value">1.82 (Target &ge; 1.67)</span>
+            </div>
+
+            <div class="profile-info-row" style="margin-top:6px;border-top:1px solid #f1f5f9;padding-top:8px;">
+              <span class="profile-info-label" style="font-size:11px;">Active RFQs in Portal</span>
+              <span class="profile-info-value" style="font-size:11px;color:#4f46e5;">3 Pending, 1 In Negotiation</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="profile-footer">
+        <button class="btn btn-primary" style="background-color: #4f46e5; border-color: #4f46e5;"
+          onclick="closeSupplierProfile()">Close Profile</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== JAVASCRIPT LOGIC ===== -->
+  <script>
+    let isNdaSigned = false;
+
+    // Create RFQ Modal logic
+    function openCreateRfqModal() {
+      const currentRfqNum = document.querySelector('.breadcrumbs span').innerText;
+      let nextNum = "REQ-250805";
+      if (currentRfqNum.startsWith("REQ-")) {
+        const numPart = parseInt(currentRfqNum.split("-")[1]);
+        if (!isNaN(numPart)) {
+          nextNum = "REQ-" + (numPart + 1);
+        }
+      }
+      document.getElementById('newRfqNumber').value = nextNum;
+      document.getElementById('createRfqModal').classList.add('show');
+    }
+
+    function closeCreateRfqModal() {
+      document.getElementById('createRfqModal').classList.remove('show');
+    }
+
+    function submitCreateRfq() {
+      const rfqNum = document.getElementById('newRfqNumber').value || "REQ-250805";
+      const partName = document.getElementById('newRfqPartName').value || "Cylinder Head";
+      const partNum = document.getElementById('newRfqPartNumber').value || "CH-AL-901";
+      const qty = document.getElementById('newRfqQty').value || "20,000 Nos";
+      const price = document.getElementById('newRfqPrice').value || "₹ 1,200.00";
+      const supplierName = document.getElementById('newRfqSupplier').value || "Aashita Enterprises";
+
+      isNdaSigned = false;
+
+      // Update Titles
+      document.title = "Aashita Intelligence — RFQ " + rfqNum;
+      document.querySelector('.breadcrumbs span').innerText = rfqNum;
+      document.querySelector('.title-row h1').innerText = "RFQ Details – " + rfqNum;
+      document.querySelector('.subtitle-row span:first-child').innerText = partName + " – Casting";
+
+      // Reset Stepper Progress & Nodes
+      document.getElementById('stepperProgressBar').style.width = "14.28%";
+
+      const step2 = document.getElementById('stepNode-2');
+      step2.className = "step-node active";
+      document.getElementById('stepCircle-2').innerHTML = "2";
+
+      const step3 = document.getElementById('stepNode-3');
+      step3.className = "step-node";
+      document.getElementById('stepCircle-3').innerHTML = "3";
+      document.getElementById('stepSub-3').innerText = "Pending";
+
+      const step4 = document.getElementById('stepNode-4');
+      step4.className = "step-node";
+      document.getElementById('stepCircle-4').innerHTML = "4";
+      document.getElementById('stepSub-4').innerText = "Pending";
+
+      const step5 = document.getElementById('stepNode-5');
+      step5.className = "step-node";
+      document.getElementById('stepCircle-5').innerHTML = "5";
+      document.getElementById('stepSub-5').innerText = "Pending";
+
+      const step6 = document.getElementById('stepNode-6');
+      step6.className = "step-node";
+      document.getElementById('stepCircle-6').innerHTML = "6";
+      document.getElementById('stepSub-6').innerText = "Pending";
+
+      const step7 = document.getElementById('stepNode-7');
+      step7.className = "step-node";
+      document.getElementById('stepCircle-7').innerHTML = "7";
+      document.getElementById('stepSub-7').innerText = "Pending";
+
+      const step8 = document.getElementById('stepNode-8');
+      step8.className = "step-node";
+      document.getElementById('stepCircle-8').innerHTML = "8";
+      document.getElementById('stepSub-8').innerText = "Pending";
+
+      // Update RFQ Info Card values
+      const infoValues = document.querySelectorAll('.info-value');
+      if (infoValues.length >= 8) {
+        infoValues[0].innerText = rfqNum;
+        infoValues[1].innerText = partName + " - Casting";
+        infoValues[2].innerText = partNum;
+        infoValues[3].innerText = qty;
+        infoValues[5].innerText = price + " / - Per Part";
+      }
+
+      // Update Documents Shared card to default locked state for new part
+      const cleanPartName = partName.replace(/\s+/g, '_');
+      const docsList = document.getElementById('sharedDocsList');
+      docsList.innerHTML = `
+        <div class="doc-item" onclick="handleDocDownload('${cleanPartName}_Specification.pdf', this)">
+          <i class="far fa-file-pdf doc-icon"></i>
+          <div class="doc-info">
+            <span class="doc-name">${cleanPartName}_Specification.pdf</span>
+            <span class="doc-size">1.5 MB • PDF</span>
+          </div>
+          <i class="fas fa-lock doc-lock" id="lock-doc-1"></i>
+        </div>
+        <div class="doc-item" onclick="handleDocDownload('${cleanPartName}_Drawing.pdf', this)">
+          <i class="far fa-file-pdf doc-icon"></i>
+          <div class="doc-info">
+            <span class="doc-name">${cleanPartName}_Drawing.pdf</span>
+            <span class="doc-size">2.8 MB • PDF</span>
+          </div>
+          <i class="fas fa-lock doc-lock" id="lock-doc-2"></i>
+        </div>
+      `;
+      document.getElementById('docCountText').innerText = "View All Documents (2)";
+
+      // Update Supplier ae card logo & name
+      document.querySelector('.supplier-name').innerText = supplierName;
+      const logoText = supplierName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
+      document.querySelector('.supplier-logo-circle').innerText = logoText;
+
+      // Reset NDA graph status to pending
+      const mutualBox = document.getElementById('mutualNdaBox');
+      mutualBox.className = "nda-mutual-box";
+      mutualBox.classList.remove('signed');
+
+      const mutualBadge = document.getElementById('mutualNdaBadge');
+      mutualBadge.className = "badge badge-pending";
+      mutualBadge.innerText = "Awaiting Supplier Signature";
+
+      const supplierBadge = document.getElementById('supplierNdaBadge');
+      supplierBadge.className = "badge badge-pending";
+      supplierBadge.innerText = "Pending";
+
+      document.getElementById('supplierNdaStatus').innerText = "Awaiting Review & Signature";
+      document.getElementById('supplierNdaTime').innerText = "Requested: Just Now";
+
+      // Restore Review & Sign button
+      const signBtn = document.getElementById('ndaSignBtn');
+      signBtn.className = "btn btn-purple";
+      signBtn.style.height = "28px";
+      signBtn.style.borderRadius = "6px";
+      signBtn.innerText = "Review & Sign NDA";
+      signBtn.onclick = openNdaModal;
+
+      // Update Alert banner
+      const alertBar = document.getElementById('ndaAlertBar');
+      alertBar.className = "nda-alert-bar";
+      document.getElementById('ndaAlertIcon').className = "fas fa-info-circle";
+      document.getElementById('ndaAlertText').innerText = "Supplier must sign the NDA to access all confidential documents and submit quotation.";
+
+      // Reset Response Cards
+      const respCardIcon = document.getElementById('respCardIcon-3');
+      respCardIcon.className = "response-icon-box pending";
+      document.getElementById('respCardSub-3').innerText = "Awaiting supplier signature";
+
+      const respCardBadge = document.getElementById('respCardBadge-3');
+      respCardBadge.className = "badge badge-pending";
+      respCardBadge.innerText = "Pending";
+
+      // Reset Timeline
+      const timeline = document.getElementById('timelineList');
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + `, ` + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      timeline.innerHTML = `
+        <div class="timeline-item completed">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">RFQ Created</span>
+          <span class="timeline-sub">by Jasneek Singh (Bajaj Auto Ltd.)</span>
+          <span class="timeline-time">${timeStr}</span>
+        </div>
+        <div class="timeline-item completed">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">RFQ Sent to Supplier</span>
+          <span class="timeline-sub">${supplierName}</span>
+          <span class="timeline-time">${timeStr}</span>
+        </div>
+        <div class="timeline-item" id="timelineNodeViewed">
+          <div class="timeline-node"></div>
+          <span class="timeline-header" id="timelineHeaderViewed">Supplier Viewed RFQ</span>
+          <span class="timeline-time" id="timelineTimeViewed">Pending</span>
+        </div>
+        <div class="timeline-item" id="timelineNodeResponse">
+          <div class="timeline-node"></div>
+          <span class="timeline-header" id="timelineHeaderResponse">Supplier Response</span>
+          <span class="timeline-time" id="timelineTimeResponse">Pending</span>
+        </div>
+        <div class="timeline-item" id="timelineNodeNDA">
+          <div class="timeline-node"></div>
+          <span class="timeline-header" id="timelineHeaderNDA">NDA & Agreements</span>
+          <span class="timeline-time" id="timelineTimeNDA">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Quotation Submission</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Evaluation</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">PO Issuance</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-node"></div>
+          <span class="timeline-header">Closed</span>
+          <span class="timeline-time">Pending</span>
+        </div>
+      `;
+
+      closeCreateRfqModal();
+      alert("Successfully created New RFQ " + rfqNum + "! Sourcing workflow initialized.");
+    }
+
+    // Toggle Sidebar collapse
+    function toggleSidebar() {
+      const sidebar = document.getElementById('appSidebar');
+      const arrow = document.getElementById('collapseArrow');
+      sidebar.classList.toggle('collapsed');
+    }
+
+    // Toggle Top Actions Dropdown
+    function toggleActionsDropdown(e) {
+      e.stopPropagation();
+      const dd = document.getElementById('actionsDropdown');
+      dd.classList.toggle('show');
+    }
+
+    // Close actions dropdown on outside click
+    document.addEventListener('click', function () {
+      const dd = document.getElementById('actionsDropdown');
+      if (dd && dd.classList.contains('show')) {
+        dd.classList.remove('show');
+      }
+    });
+
+    // Open/Close NDA modal
+    function openNdaModal() {
+      if (isNdaSigned) {
+        alert("The NDA is already signed and validated!");
+        return;
+      }
+      document.getElementById('sigInput').value = "";
+      document.getElementById('sigPreview').innerText = "Your Signature Preview";
+      document.getElementById('submitSigBtn').setAttribute('disabled', 'true');
+      document.getElementById('ndaSignModal').classList.add('show');
+    }
+
+    function closeNdaModal() {
+      document.getElementById('ndaSignModal').classList.remove('show');
+    }
+
+    // Interactive Signature input handler
+    function updateSignaturePreview() {
+      const val = document.getElementById('sigInput').value;
+      const preview = document.getElementById('sigPreview');
+      const btn = document.getElementById('submitSigBtn');
+
+      if (val.trim()) {
+        preview.innerText = val;
+        btn.removeAttribute('disabled');
+      } else {
+        preview.innerText = "Your Signature Preview";
+        btn.setAttribute('disabled', 'true');
+      }
+    }
+
+    // NDA complete signing workflow
+    function completeNdaSigning() {
+      const signName = document.getElementById('sigInput').value;
+      isNdaSigned = true;
+      closeNdaModal();
+
+      // Get current date/time
+      const now = new Date();
+      const timeStr = now.toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) + `, ` + now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+      // Update NDA status section in Graph row
+      const mutualBox = document.getElementById('mutualNdaBox');
+      mutualBox.classList.add('signed');
+
+      const mutualBadge = document.getElementById('mutualNdaBadge');
+      mutualBadge.className = "badge badge-signed";
+      mutualBadge.innerText = "Signed & Verified";
+
+      const supplierBadge = document.getElementById('supplierNdaBadge');
+      supplierBadge.className = "badge badge-signed";
+      supplierBadge.innerText = "Signed";
+
+      document.getElementById('supplierNdaStatus').innerText = signName + " (Director)";
+      document.getElementById('supplierNdaTime').innerText = "Signed On: " + timeStr;
+
+      // Update warning banner to success banner
+      const alertBar = document.getElementById('ndaAlertBar');
+      alertBar.className = "nda-alert-bar success";
+      document.getElementById('ndaAlertIcon').className = "fas fa-check-circle";
+      document.getElementById('ndaAlertText').innerText = "Mutual NDA signed and verified. Confidential engineering files unlocked.";
+
+      // Update Sign Button to View button
+      const signBtn = document.getElementById('ndaSignBtn');
+      signBtn.className = "btn btn-outline btn-icon";
+      signBtn.style.height = "28px";
+      signBtn.style.borderRadius = "6px";
+      signBtn.innerHTML = `<i class="far fa-file-pdf"></i> View Signed NDA`;
+      signBtn.onclick = function () { alert("Opening Signed NDA document signed by " + signName); };
+
+      // Update Stepper Progress & Nodes
+      document.getElementById('stepperProgressBar').style.width = "57.14%"; // Reach step 5 (4 / 7 segments)
+
+      const node2 = document.getElementById('stepNode-2');
+      if (node2) {
+        node2.className = "step-node completed";
+        const circle2 = document.getElementById('stepCircle-2');
+        if (circle2) circle2.innerHTML = `<i class="fas fa-check"></i>`;
+      }
+
+      const node3 = document.getElementById('stepNode-3');
+      if (node3) {
+        node3.className = "step-node completed";
+        const circle3 = document.getElementById('stepCircle-3');
+        if (circle3) circle3.innerHTML = `<i class="fas fa-check"></i>`;
+        const sub3 = document.getElementById('stepSub-3');
+        if (sub3) sub3.innerText = "Completed";
+      }
+
+      const node4 = document.getElementById('stepNode-4');
+      if (node4) {
+        node4.className = "step-node completed";
+        const circle4 = document.getElementById('stepCircle-4');
+        if (circle4) circle4.innerHTML = `<i class="fas fa-check"></i>`;
+        const sub4 = document.getElementById('stepSub-4');
+        if (sub4) sub4.innerText = "Completed";
+      }
+
+      const node5 = document.getElementById('stepNode-5');
+      if (node5) {
+        node5.className = "step-node active";
+        const circle5 = document.getElementById('stepCircle-5');
+        if (circle5) circle5.innerHTML = `5`;
+        const sub5 = document.getElementById('stepSub-5');
+        if (sub5) sub5.innerText = "In Progress";
+      }
+
+      // Update Supplier Response Card
+      const respCardIcon = document.getElementById('respCardIcon-3');
+      respCardIcon.className = "response-icon-box completed";
+      document.getElementById('respCardSub-3').innerText = "Signed on " + timeStr;
+
+      const respCardBadge = document.getElementById('respCardBadge-3');
+      respCardBadge.className = "badge badge-negotiation";
+      respCardBadge.innerText = "Completed";
+
+      // Unlock documents
+      const docs = document.querySelectorAll('.doc-item');
+      docs.forEach(doc => {
+        doc.classList.add('unlocked');
+        const lock = doc.querySelector('.doc-lock');
+        if (lock) {
+          lock.className = "fas fa-lock-open doc-lock";
+          lock.title = "Document Unlocked";
+        }
+      });
+
+      // Update Timeline milestones
+      const timelineViewed = document.getElementById('timelineNodeViewed');
+      if (timelineViewed) {
+        timelineViewed.className = "timeline-item completed";
+        const headerViewed = document.getElementById('timelineHeaderViewed');
+        if (headerViewed) headerViewed.innerText = "Supplier Viewed RFQ";
+        const timeViewed = document.getElementById('timelineTimeViewed');
+        if (timeViewed && (timeViewed.innerText === "Pending" || timeViewed.innerText === "")) {
+          timeViewed.innerText = timeStr;
+        }
+      }
+
+      const timelineResp = document.getElementById('timelineNodeResponse');
+      if (timelineResp) {
+        timelineResp.className = "timeline-item completed";
+        const headerResp = document.getElementById('timelineHeaderResponse');
+        if (headerResp) headerResp.innerText = "Supplier Responded (Interested)";
+        const timeResp = document.getElementById('timelineTimeResponse');
+        if (timeResp && (timeResp.innerText === "Pending" || timeResp.innerText === "")) {
+          timeResp.innerText = timeStr;
+        }
+      }
+
+      const timelineNDA = document.getElementById('timelineNodeNDA');
+      if (timelineNDA) {
+        timelineNDA.className = "timeline-item completed";
+        const headerNDA = document.getElementById('timelineHeaderNDA');
+        if (headerNDA) headerNDA.innerText = "NDA & Agreements Signed";
+        const timeNDA = document.getElementById('timelineTimeNDA');
+        if (timeNDA) timeNDA.innerText = timeStr;
+      }
+
+      alert("NDA Signed successfully! Confidential drawings and requirements are now fully unlocked.");
+    }
+
+    let currentPdfZoom = 100;
+    let currentPdfName = "";
+
+    function openPdfPreview(name) {
+      currentPdfName = name;
+      document.getElementById('pdfDocName').innerText = name;
+
+      // Determine file metadata based on name
+      let fileSize = "1.5 MB";
+      let version = "Rev 1.0";
+      let modDate = "09 Aug 2026";
+
+      if (name.includes("Engine_Bracket") || name.includes("Drawing")) {
+        fileSize = "2.4 MB";
+        version = "Rev D";
+        modDate = "08 Aug 2026";
+      } else if (name.includes("Technical")) {
+        fileSize = "1.1 MB";
+        version = "Rev 2.1";
+        modDate = "07 Aug 2026";
+      } else if (name.includes("Material")) {
+        fileSize = "0.8 MB";
+        version = "Rev 1.8";
+        modDate = "05 Aug 2026";
+      } else if (name.includes("Process")) {
+        fileSize = "1.6 MB";
+        version = "Rev 3.0";
+        modDate = "09 Aug 2026";
+      } else if (name.includes("Quality")) {
+        fileSize = "1.2 MB";
+        version = "Rev 2.2";
+        modDate = "08 Aug 2026";
+      }
+
+      document.getElementById('pdfMetaSize').innerText = fileSize;
+      document.getElementById('pdfMetaVersion').innerText = version;
+      document.getElementById('pdfMetaDate').innerText = modDate;
+
+      // Set the signee name
+      const signName = document.getElementById('sigInput').value || "Aashita Representative";
+      document.getElementById('pdfMetaSignee').innerText = signName;
+
+      // Generate preview page content
+      const paper = document.getElementById('pdfPagePaper');
+      paper.innerHTML = getMockPdfContent(name);
+
+      // Reset zoom
+      currentPdfZoom = 100;
+      document.getElementById('pdfZoomValue').innerText = "100%";
+      paper.style.transform = "scale(1)";
+      paper.style.transformOrigin = "top center";
+
+      // Show modal
+      document.getElementById('pdfPreviewModal').classList.add('show');
+    }
+
+    function closePdfPreview() {
+      document.getElementById('pdfPreviewModal').classList.remove('show');
+    }
+
+    function adjustPdfZoom(amount) {
+      currentPdfZoom += amount;
+      if (currentPdfZoom < 50) currentPdfZoom = 50;
+      if (currentPdfZoom > 150) currentPdfZoom = 150;
+      document.getElementById('pdfZoomValue').innerText = currentPdfZoom + "%";
+      document.getElementById('pdfPagePaper').style.transform = `scale(${currentPdfZoom / 100})`;
+    }
+
+    function triggerMockDownload() {
+      alert("Downloading " + currentPdfName + " ... File integrity validated.");
+    }
+
+    function getMockPdfContent(name) {
+      const isDrawing = name.includes("Drawing") || name.includes("Engine_Bracket");
+      const isTech = name.includes("Technical");
+      const isMaterial = name.includes("Material");
+      const isProcess = name.includes("Process");
+      const isQuality = name.includes("Quality");
+
+      let title = "DOCUMENT SPECIFICATION";
+      let subtitle = "Engineering Data Sheet";
+
+      if (isDrawing) {
+        title = "ENGINEERING DRAWING - ENGINE BRACKET CASTING";
+        subtitle = "Part No: EB-CAST-001 / Revision D";
+      } else if (isTech) {
+        title = "TECHNICAL & FUNCTIONAL SPECIFICATION";
+        subtitle = "Standard Operating Parameters & Stress Tolerances";
+      } else if (isMaterial) {
+        title = "MATERIAL COMPOSITION AND SPECS SHEET";
+        subtitle = "Aluminium High Pressure Die Casting (HPDC) - Alloy ADC12";
+      } else if (isProcess) {
+        title = "MANUFACTURING PROCESS & TOOLING PARAMETERS";
+        subtitle = "HPDC Foundry Production Standards & Machine Configurations";
+      } else if (isQuality) {
+        title = "QUALITY ASSURANCE & INSPECTION STANDARD";
+        subtitle = "PPAP Level 3 Qualification & Dimensional Control Plan";
+      }
+
+      let headerHtml = `
+        <div class="pdf-paper-header">
+          <div class="pdf-header-left">
+            <span class="pdf-header-classification"><i class="fas fa-exclamation-triangle"></i> STRICTLY CONFIDENTIAL - NDA SECURED</span>
+            <span class="pdf-header-company">BAJAJ AUTO LTD. & AASHITA ENTERPRISES</span>
+            <span class="pdf-header-title">${title}</span>
+          </div>
+          <div class="pdf-header-right">
+            <span>Doc Code: BJ-AE-RFQ-250801</span>
+            <span>Date: Aug 09, 2026</span>
+            <span>Status: APPROVED</span>
+          </div>
+        </div>
+      `;
+
+      let footerHtml = `
+        <div class="pdf-paper-footer">
+          <span>Bajaj Auto Proprietary & Confidential</span>
+          <span>Page 1 of 1</span>
+          <span>Security Token: HPDC-SECURE-2026-X8</span>
+        </div>
+      `;
+
+      let bodyHtml = "";
+
+      if (isDrawing) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-drafting-compass"></i> 1.0 Engineering Diagram & Annotations</div>
+          <p class="pdf-text-p">The following detailed CAD diagram showcases the primary dimensional layouts, case depth details, and heat treatment specifications for the Engine Bracket Casting (EB-CAST-001) Rev D.</p>
+          
+          <div class="pdf-drawing-container">
+            <img class="pdf-drawing-image" src="drawing_cropped.png" alt="Engineering Drawing Schematic">
+          </div>
+          
+          <div class="pdf-section-title"><i class="fas fa-table"></i> 2.0 Critical Geometry Specifications</div>
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Feature / Detail</th>
+                <th>Nominal Dimension</th>
+                <th>Tolerance Limit</th>
+                <th>Inspection Method</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Plunge Grinding Lead</td>
+                <td>&plusmn;0.05&deg;</td>
+                <td>Max Permissible Grinding</td>
+                <td>Optical Profile Projector</td>
+              </tr>
+              <tr>
+                <td>Mounting Hole Chamfer</td>
+                <td>1.5 +0.2 mm</td>
+                <td>Single Side Chamfer</td>
+                <td>Digital Caliper</td>
+              </tr>
+              <tr>
+                <td>Outer Diameter (OD)</td>
+                <td>&Oslash;26 -0.06 / -0.88 mm</td>
+                <td>High Precision turned</td>
+                <td>Micrometer Gauge</td>
+              </tr>
+              <tr>
+                <td>Inner Bore (ID)</td>
+                <td>&Oslash;20 +0.025 mm (H9)</td>
+                <td>Grinding standard</td>
+                <td>Air Plug Gauge</td>
+              </tr>
+            </tbody>
+          </table>
+        `;
+      } else if (isTech) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-cogs"></i> 1.0 Mechanical Properties & Performance Requirements</div>
+          <p class="pdf-text-p">High-pressure die-cast engine bracket parts must sustain structural stresses under dynamic vibration tests. Tensile and yield strength standards are aligned with standard automotive housing rules.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Property Parameter</th>
+                <th>Minimum Value</th>
+                <th>Standard Reference</th>
+                <th>Testing Equipment</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Tensile Strength (UTS)</td>
+                <td>&le; 280 MPa</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Yield Strength (0.2% Offset)</td>
+                <td>&le; 160 MPa</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Elongation (in 50mm)</td>
+                <td>&le; 2.5 %</td>
+                <td>ASTM E8M Standard</td>
+                <td>Universal Testing Machine</td>
+              </tr>
+              <tr>
+                <td>Brinell Hardness (HBW 5/250)</td>
+                <td>&le; 80 HB</td>
+                <td>ASTM E10 Standard</td>
+                <td>Hardness Tester</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-tint-slash"></i> 2.0 Porosity & Hydrostatic Leakage Standards</div>
+          <p class="pdf-text-p"><strong>Leak Testing:</strong> Every engine bracket casting part must pass leakage testing. No gas/air porosity leakage allowed when tested with air pressure of <strong>1.5 bar for 15 seconds</strong> in water bath or dry air decay testing machine.</p>
+          <p class="pdf-text-p"><strong>Radiographic Porosity:</strong> Maximum allowable porosity level is ASTM E155 Class 2 in critical structural joints, and Class 3 in non-critical wall sections.</p>
+        `;
+      } else if (isMaterial) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-atom"></i> 1.0 Chemical Composition limits - Alloy ADC12</div>
+          <p class="pdf-text-p">Material composition must conform to Japanese Standard JIS H 5302 (Aluminium Alloy Die Castings). The table below details chemical boundaries by mass percentage.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Element</th>
+                <th>Min %</th>
+                <th>Max %</th>
+                <th>Nominal Limit</th>
+                <th>Role in Castability</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Copper (Cu)</td>
+                <td>1.5</td>
+                <td>3.5</td>
+                <td>2.5%</td>
+                <td>Improves tensile strength and hardness</td>
+              </tr>
+              <tr>
+                <td>Silicon (Si)</td>
+                <td>9.6</td>
+                <td>12.0</td>
+                <td>11.0%</td>
+                <td>Increases fluid flow, reduces shrinkage</td>
+              </tr>
+              <tr>
+                <td>Iron (Fe)</td>
+                <td>-</td>
+                <td>1.3</td>
+                <td>0.9%</td>
+                <td>Prevents die soldering & sticking</td>
+              </tr>
+              <tr>
+                <td>Magnesium (Mg)</td>
+                <td>-</td>
+                <td>0.3</td>
+                <td>0.15%</td>
+                <td>Improves machining surface finish</td>
+              </tr>
+              <tr>
+                <td>Zinc (Zn)</td>
+                <td>-</td>
+                <td>1.0</td>
+                <td>0.6%</td>
+                <td>Acts as a general alloy component</td>
+              </tr>
+              <tr>
+                <td>Aluminium (Al)</td>
+                <td colspan="3">Remainder (Balance)</td>
+                <td>Primary metal base</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-microscope"></i> 2.0 Microstructure & Thermal Properties</div>
+          <p class="pdf-text-p">Microstructure must show a uniform distribution of silicon particles in the aluminum solid solution matrix. Thermal conductivity should be in the range of 90-100 W/m&middot;K at 25&deg;C. No slag or non-metallic inclusions are permitted.</p>
+        `;
+      } else if (isProcess) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-industry"></i> 1.0 Casting Process Specifications (HPDC)</div>
+          <p class="pdf-text-p">The engine bracket casting is to be manufactured using a cold-chamber High Pressure Die Casting (HPDC) machine. Minimum machine tonnage must be selected carefully based on projected area calculations.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Casting Process Parameter</th>
+                <th>Target Setting</th>
+                <th>Tolerance Band</th>
+                <th>Control Mechanism</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Machine Locking Force</td>
+                <td>800 Metric Tons</td>
+                <td>Minimum</td>
+                <td>Hydraulic Toggle Lock</td>
+              </tr>
+              <tr>
+                <td>Furnace Temperature</td>
+                <td>660 &deg;C</td>
+                <td>&plusmn; 10 &deg;C</td>
+                <td>Thermocouple loop PID</td>
+              </tr>
+              <tr>
+                <td>Plunger Injection Speed</td>
+                <td>3.5 m/s (Fast Stage)</td>
+                <td>&plusmn; 0.2 m/s</td>
+                <td>Servo Valve Feed</td>
+              </tr>
+              <tr>
+                <td>Die Temperature</td>
+                <td>180 &deg;C</td>
+                <td>&plusmn; 15 &deg;C</td>
+                <td>Thermal Fluid Regulator</td>
+              </tr>
+              <tr>
+                <td>Solidification Time</td>
+                <td>9.5 seconds</td>
+                <td>&plusmn; 1.0 s</td>
+                <td>Automatic Timer</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-tools"></i> 2.0 Post-Casting Machining Standards</div>
+          <p class="pdf-text-p">Secondary CNC operations must follow the locked clamping reference features. Air pressure blow-out and oil wash cycle are mandatory to remove residual fine metal chips inside the bore.</p>
+        `;
+      } else if (isQuality) {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-clipboard-check"></i> 1.0 PPAP Level 3 Quality Control Plan</div>
+          <p class="pdf-text-p">Aashita Enterprises is requested to submit full PPAP Level 3 documentation prior to tooling sign-off and batch delivery approval. The QA checklist below is mandatory.</p>
+          
+          <table class="pdf-table">
+            <thead>
+              <tr>
+                <th>Quality Element</th>
+                <th>Reporting Requirement</th>
+                <th>Frequency</th>
+                <th>Status (Aashita)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Dimensional Inspection</td>
+                <td>CMM report of 30 layout parts</td>
+                <td>First Article Inspection</td>
+                <td>Awaiting tool completion</td>
+              </tr>
+              <tr>
+                <td>Material Test Report</td>
+                <td>Chemical spectroscopy & hardness</td>
+                <td>Per batch dispatch</td>
+                <td>Awaiting raw ingot test</td>
+              </tr>
+              <tr>
+                <td>Process Capability (Cpk)</td>
+                <td>Critical dimensions Cpk &ge; 1.67</td>
+                <td>Monthly capability audit</td>
+                <td>Trial run dependent</td>
+              </tr>
+              <tr>
+                <td>X-ray Radiography</td>
+                <td>Porosity index certified reports</td>
+                <td>5 parts per shift batch</td>
+                <td>Awaiting casting setup</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="pdf-section-title"><i class="fas fa-ban"></i> 2.0 Critical-to-Quality (CTQ) Definitions</div>
+          <p class="pdf-text-p"><strong>CTQ-1:</strong> Mounting hole alignments. <strong>CTQ-2:</strong> Inner bore diameter roundness within 15 microns. Failure on any CTQ parameter will trigger immediate batch isolation and material rejection.</p>
+        `;
+      } else {
+        bodyHtml = `
+          <div class="pdf-section-title"><i class="fas fa-file-alt"></i> 1.0 Document Contents</div>
+          <p class="pdf-text-p">This is a placeholder document layout for <strong>${name}</strong>. The full contents are protected by the signed Mutual Non-Disclosure Agreement (NDA).</p>
+          <div style="margin: 40px 0; text-align: center; color: #94a3b8;">
+            <i class="fas fa-file-contract" style="font-size: 48px; margin-bottom: 12px;"></i>
+            <p>Confidential Specification Data Block</p>
+          </div>
+        `;
+      }
+
+      return headerHtml + bodyHtml + footerHtml;
+    }
+
+    // Document download simulator
+    function handleDocDownload(name, elem) {
+      if (!isNdaSigned) {
+        alert("ACCESS DENIED: Please sign the NDA & Confidentiality Agreement to unlock and view this document.");
+      } else {
+        openPdfPreview(name);
+      }
+    }
+
+    // Supplier Profile Modal logic9  
+    function openSupplierProfile() {
+      const supplierName = document.querySelector('.supplier-name').innerText || "Aashita Enterprises";
+      document.getElementById('profCompanyName').innerText = supplierName;
+
+      const initials = supplierName.split(" ").map(w => w[0]).join("").substring(0, 2).toUpperCase();
+      document.getElementById('profAvatar').innerText = initials;
+
+      if (supplierName === "Aashita Enterprises") {
+        document.getElementById('profCode').innerText = "SUP-01234";
+        document.getElementById('profContactPerson').innerText = "Rohit Deshmukh (Director)";
+        document.getElementById('profEmail').innerText = "info@aashitaenterprises.com";
+        document.getElementById('profPhone').innerText = "+91 98765 43210";
+        document.getElementById('profLocation').innerText = "Jaipur";
+        document.getElementById('profAddress').innerText = "RIICO Industrial Area, Jaipur, RJ";
+      } else {
+        document.getElementById('profCode').innerText = "SUP-07890";
+        document.getElementById('profContactPerson').innerText = "Sourcing Team Representative";
+        document.getElementById('profEmail').innerText = "contact@" + supplierName.toLowerCase().replace(/\s+/g, '') + ".com";
+        document.getElementById('profPhone').innerText = "+91 91234 56789";
+        document.getElementById('profLocation').innerText = "Jaipur";
+        document.getElementById('profAddress').innerText = "Industrial Zone, Jaipur, RJ";
+      }
+
+      document.getElementById('supplierProfileModal').classList.add('show');
+    }
+
+    function closeSupplierProfile() {
+      document.getElementById('supplierProfileModal').classList.remove('show');
+    }
+  </script>
+</body>
+
+</html>
