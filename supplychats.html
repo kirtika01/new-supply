@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -61,20 +61,20 @@
     }
 
     /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
-    [contenteditable="true"] {
+    [] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable="true"]:hover {
+    []:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable="true"]:focus {
+    []:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -82,12 +82,12 @@
       color: var(--text-gray-dark);
     }
 
-    .sidebar [contenteditable="true"]:hover {
+    .sidebar []:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .sidebar [contenteditable="true"]:focus {
+    .sidebar []:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -1811,9 +1811,9 @@
                 <circle cx="23" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
               </svg>
             </div>
-            <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
+            <span class="logo-text" >Aashita Intelligence</span>
           </div>
-          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
+          <div class="logo-tagline" >Connect. Collaborate. Deliver.</div>
         </div>
 
         <!-- Navigation Menu -->
@@ -1823,80 +1823,80 @@
           <a class="nav-item" href="supplylink_360.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-invoice"></i>
-              <span contenteditable="true">Requirements (RFQ)</span>
+              <span >Requirements (RFQ)</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-folder"></i>
-              <span contenteditable="true">My Projects</span>
+              <span >My Projects</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-users"></i>
-              <span contenteditable="true">Suppliers</span>
+              <span >Suppliers</span>
             </div>
           </a>
           <a class="nav-item" href="process_documents.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-shield"></i>
-              <span contenteditable="true">Process Documents</span>
+              <span >Process Documents</span>
             </div>
           </a>
           <a class="nav-item" href="drawing_integration.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-compass-drafting"></i>
-              <span contenteditable="true">Drawing Integration</span>
+              <span >Drawing Integration</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-map-location-dot"></i>
-              <span contenteditable="true">Production Tracking</span>
+              <span >Production Tracking</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-circle-check"></i>
-              <span contenteditable="true">Quality Management</span>
+              <span >Quality Management</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-truck-ramp-box"></i>
-              <span contenteditable="true">Deliveries &amp; Logistics</span>
+              <span >Deliveries &amp; Logistics</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-hand-holding-dollar"></i>
-              <span contenteditable="true">Accounts &amp; Finance</span>
+              <span >Accounts &amp; Finance</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-chart-column"></i>
-              <span contenteditable="true">Reports &amp; Analytics</span>
+              <span >Reports &amp; Analytics</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-robot"></i>
-              <span contenteditable="true">AI Assistant</span>
+              <span >AI Assistant</span>
             </div>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-bell"></i>
-              <span contenteditable="true">Notifications</span>
+              <span >Notifications</span>
             </div>
-            <span class="nav-badge badge-blue" contenteditable="true">12</span>
+            <span class="nav-badge badge-blue" >12</span>
           </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-gear"></i>
-              <span contenteditable="true">Settings</span>
+              <span >Settings</span>
             </div>
           </a>
         </nav>
@@ -1905,11 +1905,11 @@
       <!-- Sidebar Profile & Org Switcher -->
       <div class="sidebar-bottom">
         <div class="profile-card" onclick="toggleDropdownMenu(event)">
-          <div class="profile-avatar" contenteditable="true">PS</div>
+          <div class="profile-avatar" >PS</div>
           <div class="profile-info">
-            <div class="profile-name" id="user-display-name" contenteditable="true">Prashant Sagar</div>
-            <div class="profile-role" id="user-display-role" contenteditable="true">Engineering Manager</div>
-            <div class="profile-company" contenteditable="true">Bajaj Auto Ltd.</div>
+            <div class="profile-name" id="user-display-name" >Prashant Sagar</div>
+            <div class="profile-role" id="user-display-role" >Engineering Manager</div>
+            <div class="profile-company" >Bajaj Auto Ltd.</div>
           </div>
           <i class="fa-solid fa-chevron-up profile-dropdown-icon"></i>
 
@@ -1924,7 +1924,7 @@
         <div class="org-switcher">
           <span class="org-switcher-label">Switch Organization</span>
           <div class="org-dropdown-trigger" onclick="toggleOrgDropdown(event)">
-            <span id="org-selected-name" contenteditable="true">Bajaj Auto Ltd. (Plant: Chakan)</span>
+            <span id="org-selected-name" >Bajaj Auto Ltd. (Plant: Chakan)</span>
             <i class="fa-solid fa-chevron-down" style="font-size: 8px;"></i>
           </div>
           <div class="dropdown-menu" id="org-dropdown" style="bottom: 30px;">
@@ -1943,7 +1943,7 @@
       <header class="top-header">
         <div class="header-left">
           <h1 class="welcome-title" id="chats-header-title">Individual Chats</h1>
-          <span class="welcome-desc" id="chats-header-desc" contenteditable="true">Connect and collaborate with Bajaj &amp; Aashita team members</span>
+          <span class="welcome-desc" id="chats-header-desc" >Connect and collaborate with Bajaj &amp; Aashita team members</span>
         </div>
 
         <div class="header-right">
@@ -1964,8 +1964,8 @@
           <div class="host-logo-badge">
             <div class="host-logo-icon"><i class="fa-solid fa-motorcycle"></i></div>
             <div class="host-info">
-              <span class="host-name" contenteditable="true">BAJAJ</span>
-              <span class="host-desc" contenteditable="true">Be Ahead</span>
+              <span class="host-name" >BAJAJ</span>
+              <span class="host-desc" >Be Ahead</span>
             </div>
           </div>
         </div>
@@ -2409,7 +2409,7 @@
         const rows = matches.filter(c => c.group === group);
         if (!rows.length) return;
 
-        html += `<div class="category-group-header" contenteditable="true">${CHAT_GROUP_LABELS[group]}</div>`;
+        html += `<div class="category-group-header" >${CHAT_GROUP_LABELS[group]}</div>`;
         rows.forEach(c => {
           html += `
             <div class="chat-item${c.id === activeChatId ? ' active' : ''}" onclick="openChat('${c.id}')">
@@ -2546,7 +2546,7 @@
       document.getElementById('inspector-details-list').innerHTML = rows.map(([label, value]) => `
         <div class="details-row">
           <span class="details-lbl">${label}</span>
-          <span class="details-val" contenteditable="true">${value}</span>
+          <span class="details-val" >${value}</span>
         </div>`).join('');
 
       document.getElementById('inspector-shared-files').innerHTML = contact.files.map(f => {
