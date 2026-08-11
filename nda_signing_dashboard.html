@@ -1779,7 +1779,45 @@
                   <!-- Signatures section -->
                   <div class="signatures-container">
                     <div class="signatures-grid">
-                      <!-- Column 1: Aashita -->
+                      <!-- Column 1: Bajaj -->
+                      <div class="sig-column" id="bajaj-sig-col">
+                        <div class="sig-party-title">For Bajaj Auto Limited</div>
+
+                        <!-- Initially locked/awaiting, clickable after Aashita signs -->
+                        <div class="sig-awaiting-box" id="bajaj-awaiting-sig" onclick="openBajajSignModal()"
+                          style="border-color: #cbd5e1; background: #fafafa; cursor: not-allowed; opacity: 0.7;">
+                          <i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i>
+                          <div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>
+                        </div>
+
+                        <div class="sig-box" id="bajaj-signed-sig" style="display: none;">
+                          <span class="sig-badge signed">SIGNED</span>
+                          <!-- Replaced by Typed cursive or drawn signature image -->
+                          <div class="sig-handwritten" id="bajaj-cursive-sig" style="display: none;">Rahul Bajaj</div>
+                          <img class="sig-handwritten-canvas-img" id="bajaj-drawn-sig-img" src="" alt="Bajaj Signature"
+                            style="display: none;" />
+
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Name:</span>
+                            <span class="sig-details-val" id="bajaj-val-name">Rahul Bajaj</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Designation:</span>
+                            <span class="sig-details-val" id="bajaj-val-des">Director</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Date & Time:</span>
+                            <span class="sig-details-val" id="bajaj-val-date">11 May 2026 | 02:40 PM IST</span>
+                          </div>
+                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
+                            <button class="btn-link" onclick="retractSignature('bajaj')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
+                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Column 2: Aashita -->
                       <div class="sig-column" id="aashita-sig-col">
                         <div class="sig-party-title">For Aashita Enterprises</div>
 
@@ -1815,44 +1853,6 @@
                           </div>
                           <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
                             <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
-                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Column 2: Bajaj -->
-                      <div class="sig-column" id="bajaj-sig-col">
-                        <div class="sig-party-title">For Bajaj Auto Limited</div>
-
-                        <!-- Initially locked/awaiting, clickable after Aashita signs -->
-                        <div class="sig-awaiting-box" id="bajaj-awaiting-sig" onclick="openBajajSignModal()"
-                          style="border-color: #cbd5e1; background: #fafafa; cursor: not-allowed; opacity: 0.7;">
-                          <i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i>
-                          <div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>
-                        </div>
-
-                        <div class="sig-box" id="bajaj-signed-sig" style="display: none;">
-                          <span class="sig-badge signed">SIGNED</span>
-                          <!-- Replaced by Typed cursive or drawn signature image -->
-                          <div class="sig-handwritten" id="bajaj-cursive-sig" style="display: none;">Rahul Bajaj</div>
-                          <img class="sig-handwritten-canvas-img" id="bajaj-drawn-sig-img" src="" alt="Bajaj Signature"
-                            style="display: none;" />
-
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Name:</span>
-                            <span class="sig-details-val" id="bajaj-val-name">Rahul Bajaj</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Designation:</span>
-                            <span class="sig-details-val" id="bajaj-val-des">Director</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Date & Time:</span>
-                            <span class="sig-details-val" id="bajaj-val-date">11 May 2026 | 02:40 PM IST</span>
-                          </div>
-                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
-                            <button class="btn-link" onclick="retractSignature('bajaj')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
                               <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
                             </button>
                           </div>
