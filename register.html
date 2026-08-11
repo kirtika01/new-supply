@@ -50,20 +50,20 @@
     }
 
     /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
-    [contenteditable] {
+    [contenteditable="true"] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    [contenteditable]:hover {
+    [contenteditable="true"]:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    [contenteditable]:focus {
+    [contenteditable="true"]:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -71,12 +71,12 @@
       color: var(--text-gray-dark);
     }
 
-    .sidebar [contenteditable]:hover {
+    .sidebar [contenteditable="true"]:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .sidebar [contenteditable]:focus {
+    .sidebar [contenteditable="true"]:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -415,11 +415,6 @@
       grid-template-columns: 1fr 1.3fr 1.1fr;
       gap: 24px;
       align-items: start;
-    }
-
-    /* Phase 2 runs on two columns: Contact Details + Review Summary */
-    .form-grid-layout.two-col-layout {
-      grid-template-columns: 1.3fr 1.1fr;
     }
 
     .phase-content {
@@ -840,86 +835,6 @@
       font-weight: 500;
     }
 
-    /* Business authentication toggle */
-    .auth-toggle-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-top: 4px;
-      padding: 12px 14px;
-      border: 1px solid var(--border-color);
-      border-radius: 10px;
-      background: #f8fafc;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .auth-toggle-row.authenticated {
-      border-color: var(--accent-green);
-      background: var(--accent-green-light);
-    }
-
-    .auth-toggle-switch {
-      flex-shrink: 0;
-      width: 38px;
-      height: 21px;
-      border-radius: 999px;
-      background: #cbd5e1;
-      padding: 3px;
-      transition: background 0.2s;
-    }
-
-    .auth-toggle-row.authenticated .auth-toggle-switch {
-      background: var(--accent-green);
-    }
-
-    .auth-toggle-knob {
-      display: block;
-      width: 15px;
-      height: 15px;
-      border-radius: 50%;
-      background: #ffffff;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      transition: transform 0.2s;
-    }
-
-    .auth-toggle-row.authenticated .auth-toggle-knob {
-      transform: translateX(17px);
-    }
-
-    .auth-toggle-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .auth-toggle-title {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--text-gray-dark);
-    }
-
-    .auth-toggle-row.authenticated .auth-toggle-title {
-      color: #047857;
-    }
-
-    .auth-toggle-desc {
-      font-size: 10.5px;
-      color: var(--text-gray-muted);
-    }
-
-    .auth-toggle-check {
-      margin-left: auto;
-      font-size: 14px;
-      color: var(--accent-green);
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-
-    .auth-toggle-row.authenticated .auth-toggle-check {
-      opacity: 1;
-    }
-
     /* Categories Adder widget */
     .categories-input-wrapper {
       display: flex;
@@ -1329,667 +1244,769 @@
                 <circle cx="23" cy="12" r="7" stroke="#3b82f6" stroke-width="3" />
               </svg>
             </div>
-            <span class="logo-text">Aashita Intelligence</span>
+            <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
           </div>
-          <div class="logo-tagline">Connect. Collaborate. Deliver.</div>
+          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
         </div>
 
         <!-- Hero text -->
         <div class="hero-text-section">
-          <h1 class="hero-title">Join the Future of<br><span class="blue-highlight">Manufacturing Collaboration</span>
-          </h1>
-          <p class="hero-desc">One platform for OEMs, Suppliers and Industry Professionals to connect, collaborate and
-            grow together.</p>
+          <h1 class="hero-title" contenteditable="true">Join the Future of<br><span class="blue-highlight">Manufacturing
+              Collaboration</span></h1>
+          <p class="hero-desc" contenteditable="true">One platform for OEMs, Suppliers and Industry Professionals to
+            connect, collaborate and grow together.</p>
         </div>
 
-        <!-- Sidebar navigation -->
-        <ul class="sidebar-menu">
-          <li class="menu-item">
-            <a href="process_documents.html">
-              <div class="menu-item-left">
-                <i class="fa-regular fa-file-lines"></i>
-                <span>Process Documents</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="bajaj.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-gauge-high"></i>
-                <span>Bajaj Auto Dashboard</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="drawing_integration.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-compass-drafting"></i>
-                <span>Drawing Integration</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="index.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-table-columns"></i>
-                <span>Platform Overview</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="supplylink.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-diagram-project"></i>
-                <span>REQ-250801 Workspace</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item">
-            <a href="nda_signing_dashboard.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-file-signature"></i>
-                <span>NDA & Agreements</span>
-              </div>
-            </a>
-          </li>
-          <li class="menu-item active">
-            <a href="register.html">
-              <div class="menu-item-left">
-                <i class="fa-solid fa-user-plus"></i>
-                <span>Registration</span>
-              </div>
-            </a>
-          </li>
-        </ul>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon-wrapper">
-          <i class="fa-solid fa-eye"></i>
-        </div>
-        <div class="feature-info">
-          <div class="feature-title">End-to-End Visibility</div>
-          <div class="feature-desc">Track every stage from RFQ to payment in one place.</div>
-        </div>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon-wrapper">
-          <i class="fa-solid fa-lock"></i>
-        </div>
-        <div class="feature-info">
-          <div class="feature-title">Data Security</div>
-          <div class="feature-desc">Enterprise-grade security to protect your critical data.</div>
-        </div>
-      </div>
-
-      <div class="feature-item">
-        <div class="feature-icon-wrapper">
-          <i class="fa-solid fa-square-trend-up"></i>
-        </div>
-        <div class="feature-info">
-          <div class="feature-title">Grow Your Business</div>
-          <div class="feature-desc">Discover new opportunities and expand your network.</div>
-        </div>
-      </div>
-  </div>
-  </div>
-
-  <!-- Support card footer -->
-  <div class="sidebar-bottom">
-    <div class="help-card">
-      <div class="help-title">Need Help?</div>
-      <div class="help-desc">Our support team is here to help you at every step.</div>
-      <div class="help-details">
-        <div class="help-detail-item">
-          <i class="fa-solid fa-phone"></i>
-          <span>+91 20 2740 7170</span>
-        </div>
-        <div class="help-detail-item">
-          <i class="fa-solid fa-envelope"></i>
-          <span>support@aashitaintelligence.com</span>
-        </div>
-        <div class="help-detail-item">
-          <i class="fa-solid fa-clock"></i>
-          <span>Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
-        </div>
-      </div>
-    </div>
-  </div>
-  </aside>
-
-  <!-- ===== RIGHT CONTENT VIEWPORT ===== -->
-  <main class="main-content">
-    <!-- Top header links -->
-    <header class="top-header">
-      <span class="login-prompt">Already have an account?</span>
-      <button class="login-btn" onclick="alert('Redirecting to login...')">Login</button>
-    </header>
-
-    <!-- Wizard body view -->
-    <div class="wizard-viewport">
-      <!-- Title bar -->
-      <div class="onboarding-title-area">
-        <h2 class="onboarding-title">Create Your Aashita Intelligence Account</h2>
-        <p class="onboarding-subtitle">Complete your profile to start collaborating with the right partners</p>
-      </div>
-
-      <!-- Horizontal Stepper Progress Timeline -->
-      <nav class="stepper-row">
-        <div class="stepper-line-bg">
-          <div class="stepper-line-progress" id="wizard-progress-bar"></div>
+        <!-- About Aashita Intelligence Legacy Section -->
+        <div class="about-legacy-section"
+          style="margin-bottom: 24px; background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 10px; padding: 16px; border-left: 3px solid #3b82f6;">
+          <h4
+            style="font-size: 12px; font-weight: 700; color: #ffffff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;"
+            contenteditable="true">
+            <i class="fa-solid fa-landmark" style="color: #3b82f6;"></i>
+            Our Legacy & Vision
+          </h4>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5; margin-bottom: 8px;" contenteditable="true">
+            Established as a pioneering force in engineering supply networks, <strong>Aashita Intelligence</strong> has
+            transitioned from a localized logistics consultant into a trusted global supply chain ecosystem.
+          </p>
+          <p style="font-size: 11px; color: #94a3b8; line-height: 1.5;" contenteditable="true">
+            We partner with leading OEMs like <strong>Bajaj Auto Ltd.</strong> to synchronize complex engineering design
+            releases, supplier RFQ matches, and production milestones in real-time.
+          </p>
         </div>
 
-        <div class="step-node active" id="step-node-1" onclick="navigateToStep(1)">
-          <div class="step-circle">1</div>
-          <div class="step-label">Intent & Host OEM</div>
-        </div>
-
-        <div class="step-node" id="step-node-2" onclick="navigateToStep(2)">
-          <div class="step-circle">2</div>
-          <div class="step-label">Organization Details</div>
-        </div>
-
-        <div class="step-node" id="step-node-3" onclick="navigateToStep(3)">
-          <div class="step-circle">3</div>
-          <div class="step-label">Business & Compliance</div>
-        </div>
-
-        <div class="step-node" id="step-node-4" onclick="navigateToStep(4)">
-          <div class="step-circle">4</div>
-          <div class="step-label">Contact Details</div>
-        </div>
-
-        <div class="step-node" id="step-node-5" onclick="navigateToStep(5)">
-          <div class="step-circle">5</div>
-          <div class="step-label">Review & Submit</div>
-        </div>
-      </nav>
-
-      <!-- WIZARD STEP VIEWS CONTAINER -->
-      <div class="wizard-forms-wrapper">
-
-        <!-- PHASE 1: Step 1, 2, 3 Grid (Default Active) -->
-        <div class="phase-content active form-grid-layout" id="onboarding-phase-1">
-
-          <!-- COLUMN 1: Intent & Account Choice -->
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <!-- Intent Select -->
-            <div class="form-card">
-              <div class="form-card-title">What do you want to do on Aashita Intelligence?</div>
-              <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;">Select all that apply
-              </div>
-
-              <div class="intent-cards-wrapper">
-                <!-- Buy intent card -->
-                <div class="intent-card selected" id="intent-card-buy" onclick="toggleIntentCard('buy')">
-                  <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
-                  <div class="intent-card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
-                  <div class="intent-card-title">Buy<br><span
-                      style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Procurement)</span>
-                  </div>
-                  <p class="intent-card-desc">I want to buy products/services from suppliers</p>
-                </div>
-                <!-- Sell intent card -->
-                <div class="intent-card selected" id="intent-card-sell" onclick="toggleIntentCard('sell')">
-                  <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
-                  <div class="intent-card-icon"><i class="fa-solid fa-box-open"></i></div>
-                  <div class="intent-card-title">Sell<br><span
-                      style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Supply)</span></div>
-                  <p class="intent-card-desc">I want to sell my products/services to buyers</p>
-                </div>
-              </div>
+        <!-- Feature item value props -->
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-users"></i>
             </div>
-            <!-- About Bajaj Auto Ltd. Card -->
-            <div class="form-card company-about-card">
-              <div class="form-card-title">About Bajaj Auto Ltd.</div>
-              <div class="company-about-content">
-                <div class="company-logo-badge"
-                  style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
-                  <i class="fa-solid fa-building" style="color: var(--accent-blue); font-size: 20px;"></i>
-                  <div>
-                    <h4 style="font-size: 13px; font-weight: 700; color: var(--text-gray-dark);">Bajaj Auto Ltd.</h4>
-                    <span
-                      style="font-size: 9px; font-weight: 600; color: var(--accent-green); background: var(--accent-green-light); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;">Host
-                      OEM</span>
-                  </div>
-                </div>
-                <p style="font-size: 11px; color: var(--text-gray-muted); line-height: 1.6; margin-bottom: 12px;">
-                  Bajaj Auto is a preeminent global manufacturer of two-wheelers and three-wheelers, trusted by
-                  millions of customers across 70+ countries.
-                </p>
-                <div class="company-stats-grid"
-                  style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
-                  <div>
-                    <span style="font-size: 9px; color: var(--text-gray-muted); display: block;">Headquarters</span>
-                    <strong style="font-size: 10.5px; color: var(--text-gray-dark);">Pune, India</strong>
-                  </div>
-                  <div>
-                    <span style="font-size: 9px; color: var(--text-gray-muted); display: block;">Industry</span>
-                    <strong style="font-size: 10.5px; color: var(--text-gray-dark);">Automotive Mfg</strong>
-                  </div>
-                </div>
-                <div class="company-building-wrapper"
-                  style="width: 100%; height: 120px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 12px; position: relative;">
-                  <img src="bajaj_building.png" alt="Bajaj Corporate Building"
-                    style="width: 100%; height: 100%; object-fit: cover;">
-                </div>
-                <div
-                  style="font-size: 10px; color: var(--text-gray-muted); line-height: 1.5; background: var(--accent-blue-light); border: 1px solid rgba(37, 99, 235, 0.15); border-radius: 8px; padding: 10px; display: flex; gap: 8px; align-items: flex-start;">
-                  <i class="fa-solid fa-circle-info" style="color: var(--accent-blue); margin-top: 2px;"></i>
-                  <span>By registering, you are applying to join the Bajaj Auto Ltd. partner supply chain network.
-                    Your details will be submitted to the Bajaj Procurement team for review.</span>
-                </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Streamlined Collaboration</div>
+              <div class="feature-desc" contenteditable="true">Work with verified partners in a secure environment.
               </div>
             </div>
           </div>
 
-          <!-- COLUMN 2: Organization Info details -->
-          <div class="form-card" id="org-details-form-section">
-            <div class="form-card-title">Organization Details</div>
-
-            <!-- Company Information Group -->
-            <div class="form-card-subtitle">Company Information</div>
-
-            <div class="form-group-row">
-              <div class="form-item full-width">
-                <label class="form-label">Company / Organization Name <span class="required-star">*</span></label>
-                <input type="text" class="form-input" id="input-company-name" placeholder="Enter company name">
-              </div>
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-chart-line"></i>
             </div>
-
-            <div class="form-group-row">
-              <div class="form-item">
-                <label class="form-label">Legal Entity Type <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-legal-entity" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select entity type</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="PVT_LTD">Private Limited</div>
-                    <div class="select-option" data-val="PUBLIC_LTD">Public Limited</div>
-                    <div class="select-option" data-val="PARTNERSHIP">Partnership</div>
-                    <div class="select-option" data-val="LLP">LLP</div>
-                    <div class="select-option" data-val="PROPRIETORSHIP">Sole Proprietorship</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-item">
-                <label class="form-label">Country <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-country" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span>India</span><i class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option selected" data-val="IN">India</div>
-                    <div class="select-option" data-val="US">United States</div>
-                    <div class="select-option" data-val="DE">Germany</div>
-                    <div class="select-option" data-val="JP">Japan</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group-row">
-              <div class="form-item">
-                <label class="form-label">State <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-state" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select state</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="MH">Maharashtra</div>
-                    <div class="select-option" data-val="DL">Delhi</div>
-                    <div class="select-option" data-val="KA">Karnataka</div>
-                    <div class="select-option" data-val="TN">Tamil Nadu</div>
-                    <div class="select-option" data-val="GJ">Gujarat</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-item">
-                <label class="form-label">City <span class="required-star">*</span></label>
-                <input type="text" class="form-input" id="input-city" placeholder="Enter city">
-              </div>
-            </div>
-
-            <!-- Business Identifiers -->
-            <div class="form-card-subtitle">Business Identifiers</div>
-
-            <div class="form-group-row">
-              <div class="form-item">
-                <label class="form-label">GSTIN <span class="required-star">*</span></label>
-                <input type="text" class="form-input" id="input-gstin" placeholder="22AAAAA0000A1Z5">
-                <span class="input-desc">Enter 15-digit GSTIN</span>
-              </div>
-              <div class="form-item">
-                <label class="form-label">PAN Number <span class="required-star">*</span></label>
-                <input type="text" class="form-input" id="input-pan" placeholder="AAAAA0000A">
-                <span class="input-desc">Enter 10-digit PAN</span>
-              </div>
-            </div>
-
-            <div class="form-group-row">
-              <div class="form-item">
-                <label class="form-label">Udyam Registration Number (MSME)</label>
-                <input type="text" class="form-input" id="input-udyam" placeholder="UDYAM-MH-20-0001234">
-                <span class="input-desc">If applicable</span>
-              </div>
-              <div class="form-item">
-                <label class="form-label">MSME Classification</label>
-                <div class="select-dropdown-container" id="dropdown-msme" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select classification</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="MICRO">Micro</div>
-                    <div class="select-option" data-val="SMALL">Small</div>
-                    <div class="select-option" data-val="MEDIUM">Medium</div>
-                    <div class="select-option" data-val="NONE">Not Applicable</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group-row">
-              <div class="form-item">
-                <label class="form-label">Industry Type <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-industry" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select industry</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="AUTO">Automotive</div>
-                    <div class="select-option" data-val="AERO">Aerospace</div>
-                    <div class="select-option" data-val="ELEC">Electronics</div>
-                    <div class="select-option" data-val="MACH">Machinery & Tooling</div>
-                    <div class="select-option" data-val="METALS">Metals & Castings</div>
-                  </div>
-                </div>
-              </div>
-              <div class="form-item">
-                <label class="form-label">IEC Number</label>
-                <input type="text" class="form-input" id="input-iec" placeholder="AAAAA0000A">
-                <span class="input-desc">10-character Import Export Code, if applicable</span>
-              </div>
-            </div>
-
-            <div class="form-group-row">
-              <div class="form-item full-width">
-                <label class="form-label">Company Website</label>
-                <input type="text" class="form-input" id="input-website" placeholder="https://www.company.com">
-              </div>
-            </div>
-
-            <!-- Business authentication toggle -->
-            <div class="auth-toggle-row" id="business-auth-toggle" onclick="toggleBusinessAuth(this)">
-              <div class="auth-toggle-switch"><span class="auth-toggle-knob"></span></div>
-              <div class="auth-toggle-text">
-                <span class="auth-toggle-title" id="business-auth-label">Authenticate business details</span>
-                <span class="auth-toggle-desc" id="business-auth-desc">Turn on to verify GSTIN, PAN &amp; Udyam
-                  records</span>
-              </div>
-              <i class="fa-solid fa-circle-check auth-toggle-check"></i>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">AI-Powered Insights</div>
+              <div class="feature-desc" contenteditable="true">Make smarter decisions with real-time analytics and
+                intelligence.</div>
             </div>
           </div>
 
-          <!-- COLUMN 3: Turnovers, categories, options -->
-          <div style="display: flex; flex-direction: column; gap: 20px;">
-            <!-- Business Preferences Preferences -->
-            <div class="form-card">
-              <div class="form-card-title">Business Preferences</div>
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-eye"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">End-to-End Visibility</div>
+              <div class="feature-desc" contenteditable="true">Track every stage from RFQ to payment in one place.</div>
+            </div>
+          </div>
 
-              <div class="form-item full-width">
-                <label class="form-label">What do you primarily want to?</label>
-                <div class="preference-checkbox-list">
-                  <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Buy finished goods / components</span>
-                  </div>
-                  <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Buy raw materials</span>
-                  </div>
-                  <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Buy services</span>
-                  </div>
-                  <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Sell finished goods / components</span>
-                  </div>
-                  <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Sell raw materials</span>
-                  </div>
-                  <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
-                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                    <span class="checkbox-label">Sell services</span>
-                  </div>
-                </div>
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-lock"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Data Security</div>
+              <div class="feature-desc" contenteditable="true">Enterprise-grade security to protect your critical data.
               </div>
+            </div>
+          </div>
 
-              <!-- Product Categories -->
-              <div class="form-item full-width">
-                <label class="form-label">Product / Service Categories <span class="required-star">*</span></label>
-                <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -4px; margin-bottom: 6px;">
+          <div class="feature-item">
+            <div class="feature-icon-wrapper">
+              <i class="fa-solid fa-square-trend-up"></i>
+            </div>
+            <div class="feature-info">
+              <div class="feature-title" contenteditable="true">Grow Your Business</div>
+              <div class="feature-desc" contenteditable="true">Discover new opportunities and expand your network.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Support card footer -->
+      <div class="sidebar-bottom">
+        <div class="help-card">
+          <div class="help-title" contenteditable="true">Need Help?</div>
+          <div class="help-desc" contenteditable="true">Our support team is here to help you at every step.</div>
+          <div class="help-details">
+            <div class="help-detail-item">
+              <i class="fa-solid fa-phone"></i>
+              <span contenteditable="true">+91 20 2740 7170</span>
+            </div>
+            <div class="help-detail-item">
+              <i class="fa-solid fa-envelope"></i>
+              <span contenteditable="true">support@aashitaintelligence.com</span>
+            </div>
+            <div class="help-detail-item">
+              <i class="fa-solid fa-clock"></i>
+              <span contenteditable="true">Mon - Fri: 9:00 AM to 6:00 PM (IST)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== RIGHT CONTENT VIEWPORT ===== -->
+    <main class="main-content">
+      <!-- Top header links -->
+      <header class="top-header">
+        <span class="login-prompt" contenteditable="true">Already have an account?</span>
+        <button class="login-btn" onclick="alert('Redirecting to login...')">Login</button>
+      </header>
+
+      <!-- Wizard body view -->
+      <div class="wizard-viewport">
+        <!-- Title bar -->
+        <div class="onboarding-title-area">
+          <h2 class="onboarding-title" contenteditable="true">Create Your Aashita Intelligence Account</h2>
+          <p class="onboarding-subtitle" contenteditable="true">Complete your profile to start collaborating with the
+            right partners</p>
+        </div>
+
+        <!-- Horizontal Stepper Progress Timeline -->
+        <nav class="stepper-row">
+          <div class="stepper-line-bg">
+            <div class="stepper-line-progress" id="wizard-progress-bar"></div>
+          </div>
+
+          <div class="step-node active" id="step-node-1" onclick="navigateToStep(1)">
+            <div class="step-circle">1</div>
+            <div class="step-label" contenteditable="true">Intent & Host OEM</div>
+          </div>
+
+          <div class="step-node" id="step-node-2" onclick="navigateToStep(2)">
+            <div class="step-circle">2</div>
+            <div class="step-label" contenteditable="true">Organization Details</div>
+          </div>
+
+          <div class="step-node" id="step-node-3" onclick="navigateToStep(3)">
+            <div class="step-circle">3</div>
+            <div class="step-label" contenteditable="true">Business & Compliance</div>
+          </div>
+
+          <div class="step-node" id="step-node-4" onclick="navigateToStep(4)">
+            <div class="step-circle">4</div>
+            <div class="step-label" contenteditable="true">Contact Details</div>
+          </div>
+
+          <div class="step-node" id="step-node-5" onclick="navigateToStep(5)">
+            <div class="step-circle">5</div>
+            <div class="step-label" contenteditable="true">Documents</div>
+          </div>
+
+          <div class="step-node" id="step-node-6" onclick="navigateToStep(6)">
+            <div class="step-circle">6</div>
+            <div class="step-label" contenteditable="true">Review & Submit</div>
+          </div>
+        </nav>
+
+        <!-- WIZARD STEP VIEWS CONTAINER -->
+        <div class="wizard-forms-wrapper">
+
+          <!-- PHASE 1: Step 1, 2, 3 Grid (Default Active) -->
+          <div class="phase-content active form-grid-layout" id="onboarding-phase-1">
+
+            <!-- COLUMN 1: Intent & Account Choice -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Intent Select -->
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">What do you want to do on Aashita Intelligence?
+                </div>
+                <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;" contenteditable="true">
                   Select all that apply</div>
-                <div class="categories-input-wrapper">
-                  <div style="flex: 1;">
-                    <div class="select-dropdown-container" id="dropdown-categories" onclick="toggleCustomSelect(this)">
-                      <div class="select-trigger"><span class="placeholder">Select categories</span><i
-                          class="fa-solid fa-chevron-down"></i></div>
-                      <div class="select-menu-options">
-                        <div class="select-option" data-val="Casting">Aluminium Casting</div>
-                        <div class="select-option" data-val="Forging">Forging & Press</div>
-                        <div class="select-option" data-val="Machining">CNC Machining</div>
-                        <div class="select-option" data-val="SheetMetal">Sheet Metal Parts</div>
-                        <div class="select-option" data-val="Fasteners">Fasteners & Bolts</div>
+
+                <div class="intent-cards-wrapper">
+                  <!-- Buy intent card -->
+                  <div class="intent-card selected" id="intent-card-buy" onclick="toggleIntentCard('buy')">
+                    <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="intent-card-icon"><i class="fa-solid fa-cart-shopping"></i></div>
+                    <div class="intent-card-title" contenteditable="true">Buy<br><span
+                        style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Procurement)</span>
+                    </div>
+                    <p class="intent-card-desc" contenteditable="true">I want to buy products/services from suppliers
+                    </p>
+                  </div>
+                  <!-- Sell intent card -->
+                  <div class="intent-card selected" id="intent-card-sell" onclick="toggleIntentCard('sell')">
+                    <div class="intent-card-checkbox"><i class="fa-solid fa-check"></i></div>
+                    <div class="intent-card-icon"><i class="fa-solid fa-box-open"></i></div>
+                    <div class="intent-card-title" contenteditable="true">Sell<br><span
+                        style="font-weight: 500; font-size: 9px; color: var(--text-gray-muted);">(Supply)</span></div>
+                    <p class="intent-card-desc" contenteditable="true">I want to sell my products/services to buyers</p>
+                  </div>
+                </div>
+              </div>
+              <!-- About Bajaj Auto Ltd. Card -->
+              <div class="form-card company-about-card">
+                <div class="form-card-title" contenteditable="true">About Bajaj Auto Ltd.</div>
+                <div class="company-about-content">
+                  <div class="company-logo-badge"
+                    style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+                    <i class="fa-solid fa-building" style="color: var(--accent-blue); font-size: 20px;"></i>
+                    <div>
+                      <h4 style="font-size: 13px; font-weight: 700; color: var(--text-gray-dark);"
+                        contenteditable="true">Bajaj Auto Ltd.</h4>
+                      <span
+                        style="font-size: 9px; font-weight: 600; color: var(--accent-green); background: var(--accent-green-light); padding: 2px 6px; border-radius: 4px; text-transform: uppercase;"
+                        contenteditable="true">Host OEM</span>
+                    </div>
+                  </div>
+                  <p style="font-size: 11px; color: var(--text-gray-muted); line-height: 1.6; margin-bottom: 12px;"
+                    contenteditable="true">
+                    Bajaj Auto is a preeminent global manufacturer of two-wheelers and three-wheelers, trusted by
+                    millions of customers across 70+ countries.
+                  </p>
+                  <div class="company-stats-grid"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; background: #f8fafc; border: 1px solid var(--border-color); border-radius: 8px; padding: 10px;">
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;"
+                        contenteditable="true">Headquarters</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Pune,
+                        India</strong>
+                    </div>
+                    <div>
+                      <span style="font-size: 9px; color: var(--text-gray-muted); display: block;"
+                        contenteditable="true">Industry</span>
+                      <strong style="font-size: 10.5px; color: var(--text-gray-dark);" contenteditable="true">Automotive
+                        Mfg</strong>
+                    </div>
+                  </div>
+                  <div class="company-building-wrapper"
+                    style="width: 100%; height: 120px; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); margin-bottom: 12px; position: relative;">
+                    <img src="bajaj_building.png" alt="Bajaj Corporate Building"
+                      style="width: 100%; height: 100%; object-fit: cover;">
+                  </div>
+                  <div
+                    style="font-size: 10px; color: var(--text-gray-muted); line-height: 1.5; background: var(--accent-blue-light); border: 1px solid rgba(37, 99, 235, 0.15); border-radius: 8px; padding: 10px; display: flex; gap: 8px; align-items: flex-start;">
+                    <i class="fa-solid fa-circle-info" style="color: var(--accent-blue); margin-top: 2px;"></i>
+                    <span contenteditable="true">By registering, you are applying to join the Bajaj Auto Ltd. partner
+                      supply chain network. Your details will be submitted to the Bajaj Procurement team for
+                      review.</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 2: Organization Info details -->
+            <div class="form-card" id="org-details-form-section">
+              <div class="form-card-title" contenteditable="true">Organization Details</div>
+
+              <!-- Company Information Group -->
+              <div class="form-card-subtitle" contenteditable="true">Company Information</div>
+
+              <div class="form-group-row">
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Company / Organization Name <span
+                      class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-company-name" placeholder="Enter company name">
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Legal Entity Type <span
+                      class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-legal-entity" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select entity type</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="PVT_LTD">Private Limited</div>
+                      <div class="select-option" data-val="PUBLIC_LTD">Public Limited</div>
+                      <div class="select-option" data-val="PARTNERSHIP">Partnership</div>
+                      <div class="select-option" data-val="LLP">LLP</div>
+                      <div class="select-option" data-val="PROPRIETORSHIP">Sole Proprietorship</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Country <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-country" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span>India</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option selected" data-val="IN">India</div>
+                      <div class="select-option" data-val="US">United States</div>
+                      <div class="select-option" data-val="DE">Germany</div>
+                      <div class="select-option" data-val="JP">Japan</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">State <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-state" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select state</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="MH">Maharashtra</div>
+                      <div class="select-option" data-val="DL">Delhi</div>
+                      <div class="select-option" data-val="KA">Karnataka</div>
+                      <div class="select-option" data-val="TN">Tamil Nadu</div>
+                      <div class="select-option" data-val="GJ">Gujarat</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">City <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-city" placeholder="Enter city">
+                </div>
+              </div>
+
+              <!-- Business Identifiers -->
+              <div class="form-card-subtitle" contenteditable="true">Business Identifiers</div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">GSTIN <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-gstin" placeholder="22AAAAA0000A1Z5">
+                  <span class="input-desc" contenteditable="true">Enter 15-digit GSTIN</span>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">PAN Number <span
+                      class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-pan" placeholder="AAAAA0000A">
+                  <span class="input-desc" contenteditable="true">Enter 10-digit PAN</span>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Udyam Registration Number (MSME)</label>
+                  <input type="text" class="form-input" id="input-udyam" placeholder="UDYAM-MH-20-0001234">
+                  <span class="input-desc" contenteditable="true">If applicable</span>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">MSME Classification</label>
+                  <div class="select-dropdown-container" id="dropdown-msme" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select classification</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="MICRO">Micro</div>
+                      <div class="select-option" data-val="SMALL">Small</div>
+                      <div class="select-option" data-val="MEDIUM">Medium</div>
+                      <div class="select-option" data-val="NONE">Not Applicable</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Industry Type <span
+                      class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-industry" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select industry</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="AUTO">Automotive</div>
+                      <div class="select-option" data-val="AERO">Aerospace</div>
+                      <div class="select-option" data-val="ELEC">Electronics</div>
+                      <div class="select-option" data-val="MACH">Machinery & Tooling</div>
+                      <div class="select-option" data-val="METALS">Metals & Castings</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Company Website</label>
+                  <input type="text" class="form-input" id="input-website" placeholder="https://www.company.com">
+                </div>
+              </div>
+
+              <!-- Address details -->
+              <div class="form-card-subtitle" contenteditable="true">Business Address</div>
+
+              <div class="form-group-row">
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Registered Address <span
+                      class="required-star">*</span></label>
+                  <textarea class="form-textarea" id="input-address"
+                    placeholder="Enter complete registered address"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group-row">
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Pin Code <span class="required-star">*</span></label>
+                  <input type="text" class="form-input" id="input-pincode" placeholder="Enter pin code">
+                </div>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">Address Proof <span
+                      class="required-star">*</span></label>
+                  <div class="upload-box-area" onclick="triggerFileInput('file-address-proof')">
+                    <input type="file" id="file-address-proof" style="display: none;"
+                      onchange="handleFileSelect(this, 'uploaded-address-proof')">
+                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                    <span class="upload-title" contenteditable="true">Upload Address Proof</span>
+                    <span class="upload-desc" contenteditable="true">PDF, JPG, PNG (Max 5MB)</span>
+                  </div>
+                  <!-- Uploaded state -->
+                  <div class="file-uploaded-state" id="uploaded-address-proof">
+                    <div class="file-uploaded-info">
+                      <i class="fa-solid fa-circle-check"></i>
+                      <span class="file-name-span">address_proof.pdf</span>
+                    </div>
+                    <span class="remove-file-btn"
+                      onclick="removeUploadedFile('file-address-proof', 'uploaded-address-proof')">Remove</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- COLUMN 3: Turnovers, categories, options -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <!-- Business Preferences Preferences -->
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">Business Preferences</div>
+
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">What do you primarily want to?</label>
+                  <div class="preference-checkbox-list">
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy finished goods / components</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy raw materials</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Buy services</span>
+                    </div>
+                    <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell finished goods / components</span>
+                    </div>
+                    <div class="checkbox-item-row checked" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell raw materials</span>
+                    </div>
+                    <div class="checkbox-item-row" onclick="toggleCheckboxItem(this)">
+                      <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                      <span class="checkbox-label" contenteditable="true">Sell services</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product Categories -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Product / Service Categories <span
+                      class="required-star">*</span></label>
+                  <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -4px; margin-bottom: 6px;"
+                    contenteditable="true">Select all that apply</div>
+                  <div class="categories-input-wrapper">
+                    <div style="flex: 1;">
+                      <div class="select-dropdown-container" id="dropdown-categories"
+                        onclick="toggleCustomSelect(this)">
+                        <div class="select-trigger"><span class="placeholder">Select categories</span><i
+                            class="fa-solid fa-chevron-down"></i></div>
+                        <div class="select-menu-options">
+                          <div class="select-option" data-val="Casting">Aluminium Casting</div>
+                          <div class="select-option" data-val="Forging">Forging & Press</div>
+                          <div class="select-option" data-val="Machining">CNC Machining</div>
+                          <div class="select-option" data-val="SheetMetal">Sheet Metal Parts</div>
+                          <div class="select-option" data-val="Fasteners">Fasteners & Bolts</div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="add-category-btn" onclick="addSelectedCategoryTag()"><i
+                        class="fa-solid fa-plus"></i></button>
+                  </div>
+                  <!-- Category Pills -->
+                  <div class="categories-pills-container" id="categories-pillbox">
+                    <div class="category-pill" data-val="Casting">
+                      <span>Aluminium Casting</span>
+                      <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
+                    </div>
+                    <div class="category-pill" data-val="Machining">
+                      <span>CNC Machining</span>
+                      <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Annual turnover -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Annual Turnover (Approx.) <span
+                      class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-turnover" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select turnover range</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U1C">Under ₹1 Crore</div>
+                      <div class="select-option" data-val="1C5C">₹1 Crore - ₹5 Crores</div>
+                      <div class="select-option" data-val="5C20C">₹5 Crores - ₹20 Crores</div>
+                      <div class="select-option" data-val="20C100C">₹20 Crores - ₹100 Crores</div>
+                      <div class="select-option" data-val="O100C">Above ₹100 Crores</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Number of employees -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Number of Employees</label>
+                  <div class="select-dropdown-container" id="dropdown-employees" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select range</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U20">1 - 20</div>
+                      <div class="select-option" data-val="20_100">21 - 100</div>
+                      <div class="select-option" data-val="100_500">101 - 500</div>
+                      <div class="select-option" data-val="O500">500+</div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Years in business -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Years in Business <span
+                      class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-years" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select range</span><i
+                        class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U3">Less than 3 years</div>
+                      <div class="select-option" data-val="3_10">3 - 10 years</div>
+                      <div class="select-option" data-val="O10">More than 10 years</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Info banner at bottom -->
+              <div class="helper-card-banner security-banner">
+                <i class="fa-solid fa-shield-halved"></i>
+                <div>
+                  <strong style="display: block; margin-bottom: 2px;" contenteditable="true">Your information is
+                    secure</strong>
+                  <span contenteditable="true">All data is encrypted and protected. We never share your information with
+                    third parties without consent.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- PHASE 2: Step 4, 5, 6 Grid (Hidden by Default) -->
+          <div class="phase-content form-grid-layout" id="onboarding-phase-2">
+
+            <!-- COLUMN 1: Contact Details -->
+            <div class="form-card">
+              <div class="form-card-title" contenteditable="true">Contact Details</div>
+
+              <div class="contact-card-list" id="contact-list-box">
+                <!-- Primary Contact -->
+                <div class="contact-item-box">
+                  <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;" contenteditable="true">
+                    Primary Contact (Admin)</div>
+                  <div style="display: flex; flex-direction: column; gap: 14px;">
+                    <div class="form-item">
+                      <label class="form-label" contenteditable="true">Full Name <span
+                          class="required-star">*</span></label>
+                      <input type="text" class="form-input input-contact-name" placeholder="Enter contact name">
+                    </div>
+                    <div class="form-item">
+                      <label class="form-label" contenteditable="true">Designation / Role <span
+                          class="required-star">*</span></label>
+                      <input type="text" class="form-input" placeholder="e.g. Sales Manager">
+                    </div>
+                    <div class="form-group-row">
+                      <div class="form-item">
+                        <label class="form-label" contenteditable="true">Email Address <span
+                            class="required-star">*</span></label>
+                        <input type="email" class="form-input" placeholder="name@company.com">
+                      </div>
+                      <div class="form-item">
+                        <label class="form-label" contenteditable="true">Phone Number <span
+                            class="required-star">*</span></label>
+                        <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX">
                       </div>
                     </div>
                   </div>
-                  <button class="add-category-btn" onclick="addSelectedCategoryTag()"><i
-                      class="fa-solid fa-plus"></i></button>
-                </div>
-                <!-- Category Pills -->
-                <div class="categories-pills-container" id="categories-pillbox">
-                  <div class="category-pill" data-val="Casting">
-                    <span>Aluminium Casting</span>
-                    <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
-                  </div>
-                  <div class="category-pill" data-val="Machining">
-                    <span>CNC Machining</span>
-                    <i class="fa-solid fa-xmark" onclick="removeCategoryTag(this)"></i>
-                  </div>
                 </div>
               </div>
 
-              <!-- Annual turnover -->
-              <div class="form-item full-width">
-                <label class="form-label">Annual Turnover (Approx.) <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-turnover" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select turnover range</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="U1C">Under ₹1 Crore</div>
-                    <div class="select-option" data-val="1C5C">₹1 Crore - ₹5 Crores</div>
-                    <div class="select-option" data-val="5C20C">₹5 Crores - ₹20 Crores</div>
-                    <div class="select-option" data-val="20C100C">₹20 Crores - ₹100 Crores</div>
-                    <div class="select-option" data-val="O100C">Above ₹100 Crores</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Number of employees -->
-              <div class="form-item full-width">
-                <label class="form-label">Number of Employees</label>
-                <div class="select-dropdown-container" id="dropdown-employees" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select range</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="U20">1 - 20</div>
-                    <div class="select-option" data-val="20_100">21 - 100</div>
-                    <div class="select-option" data-val="100_500">101 - 500</div>
-                    <div class="select-option" data-val="O500">500+</div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Years in business -->
-              <div class="form-item full-width">
-                <label class="form-label">Years in Business <span class="required-star">*</span></label>
-                <div class="select-dropdown-container" id="dropdown-years" onclick="toggleCustomSelect(this)">
-                  <div class="select-trigger"><span class="placeholder">Select range</span><i
-                      class="fa-solid fa-chevron-down"></i></div>
-                  <div class="select-menu-options">
-                    <div class="select-option" data-val="U3">Less than 3 years</div>
-                    <div class="select-option" data-val="3_10">3 - 10 years</div>
-                    <div class="select-option" data-val="O10">More than 10 years</div>
-                  </div>
-                </div>
-              </div>
+              <!-- Add contact button -->
+              <button class="add-contact-btn" onclick="addNewContactCard()"><i class="fa-solid fa-plus"></i> Add Another
+                Contact</button>
             </div>
 
-            <!-- Security Info banner at bottom -->
-            <div class="helper-card-banner security-banner">
-              <i class="fa-solid fa-shield-halved"></i>
-              <div>
-                <strong style="display: block; margin-bottom: 2px;">Your information is secure</strong>
-                <span>All data is encrypted and protected. We never share your information with third parties without
-                  consent.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- PHASE 2: Step 4, 5, 6 Grid (Hidden by Default) -->
-        <div class="phase-content form-grid-layout two-col-layout" id="onboarding-phase-2">
-
-          <!-- COLUMN 1: Contact Details -->
-          <div class="form-card">
-            <div class="form-card-title">Contact Details</div>
-
-            <div class="contact-card-list" id="contact-list-box">
-              <!-- Primary Contact -->
-              <div class="contact-item-box">
-                <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;">Primary Contact (Admin)
-                </div>
-                <div style="display: flex; flex-direction: column; gap: 14px;">
-                  <div class="form-item">
-                    <label class="form-label">Full Name <span class="required-star">*</span></label>
-                    <input type="text" class="form-input input-contact-name" placeholder="Enter contact name">
-                  </div>
-                  <div class="form-item">
-                    <label class="form-label">Designation / Role <span class="required-star">*</span></label>
-                    <input type="text" class="form-input" placeholder="e.g. Sales Manager">
-                  </div>
-                  <div class="form-group-row">
-                    <div class="form-item">
-                      <label class="form-label">Email Address <span class="required-star">*</span></label>
-                      <input type="email" class="form-input" placeholder="name@company.com">
-                    </div>
-                    <div class="form-item">
-                      <label class="form-label">Phone Number <span class="required-star">*</span></label>
-                      <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX">
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Add contact button -->
-            <button class="add-contact-btn" onclick="addNewContactCard()"><i class="fa-solid fa-plus"></i> Add Another
-              Contact</button>
-          </div>
-
-          <!-- COLUMN 2: Review & Submit Summary details -->
-          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- COLUMN 2: Documents Upload Checklist -->
             <div class="form-card">
-              <div class="form-card-title">Review Summary</div>
+              <div class="form-card-title" contenteditable="true">Business Documents</div>
+              <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;" contenteditable="true">
+                Upload verified copies of compliance files</div>
 
-              <div class="summary-card-group">
-                <!-- Company card -->
-                <div class="summary-item-card">
-                  <div class="summary-card-header">
-                    <span>ORGANIZATION INFO</span>
-                    <span class="edit-summary-link" onclick="navigateToStep(2)">EDIT</span>
+              <div class="document-upload-grid">
+                <!-- GST Copy -->
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">GST Registration Copy <span
+                      class="required-star">*</span></label>
+                  <div class="upload-box-area" onclick="triggerFileInput('file-gst')">
+                    <input type="file" id="file-gst" style="display: none;"
+                      onchange="handleFileSelect(this, 'uploaded-gst')">
+                    <i class="fa-solid fa-file-pdf upload-icon"></i>
+                    <span class="upload-title" contenteditable="true">Upload GST Certificate</span>
+                    <span class="upload-desc" contenteditable="true">PDF (Max 5MB)</span>
                   </div>
-                  <div class="summary-card-body">
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">Name:</span>
-                      <span class="summary-field-value" id="summary-org-name">--</span>
+                  <div class="file-uploaded-state" id="uploaded-gst">
+                    <div class="file-uploaded-info">
+                      <i class="fa-solid fa-circle-check"></i>
+                      <span class="file-name-span">gst_certificate.pdf</span>
                     </div>
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">GSTIN:</span>
-                      <span class="summary-field-value" id="summary-org-gstin">--</span>
-                    </div>
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">Type:</span>
-                      <span class="summary-field-value" id="summary-org-type">--</span>
-                    </div>
+                    <span class="remove-file-btn" onclick="removeUploadedFile('file-gst', 'uploaded-gst')">Remove</span>
                   </div>
                 </div>
 
-                <!-- Preferences card -->
-                <div class="summary-item-card">
-                  <div class="summary-card-header">
-                    <span>PREFERENCES & DETAILS</span>
-                    <span class="edit-summary-link" onclick="navigateToStep(3)">EDIT</span>
+                <!-- PAN Card Copy -->
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">PAN Card Copy <span
+                      class="required-star">*</span></label>
+                  <div class="upload-box-area" onclick="triggerFileInput('file-pan')">
+                    <input type="file" id="file-pan" style="display: none;"
+                      onchange="handleFileSelect(this, 'uploaded-pan')">
+                    <i class="fa-solid fa-file-pdf upload-icon"></i>
+                    <span class="upload-title" contenteditable="true">Upload PAN Copy</span>
+                    <span class="upload-desc" contenteditable="true">PDF or JPEG (Max 5MB)</span>
                   </div>
-                  <div class="summary-card-body">
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">Categories:</span>
-                      <span class="summary-field-value" id="summary-org-categories">--</span>
+                  <div class="file-uploaded-state" id="uploaded-pan">
+                    <div class="file-uploaded-info">
+                      <i class="fa-solid fa-circle-check"></i>
+                      <span class="file-name-span">pan_card_copy.jpg</span>
                     </div>
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">Turnover:</span>
-                      <span class="summary-field-value" id="summary-org-turnover">--</span>
-                    </div>
+                    <span class="remove-file-btn" onclick="removeUploadedFile('file-pan', 'uploaded-pan')">Remove</span>
                   </div>
                 </div>
 
-                <!-- Contacts card -->
-                <div class="summary-item-card">
-                  <div class="summary-card-header">
-                    <span>CONTACT PERSON</span>
-                    <span class="edit-summary-link" onclick="navigateToStep(4)">EDIT</span>
+                <!-- MSME Certificate -->
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">MSME Udyam Registration (Optional)</label>
+                  <div class="upload-box-area" onclick="triggerFileInput('file-msme')">
+                    <input type="file" id="file-msme" style="display: none;"
+                      onchange="handleFileSelect(this, 'uploaded-msme')">
+                    <i class="fa-solid fa-file-pdf upload-icon"></i>
+                    <span class="upload-title" contenteditable="true">Upload Udyam Certificate</span>
+                    <span class="upload-desc" contenteditable="true">PDF (Max 5MB)</span>
                   </div>
-                  <div class="summary-card-body">
-                    <div class="summary-field-row">
-                      <span class="summary-field-label">Primary Admin:</span>
-                      <span class="summary-field-value" id="summary-org-contact">--</span>
+                  <div class="file-uploaded-state" id="uploaded-msme">
+                    <div class="file-uploaded-info">
+                      <i class="fa-solid fa-circle-check"></i>
+                      <span class="file-name-span">msme_udyam_cert.pdf</span>
                     </div>
+                    <span class="remove-file-btn"
+                      onclick="removeUploadedFile('file-msme', 'uploaded-msme')">Remove</span>
                   </div>
-                </div>
-              </div>
-
-              <!-- Declarative checklist -->
-              <div style="margin-top: 10px;">
-                <div class="checkbox-item-row" id="declaration-agree-check" onclick="toggleCheckboxItem(this)">
-                  <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
-                  <span class="checkbox-label" style="font-size: 10.5px; line-height: 1.4;">I hereby declare that all
-                    provided details are authentic.</span>
                 </div>
               </div>
             </div>
 
-            <!-- Security Info banner at bottom -->
-            <div class="helper-card-banner security-banner">
-              <i class="fa-solid fa-circle-check"></i>
-              <div>
-                <strong style="display: block; margin-bottom: 2px;">Ready for submission</strong>
-                <span>Once submitted, our team will verify your compliance records within 24 business hours.</span>
+            <!-- COLUMN 3: Review & Submit Summary details -->
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <div class="form-card">
+                <div class="form-card-title" contenteditable="true">Review Summary</div>
+
+                <div class="summary-card-group">
+                  <!-- Company card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">ORGANIZATION INFO</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(2)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Name:</span>
+                        <span class="summary-field-value" id="summary-org-name">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">GSTIN:</span>
+                        <span class="summary-field-value" id="summary-org-gstin">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Type:</span>
+                        <span class="summary-field-value" id="summary-org-type">--</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Preferences card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">PREFERENCES & DETAILS</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(3)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Categories:</span>
+                        <span class="summary-field-value" id="summary-org-categories">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Turnover:</span>
+                        <span class="summary-field-value" id="summary-org-turnover">--</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Contacts card -->
+                  <div class="summary-item-card">
+                    <div class="summary-card-header">
+                      <span contenteditable="true">CONTACT PERSON</span>
+                      <span class="edit-summary-link" onclick="navigateToStep(4)">EDIT</span>
+                    </div>
+                    <div class="summary-card-body">
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Primary Admin:</span>
+                        <span class="summary-field-value" id="summary-org-contact">--</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Declarative checklist -->
+                <div style="margin-top: 10px;">
+                  <div class="checkbox-item-row" id="declaration-agree-check" onclick="toggleCheckboxItem(this)">
+                    <div class="checkbox-box"><i class="fa-solid fa-check"></i></div>
+                    <span class="checkbox-label" style="font-size: 10.5px; line-height: 1.4;" contenteditable="true">I
+                      hereby declare that all provided details and documents are authentic.</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Security Info banner at bottom -->
+              <div class="helper-card-banner security-banner">
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                  <strong style="display: block; margin-bottom: 2px;" contenteditable="true">Ready for
+                    submission</strong>
+                  <span contenteditable="true">Once submitted, our team will verify your compliance records within 24
+                    business hours.</span>
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- STICKY BOTTOM ACTIONS BAR -->
-    <footer class="bottom-actions-bar">
-      <button class="cancel-btn" onclick="alert('Registration cancelled.')">Cancel</button>
-      <div class="action-right-buttons">
-        <button class="back-btn" id="btn-wizard-back" onclick="navigateBackPhase()"><i
-            class="fa-solid fa-arrow-left"></i> Back</button>
-        <button class="save-continue-btn" id="btn-wizard-continue" onclick="navigateContinuePhase()">Save & Continue
-          <i class="fa-solid fa-arrow-right"></i></button>
-      </div>
-    </footer>
-  </main>
+      <!-- STICKY BOTTOM ACTIONS BAR -->
+      <footer class="bottom-actions-bar">
+        <button class="cancel-btn" onclick="alert('Registration cancelled.')">Cancel</button>
+        <div class="action-right-buttons">
+          <button class="back-btn" id="btn-wizard-back" onclick="navigateBackPhase()"><i
+              class="fa-solid fa-arrow-left"></i> Back</button>
+          <button class="save-continue-btn" id="btn-wizard-continue" onclick="navigateContinuePhase()">Save & Continue
+            <i class="fa-solid fa-arrow-right"></i></button>
+        </div>
+      </footer>
+    </main>
 
   </div>
 
@@ -1999,9 +2016,9 @@
       <div class="modal-icon-circle">
         <i class="fa-solid fa-circle-check"></i>
       </div>
-      <h3 class="modal-title">Onboarding Application Submitted!</h3>
-      <p class="modal-desc">Thank you for registering. Your details are now under verification by the compliance team.
-        You will receive an email confirmation shortly.</p>
+      <h3 class="modal-title" contenteditable="true">Onboarding Application Submitted!</h3>
+      <p class="modal-desc" contenteditable="true">Thank you for registering. Your details are now under verification by
+        the compliance team. You will receive an email confirmation shortly.</p>
       <button class="modal-close-btn" onclick="closeSuccessModalAndRedirect()">Go to Platform Overview</button>
     </div>
   </div>
@@ -2010,7 +2027,7 @@
   <script>
     // Global State management
     let activeStep = 1;
-    const maxSteps = 5;
+    const maxSteps = 6;
 
     // Initializer
     window.addEventListener('DOMContentLoaded', () => {
@@ -2044,21 +2061,6 @@
     // Toggle Selection Checkboxes
     function toggleCheckboxItem(element) {
       element.classList.toggle('checked');
-    }
-
-    // Business authentication toggle (Organization Info step)
-    function toggleBusinessAuth(element) {
-      const isOn = element.classList.toggle('authenticated');
-      const label = document.getElementById('business-auth-label');
-      const desc = document.getElementById('business-auth-desc');
-
-      if (isOn) {
-        label.textContent = 'Business Authentication Successful';
-        desc.textContent = 'GSTIN, PAN & Udyam records verified';
-      } else {
-        label.textContent = 'Authenticate business details';
-        desc.textContent = 'Turn on to verify GSTIN, PAN & Udyam records';
-      }
     }
 
     // Custom select dropdown overlay toggler
@@ -2189,23 +2191,23 @@
       card.className = 'contact-item-box';
       card.innerHTML = `
         <i class="fa-solid fa-trash remove-contact-box" onclick="removeContactCard(this)"></i>
-        <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;">Additional Contact #${boxCount}</div>
+        <div class="form-card-subtitle" style="margin-top: 0; margin-bottom: 12px;" contenteditable="true">Additional Contact #${boxCount}</div>
         <div style="display: flex; flex-direction: column; gap: 14px;">
           <div class="form-item">
-            <label class="form-label">Full Name <span class="required-star">*</span></label>
+            <label class="form-label" contenteditable="true">Full Name <span class="required-star">*</span></label>
             <input type="text" class="form-input" placeholder="Enter contact name">
           </div>
           <div class="form-item">
-            <label class="form-label">Designation / Role <span class="required-star">*</span></label>
+            <label class="form-label" contenteditable="true">Designation / Role <span class="required-star">*</span></label>
             <input type="text" class="form-input" placeholder="e.g. Quality Engineer">
           </div>
           <div class="form-group-row">
             <div class="form-item">
-              <label class="form-label">Email Address <span class="required-star">*</span></label>
+              <label class="form-label" contenteditable="true">Email Address <span class="required-star">*</span></label>
               <input type="email" class="form-input" placeholder="name@company.com">
             </div>
             <div class="form-item">
-              <label class="form-label">Phone Number <span class="required-star">*</span></label>
+              <label class="form-label" contenteditable="true">Phone Number <span class="required-star">*</span></label>
               <input type="text" class="form-input" placeholder="+91 XXXXX XXXXX">
             </div>
           </div>
@@ -2276,15 +2278,15 @@
 
         btnBack.classList.add('visible');
 
-        if (step === 5) {
+        if (step === 6) {
           btnContinue.innerHTML = 'Submit Registration <i class="fa-solid fa-circle-check"></i>';
         } else {
           btnContinue.innerHTML = 'Save & Continue <i class="fa-solid fa-arrow-right"></i>';
         }
       }
 
-      // Update review summary when opening the final step
-      if (step === 5) {
+      // Update review summary when opening step 6
+      if (step === 6) {
         updateReviewSummary();
       }
     }
@@ -2308,7 +2310,7 @@
 
     // Continue Phase logic (Save & Continue button click)
     function navigateContinuePhase() {
-      if (activeStep < 5) {
+      if (activeStep < 6) {
         // Save state values, move to next logical step / phase
         if (activeStep <= 3) {
           navigateToStep(4);
@@ -2316,15 +2318,15 @@
           navigateToStep(activeStep + 1);
         }
       } else {
-        // Final step: Validate declaration check before final submission
+        // Step 6: Validate declaration check before final submission
         const agreeCheck = document.getElementById('declaration-agree-check');
         if (!agreeCheck.classList.contains('checked')) {
           alert('Please declare that all details are authentic by checking the declaration statement.');
           return;
         }
 
-        // Registration submitted -> go to the REQ-250801 Workspace (supply link) page
-        window.location.href = 'supplylink.html';
+        // Show success modal
+        document.getElementById('success-submit-modal').classList.add('active');
       }
     }
 
