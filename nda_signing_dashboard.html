@@ -2884,9 +2884,26 @@
 
     // Retract Signature Logic
     function retractSignature(party) {
-      if (party === 'bajaj') {
-        if (confirm("Are you sure you want to retract the signature of Bajaj Auto Limited? This will revert the document to a pending state.")) {
-          currentSignState = 1; // back to Aashita signed
+      if (party === 'aashita') {
+        if (confirm("Are you sure you want to retract the signature of Aashita Enterprises? This will revert the document to a pending state.")) {
+          currentSignState = 1; // back to Bajaj signed, Aashita active
+          
+          // Reset signature inputs/elements
+          document.getElementById("aashita-val-name").innerText = "";
+          document.getElementById("aashita-val-des").innerText = "";
+          document.getElementById("aashita-val-date").innerText = "";
+          
+          applyStateUI();
+          saveState();
+          showToast("Aashita Enterprises signature has been retracted.");
+        }
+      } else if (party === 'bajaj') {
+        if (currentSignState === 2) {
+          alert("Please retract Aashita Enterprises's signature first before retracting Bajaj's signature.");
+          return;
+        }
+        if (confirm("Are you sure you want to retract the signature of Bajaj Auto Limited?")) {
+          currentSignState = 0; // back to initial
           
           // Reset signature inputs/elements
           document.getElementById("bajaj-val-name").innerText = "";
@@ -2898,23 +2915,6 @@
           applyStateUI();
           saveState();
           showToast("Bajaj Auto Limited signature has been retracted.");
-        }
-      } else if (party === 'aashita') {
-        if (currentSignState === 2) {
-          alert("Please retract Bajaj Auto Limited's signature first before retracting Aashita's signature.");
-          return;
-        }
-        if (confirm("Are you sure you want to retract the signature of Aashita Enterprises?")) {
-          currentSignState = 0; // back to initial
-          
-          // Reset signature inputs/elements
-          document.getElementById("aashita-val-name").innerText = "";
-          document.getElementById("aashita-val-des").innerText = "";
-          document.getElementById("aashita-val-date").innerText = "";
-          
-          applyStateUI();
-          saveState();
-          showToast("Aashita Enterprises signature has been retracted.");
         }
       }
     }
