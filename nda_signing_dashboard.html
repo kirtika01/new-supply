@@ -1684,11 +1684,11 @@
           </div>
           <div class="t-line checked" id="line-h-2"></div>
 
-          <div class="t-step checked" id="step-h-3">
-            <div class="t-step-circle"><i class="fa-solid fa-check"></i></div>
+          <div class="t-step" id="step-h-3">
+            <div class="t-step-circle">3</div>
             <span>Stamp Duty</span>
           </div>
-          <div class="t-line checked" id="line-h-3"></div>
+          <div class="t-line" id="line-h-3"></div>
 
           <div class="t-step active" id="step-h-4">
             <div class="t-step-circle" id="circle-h-4">4</div>
@@ -1783,8 +1783,17 @@
                       <div class="sig-column" id="aashita-sig-col">
                         <div class="sig-party-title">For Aashita Enterprises</div>
 
+                        <!-- Payment state (Locked) -->
+                        <div class="sig-awaiting-box" id="aashita-payment-sig" style="border-color: #cbd5e1; background: #fafafa; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 120px; gap: 8px;">
+                          <i class="fa-solid fa-credit-card" style="font-size: 20px; color: var(--accent-blue);"></i>
+                          <div class="sig-awaiting-text" style="color: #475569; font-weight: 700; font-size: 11.5px; text-align: center;">Stamp Duty Payment Pending</div>
+                          <button class="btn-primary" onclick="openPaymentModal()" style="padding: 6px 14px; font-size: 10.5px; display: flex; align-items: center; gap: 6px; border-radius: 6px; cursor: pointer; font-weight: 600;">
+                            <i class="fa-solid fa-wallet"></i> Pay Stamp Duty (₹500)
+                          </button>
+                        </div>
+
                         <!-- Initial state is Awaiting, updates to Signed -->
-                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
+                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()" style="display: none;">
                           <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
                           <div class="sig-awaiting-text">eSign using Aadhaar</div>
                         </div>
@@ -1878,12 +1887,12 @@
                   </div>
                 </div>
 
-                <div class="wf-item checked" id="wf-3">
-                  <div class="wf-dot"><i class="fa-solid fa-check"></i></div>
+                <div class="wf-item" id="wf-3">
+                  <div class="wf-dot" id="dot-wf-3"><i class="fa-solid fa-wallet" style="font-size: 11px;"></i></div>
                   <div class="wf-content">
                     <div class="wf-name">Stamp Duty Applied</div>
-                    <div class="wf-meta">₹500 e-Stamp (Rajasthan)</div>
-                    <div class="wf-time">08 May 2026, 12:05 PM</div>
+                    <div class="wf-meta" id="meta-wf-3">Payment Pending (₹500)</div>
+                    <div class="wf-time" id="time-wf-3">Awaiting Payment</div>
                   </div>
                 </div>
 
@@ -2253,6 +2262,86 @@
     </div>
   </div>
 
+  <!-- Modal 5: Stamp Duty Payment Modal -->
+  <div class="modal-overlay" id="paymentModal">
+    <div class="modal-content" style="max-width: 480px; padding: 24px;">
+      <div class="modal-header" style="border-bottom: 1px solid #f1f5f9; padding-bottom: 12px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center;">
+        <h3 style="font-size: 16px; font-weight: 800; color: #0f172a; display: flex; align-items: center; gap: 8px; margin: 0;">
+          <i class="fa-solid fa-shield-halved" style="color: var(--accent-blue);"></i> Secure Stamp Duty Payment
+        </h3>
+        <div class="modal-close-btn" onclick="closeModal('paymentModal')" style="cursor: pointer; padding: 4px;">
+          <i class="fa-solid fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body" style="display: flex; flex-direction: column; gap: 16px;">
+        <!-- Payment details summary -->
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 16px; display: flex; flex-direction: column; gap: 10px;">
+          <div style="display: flex; justify-content: space-between; font-size: 12px;">
+            <span style="color: #64748b;">Document Ref:</span>
+            <strong style="color: #0f172a;">NDA #AAS-2026-00421</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 12px;">
+            <span style="color: #64748b;">State:</span>
+            <strong style="color: #0f172a;">Rajasthan</strong>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-size: 12px; border-top: 1px dashed #cbd5e1; padding-top: 10px; margin-top: 4px;">
+            <span style="color: #0f172a; font-weight: 700;">Total Amount:</span>
+            <strong style="color: #2563eb; font-size: 14px; font-weight: 800;">₹500.00</strong>
+          </div>
+        </div>
+
+        <!-- Payment methods -->
+        <div>
+          <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 8px;">Select Payment Method</label>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div id="pay-upi" onclick="selectPaymentMethod('upi')" style="border: 2px solid var(--accent-blue); background: var(--accent-blue-light); border-radius: 8px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; text-align: center; transition: all 0.2s;">
+              <i class="fa-solid fa-mobile-screen-button" style="font-size: 20px; color: var(--accent-blue);"></i>
+              <span style="font-size: 11px; font-weight: 700; color: #0f172a;">UPI / QR Code</span>
+            </div>
+            <div id="pay-card" onclick="selectPaymentMethod('card')" style="border: 1px solid #cbd5e1; background: #ffffff; border-radius: 8px; padding: 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; text-align: center; transition: all 0.2s;">
+              <i class="fa-solid fa-credit-card" style="font-size: 20px; color: #64748b;"></i>
+              <span style="font-size: 11px; font-weight: 700; color: #475569;">Credit / Debit Card</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- UPI details input -->
+        <div id="upi-input-container" style="display: block;">
+          <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Enter UPI ID</label>
+          <input type="text" placeholder="username@upi" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;" value="jasneek@okhdfcbank">
+        </div>
+
+        <!-- Card details input (hidden by default) -->
+        <div id="card-input-container" style="display: none; flex-direction: column; gap: 10px;">
+          <div>
+            <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Card Number</label>
+            <input type="text" placeholder="4532 7182 9182 3122" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+            <div>
+              <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">Expiry</label>
+              <input type="text" placeholder="12/29" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
+            </div>
+            <div>
+              <label style="font-size: 11px; font-weight: 700; color: #475569; display: block; margin-bottom: 6px;">CVV</label>
+              <input type="password" placeholder="***" value="123" style="width: 100%; padding: 10px; border: 1px solid #cbd5e1; border-radius: 6px; font-size: 12px; outline: none;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Processing message -->
+        <div id="payment-loader" style="display: none; flex-direction: column; align-items: center; gap: 10px; padding: 10px 0;">
+          <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 24px; color: var(--accent-blue);"></i>
+          <span style="font-size: 12px; font-weight: 600; color: #475569;">Verifying transaction... Please wait</span>
+        </div>
+      </div>
+      <div class="modal-footer" style="border-top: 1px solid #f1f5f9; padding-top: 16px; margin-top: 16px; display: flex; justify-content: flex-end; gap: 8px;">
+        <button class="btn-outline" style="border: none; cursor: pointer;" onclick="closeModal('paymentModal')">Cancel</button>
+        <button class="btn-primary" id="btn-submit-payment" onclick="processPaymentSim()" style="padding: 10px 20px; font-weight: 700; cursor: pointer;">Proceed to Pay</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification elements -->
   <div class="toast-container" id="toast-box"></div>
 
@@ -2265,6 +2354,7 @@
     // 2: Fully Executed (Both signed, execution complete)
     let currentSignState = 0;
     let selectedSignatureType = 'type'; // 'type' or 'draw'
+    let isStampDutyPaid = false; // default stamp duty payment status
 
     // Canvas drawing variables
     let canvas, ctx;
@@ -2280,6 +2370,7 @@
     // Save/Restore State using LocalStorage
     function saveState() {
       localStorage.setItem("nda_signing_state", currentSignState);
+      localStorage.setItem("stamp_duty_paid", isStampDutyPaid ? "true" : "false");
       localStorage.setItem("aashita_sig_data", JSON.stringify({
         name: document.getElementById("aashita-val-name").innerText,
         des: document.getElementById("aashita-val-des").innerText,
@@ -2296,6 +2387,14 @@
 
     function loadState() {
       const savedState = localStorage.getItem("nda_signing_state");
+      const savedPayment = localStorage.getItem("stamp_duty_paid");
+      
+      if (savedPayment !== null) {
+        isStampDutyPaid = (savedPayment === "true");
+      } else {
+        isStampDutyPaid = false;
+      }
+
       if (savedState !== null) {
         currentSignState = parseInt(savedState);
 
@@ -2323,6 +2422,7 @@
       localStorage.clear();
       currentSignState = 0;
       selectedSignatureType = 'type';
+      isStampDutyPaid = false;
       
       // Default timestamps
       document.getElementById("aashita-val-name").innerText = "Jasneek Singh";
@@ -2334,16 +2434,95 @@
       document.getElementById("bajaj-val-date").innerText = "11 May 2026 | 02:40 PM IST";
       
       applyStateUI();
+      saveState();
       showToast("Demo state reset to initial pending state.");
+    }
+
+    // Payment Modal Functions
+    let selectedPaymentMethod = 'upi';
+
+    function openPaymentModal() {
+      selectedPaymentMethod = 'upi';
+      document.getElementById("pay-upi").style.border = "2px solid var(--accent-blue)";
+      document.getElementById("pay-upi").style.background = "var(--accent-blue-light)";
+      document.getElementById("pay-card").style.border = "1px solid #cbd5e1";
+      document.getElementById("pay-card").style.background = "#ffffff";
+      
+      document.getElementById("upi-input-container").style.display = "block";
+      document.getElementById("card-input-container").style.display = "none";
+      document.getElementById("payment-loader").style.display = "none";
+      document.getElementById("btn-submit-payment").disabled = false;
+      document.getElementById("btn-submit-payment").innerText = "Proceed to Pay";
+      
+      openModal("paymentModal");
+    }
+
+    function selectPaymentMethod(method) {
+      selectedPaymentMethod = method;
+      const upiBtn = document.getElementById("pay-upi");
+      const cardBtn = document.getElementById("pay-card");
+      const upiInput = document.getElementById("upi-input-container");
+      const cardInput = document.getElementById("card-input-container");
+
+      if (method === 'upi') {
+        upiBtn.style.border = "2px solid var(--accent-blue)";
+        upiBtn.style.background = "var(--accent-blue-light)";
+        upiBtn.querySelector('i').style.color = "var(--accent-blue)";
+        upiBtn.querySelector('span').style.color = "#0f172a";
+
+        cardBtn.style.border = "1px solid #cbd5e1";
+        cardBtn.style.background = "#ffffff";
+        cardBtn.querySelector('i').style.color = "#64748b";
+        cardBtn.querySelector('span').style.color = "#475569";
+
+        upiInput.style.display = "block";
+        cardInput.style.display = "none";
+      } else {
+        cardBtn.style.border = "2px solid var(--accent-blue)";
+        cardBtn.style.background = "var(--accent-blue-light)";
+        cardBtn.querySelector('i').style.color = "var(--accent-blue)";
+        cardBtn.querySelector('span').style.color = "#0f172a";
+
+        upiBtn.style.border = "1px solid #cbd5e1";
+        upiBtn.style.background = "#ffffff";
+        upiBtn.querySelector('i').style.color = "#64748b";
+        upiBtn.querySelector('span').style.color = "#475569";
+
+        cardInput.style.display = "flex";
+        upiInput.style.display = "none";
+      }
+    }
+
+    function processPaymentSim() {
+      const loader = document.getElementById("payment-loader");
+      const submitBtn = document.getElementById("btn-submit-payment");
+      
+      document.getElementById("upi-input-container").style.display = "none";
+      document.getElementById("card-input-container").style.display = "none";
+      
+      loader.style.display = "flex";
+      submitBtn.disabled = true;
+      submitBtn.innerText = "Processing...";
+
+      setTimeout(() => {
+        isStampDutyPaid = true;
+        saveState();
+        applyStateUI();
+        
+        closeModal("paymentModal");
+        showToast("Stamp Duty Payment of ₹500 successful!", "success");
+      }, 1500);
     }
 
     // Apply State UI transformations
     function applyStateUI() {
       // Elements list
+      const hStep3 = document.getElementById("step-h-3");
       const hStep4 = document.getElementById("step-h-4");
       const hStep5 = document.getElementById("step-h-5");
       const hStep6 = document.getElementById("step-h-6");
 
+      const line3 = document.getElementById("line-h-3");
       const line4 = document.getElementById("line-h-4");
       const line5 = document.getElementById("line-h-5");
 
@@ -2351,22 +2530,28 @@
       const circle5 = document.getElementById("circle-h-5");
       const circle6 = document.getElementById("circle-h-6");
 
+      const wf3 = document.getElementById("wf-3");
       const wf4 = document.getElementById("wf-4");
       const wf5 = document.getElementById("wf-5");
       const wf6 = document.getElementById("wf-6");
 
+      const dot3 = document.getElementById("dot-wf-3");
       const dot4 = document.getElementById("dot-wf-4");
       const dot5 = document.getElementById("dot-wf-5");
       const dot6 = document.getElementById("dot-wf-6");
 
+      const time3 = document.getElementById("time-wf-3");
       const time4 = document.getElementById("time-wf-4");
       const time5 = document.getElementById("time-wf-5");
       const time6 = document.getElementById("time-wf-6");
+
+      const meta3 = document.getElementById("meta-wf-3");
 
       const banner = document.getElementById("success-banner");
       const btnEsign = document.getElementById("btn-action-esign");
       const btnReview = document.getElementById("btn-action-review");
 
+      const aashitaPayment = document.getElementById("aashita-payment-sig");
       const aashitaAwaiting = document.getElementById("aashita-awaiting-sig");
       const aashitaSigned = document.getElementById("aashita-signed-sig");
 
@@ -2374,9 +2559,9 @@
       const bajajSigned = document.getElementById("bajaj-signed-sig");
 
       // Reset All classes first
-      [hStep4, hStep5, hStep6].forEach(e => e.classList.remove("checked", "active"));
-      [line4, line5].forEach(e => e.classList.remove("checked"));
-      [wf4, wf5, wf6].forEach(e => e.classList.remove("checked", "active"));
+      [hStep3, hStep4, hStep5, hStep6].forEach(e => e.classList.remove("checked", "active"));
+      [line3, line4, line5].forEach(e => e.classList.remove("checked"));
+      [wf3, wf4, wf5, wf6].forEach(e => e.classList.remove("checked", "active"));
 
       circle4.innerHTML = "4";
       circle5.innerHTML = "5";
@@ -2389,6 +2574,26 @@
       // Hide banners/modals
       banner.classList.remove("active");
 
+      // Timeline Step 3 (Stamp Duty Payment)
+      if (isStampDutyPaid) {
+        hStep3.classList.add("checked");
+        hStep3.querySelector(".t-step-circle").innerHTML = `<i class="fa-solid fa-check"></i>`;
+        line3.classList.add("checked");
+
+        wf3.classList.add("checked");
+        dot3.innerHTML = '<i class="fa-solid fa-check"></i>';
+        meta3.innerText = "₹500 e-Stamp (Rajasthan)";
+        time3.innerText = "08 May 2026, 12:05 PM";
+      } else {
+        hStep3.classList.add("active");
+        hStep3.querySelector(".t-step-circle").innerHTML = `3`;
+        
+        wf3.classList.add("active");
+        dot3.innerHTML = '<i class="fa-solid fa-wallet" style="font-size: 11px;"></i>';
+        meta3.innerText = "Payment Pending (₹500)";
+        time3.innerText = "Awaiting Payment";
+      }
+
       // UI Config based on states
       if (currentSignState === 0) {
         // Initial
@@ -2398,8 +2603,21 @@
         time5.innerText = "Pending";
         time6.innerText = "Pending";
 
-        aashitaAwaiting.style.display = "flex";
-        aashitaSigned.style.display = "none";
+        if (!isStampDutyPaid) {
+          aashitaPayment.style.display = "flex";
+          aashitaAwaiting.style.display = "none";
+          aashitaSigned.style.display = "none";
+          
+          btnEsign.disabled = true;
+          btnEsign.innerHTML = `<i class="fa-solid fa-lock"></i> Payment Required`;
+        } else {
+          aashitaPayment.style.display = "none";
+          aashitaAwaiting.style.display = "flex";
+          aashitaSigned.style.display = "none";
+          
+          btnEsign.disabled = false;
+          btnEsign.innerHTML = `<i class="fa-solid fa-file-signature"></i> eSign Now`;
+        }
 
         // Bajaj disabled/locked
         bajajAwaiting.style.display = "flex";
@@ -2410,8 +2628,6 @@
         bajajAwaiting.innerHTML = `<i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i><div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>`;
         bajajSigned.style.display = "none";
 
-        btnEsign.disabled = false;
-        btnEsign.innerHTML = `<i class="fa-solid fa-file-signature"></i> eSign Now`;
         btnReview.innerText = "Review NDA";
         btnReview.style.background = "var(--accent-blue)";
         btnReview.style.borderColor = "var(--accent-blue)";
@@ -2432,6 +2648,7 @@
         time5.innerText = "In Progress";
         time6.innerText = "Pending";
 
+        aashitaPayment.style.display = "none";
         aashitaAwaiting.style.display = "none";
         aashitaSigned.style.display = "flex";
 
@@ -2472,6 +2689,7 @@
         dot6.innerHTML = `<i class="fa-solid fa-check"></i>`;
         time6.innerText = document.getElementById("bajaj-val-date").innerText;
 
+        aashitaPayment.style.display = "none";
         aashitaAwaiting.style.display = "none";
         aashitaSigned.style.display = "flex";
 
@@ -2521,6 +2739,11 @@
 
     // Trigger eSign Modal
     function openEsignModal() {
+      if (!isStampDutyPaid) {
+        showToast("Stamp Duty Payment is required before signing.");
+        openPaymentModal();
+        return;
+      }
       if (currentSignState === 0) {
         // Reset modal steps
         document.getElementById("esign-step-aadhaar").style.display = "block";
