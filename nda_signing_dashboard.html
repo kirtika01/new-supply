@@ -2008,7 +2008,7 @@
     <div class="modal-content">
       <div class="govt-header"></div>
       <div class="modal-header">
-        <h3>Aadhaar eSign Gateway</h3>
+        <h3 id="esign-modal-title">Aadhaar eSign Gateway</h3>
         <div class="modal-close-btn" onclick="closeModal('esignModal')">
           <i class="fa-solid fa-times"></i>
         </div>
@@ -2039,14 +2039,14 @@
         <!-- Aadhaar Number Inputs -->
         <div id="esign-step-aadhaar">
           <div class="form-group">
-            <label class="form-label" for="aadhaar-num">Enter Signer Aadhaar Number</label>
+            <label class="form-label" for="aadhaar-num" id="esign-signer-label">Enter Signer Aadhaar Number</label>
             <input type="text" class="input-text" id="aadhaar-num" placeholder="12-digit Aadhaar Number" maxlength="14"
               value="5821-4927-1042">
           </div>
 
           <div class="consent-box">
             <input type="checkbox" id="consent-check" checked>
-            <label for="consent-check">
+            <label for="consent-check" id="esign-consent-text">
               I hereby give my consent to Aashita SecureSign to verify my Identity details using Aadhaar e-KYC service
               for the purpose of signing the Non-Disclosure Agreement (NDA #AAS-2026-00421).
             </label>
@@ -2060,7 +2060,7 @@
         <!-- OTP inputs -->
         <div id="esign-step-otp" style="display: none;">
           <div class="form-group">
-            <label class="form-label" style="text-align: center;">Enter 6-digit OTP sent to Mobile ******9876</label>
+            <label class="form-label" style="text-align: center;" id="esign-otp-label">Enter 6-digit OTP sent to Mobile ******9876</label>
             <div class="otp-grid">
               <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp2', '')" id="otp1">
               <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp3', 'otp1')" id="otp2">
@@ -2086,61 +2086,7 @@
     </div>
   </div>
 
-  <!-- Modal 2: Bajaj Recipient Signature Modal -->
-  <div class="modal-overlay" id="bajajSignModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h3>Bajaj Auto Ltd. - Recipient Signature</h3>
-        <div class="modal-close-btn" onclick="closeModal('bajajSignModal')">
-          <i class="fa-solid fa-times"></i>
-        </div>
-      </div>
-      <div class="modal-body" style="position: relative;">
-        <!-- Loader overlay -->
-        <div class="loader-overlay" id="bajaj-loader">
-          <div class="spinner"></div>
-          <div class="loader-status" id="bajaj-loader-text">Applying digital signature...</div>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Signer Full Name</label>
-          <input type="text" class="input-text" id="bajaj-signer-name" value="Rahul Bajaj" oninput="updateSignaturePreview()">
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Designation / Role</label>
-          <input type="text" class="input-text" id="bajaj-signer-des" value="Director">
-        </div>
-
-        <div class="signature-tabs">
-          <div class="sig-tab active" onclick="switchSigTab('type')" id="tab-type">Type Signature</div>
-          <div class="sig-tab" onclick="switchSigTab('draw')" id="tab-draw">Draw Signature</div>
-        </div>
-
-        <!-- Cursive Type Panel -->
-        <div class="sig-panel active" id="panel-type">
-          <div class="cursive-preview" id="cursive-sig-preview">Rahul Bajaj</div>
-          <div style="font-size: 10px; color: var(--text-gray-muted); text-align: center;">
-            This will insert a stylized handwritten signature representation.
-          </div>
-        </div>
-
-        <!-- Canvas Draw Panel -->
-        <div class="sig-panel" id="panel-draw">
-          <div class="canvas-container">
-            <canvas id="sig-canvas"></canvas>
-          </div>
-          <div class="canvas-actions">
-            <button class="btn-link" onclick="clearSignatureCanvas()">Clear Canvas</button>
-          </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn-outline" style="border: none;" onclick="closeModal('bajajSignModal')">Cancel</button>
-        <button class="btn-primary" onclick="submitBajajSignature()">Apply Signature</button>
-      </div>
-    </div>
-  </div>
+  <!-- Modal 2 is deprecated: Bajaj now signs via dynamic Aadhaar eSign Gateway -->
 
   <!-- Modal 3: View Certificate Modal -->
   <div class="modal-overlay" id="certModal">
@@ -2353,18 +2299,11 @@
     // 1: Aashita Signed (Aashita signature applied, Bajaj signing active)
     // 2: Fully Executed (Both signed, execution complete)
     let currentSignState = 0;
-    let selectedSignatureType = 'type'; // 'type' or 'draw'
     let isStampDutyPaid = false; // default stamp duty payment status
-
-    // Canvas drawing variables
-    let canvas, ctx;
-    let drawing = false;
 
     // Initialize Page
     document.addEventListener("DOMContentLoaded", () => {
       loadState();
-      initSignatureCanvas();
-      updateSignaturePreview();
     });
 
     // Save/Restore State using LocalStorage
@@ -2379,9 +2318,7 @@
       localStorage.setItem("bajaj_sig_data", JSON.stringify({
         name: document.getElementById("bajaj-val-name").innerText,
         des: document.getElementById("bajaj-val-des").innerText,
-        date: document.getElementById("bajaj-val-date").innerText,
-        type: selectedSignatureType,
-        drawnImg: document.getElementById("bajaj-drawn-sig-img").src
+        date: document.getElementById("bajaj-val-date").innerText
       }));
     }
 
@@ -2410,8 +2347,10 @@
           document.getElementById("bajaj-val-name").innerText = bajajData.name;
           document.getElementById("bajaj-val-des").innerText = bajajData.des;
           document.getElementById("bajaj-val-date").innerText = bajajData.date;
-          if (bajajData.drawnImg) {
-            document.getElementById("bajaj-drawn-sig-img").src = bajajData.drawnImg;
+          
+          if (currentSignState === 2) {
+            document.getElementById("bajaj-cursive-sig").innerText = bajajData.name;
+            document.getElementById("bajaj-cursive-sig").style.display = "block";
           }
         }
       }
@@ -2421,7 +2360,6 @@
     function resetDemo() {
       localStorage.clear();
       currentSignState = 0;
-      selectedSignatureType = 'type';
       isStampDutyPaid = false;
       
       // Default timestamps
@@ -2730,10 +2668,8 @@
 
     function proceedToSignFromReview() {
       closeModal("reviewNdaModal");
-      if (currentSignState === 0) {
+      if (currentSignState === 0 || currentSignState === 1) {
         openEsignModal();
-      } else if (currentSignState === 1) {
-        openBajajSignModal();
       }
     }
 
@@ -2744,14 +2680,32 @@
         openPaymentModal();
         return;
       }
-      if (currentSignState === 0) {
+      if (currentSignState === 0 || currentSignState === 1) {
+        // Configure Aadhaar modal elements dynamically based on who is signing
+        const signerName = currentSignState === 0 ? "Aashita Enterprises" : "Bajaj Auto Limited";
+        const defaultAadhaar = currentSignState === 0 ? "5821-4927-1042" : "9822-1083-4566";
+        const defaultMobile = currentSignState === 0 ? "******9876" : "******1205";
+        
+        document.getElementById("esign-modal-title").innerText = `${signerName} - Aadhaar eSign`;
+        document.getElementById("esign-signer-label").innerText = `Enter Aadhaar Number for ${signerName}`;
+        document.getElementById("aadhaar-num").value = defaultAadhaar;
+        document.getElementById("esign-otp-label").innerText = `Enter 6-digit OTP sent to Mobile ${defaultMobile}`;
+        document.getElementById("esign-consent-text").innerHTML = `
+          I hereby give my consent to Aashita SecureSign to verify my Identity details using Aadhaar e-KYC service 
+          for the purpose of signing the Non-Disclosure Agreement (NDA #AAS-2026-00421) on behalf of <strong>${signerName}</strong>.
+        `;
+
         // Reset modal steps
         document.getElementById("esign-step-aadhaar").style.display = "block";
         document.getElementById("esign-step-otp").style.display = "none";
         document.getElementById("esign-loader").classList.remove("active");
+        
+        // Reset OTP inputs
+        for (let i = 1; i <= 6; i++) {
+          document.getElementById("otp" + i).value = "";
+        }
+        
         openModal("esignModal");
-      } else if (currentSignState === 1) {
-        openBajajSignModal();
       }
     }
 
@@ -2814,26 +2768,43 @@
       setTimeout(() => {
         loaderText.innerText = "Applying Cryptographic Signature Seal...";
         setTimeout(() => {
-          loaderText.innerText = "Applying Stamp Duty (Certificate No. IN-PB-2026-51234567890123)...";
+          loaderText.innerText = "Applying Stamp Duty (Certificate No. IN-RJ-2026-51234567890123)...";
           setTimeout(() => {
             loader.classList.remove("active");
             closeModal("esignModal");
 
-            // Update State
-            currentSignState = 1;
-            
-            // Set signature details
-            document.getElementById("aashita-val-name").innerText = "Jasneek Singh";
-            document.getElementById("aashita-val-des").innerText = "Authorized Signatory";
-            
-            // Set live signing timestamp
             const now = new Date();
             const dateStr = formatDateTime(now);
-            document.getElementById("aashita-val-date").innerText = dateStr;
+
+            if (currentSignState === 0) {
+              // Update State
+              currentSignState = 1;
+              
+              // Set Aashita signature details
+              document.getElementById("aashita-val-name").innerText = "Jasneek Singh";
+              document.getElementById("aashita-val-des").innerText = "Authorized Signatory";
+              document.getElementById("aashita-val-date").innerText = dateStr;
+              
+              showToast("Aashita Enterprises eSigned via Aadhaar successfully!", "success");
+            } else if (currentSignState === 1) {
+              // Update State
+              currentSignState = 2;
+              
+              // Set Bajaj signature details
+              document.getElementById("bajaj-val-name").innerText = "Rahul Bajaj";
+              document.getElementById("bajaj-val-des").innerText = "Director";
+              document.getElementById("bajaj-val-date").innerText = dateStr;
+              
+              // Show cursive signature for Bajaj as digital sign representation
+              document.getElementById("bajaj-cursive-sig").innerText = "Rahul Bajaj";
+              document.getElementById("bajaj-cursive-sig").style.display = "block";
+              document.getElementById("bajaj-drawn-sig-img").style.display = "none";
+              
+              showToast("Bajaj Auto Limited eSigned via Aadhaar successfully!", "success");
+            }
 
             applyStateUI();
             saveState();
-            showToast("eSigned via Aadhaar successfully!", "success");
           }, 1200);
         }, 1000);
       }, 1200);
@@ -2845,158 +2816,7 @@
         showToast("Please sign as Aashita Enterprises first.");
         return;
       }
-      // Reset inputs & Draw
-      document.getElementById("bajaj-loader").classList.remove("active");
-      openModal("bajajSignModal");
-      
-      // Resize canvas to load properly
-      setTimeout(() => {
-        resizeCanvas();
-      }, 200);
-    }
-
-    function switchSigTab(type) {
-      selectedSignatureType = type;
-      document.getElementById("tab-type").classList.remove("active");
-      document.getElementById("tab-draw").classList.remove("active");
-      document.getElementById("panel-type").classList.remove("active");
-      document.getElementById("panel-draw").classList.remove("active");
-
-      if (type === 'type') {
-        document.getElementById("tab-type").classList.add("active");
-        document.getElementById("panel-type").classList.add("active");
-      } else {
-        document.getElementById("tab-draw").classList.add("active");
-        document.getElementById("panel-draw").classList.add("active");
-        resizeCanvas();
-      }
-    }
-
-    // Update Signature Handwriting text
-    function updateSignaturePreview() {
-      const name = document.getElementById("bajaj-signer-name").value || "Rahul Bajaj";
-      document.getElementById("cursive-sig-preview").innerText = name;
-    }
-
-    function submitBajajSignature() {
-      const name = document.getElementById("bajaj-signer-name").value;
-      const des = document.getElementById("bajaj-signer-des").value;
-
-      if (!name || !des) {
-        alert("Please enter both Signer Name and Designation.");
-        return;
-      }
-
-      const loader = document.getElementById("bajaj-loader");
-      const loaderText = document.getElementById("bajaj-loader-text");
-      loader.classList.add("active");
-      loaderText.innerText = "Securing cryptographic signature...";
-
-      setTimeout(() => {
-        loaderText.innerText = "Updating agreement audit logs...";
-        setTimeout(() => {
-          loader.classList.remove("active");
-          closeModal("bajajSignModal");
-
-          // Save signature fields
-          document.getElementById("bajaj-val-name").innerText = name;
-          document.getElementById("bajaj-val-des").innerText = des;
-          
-          const now = new Date();
-          const dateStr = formatDateTime(now);
-          document.getElementById("bajaj-val-date").innerText = dateStr;
-
-          const cursiveSig = document.getElementById("bajaj-cursive-sig");
-          const drawnSig = document.getElementById("bajaj-drawn-sig-img");
-
-          if (selectedSignatureType === 'type') {
-            cursiveSig.innerText = name;
-            cursiveSig.style.display = "block";
-            drawnSig.style.display = "none";
-          } else {
-            // Get canvas data url
-            const dataUrl = canvas.toDataURL();
-            drawnSig.src = dataUrl;
-            drawnSig.style.display = "block";
-            cursiveSig.style.display = "none";
-          }
-
-          // Move state to fully executed
-          currentSignState = 2;
-          applyStateUI();
-          saveState();
-          showToast("Bajaj Auto Limited signed successfully!", "success");
-        }, 1000);
-      }, 1200);
-    }
-
-    // HTML5 Canvas Drawing Board Logic
-    function initSignatureCanvas() {
-      canvas = document.getElementById("sig-canvas");
-      ctx = canvas.getContext("2d");
-
-      // Setup drawing options
-      ctx.strokeStyle = "#0f2d59";
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = "round";
-
-      // Mouse events
-      canvas.addEventListener("mousedown", (e) => {
-        drawing = true;
-        draw(e);
-      });
-      canvas.addEventListener("mousemove", draw);
-      canvas.addEventListener("mouseup", () => drawing = false);
-      canvas.addEventListener("mouseleave", () => drawing = false);
-
-      // Touch events (for mobile compatibility)
-      canvas.addEventListener("touchstart", (e) => {
-        drawing = true;
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        ctx.beginPath();
-        ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
-        e.preventDefault();
-      });
-      canvas.addEventListener("touchmove", (e) => {
-        if (!drawing) return;
-        const touch = e.touches[0];
-        const rect = canvas.getBoundingClientRect();
-        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
-        ctx.stroke();
-        e.preventDefault();
-      });
-      canvas.addEventListener("touchend", () => drawing = false);
-    }
-
-    function resizeCanvas() {
-      if (!canvas) return;
-      const rect = canvas.parentElement.getBoundingClientRect();
-      canvas.width = rect.width;
-      canvas.height = 150;
-      // Re-apply options after resize
-      ctx.strokeStyle = "#0f2d59";
-      ctx.lineWidth = 2.5;
-      ctx.lineCap = "round";
-    }
-
-    function draw(e) {
-      if (!drawing) return;
-      const rect = canvas.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      if (e.type === 'mousedown') {
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-      } else {
-        ctx.lineTo(x, y);
-        ctx.stroke();
-      }
-    }
-
-    function clearSignatureCanvas() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      openEsignModal();
     }
 
     // View Certificate Modal
