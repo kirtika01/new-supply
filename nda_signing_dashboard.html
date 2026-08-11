@@ -1,0 +1,2922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NDA Signing - Aashita Manufacturing Collaboration</title>
+  <meta name="description" content="Secure, legally compliant NDA execution dashboard - Powered by Aashita SecureSign.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&family=Cinzel:wght@600;700&display=swap"
+    rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE STYLE ===== */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-sidebar: #0b0f19;
+      --bg-sidebar-hover: #162032;
+      --text-white: #ffffff;
+      --text-gray-light: #cbd5e1;
+      --text-gray-dark: #0f172a;
+      --text-gray-muted: #64748b;
+
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-light: #eff6ff;
+      --accent-blue-glow: rgba(37, 99, 235, 0.15);
+
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-green-light: #ecfdf5;
+
+      --accent-orange: #f59e0b;
+      --accent-orange-light: #fffbeb;
+
+      --accent-red: #ef4444;
+      --accent-red-light: #fef2f2;
+
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.06), 0 4px 6px -2px rgba(0, 0, 0, 0.03);
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-gray-dark);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      min-width: 1200px;
+    }
+
+    /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
+    [contenteditable="true"] {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(37, 99, 235, 0.4);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.03);
+      border-radius: 4px;
+    }
+
+    [contenteditable="true"]:focus {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.06);
+      border-radius: 4px;
+      color: var(--text-gray-dark);
+    }
+
+    /* ===== APP LAYOUT ===== */
+    .app-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ===== LEFT SIDEBAR ===== */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: var(--bg-sidebar);
+      color: var(--text-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #111e35;
+      height: 100vh;
+      z-index: 100;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Brand Logo */
+    .brand-section {
+      margin-bottom: 30px;
+      padding: 0 8px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+
+    .logo-icon-svg {
+      width: 32px;
+      height: 32px;
+      flex-shrink: 0;
+    }
+
+    .logo-text {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: var(--text-white);
+      line-height: 1.2;
+    }
+
+    .logo-tagline {
+      font-size: 8px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      padding-left: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Navigation Items */
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 11px 14px;
+      border-radius: 8px;
+      color: #94a3b8;
+      font-size: 13px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-item-left i {
+      font-size: 15px;
+      width: 20px;
+      text-align: center;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-sidebar-hover);
+      color: var(--text-white);
+    }
+
+    .nav-item.active {
+      background: var(--accent-blue);
+      color: var(--text-white);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    /* Profile Section at Bottom */
+    .sidebar-bottom {
+      padding: 16px;
+      border-top: 1px solid #162032;
+      background: #070a12;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      background: var(--bg-sidebar-hover);
+    }
+
+    .profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .profile-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .profile-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-role {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-dropdown-icon {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+    }
+
+    /* ===== MAIN CONTENT AREA ===== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header Bar */
+    .top-header {
+      height: 70px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-subtitle {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      margin-top: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-gray-muted);
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      position: relative;
+      background: #fff;
+      transition: all 0.2s;
+    }
+
+    .header-icon-btn:hover {
+      background: #f1f5f9;
+      color: var(--text-gray-dark);
+    }
+
+    .badge-dot {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 14px;
+      height: 14px;
+      background: var(--accent-red);
+      color: #fff;
+      border-radius: 50%;
+      font-size: 8px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+
+    .header-profile-menu {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 12px 4px 4px;
+      border-radius: 20px;
+      border: 1px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .header-profile-menu:hover {
+      background: #f8fafc;
+    }
+
+    .header-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 700;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .header-user-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-user-name {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .header-user-role {
+      font-size: 9px;
+      color: var(--text-gray-muted);
+    }
+
+    /* Scrollable Container */
+    .content-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 24px;
+      background: #f8fafc;
+    }
+
+    /* Stepper Progress Bar */
+    .timeline-stepper {
+      display: flex;
+      align-items: center;
+      background: #ffffff;
+      padding: 16px 24px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .t-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+      position: relative;
+    }
+
+    .t-step-circle {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-muted);
+      transition: all 0.3s ease;
+    }
+
+    .t-step.checked {
+      color: var(--accent-blue);
+    }
+
+    .t-step.checked .t-step-circle {
+      background: var(--accent-blue);
+      border-color: var(--accent-blue);
+      color: var(--text-white);
+    }
+
+    .t-step.active {
+      color: var(--accent-blue);
+    }
+
+    .t-step.active .t-step-circle {
+      border-color: var(--accent-blue);
+      border-width: 2px;
+      background: var(--text-white);
+      color: var(--accent-blue);
+    }
+
+    .t-line {
+      flex: 1;
+      height: 2px;
+      background: #e2e8f0;
+      margin: 0 16px;
+      transition: all 0.3s ease;
+    }
+
+    .t-line.checked {
+      background: var(--accent-blue);
+    }
+
+    /* Main Dashboard Grid */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 2.4fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    /* ===== LEFT PANEL (NDA document view) ===== */
+    .doc-viewer-card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-viewer-header {
+      padding: 16px 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .doc-viewer-title-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .doc-viewer-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+    }
+
+    .doc-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .doc-badge.green {
+      background: #e6fcf5;
+      color: #0ca678;
+      border: 1px solid #c3fae8;
+    }
+
+    .doc-viewer-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-outline {
+      padding: 7px 14px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* Document Sheet Wrapper (looks like paper) */
+    .doc-sheet-container {
+      padding: 40px;
+      background: #f1f5f9;
+      display: flex;
+      justify-content: center;
+    }
+
+    .doc-sheet {
+      width: 100%;
+      max-width: 800px;
+      background: #ffffff;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05), 0 2px 4px rgba(0, 0, 0, 0.02);
+      border: 1px solid #d1d5db;
+      padding: 50px 40px;
+      position: relative;
+    }
+
+    /* e-Stamp paper graphic */
+    .estamp-paper {
+      border: 10px double #f87171;
+      padding: 16px;
+      background-color: #fff9fa;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cpath d='M0 40 C 20 20, 60 20, 80 40 C 60 60, 20 60, 0 40 Z' fill='none' stroke='%23fecaca' stroke-width='0.5' opacity='0.25'/%3E%3Cpath d='M40 0 C 20 20, 20 60, 40 80 C 60 60, 60 20, 40 0 Z' fill='none' stroke='%23fecaca' stroke-width='0.5' opacity='0.25'/%3E%3C/svg%3E");
+      border-radius: 4px;
+      margin-bottom: 30px;
+      box-shadow: inset 0 0 20px rgba(239, 68, 68, 0.03);
+    }
+
+    .estamp-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .estamp-col-left,
+    .estamp-col-right {
+      flex: 1;
+      color: #b91c1c;
+    }
+
+    .estamp-col-left {
+      text-align: left;
+    }
+
+    .estamp-col-right {
+      text-align: right;
+    }
+
+    .stamp-hindi-text {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+    }
+
+    .stamp-hindi-text.large {
+      font-size: 17px;
+      margin-top: 6px;
+    }
+
+    .stamp-sub-text {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.8px;
+    }
+
+    .stamp-eng-text {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.8px;
+    }
+
+    .stamp-value {
+      font-size: 22px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .stamp-value-symbol {
+      font-size: 26px;
+      font-weight: 800;
+      margin-top: 2px;
+    }
+
+    .estamp-center-emblem {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 0 12px;
+    }
+
+    .emblem-svg {
+      width: 70px;
+      height: 70px;
+    }
+
+    .estamp-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      border-top: 1px dashed #fca5a5;
+      padding-top: 8px;
+      margin-top: 12px;
+    }
+
+    .estamp-footer-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #b91c1c;
+      letter-spacing: 1px;
+    }
+
+    .estamp-serial {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #ef4444;
+      letter-spacing: 0.5px;
+    }
+
+    /* Document Legal Text Layout */
+    .document-body-content {
+      color: #1e293b;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .doc-main-title {
+      text-align: center;
+      font-weight: 800;
+      font-size: 14px;
+      letter-spacing: 1px;
+      margin-bottom: 24px;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+      padding-bottom: 8px;
+    }
+
+    .doc-para {
+      margin-bottom: 16px;
+      text-align: justify;
+    }
+
+    .doc-section-heading {
+      font-weight: 700;
+      margin: 20px 0 8px 0;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: #0f172a;
+      letter-spacing: 0.5px;
+    }
+
+    /* Party Grid */
+    .parties-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin: 16px 0;
+    }
+
+    .party-card {
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 14px;
+      background: #f8fafc;
+      min-height: 110px;
+    }
+
+    .party-name {
+      font-weight: 700;
+      font-size: 11.5px;
+      color: #0f172a;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    .party-address {
+      font-size: 11px;
+      color: #475569;
+    }
+
+    .party-role-label {
+      font-size: 10px;
+      color: #64748b;
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* Signatures Section */
+    .signatures-container {
+      margin-top: 30px;
+      border-top: 1px dashed #cbd5e1;
+      padding-top: 20px;
+    }
+
+    .signatures-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .sig-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      position: relative;
+    }
+
+    .sig-party-title {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .sig-badge {
+      position: absolute;
+      top: 0;
+      right: 0;
+      font-size: 9px;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .sig-badge.signed {
+      background: #e6fcf5;
+      color: #0ca678;
+      border: 1px solid #c3fae8;
+    }
+
+    .sig-badge.pending {
+      background: #fff9db;
+      color: #f59f00;
+      border: 1px solid #fff3bf;
+    }
+
+    .sig-box {
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      background: #f8fafc;
+      padding: 16px;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sig-handwritten {
+      font-family: 'Caveat', cursive;
+      font-size: 28px;
+      color: #0f2d59;
+      transform: rotate(-3deg);
+      user-select: none;
+      margin-bottom: 4px;
+      text-align: center;
+      line-height: 1;
+    }
+
+    .sig-handwritten-canvas-img {
+      max-height: 60px;
+      object-fit: contain;
+      margin: 0 auto 4px auto;
+      display: block;
+    }
+
+    .sig-awaiting-box {
+      border: 1.5px dashed #2563eb;
+      border-radius: 6px;
+      background: rgba(37, 99, 235, 0.02);
+      padding: 16px;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .sig-awaiting-box:hover {
+      background: rgba(37, 99, 235, 0.06);
+      border-color: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .sig-awaiting-text {
+      font-size: 11px;
+      font-weight: 600;
+      color: #2563eb;
+    }
+
+    .sig-awaiting-icon {
+      font-size: 14px;
+      color: #2563eb;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+
+      50% {
+        transform: scale(1.15);
+        opacity: 0.7;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .sig-details-row {
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 4px;
+    }
+
+    .sig-details-label {
+      font-weight: 600;
+      color: #475569;
+    }
+
+    .sig-details-val {
+      color: #334155;
+    }
+
+    /* ===== RIGHT PANEL (Widgets) ===== */
+    .widgets-column {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .widget-card {
+      background: #ffffff;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      box-shadow: var(--card-shadow);
+      padding: 20px;
+    }
+
+    .widget-title {
+      font-size: 13.5px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* Workflow Stepper Vertical */
+    .wf-timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+      padding-left: 10px;
+    }
+
+    .wf-timeline::before {
+      content: '';
+      position: absolute;
+      left: 19px;
+      top: 10px;
+      bottom: 10px;
+      width: 2px;
+      background: #cbd5e1;
+      z-index: 1;
+    }
+
+    .wf-item {
+      display: flex;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .wf-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #f1f5f9;
+      border: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 800;
+      color: var(--text-gray-muted);
+      flex-shrink: 0;
+      transition: all 0.3s;
+    }
+
+    .wf-item.checked .wf-dot {
+      background: #22c55e;
+      border-color: #22c55e;
+      color: var(--text-white);
+    }
+
+    .wf-item.active .wf-dot {
+      border-color: var(--accent-blue);
+      border-width: 2px;
+      background: var(--text-white);
+      color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+
+    .wf-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wf-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+    }
+
+    .wf-meta {
+      font-size: 10.5px;
+      color: var(--text-gray-muted);
+      margin-top: 1px;
+    }
+
+    .wf-time {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      margin-top: 2px;
+    }
+
+    .wf-item.active .wf-time {
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* Stamp Duty Details List */
+    .stamp-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .detail-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+
+    .detail-label {
+      color: var(--text-gray-muted);
+      font-weight: 500;
+    }
+
+    .detail-val {
+      color: var(--text-gray-dark);
+      font-weight: 600;
+      text-align: right;
+    }
+
+    .verification-status {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      color: #0ca678;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .verification-status i {
+      font-size: 12px;
+    }
+
+    /* Actions Panel */
+    .actions-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .btn-primary {
+      padding: 10px 16px;
+      background: var(--accent-blue);
+      color: var(--text-white);
+      border: 1px solid var(--accent-blue);
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-blue-hover);
+      border-color: var(--accent-blue-hover);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-primary:disabled {
+      background: #cbd5e1;
+      border-color: #cbd5e1;
+      color: #94a3b8;
+      cursor: not-allowed;
+      box-shadow: none;
+    }
+
+    .btn-outline-blue {
+      padding: 10px 16px;
+      border: 1.5px solid var(--accent-blue);
+      background: #ffffff;
+      color: var(--accent-blue);
+      border-radius: 6px;
+      font-size: 12.5px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.2s;
+      width: 100%;
+    }
+
+    .btn-outline-blue:hover {
+      background: var(--accent-blue-light);
+    }
+
+    .btn-outline-blue:disabled {
+      border-color: #e2e8f0;
+      color: #cbd5e1;
+      background: #fff;
+      cursor: not-allowed;
+    }
+
+    .action-notice {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--text-gray-muted);
+      font-size: 10.5px;
+      margin-top: 6px;
+    }
+
+    .action-notice i {
+      font-size: 11px;
+    }
+
+    /* ===== FOOTER BAR ===== */
+    .app-footer {
+      height: 40px;
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-item i {
+      color: #94a3b8;
+    }
+
+    .footer-right a {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .footer-right a:hover {
+      text-decoration: underline;
+    }
+
+    /* ===== MODAL OVERLAYS ===== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(4px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-content {
+      background: #ffffff;
+      border-radius: 12px;
+      width: 100%;
+      max-width: 500px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+      border: 1px solid var(--border-color);
+      overflow: hidden;
+      transform: scale(0.95);
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .modal-overlay.active .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .modal-header h3 {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+    }
+
+    .modal-close-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-gray-muted);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .modal-close-btn:hover {
+      background: #f1f5f9;
+      color: var(--text-gray-dark);
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .modal-footer {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 10px;
+      background: #f8fafc;
+    }
+
+    /* Government Aadhaar Portal styles inside Modal */
+    .govt-header {
+      background: linear-gradient(to right, #ff9933, #ffffff, #128807);
+      height: 4px;
+      width: 100%;
+    }
+
+    .aadhaar-logo-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      gap: 10px;
+    }
+
+    .aadhaar-title-main {
+      font-size: 13px;
+      font-weight: 800;
+      color: #0f172a;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .aadhaar-subtitle-main {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-bottom: 6px;
+    }
+
+    .input-text {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      font-size: 13px;
+      color: var(--text-gray-dark);
+      transition: all 0.2s;
+    }
+
+    .input-text:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .otp-grid {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .otp-input {
+      height: 45px;
+      width: 100%;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 700;
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-gray-dark);
+    }
+
+    .otp-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+    }
+
+    .consent-box {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      margin-bottom: 16px;
+      font-size: 10px;
+      line-height: 1.5;
+      color: #475569;
+    }
+
+    .consent-box input {
+      margin-top: 2px;
+    }
+
+    /* Drawing Canvas for Signature */
+    .signature-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 16px;
+    }
+
+    .sig-tab {
+      flex: 1;
+      padding: 8px;
+      text-align: center;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: var(--text-gray-muted);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+
+    .sig-tab.active {
+      color: var(--accent-blue);
+      border-color: var(--accent-blue);
+      font-weight: 700;
+    }
+
+    .sig-panel {
+      display: none;
+    }
+
+    .sig-panel.active {
+      display: block;
+    }
+
+    .canvas-container {
+      border: 1.5px dashed #cbd5e1;
+      border-radius: 8px;
+      background: #fafafa;
+      position: relative;
+      margin-bottom: 8px;
+    }
+
+    #sig-canvas {
+      width: 100%;
+      height: 150px;
+      display: block;
+      cursor: crosshair;
+    }
+
+    .canvas-actions {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .btn-link {
+      background: none;
+      border: none;
+      color: var(--accent-blue);
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .btn-link:hover {
+      text-decoration: underline;
+    }
+
+    /* Handwriting typeface options */
+    .cursive-preview {
+      font-family: 'Caveat', cursive;
+      font-size: 32px;
+      color: #0f2d59;
+      height: 100px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #f8fafc;
+      margin-bottom: 10px;
+      user-select: none;
+    }
+
+    /* Spinner loader */
+    .loader-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(255, 255, 255, 0.9);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s;
+    }
+
+    .loader-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid #e2e8f0;
+      border-top-color: var(--accent-blue);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    .loader-status {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      text-align: center;
+      animation: blink 1.5s infinite;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+
+    @keyframes blink {
+      0% {
+        opacity: 0.6;
+      }
+
+      50% {
+        opacity: 1;
+      }
+
+      100% {
+        opacity: 0.6;
+      }
+    }
+
+    /* Success Confetti Animation / Banner */
+    .success-alert-banner {
+      background: #ecfdf5;
+      border: 1.5px solid #a7f3d0;
+      border-radius: 8px;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #065f46;
+      margin-bottom: 24px;
+      display: none;
+      animation: slideDown 0.3s ease-out;
+    }
+
+    .success-alert-banner.active {
+      display: flex;
+    }
+
+    .success-banner-icon {
+      font-size: 20px;
+      color: var(--accent-green);
+    }
+
+    .success-banner-content {
+      flex: 1;
+    }
+
+    .success-banner-title {
+      font-size: 12.5px;
+      font-weight: 700;
+    }
+
+    .success-banner-desc {
+      font-size: 11px;
+      color: #047857;
+      margin-top: 1px;
+    }
+
+    @keyframes slideDown {
+      0% {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Certificate Graphic Style */
+    .certificate-sheet {
+      border: 6px double #334155;
+      padding: 24px;
+      background: #fafaf9;
+      position: relative;
+    }
+
+    .cert-seal {
+      width: 60px;
+      height: 60px;
+      position: absolute;
+      bottom: 20px;
+      right: 20px;
+      opacity: 0.85;
+    }
+
+    /* Toast Notifications */
+    .toast-container {
+      position: fixed;
+      bottom: 60px;
+      right: 24px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .toast {
+      background: #1e293b;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 6px;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .toast.active {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .toast-success {
+      border-left: 4px solid var(--accent-green);
+    }
+
+    .toast-icon-green {
+      color: var(--accent-green);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="app-container">
+    <!-- ===== LEFT SIDEBAR ===== -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Brand logo -->
+        <div class="brand-section">
+          <div class="logo-container">
+            <svg class="logo-icon-svg" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="30" cy="30" r="28" fill="#1d4ed8" />
+              <path d="M18 42 L28 18 L32 18 L42 42" stroke="white" stroke-width="4.5" stroke-linecap="round"
+                stroke-linejoin="round" />
+              <path d="M22 34 L38 34" stroke="white" stroke-width="4" stroke-linecap="round" />
+              <circle cx="30" cy="30" r="26" stroke="#2563eb" stroke-width="2.5" stroke-dasharray="8 4" />
+            </svg>
+            <div class="logo-text">
+              AASHITA
+            </div>
+          </div>
+          <div class="logo-tagline">MANUFACTURING COLLABORATION</div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-menu">
+          <a class="nav-item active" href="supplylink.html" style="background: var(--accent-blue); color: var(--text-white); box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-arrow-left-long"></i>
+              <span>Back to REQ-250801 Workspace</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Profile Section at bottom -->
+      <div class="sidebar-bottom">
+        <div class="profile-card" onclick="alert('Profile configurations...')">
+          <div class="profile-avatar">AS</div>
+          <div class="profile-info">
+            <div class="profile-name" contenteditable="true" id="sidebar-profile-name">Aashita Pvt. Ltd.</div>
+            <div class="profile-role" contenteditable="true" id="sidebar-profile-role">Production Team</div>
+          </div>
+          <i class="fa-solid fa-chevron-down profile-dropdown-icon"></i>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+      <!-- Top header bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <h1 class="header-title">NDA Signing</h1>
+          <div class="header-subtitle" contenteditable="true" id="header-rfq">RFQ: BAJ-2026-0578</div>
+        </div>
+
+        <div class="header-right">
+          <button class="header-icon-btn" onclick="alert('You have 3 notifications related to NDA and RFQ submissions.')">
+            <i class="fa-solid fa-bell"></i>
+            <span class="badge-dot">3</span>
+          </button>
+          <button class="header-icon-btn" onclick="alert('NDA signing help manual. For support, write to support@aashita.ai')">
+            <i class="fa-solid fa-circle-question"></i>
+          </button>
+          <div class="header-profile-menu" onclick="alert('Signer profile active.')">
+            <div class="header-avatar">AS</div>
+            <div class="header-user-info">
+              <div class="header-user-name" id="user-header-name" contenteditable="true">Aashita Pvt. Ltd.</div>
+              <div class="header-user-role" id="user-header-role" contenteditable="true">Authorized Signatory</div>
+            </div>
+            <i class="fa-solid fa-chevron-down" style="font-size: 8px; color: var(--text-gray-muted); margin-left: 4px;"></i>
+          </div>
+        </div>
+      </header>
+
+      <!-- Scrollable Main Pane -->
+      <div class="content-scroll">
+        <!-- Success Banner -->
+        <div class="success-alert-banner" id="success-banner">
+          <i class="fa-solid fa-circle-check success-banner-icon"></i>
+          <div class="success-banner-content">
+            <div class="success-banner-title" id="success-banner-title">Document Signed Successfully!</div>
+            <div class="success-banner-desc" id="success-banner-desc">e-Stamp has been applied and signed via Aadhaar eSign.</div>
+          </div>
+          <button class="btn-outline" style="padding: 4px 8px; font-size: 10px;" onclick="resetDemo()">Reset State</button>
+        </div>
+
+        <!-- Horizontal Timelines Progress stepper -->
+        <div class="timeline-stepper">
+          <div class="t-step checked" id="step-h-1">
+            <div class="t-step-circle"><i class="fa-solid fa-check"></i></div>
+            <span>RFQ Received</span>
+          </div>
+          <div class="t-line checked" id="line-h-1"></div>
+
+          <div class="t-step checked" id="step-h-2">
+            <div class="t-step-circle"><i class="fa-solid fa-check"></i></div>
+            <span>NDA Generated</span>
+          </div>
+          <div class="t-line checked" id="line-h-2"></div>
+
+          <div class="t-step checked" id="step-h-3">
+            <div class="t-step-circle"><i class="fa-solid fa-check"></i></div>
+            <span>Stamp Duty</span>
+          </div>
+          <div class="t-line checked" id="line-h-3"></div>
+
+          <div class="t-step active" id="step-h-4">
+            <div class="t-step-circle" id="circle-h-4">4</div>
+            <span>Sign by Aashita</span>
+          </div>
+          <div class="t-line" id="line-h-4"></div>
+
+          <div class="t-step" id="step-h-5">
+            <div class="t-step-circle" id="circle-h-5">5</div>
+            <span>Sign by Bajaj</span>
+          </div>
+          <div class="t-line" id="line-h-5"></div>
+
+          <div class="t-step" id="step-h-6">
+            <div class="t-step-circle" id="circle-h-6">6</div>
+            <span>Executed NDA</span>
+          </div>
+        </div>
+
+        <!-- Split Grid (NDA document on Left, Widgets on Right) -->
+        <div class="dashboard-grid">
+          <!-- Left side: Document Viewer card -->
+          <div class="doc-viewer-card">
+            <div class="doc-viewer-header">
+              <div class="doc-viewer-title-area">
+                <div class="doc-viewer-title">Non-Disclosure Agreement</div>
+                <div class="doc-badge green" contenteditable="true" id="doc-badge-nda">NDA #AAS-2026-00421</div>
+              </div>
+              <div class="doc-viewer-actions">
+                <button class="btn-outline" onclick="triggerDownloadPDF()">
+                  <i class="fa-solid fa-download"></i> Download PDF
+                </button>
+                <button class="btn-outline" onclick="alert('Additional options: \n1. Email Audit Trail\n2. Share Sign Link\n3. Void Agreement')">
+                  <i class="fa-solid fa-ellipsis"></i> More
+                </button>
+              </div>
+            </div>
+
+            <!-- Page content sheet -->
+            <div class="doc-sheet-container">
+              <div class="doc-sheet">
+                <!-- e-Stamp Paper Graphic -->
+                <div class="estamp-paper">
+                  <div class="estamp-header">
+                    <div class="estamp-col-left">
+                      <div class="stamp-hindi-text">भारतीय गैर न्यायिक</div>
+                      <div class="stamp-sub-text">भारत INDIA</div>
+                      <div class="stamp-hindi-text large">पाँच सौ रुपये</div>
+                      <div class="stamp-value">रु. 500</div>
+                    </div>
+
+                    <div class="estamp-center-emblem">
+                      <svg class="emblem-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Chakra Base -->
+                        <circle cx="50" cy="78" r="8" fill="none" stroke="#b91c1c" stroke-width="2.5" />
+                        <circle cx="50" cy="78" r="2.5" fill="#b91c1c" />
+                        <line x1="50" y1="70" x2="50" y2="86" stroke="#b91c1c" stroke-width="1.5" />
+                        <line x1="42" y1="78" x2="58" y2="78" stroke="#b91c1c" stroke-width="1.5" />
+                        <line x1="44.3" y1="72.3" x2="55.7" y2="83.7" stroke="#b91c1c" stroke-width="1" />
+                        <line x1="44.3" y1="83.7" x2="55.7" y2="72.3" stroke="#b91c1c" stroke-width="1" />
+                        <!-- Pillars and animal base -->
+                        <path d="M38 68 L62 68 L59 70 L41 70 Z" fill="#b91c1c" />
+                        <!-- Lions body -->
+                        <path d="M42 35 C42 20, 58 20, 58 35 L55 65 L45 65 Z" fill="#b91c1c" />
+                        <!-- Front lion face -->
+                        <circle cx="50" cy="30" r="8" fill="#b91c1c" />
+                        <circle cx="48" cy="29" r="1.5" fill="#fff" />
+                        <circle cx="52" cy="29" r="1.5" fill="#fff" />
+                        <path d="M47 33 Q50 35 53 33" fill="none" stroke="#fff" stroke-width="1" />
+                        <!-- Left Lion profile -->
+                        <path d="M42 33 C37 33, 36 26, 43 23" fill="#b91c1c" />
+                        <!-- Right Lion profile -->
+                        <path d="M58 33 C63 33, 64 26, 57 23" fill="#b91c1c" />
+                        <text x="50" y="94" text-anchor="middle" font-size="8" font-weight="900" fill="#b91c1c"
+                          font-family="'Inter', sans-serif">सत्यमेव जयते</text>
+                      </svg>
+                    </div>
+
+                    <div class="estamp-col-right">
+                      <div class="stamp-eng-text">INDIA NON JUDICIAL</div>
+                      <div class="stamp-value" style="opacity: 0;">&nbsp;</div>
+                      <div class="stamp-value-symbol">₹ 500</div>
+                    </div>
+                  </div>
+
+                  <div class="estamp-footer">
+                    <div class="estamp-footer-title">भारत INDIA NON-JUDICIAL</div>
+                    <div class="estamp-serial" contenteditable="true" id="stamp-serial-no">IN 51234567890123</div>
+                  </div>
+                </div>
+
+                <!-- NDA Legal Agreement Contents -->
+                <div class="document-body-content">
+                  <div class="doc-main-title">NON-DISCLOSURE AGREEMENT</div>
+
+                  <p class="doc-para">
+                    This Non-Disclosure Agreement (“Agreement”) is made and entered into on this
+                    <strong contenteditable="true">11th day of May, 2026</strong> (“Effective Date”).
+                  </p>
+
+                  <div class="doc-section-heading">BY AND BETWEEN</div>
+
+                  <!-- Two Columns for Parties -->
+                  <div class="parties-grid">
+                    <div class="party-card">
+                      <div class="party-name" contenteditable="true" id="p1-name">AASHITA PRIVATE LIMITED</div>
+                      <div class="party-address" contenteditable="true" id="p1-address">
+                        SCO 123, Industrial Area,<br>
+                        Phase 1, Mohali, Punjab - 160055, India
+                      </div>
+                      <div class="party-role-label">(Hereinafter referred to as “Disclosing Party”)</div>
+                    </div>
+
+                    <div class="party-card">
+                      <div class="party-name" contenteditable="true" id="p2-name">BAJAJ AUTO LIMITED</div>
+                      <div class="party-address" contenteditable="true" id="p2-address">
+                        Registered Address:<br>
+                        Akurdi, Pune, Maharashtra - 411035, India
+                      </div>
+                      <div class="party-role-label">(Hereinafter referred to as “Receiving Party”)</div>
+                    </div>
+                  </div>
+
+                  <p class="doc-para">
+                    The Disclosing Party and the Receiving Party are hereinafter individually referred to as “Party”
+                    and collectively as “Parties”.
+                  </p>
+
+                  <!-- Signatures section -->
+                  <div class="signatures-container">
+                    <div class="signatures-grid">
+                      <!-- Column 1: Aashita -->
+                      <div class="sig-column" id="aashita-sig-col">
+                        <div class="sig-party-title">For Aashita Pvt. Ltd.</div>
+
+                        <!-- Initial state is Awaiting, updates to Signed -->
+                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
+                          <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
+                          <div class="sig-awaiting-text">eSign using Aadhaar</div>
+                        </div>
+
+                        <div class="sig-box" id="aashita-signed-sig" style="display: none;">
+                          <span class="sig-badge signed">SIGNED</span>
+                          <div class="sig-handwritten" id="aashita-cursive-sig">Jasneek Singh</div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Name:</span>
+                            <span class="sig-details-val" id="aashita-val-name">Jasneek Singh</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Designation:</span>
+                            <span class="sig-details-val" id="aashita-val-des">Authorized Signatory</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Date & Time:</span>
+                            <span class="sig-details-val" id="aashita-val-date">11 May 2026 | 10:42 AM IST</span>
+                          </div>
+                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
+                            <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
+                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Column 2: Bajaj -->
+                      <div class="sig-column" id="bajaj-sig-col">
+                        <div class="sig-party-title">For Bajaj Auto Limited</div>
+
+                        <!-- Initially locked/awaiting, clickable after Aashita signs -->
+                        <div class="sig-awaiting-box" id="bajaj-awaiting-sig" onclick="openBajajSignModal()"
+                          style="border-color: #cbd5e1; background: #fafafa; cursor: not-allowed; opacity: 0.7;">
+                          <i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i>
+                          <div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>
+                        </div>
+
+                        <div class="sig-box" id="bajaj-signed-sig" style="display: none;">
+                          <span class="sig-badge signed">SIGNED</span>
+                          <!-- Replaced by Typed cursive or drawn signature image -->
+                          <div class="sig-handwritten" id="bajaj-cursive-sig" style="display: none;">Rahul Bajaj</div>
+                          <img class="sig-handwritten-canvas-img" id="bajaj-drawn-sig-img" src="" alt="Bajaj Signature"
+                            style="display: none;" />
+
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Name:</span>
+                            <span class="sig-details-val" id="bajaj-val-name">Rahul Bajaj</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Designation:</span>
+                            <span class="sig-details-val" id="bajaj-val-des">Director</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Date & Time:</span>
+                            <span class="sig-details-val" id="bajaj-val-date">11 May 2026 | 02:40 PM IST</span>
+                          </div>
+                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
+                            <button class="btn-link" onclick="retractSignature('bajaj')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
+                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right side: Widgets Column -->
+          <div class="widgets-column">
+            <!-- Widget 1: NDA Workflow -->
+            <div class="widget-card">
+              <h2 class="widget-title">NDA Workflow</h2>
+              <div class="wf-timeline">
+                <div class="wf-item checked" id="wf-1">
+                  <div class="wf-dot"><i class="fa-solid fa-check"></i></div>
+                  <div class="wf-content">
+                    <div class="wf-name">RFQ Received</div>
+                    <div class="wf-time">08 May 2026, 11:20 AM</div>
+                  </div>
+                </div>
+
+                <div class="wf-item checked" id="wf-2">
+                  <div class="wf-dot"><i class="fa-solid fa-check"></i></div>
+                  <div class="wf-content">
+                    <div class="wf-name">NDA Generated</div>
+                    <div class="wf-time">08 May 2026, 11:45 AM</div>
+                  </div>
+                </div>
+
+                <div class="wf-item checked" id="wf-3">
+                  <div class="wf-dot"><i class="fa-solid fa-check"></i></div>
+                  <div class="wf-content">
+                    <div class="wf-name">Stamp Duty Applied</div>
+                    <div class="wf-meta">₹500 e-Stamp (Punjab)</div>
+                    <div class="wf-time">08 May 2026, 12:05 PM</div>
+                  </div>
+                </div>
+
+                <div class="wf-item active" id="wf-4">
+                  <div class="wf-dot" id="dot-wf-4">4</div>
+                  <div class="wf-content">
+                    <div class="wf-name">Sign by Aashita</div>
+                    <div class="wf-time" id="time-wf-4">In Progress</div>
+                  </div>
+                </div>
+
+                <div class="wf-item" id="wf-5">
+                  <div class="wf-dot" id="dot-wf-5">5</div>
+                  <div class="wf-content">
+                    <div class="wf-name">Sign by Bajaj</div>
+                    <div class="wf-time" id="time-wf-5">Pending</div>
+                  </div>
+                </div>
+
+                <div class="wf-item" id="wf-6">
+                  <div class="wf-dot" id="dot-wf-6">6</div>
+                  <div class="wf-content">
+                    <div class="wf-name">Executed NDA</div>
+                    <div class="wf-time" id="time-wf-6">Pending</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Widget 2: Stamp Duty Details -->
+            <div class="widget-card">
+              <h2 class="widget-title">Stamp Duty Details</h2>
+              <div class="stamp-details-list">
+                <div class="detail-row">
+                  <span class="detail-label">Instrument Type</span>
+                  <span class="detail-val">Agreement (NDA)</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">State</span>
+                  <span class="detail-val">Punjab</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">Stamp Duty Amount</span>
+                  <span class="detail-val">₹500</span>
+                </div>
+                <div class="detail-row">
+                  <span class="detail-label">e-Stamp Certificate No.</span>
+                  <span class="detail-val">IN-PB-2026-51234567890123</span>
+                </div>
+              </div>
+              <div class="verification-status">
+                <i class="fa-solid fa-circle-check"></i>
+                <span>e-Stamp Verified</span>
+              </div>
+              <button class="btn-outline" style="width: 100%; justify-content: center;" onclick="openCertModal()">
+                View Certificate
+              </button>
+            </div>
+
+            <!-- Widget 3: Actions Panel -->
+            <div class="widget-card">
+              <h2 class="widget-title">Actions</h2>
+              <div class="actions-panel">
+                <!-- Primary Action (Review) -->
+                <button class="btn-primary" id="btn-action-review" onclick="openReviewModal()">
+                  Review NDA
+                </button>
+                <!-- Secondary Action (eSign) -->
+                <button class="btn-outline-blue" id="btn-action-esign" onclick="openEsignModal()">
+                  <i class="fa-solid fa-file-signature"></i> eSign Now
+                </button>
+
+                <div class="action-notice">
+                  <i class="fa-solid fa-shield-halved"></i>
+                  <span>You will eSign using Aadhaar eSign</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== FOOTER BAR ===== -->
+      <footer class="app-footer">
+        <div class="footer-left">
+          <div class="footer-item">
+            <i class="fa-solid fa-shield-check"></i>
+            <span>Secure & Legally Compliant</span>
+          </div>
+          <div class="footer-item">
+            <i class="fa-solid fa-list-check"></i>
+            <span>Audit Trail Enabled</span>
+          </div>
+          <div class="footer-item">
+            <i class="fa-solid fa-fingerprint"></i>
+            <span>Powered by Aashita SecureSign</span>
+          </div>
+        </div>
+        <div class="footer-right">
+          <a href="#" onclick="alert('Opening support chat. Or call: +91 1800 234 5678')">
+            <i class="fa-solid fa-headset"></i>
+            <span>Need Help? Contact Support</span>
+          </a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <!-- ==================== MODALS ==================== -->
+
+  <!-- Modal 1: Aadhaar eSign OTP Gateway -->
+  <div class="modal-overlay" id="esignModal">
+    <div class="modal-content">
+      <div class="govt-header"></div>
+      <div class="modal-header">
+        <h3>Aadhaar eSign Gateway</h3>
+        <div class="modal-close-btn" onclick="closeModal('esignModal')">
+          <i class="fa-solid fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body" style="position: relative;">
+        <!-- Loader overlay -->
+        <div class="loader-overlay" id="esign-loader">
+          <div class="spinner"></div>
+          <div class="loader-status" id="esign-loader-text">Connecting to NSDL Secure eSign Server...</div>
+        </div>
+
+        <div class="aadhaar-logo-box">
+          <svg viewBox="0 0 100 100" width="40" height="40">
+            <!-- Tri-color Aadhaar mock logo -->
+            <path d="M20 50 C20 30, 80 30, 80 50 C80 70, 20 70, 20 50" fill="none" stroke="#ff9933" stroke-width="4" />
+            <path d="M30 50 C30 38, 70 38, 70 50 C70 62, 30 62, 30 50" fill="none" stroke="#000080" stroke-width="4" />
+            <path d="M40 50 C40 45, 60 45, 60 50 C60 55, 40 55, 40 50" fill="none" stroke="#128807" stroke-width="4" />
+            <!-- Fingerprint lines -->
+            <path d="M42 25 Q50 15 58 25 M38 30 Q50 10 62 30 M45 40 Q50 35 55 40" fill="none" stroke="#2563eb"
+              stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <div>
+            <div class="aadhaar-title-main">Unique Identification Authority of India</div>
+            <div class="aadhaar-subtitle-main">Government of India • eSign Verification Service</div>
+          </div>
+        </div>
+
+        <!-- Aadhaar Number Inputs -->
+        <div id="esign-step-aadhaar">
+          <div class="form-group">
+            <label class="form-label" for="aadhaar-num">Enter Signer Aadhaar Number</label>
+            <input type="text" class="input-text" id="aadhaar-num" placeholder="12-digit Aadhaar Number" maxlength="14"
+              value="5821-4927-1042">
+          </div>
+
+          <div class="consent-box">
+            <input type="checkbox" id="consent-check" checked>
+            <label for="consent-check">
+              I hereby give my consent to Aashita SecureSign to verify my Identity details using Aadhaar e-KYC service
+              for the purpose of signing the Non-Disclosure Agreement (NDA #AAS-2026-00421).
+            </label>
+          </div>
+
+          <button class="btn-primary" style="margin-top: 10px;" onclick="requestAadhaarOtp()">
+            Request OTP
+          </button>
+        </div>
+
+        <!-- OTP inputs -->
+        <div id="esign-step-otp" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" style="text-align: center;">Enter 6-digit OTP sent to Mobile ******9876</label>
+            <div class="otp-grid">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp2', '')" id="otp1">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp3', 'otp1')" id="otp2">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp4', 'otp2')" id="otp3">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp5', 'otp3')" id="otp4">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, 'otp6', 'otp4')" id="otp5">
+              <input type="text" class="otp-input" maxlength="1" onkeyup="moveOtpFocus(this, '', 'otp5')" id="otp6">
+            </div>
+            <div style="display: flex; justify-content: space-between; font-size: 11px; margin-top: 8px;">
+              <span style="color: var(--text-gray-muted);">Didn't receive code?</span>
+              <button class="btn-link" onclick="alert('New OTP has been sent.')">Resend Code</button>
+            </div>
+          </div>
+
+          <button class="btn-primary" style="margin-top: 16px;" onclick="verifyAadhaarOtp()">
+            Verify & Sign Document
+          </button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" style="border: none;" onclick="closeModal('esignModal')">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 2: Bajaj Recipient Signature Modal -->
+  <div class="modal-overlay" id="bajajSignModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Bajaj Auto Ltd. - Recipient Signature</h3>
+        <div class="modal-close-btn" onclick="closeModal('bajajSignModal')">
+          <i class="fa-solid fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body" style="position: relative;">
+        <!-- Loader overlay -->
+        <div class="loader-overlay" id="bajaj-loader">
+          <div class="spinner"></div>
+          <div class="loader-status" id="bajaj-loader-text">Applying digital signature...</div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Signer Full Name</label>
+          <input type="text" class="input-text" id="bajaj-signer-name" value="Rahul Bajaj" oninput="updateSignaturePreview()">
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Designation / Role</label>
+          <input type="text" class="input-text" id="bajaj-signer-des" value="Director">
+        </div>
+
+        <div class="signature-tabs">
+          <div class="sig-tab active" onclick="switchSigTab('type')" id="tab-type">Type Signature</div>
+          <div class="sig-tab" onclick="switchSigTab('draw')" id="tab-draw">Draw Signature</div>
+        </div>
+
+        <!-- Cursive Type Panel -->
+        <div class="sig-panel active" id="panel-type">
+          <div class="cursive-preview" id="cursive-sig-preview">Rahul Bajaj</div>
+          <div style="font-size: 10px; color: var(--text-gray-muted); text-align: center;">
+            This will insert a stylized handwritten signature representation.
+          </div>
+        </div>
+
+        <!-- Canvas Draw Panel -->
+        <div class="sig-panel" id="panel-draw">
+          <div class="canvas-container">
+            <canvas id="sig-canvas"></canvas>
+          </div>
+          <div class="canvas-actions">
+            <button class="btn-link" onclick="clearSignatureCanvas()">Clear Canvas</button>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" style="border: none;" onclick="closeModal('bajajSignModal')">Cancel</button>
+        <button class="btn-primary" onclick="submitBajajSignature()">Apply Signature</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 3: View Certificate Modal -->
+  <div class="modal-overlay" id="certModal">
+    <div class="modal-content" style="max-width: 600px;">
+      <div class="modal-header">
+        <h3>e-Stamp Duty Payment Certificate</h3>
+        <div class="modal-close-btn" onclick="closeModal('certModal')">
+          <i class="fa-solid fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="certificate-sheet">
+          <div style="text-align: center; border-bottom: 2px solid #334155; padding-bottom: 12px; margin-bottom: 16px;">
+            <div style="font-size: 15px; font-weight: 800; color: #1e293b; letter-spacing: 0.5px;">GOVERNMENT OF PUNJAB</div>
+            <div style="font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase;">Department of Revenue and Stamps</div>
+            <div style="font-size: 12px; font-weight: 800; color: #0284c7; margin-top: 4px;">e-STAMP DUTY PAYMENT CERTIFICATE</div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; font-size: 11.5px; margin-bottom: 20px;">
+            <div>
+              <div style="color: #64748b; font-weight: 500;">Certificate No.</div>
+              <div style="font-weight: 700; color: #1e293b;">IN-PB-2026-51234567890123</div>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 500;">Certificate Date</div>
+              <div style="font-weight: 700; color: #1e293b;">08 May 2026 | 12:05 PM</div>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 500;">Duty Paid By</div>
+              <div style="font-weight: 700; color: #1e293b; text-transform: uppercase;">Aashita Private Limited</div>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 500;">Stamp Duty Amount</div>
+              <div style="font-weight: 700; color: #1e293b;">₹500 (Rupees Five Hundred Only)</div>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 500;">State Office / Registering Auth</div>
+              <div style="font-weight: 700; color: #1e293b;">S.R.O. Mohali, Punjab</div>
+            </div>
+            <div>
+              <div style="color: #64748b; font-weight: 500;">Description of Document</div>
+              <div style="font-weight: 700; color: #1e293b;">Agreement (NDA)</div>
+            </div>
+          </div>
+
+          <div style="border: 1px solid #e2e8f0; border-radius: 6px; padding: 12px; font-size: 10px; color: #64748b; line-height: 1.5;">
+            <strong>Verification Warning:</strong> The authenticity of this e-Stamp Certificate should be verified at
+            www.shcilestamp.com. Any discrepancy in the details on this Certificate and as available on the website renders it invalid.
+          </div>
+
+          <!-- Barcode Simulation -->
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-top: 24px;">
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+              <div style="display: flex; height: 30px; gap: 2px;">
+                <!-- Generating mock lines -->
+                <div style="width: 2px; background: #000; height: 100%;"></div>
+                <div style="width: 1px; background: #000; height: 100%;"></div>
+                <div style="width: 4px; background: #000; height: 100%;"></div>
+                <div style="width: 2px; background: #000; height: 100%;"></div>
+                <div style="width: 1px; background: #000; height: 100%;"></div>
+                <div style="width: 3px; background: #000; height: 100%;"></div>
+                <div style="width: 1px; background: #000; height: 100%;"></div>
+                <div style="width: 4px; background: #000; height: 100%;"></div>
+                <div style="width: 2px; background: #000; height: 100%;"></div>
+                <div style="width: 2px; background: #000; height: 100%;"></div>
+                <div style="width: 1px; background: #000; height: 100%;"></div>
+                <div style="width: 3px; background: #000; height: 100%;"></div>
+                <div style="width: 4px; background: #000; height: 100%;"></div>
+              </div>
+              <div style="font-family: monospace; font-size: 9px; color: #1e293b;">IN-PB-51234567890123-VERIFIED</div>
+            </div>
+
+            <!-- Custom Mock QR Code -->
+            <div style="width: 60px; height: 60px; border: 2px solid #000; padding: 2px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px;">
+              <div style="background: #000;"></div><div style="background: #000;"></div><div></div><div style="background: #000;"></div>
+              <div></div><div style="background: #000;"></div><div style="background: #000;"></div><div></div>
+              <div style="background: #000;"></div><div></div><div style="background: #000;"></div><div style="background: #000;"></div>
+              <div style="background: #000;"></div><div style="background: #000;"></div><div></div><div style="background: #000;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-primary" onclick="alert('Downloading Certificate PDF...')">Download Certificate</button>
+        <button class="btn-outline" onclick="closeModal('certModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal 4: Review NDA Modal -->
+  <div class="modal-overlay" id="reviewNdaModal">
+    <div class="modal-content" style="max-width: 650px;">
+      <div class="modal-header">
+        <h3>Review Non-Disclosure Agreement</h3>
+        <div class="modal-close-btn" onclick="closeModal('reviewNdaModal')">
+          <i class="fa-solid fa-times"></i>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div style="border: 1px solid #e2e8f0; border-radius: 8px; padding: 20px; max-height: 400px; overflow-y: auto; background: #f8fafc; font-size: 11px; color: #334155; line-height: 1.7;">
+          <h4 style="text-align: center; margin-bottom: 14px; font-size: 12.5px; font-weight: 800; color: #0f172a;">
+            MUTUAL NON-DISCLOSURE AGREEMENT
+          </h4>
+          <p>This Mutual Non-Disclosure Agreement (this "Agreement") is entered into as of May 11, 2026 (the "Effective Date"), by and between Aashita Private Limited ("Disclosing Party") and Bajaj Auto Limited ("Receiving Party").</p>
+          <br>
+          <p><strong>1. Purpose.</strong> The parties wish to explore a business opportunity in connection with RFQ: BAJ-2026-0578 (the "Opportunity"). In connection with the Opportunity, Aashita Private Limited may disclose proprietary or confidential technical and business information to Bajaj Auto Limited.</p>
+          <br>
+          <p><strong>2. Confidential Information.</strong> "Confidential Information" means any and all technical and non-technical information provided by either party, including but not limited to CAD drawings, process sheets, cost estimations, and supplier networks, which is marked as confidential or should reasonably be understood to be confidential.</p>
+          <br>
+          <p><strong>3. Protection of Information.</strong> The Receiving Party agrees that it will hold the Confidential Information in strict confidence and take reasonable precautions to protect it (including, without limitation, all precautions the Receiving Party employs with respect to its own confidential materials).</p>
+          <br>
+          <p><strong>4. Terms and Termination.</strong> The obligations of confidentiality hereunder shall survive for a period of five (5) years from the date of disclosure. Each party shall return or destroy all copies of Confidential Information upon written request.</p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-outline" style="border: none;" onclick="closeModal('reviewNdaModal')">Cancel</button>
+        <button class="btn-primary" onclick="proceedToSignFromReview()">Proceed to Sign</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification elements -->
+  <div class="toast-container" id="toast-box"></div>
+
+  <!-- JavaScript Logics -->
+  <script>
+    // ===== SYSTEM STATES =====
+    // States: 
+    // 0: Initial State (No signatures, Aashita signing active)
+    // 1: Aashita Signed (Aashita signature applied, Bajaj signing active)
+    // 2: Fully Executed (Both signed, execution complete)
+    let currentSignState = 0;
+    let selectedSignatureType = 'type'; // 'type' or 'draw'
+
+    // Canvas drawing variables
+    let canvas, ctx;
+    let drawing = false;
+
+    // Initialize Page
+    document.addEventListener("DOMContentLoaded", () => {
+      loadState();
+      initSignatureCanvas();
+      updateSignaturePreview();
+    });
+
+    // Save/Restore State using LocalStorage
+    function saveState() {
+      localStorage.setItem("nda_signing_state", currentSignState);
+      localStorage.setItem("aashita_sig_data", JSON.stringify({
+        name: document.getElementById("aashita-val-name").innerText,
+        des: document.getElementById("aashita-val-des").innerText,
+        date: document.getElementById("aashita-val-date").innerText
+      }));
+      localStorage.setItem("bajaj_sig_data", JSON.stringify({
+        name: document.getElementById("bajaj-val-name").innerText,
+        des: document.getElementById("bajaj-val-des").innerText,
+        date: document.getElementById("bajaj-val-date").innerText,
+        type: selectedSignatureType,
+        drawnImg: document.getElementById("bajaj-drawn-sig-img").src
+      }));
+    }
+
+    function loadState() {
+      const savedState = localStorage.getItem("nda_signing_state");
+      if (savedState !== null) {
+        currentSignState = parseInt(savedState);
+
+        const aashitaData = JSON.parse(localStorage.getItem("aashita_sig_data"));
+        if (aashitaData) {
+          document.getElementById("aashita-val-name").innerText = aashitaData.name;
+          document.getElementById("aashita-val-des").innerText = aashitaData.des;
+          document.getElementById("aashita-val-date").innerText = aashitaData.date;
+        }
+
+        const bajajData = JSON.parse(localStorage.getItem("bajaj_sig_data"));
+        if (bajajData) {
+          document.getElementById("bajaj-val-name").innerText = bajajData.name;
+          document.getElementById("bajaj-val-des").innerText = bajajData.des;
+          document.getElementById("bajaj-val-date").innerText = bajajData.date;
+          if (bajajData.drawnImg) {
+            document.getElementById("bajaj-drawn-sig-img").src = bajajData.drawnImg;
+          }
+        }
+      }
+      applyStateUI();
+    }
+
+    function resetDemo() {
+      localStorage.clear();
+      currentSignState = 0;
+      selectedSignatureType = 'type';
+      
+      // Default timestamps
+      document.getElementById("aashita-val-name").innerText = "Jasneek Singh";
+      document.getElementById("aashita-val-des").innerText = "Authorized Signatory";
+      document.getElementById("aashita-val-date").innerText = "11 May 2026 | 10:42 AM IST";
+
+      document.getElementById("bajaj-val-name").innerText = "Rahul Bajaj";
+      document.getElementById("bajaj-val-des").innerText = "Director";
+      document.getElementById("bajaj-val-date").innerText = "11 May 2026 | 02:40 PM IST";
+      
+      applyStateUI();
+      showToast("Demo state reset to initial pending state.");
+    }
+
+    // Apply State UI transformations
+    function applyStateUI() {
+      // Elements list
+      const hStep4 = document.getElementById("step-h-4");
+      const hStep5 = document.getElementById("step-h-5");
+      const hStep6 = document.getElementById("step-h-6");
+
+      const line4 = document.getElementById("line-h-4");
+      const line5 = document.getElementById("line-h-5");
+
+      const circle4 = document.getElementById("circle-h-4");
+      const circle5 = document.getElementById("circle-h-5");
+      const circle6 = document.getElementById("circle-h-6");
+
+      const wf4 = document.getElementById("wf-4");
+      const wf5 = document.getElementById("wf-5");
+      const wf6 = document.getElementById("wf-6");
+
+      const dot4 = document.getElementById("dot-wf-4");
+      const dot5 = document.getElementById("dot-wf-5");
+      const dot6 = document.getElementById("dot-wf-6");
+
+      const time4 = document.getElementById("time-wf-4");
+      const time5 = document.getElementById("time-wf-5");
+      const time6 = document.getElementById("time-wf-6");
+
+      const banner = document.getElementById("success-banner");
+      const btnEsign = document.getElementById("btn-action-esign");
+      const btnReview = document.getElementById("btn-action-review");
+
+      const aashitaAwaiting = document.getElementById("aashita-awaiting-sig");
+      const aashitaSigned = document.getElementById("aashita-signed-sig");
+
+      const bajajAwaiting = document.getElementById("bajaj-awaiting-sig");
+      const bajajSigned = document.getElementById("bajaj-signed-sig");
+
+      // Reset All classes first
+      [hStep4, hStep5, hStep6].forEach(e => e.classList.remove("checked", "active"));
+      [line4, line5].forEach(e => e.classList.remove("checked"));
+      [wf4, wf5, wf6].forEach(e => e.classList.remove("checked", "active"));
+
+      circle4.innerHTML = "4";
+      circle5.innerHTML = "5";
+      circle6.innerHTML = "6";
+
+      dot4.innerHTML = "4";
+      dot5.innerHTML = "5";
+      dot6.innerHTML = "6";
+
+      // Hide banners/modals
+      banner.classList.remove("active");
+
+      // UI Config based on states
+      if (currentSignState === 0) {
+        // Initial
+        hStep4.classList.add("active");
+        wf4.classList.add("active");
+        time4.innerText = "In Progress";
+        time5.innerText = "Pending";
+        time6.innerText = "Pending";
+
+        aashitaAwaiting.style.display = "flex";
+        aashitaSigned.style.display = "none";
+
+        // Bajaj disabled/locked
+        bajajAwaiting.style.display = "flex";
+        bajajAwaiting.style.borderColor = "#cbd5e1";
+        bajajAwaiting.style.background = "#fafafa";
+        bajajAwaiting.style.cursor = "not-allowed";
+        bajajAwaiting.style.opacity = "0.7";
+        bajajAwaiting.innerHTML = `<i class="fa-solid fa-lock" style="font-size: 14px; color: #94a3b8;"></i><div class="sig-awaiting-text" style="color: #94a3b8;">Awaiting Signature</div>`;
+        bajajSigned.style.display = "none";
+
+        btnEsign.disabled = false;
+        btnEsign.innerHTML = `<i class="fa-solid fa-file-signature"></i> eSign Now`;
+        btnReview.innerText = "Review NDA";
+        btnReview.style.background = "var(--accent-blue)";
+        btnReview.style.borderColor = "var(--accent-blue)";
+
+      } else if (currentSignState === 1) {
+        // Aashita signed, Bajaj active
+        hStep4.classList.add("checked");
+        hStep4.querySelector(".t-step-circle").innerHTML = `<i class="fa-solid fa-check"></i>`;
+        line4.classList.add("checked");
+
+        hStep5.classList.add("active");
+
+        wf4.classList.add("checked");
+        dot4.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        time4.innerText = document.getElementById("aashita-val-date").innerText;
+
+        wf5.classList.add("active");
+        time5.innerText = "In Progress";
+        time6.innerText = "Pending";
+
+        aashitaAwaiting.style.display = "none";
+        aashitaSigned.style.display = "flex";
+
+        // Bajaj active
+        bajajAwaiting.style.display = "flex";
+        bajajAwaiting.style.borderColor = "#2563eb";
+        bajajAwaiting.style.background = "rgba(37, 99, 235, 0.02)";
+        bajajAwaiting.style.cursor = "pointer";
+        bajajAwaiting.style.opacity = "1";
+        bajajAwaiting.innerHTML = `<i class="fa-solid fa-file-pen sig-awaiting-icon"></i><div class="sig-awaiting-text">Sign as Recipient (Bajaj)</div>`;
+        bajajSigned.style.display = "none";
+
+        btnEsign.innerHTML = `<i class="fa-solid fa-signature"></i> eSign Recipient`;
+        btnReview.innerText = "Review NDA";
+
+      } else if (currentSignState === 2) {
+        // Fully Executed
+        hStep4.classList.add("checked");
+        hStep4.querySelector(".t-step-circle").innerHTML = `<i class="fa-solid fa-check"></i>`;
+        line4.classList.add("checked");
+
+        hStep5.classList.add("checked");
+        hStep5.querySelector(".t-step-circle").innerHTML = `<i class="fa-solid fa-check"></i>`;
+        line5.classList.add("checked");
+
+        hStep6.classList.add("checked");
+        hStep6.querySelector(".t-step-circle").innerHTML = `<i class="fa-solid fa-check"></i>`;
+
+        wf4.classList.add("checked");
+        dot4.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        time4.innerText = document.getElementById("aashita-val-date").innerText;
+
+        wf5.classList.add("checked");
+        dot5.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        time5.innerText = document.getElementById("bajaj-val-date").innerText;
+
+        wf6.classList.add("checked");
+        dot6.innerHTML = `<i class="fa-solid fa-check"></i>`;
+        time6.innerText = document.getElementById("bajaj-val-date").innerText;
+
+        aashitaAwaiting.style.display = "none";
+        aashitaSigned.style.display = "flex";
+
+        bajajAwaiting.style.display = "none";
+        bajajSigned.style.display = "flex";
+
+        // Display banner
+        banner.classList.add("active");
+        document.getElementById("success-banner-title").innerText = "NDA Fully Executed!";
+        document.getElementById("success-banner-desc").innerText = "All parties have signed this Agreement. Certified Audit Trail has been compiled.";
+
+        btnEsign.disabled = true;
+        btnEsign.innerHTML = `<i class="fa-solid fa-check-double"></i> NDA Fully Signed`;
+        btnReview.innerText = "View Signature Audit";
+        btnReview.style.background = "#0ca678";
+        btnReview.style.borderColor = "#0ca678";
+      }
+    }
+
+    // Modal Control functions
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    // Close Modal helper
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    // Trigger Review Modal
+    function openReviewModal() {
+      if (currentSignState === 2) {
+        alert("Signature Audit:\n1. Aashita Pvt. Ltd. (Signed via Aadhaar OTP on " + document.getElementById("aashita-val-date").innerText + ")\n2. Bajaj Auto Limited (Signed on " + document.getElementById("bajaj-val-date").innerText + ")\nStatus: Securely Executed");
+      } else {
+        openModal("reviewNdaModal");
+      }
+    }
+
+    function proceedToSignFromReview() {
+      closeModal("reviewNdaModal");
+      if (currentSignState === 0) {
+        openEsignModal();
+      } else if (currentSignState === 1) {
+        openBajajSignModal();
+      }
+    }
+
+    // Trigger eSign Modal
+    function openEsignModal() {
+      if (currentSignState === 0) {
+        // Reset modal steps
+        document.getElementById("esign-step-aadhaar").style.display = "block";
+        document.getElementById("esign-step-otp").style.display = "none";
+        document.getElementById("esign-loader").classList.remove("active");
+        openModal("esignModal");
+      } else if (currentSignState === 1) {
+        openBajajSignModal();
+      }
+    }
+
+    function requestAadhaarOtp() {
+      const aadhaarNum = document.getElementById("aadhaar-num").value;
+      if (aadhaarNum.replace(/-/g, '').length !== 12) {
+        alert("Please enter a valid 12-digit Aadhaar Number.");
+        return;
+      }
+      if (!document.getElementById("consent-check").checked) {
+        alert("Please check the consent box to proceed.");
+        return;
+      }
+
+      // Show loader
+      const loader = document.getElementById("esign-loader");
+      const loaderText = document.getElementById("esign-loader-text");
+      loader.classList.add("active");
+      loaderText.innerText = "Connecting to Aadhaar NSDL e-Sign Server...";
+
+      setTimeout(() => {
+        loaderText.innerText = "Verifying Identity and generating OTP...";
+        setTimeout(() => {
+          loader.classList.remove("active");
+          document.getElementById("esign-step-aadhaar").style.display = "none";
+          document.getElementById("esign-step-otp").style.display = "block";
+          // Auto focus OTP inputs
+          document.getElementById("otp1").focus();
+          showToast("OTP sent to mobile number.");
+        }, 1200);
+      }, 1000);
+    }
+
+    // OTP Navigation
+    function moveOtpFocus(current, nextId, prevId) {
+      if (current.value.length === 1 && nextId !== '') {
+        document.getElementById(nextId).focus();
+      }
+      if (current.value.length === 0 && prevId !== '') {
+        document.getElementById(prevId).focus();
+      }
+    }
+
+    function verifyAadhaarOtp() {
+      let otp = "";
+      for (let i = 1; i <= 6; i++) {
+        otp += document.getElementById("otp" + i).value;
+      }
+
+      if (otp.length !== 6) {
+        alert("Please enter the 6-digit OTP code.");
+        return;
+      }
+
+      const loader = document.getElementById("esign-loader");
+      const loaderText = document.getElementById("esign-loader-text");
+      loader.classList.add("active");
+      loaderText.innerText = "Verifying Aadhaar OTP Authentication...";
+
+      setTimeout(() => {
+        loaderText.innerText = "Applying Cryptographic Signature Seal...";
+        setTimeout(() => {
+          loaderText.innerText = "Applying Stamp Duty (Certificate No. IN-PB-2026-51234567890123)...";
+          setTimeout(() => {
+            loader.classList.remove("active");
+            closeModal("esignModal");
+
+            // Update State
+            currentSignState = 1;
+            
+            // Set signature details
+            document.getElementById("aashita-val-name").innerText = "Jasneek Singh";
+            document.getElementById("aashita-val-des").innerText = "Authorized Signatory";
+            
+            // Set live signing timestamp
+            const now = new Date();
+            const dateStr = formatDateTime(now);
+            document.getElementById("aashita-val-date").innerText = dateStr;
+
+            applyStateUI();
+            saveState();
+            showToast("eSigned via Aadhaar successfully!", "success");
+          }, 1200);
+        }, 1000);
+      }, 1200);
+    }
+
+    // Recipient Bajaj Signing Modals
+    function openBajajSignModal() {
+      if (currentSignState === 0) {
+        showToast("Please sign as Aashita Pvt. Ltd. first.");
+        return;
+      }
+      // Reset inputs & Draw
+      document.getElementById("bajaj-loader").classList.remove("active");
+      openModal("bajajSignModal");
+      
+      // Resize canvas to load properly
+      setTimeout(() => {
+        resizeCanvas();
+      }, 200);
+    }
+
+    function switchSigTab(type) {
+      selectedSignatureType = type;
+      document.getElementById("tab-type").classList.remove("active");
+      document.getElementById("tab-draw").classList.remove("active");
+      document.getElementById("panel-type").classList.remove("active");
+      document.getElementById("panel-draw").classList.remove("active");
+
+      if (type === 'type') {
+        document.getElementById("tab-type").classList.add("active");
+        document.getElementById("panel-type").classList.add("active");
+      } else {
+        document.getElementById("tab-draw").classList.add("active");
+        document.getElementById("panel-draw").classList.add("active");
+        resizeCanvas();
+      }
+    }
+
+    // Update Signature Handwriting text
+    function updateSignaturePreview() {
+      const name = document.getElementById("bajaj-signer-name").value || "Rahul Bajaj";
+      document.getElementById("cursive-sig-preview").innerText = name;
+    }
+
+    function submitBajajSignature() {
+      const name = document.getElementById("bajaj-signer-name").value;
+      const des = document.getElementById("bajaj-signer-des").value;
+
+      if (!name || !des) {
+        alert("Please enter both Signer Name and Designation.");
+        return;
+      }
+
+      const loader = document.getElementById("bajaj-loader");
+      const loaderText = document.getElementById("bajaj-loader-text");
+      loader.classList.add("active");
+      loaderText.innerText = "Securing cryptographic signature...";
+
+      setTimeout(() => {
+        loaderText.innerText = "Updating agreement audit logs...";
+        setTimeout(() => {
+          loader.classList.remove("active");
+          closeModal("bajajSignModal");
+
+          // Save signature fields
+          document.getElementById("bajaj-val-name").innerText = name;
+          document.getElementById("bajaj-val-des").innerText = des;
+          
+          const now = new Date();
+          const dateStr = formatDateTime(now);
+          document.getElementById("bajaj-val-date").innerText = dateStr;
+
+          const cursiveSig = document.getElementById("bajaj-cursive-sig");
+          const drawnSig = document.getElementById("bajaj-drawn-sig-img");
+
+          if (selectedSignatureType === 'type') {
+            cursiveSig.innerText = name;
+            cursiveSig.style.display = "block";
+            drawnSig.style.display = "none";
+          } else {
+            // Get canvas data url
+            const dataUrl = canvas.toDataURL();
+            drawnSig.src = dataUrl;
+            drawnSig.style.display = "block";
+            cursiveSig.style.display = "none";
+          }
+
+          // Move state to fully executed
+          currentSignState = 2;
+          applyStateUI();
+          saveState();
+          showToast("Bajaj Auto Limited signed successfully!", "success");
+        }, 1000);
+      }, 1200);
+    }
+
+    // HTML5 Canvas Drawing Board Logic
+    function initSignatureCanvas() {
+      canvas = document.getElementById("sig-canvas");
+      ctx = canvas.getContext("2d");
+
+      // Setup drawing options
+      ctx.strokeStyle = "#0f2d59";
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = "round";
+
+      // Mouse events
+      canvas.addEventListener("mousedown", (e) => {
+        drawing = true;
+        draw(e);
+      });
+      canvas.addEventListener("mousemove", draw);
+      canvas.addEventListener("mouseup", () => drawing = false);
+      canvas.addEventListener("mouseleave", () => drawing = false);
+
+      // Touch events (for mobile compatibility)
+      canvas.addEventListener("touchstart", (e) => {
+        drawing = true;
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        ctx.beginPath();
+        ctx.moveTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        e.preventDefault();
+      });
+      canvas.addEventListener("touchmove", (e) => {
+        if (!drawing) return;
+        const touch = e.touches[0];
+        const rect = canvas.getBoundingClientRect();
+        ctx.lineTo(touch.clientX - rect.left, touch.clientY - rect.top);
+        ctx.stroke();
+        e.preventDefault();
+      });
+      canvas.addEventListener("touchend", () => drawing = false);
+    }
+
+    function resizeCanvas() {
+      if (!canvas) return;
+      const rect = canvas.parentElement.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = 150;
+      // Re-apply options after resize
+      ctx.strokeStyle = "#0f2d59";
+      ctx.lineWidth = 2.5;
+      ctx.lineCap = "round";
+    }
+
+    function draw(e) {
+      if (!drawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      if (e.type === 'mousedown') {
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+      } else {
+        ctx.lineTo(x, y);
+        ctx.stroke();
+      }
+    }
+
+    function clearSignatureCanvas() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+    }
+
+    // View Certificate Modal
+    function openCertModal() {
+      openModal("certModal");
+    }
+
+    // Toast Notifications helper
+    function showToast(message, type = "info") {
+      const toastBox = document.getElementById("toast-box");
+      const toast = document.createElement("div");
+      toast.className = "toast toast-success";
+      
+      const checkIcon = type === "success" 
+        ? `<i class="fa-solid fa-circle-check toast-icon-green"></i>` 
+        : `<i class="fa-solid fa-info-circle" style="color: #2563eb;"></i>`;
+
+      toast.innerHTML = `
+        ${checkIcon}
+        <span>${message}</span>
+      `;
+      toastBox.appendChild(toast);
+
+      // Trigger animation
+      setTimeout(() => {
+        toast.classList.add("active");
+      }, 50);
+
+      // Dismiss after 4 seconds
+      setTimeout(() => {
+        toast.classList.remove("active");
+        setTimeout(() => {
+          toast.remove();
+        }, 300);
+      }, 4000);
+    }
+
+    // Helper Date Time Format
+    function formatDateTime(date) {
+      const day = date.getDate();
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      const month = monthNames[date.getMonth()];
+      const year = date.getFullYear();
+
+      let hours = date.getHours();
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      const formattedHours = hours.toString().padStart(2, '0');
+
+      return `${day} ${month} ${year} | ${formattedHours}:${minutes} ${ampm} IST`;
+    }
+
+    function triggerDownloadPDF() {
+      if (currentSignState !== 2) {
+        const confirmDownload = confirm("Warning: Document is still pending signature(s). Do you want to download the draft PDF?");
+        if (!confirmDownload) return;
+      }
+      alert("Opening print layout to save document as PDF...");
+      window.print();
+    }
+
+    // Retract Signature Logic
+    function retractSignature(party) {
+      if (party === 'bajaj') {
+        if (confirm("Are you sure you want to retract the signature of Bajaj Auto Limited? This will revert the document to a pending state.")) {
+          currentSignState = 1; // back to Aashita signed
+          
+          // Reset signature inputs/elements
+          document.getElementById("bajaj-val-name").innerText = "";
+          document.getElementById("bajaj-val-des").innerText = "";
+          document.getElementById("bajaj-val-date").innerText = "";
+          document.getElementById("bajaj-cursive-sig").innerText = "";
+          document.getElementById("bajaj-drawn-sig-img").src = "";
+          
+          applyStateUI();
+          saveState();
+          showToast("Bajaj Auto Limited signature has been retracted.");
+        }
+      } else if (party === 'aashita') {
+        if (currentSignState === 2) {
+          alert("Please retract Bajaj Auto Limited's signature first before retracting Aashita's signature.");
+          return;
+        }
+        if (confirm("Are you sure you want to retract the signature of Aashita Pvt. Ltd.?")) {
+          currentSignState = 0; // back to initial
+          
+          // Reset signature inputs/elements
+          document.getElementById("aashita-val-name").innerText = "";
+          document.getElementById("aashita-val-des").innerText = "";
+          document.getElementById("aashita-val-date").innerText = "";
+          
+          applyStateUI();
+          saveState();
+          showToast("Aashita Pvt. Ltd. signature has been retracted.");
+        }
+      }
+    }
+  </script>
+</body>
+
+</html>

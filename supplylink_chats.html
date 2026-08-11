@@ -1,0 +1,2421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chats - Aashita Intelligence</title>
+  <meta name="description" content="Aashita Intelligence - Connect. Collaborate. Deliver. Individual Enterprise Chats.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  <style>
+    /* ===== RESET & BASE STYLE ===== */
+    *, *::before, *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #f8fafc;
+      --bg-sidebar: #0b0f19;
+      --bg-sidebar-hover: #162032;
+      --text-white: #ffffff;
+      --text-gray-light: #cbd5e1;
+      --text-gray-dark: #0f172a;
+      --text-gray-muted: #64748b;
+      
+      --accent-blue: #2563eb;
+      --accent-blue-hover: #1d4ed8;
+      --accent-blue-light: #eff6ff;
+      --accent-blue-glow: rgba(37, 99, 235, 0.15);
+      
+      --accent-green: #10b981;
+      --accent-green-hover: #059669;
+      --accent-green-light: #ecfdf5;
+      
+      --accent-orange: #f59e0b;
+      
+      --accent-red: #ef4444;
+      --accent-red-light: #fef2f2;
+      
+      --border-color: #e2e8f0;
+      --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.03), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
+      
+      /* Avatar Background Color Palette */
+      --avatar-color-1: #2563eb;
+      --avatar-color-2: #8b5cf6;
+      --avatar-color-3: #10b981;
+      --avatar-color-4: #f59e0b;
+      --avatar-color-5: #06b6d4;
+      --avatar-color-6: #ec4899;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-gray-dark);
+      line-height: 1.5;
+      overflow: hidden;
+      height: 100vh;
+      min-width: 1200px;
+    }
+
+    /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
+    [contenteditable="true"] {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(37, 99, 235, 0.4);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.03);
+      border-radius: 4px;
+    }
+
+    [contenteditable="true"]:focus {
+      outline: 2px solid var(--accent-blue);
+      outline-offset: 2px;
+      background: rgba(37, 99, 235, 0.06);
+      border-radius: 4px;
+      color: var(--text-gray-dark);
+    }
+
+    .sidebar [contenteditable="true"]:hover {
+      outline: 1px dashed rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar [contenteditable="true"]:focus {
+      outline: 2px solid var(--text-white);
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--text-white);
+    }
+
+    /* ===== APP LAYOUT ===== */
+    .app-container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    /* ===== LEFT SIDEBAR ===== */
+    .sidebar {
+      width: 260px;
+      min-width: 260px;
+      background: var(--bg-sidebar);
+      color: var(--text-white);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid #111e35;
+      height: 100vh;
+      z-index: 100;
+    }
+
+    .sidebar-top {
+      display: flex;
+      flex-direction: column;
+      padding: 24px 16px;
+      overflow-y: auto;
+      flex: 1;
+    }
+
+    /* Brand Logo */
+    .brand-section {
+      margin-bottom: 24px;
+      padding: 0 8px;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+
+    .logo-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--text-white);
+    }
+
+    .logo-tagline {
+      font-size: 9px;
+      font-weight: 500;
+      color: var(--text-gray-muted);
+      padding-left: 2px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    /* Navigation Items */
+    .sidebar-menu {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: 20px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      border-radius: 8px;
+      color: #94a3b8;
+      font-size: 12.5px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .nav-item-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-item-left i {
+      font-size: 14px;
+      width: 18px;
+      text-align: center;
+    }
+
+    .nav-item:hover {
+      background: var(--bg-sidebar-hover);
+      color: var(--text-white);
+    }
+
+    .nav-item.active {
+      background: linear-gradient(135deg, #1d4ed8, #2563eb);
+      color: var(--text-white);
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .nav-badge {
+      font-size: 10px;
+      font-weight: 700;
+      background: var(--accent-red);
+      color: var(--text-white);
+      padding: 2px 6px;
+      border-radius: 10px;
+    }
+
+    .nav-badge.badge-blue {
+      background: var(--accent-blue);
+    }
+
+    /* Profile Section at Bottom */
+    .sidebar-bottom {
+      padding: 16px;
+      border-top: 1px solid #162032;
+      background: #070a12;
+    }
+
+    .profile-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .profile-card:hover {
+      background: var(--bg-sidebar-hover);
+    }
+
+    .profile-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: var(--text-white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+
+    .profile-info {
+      flex: 1;
+      overflow: hidden;
+    }
+
+    .profile-name {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-white);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-role {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .profile-company {
+      font-size: 9px;
+      color: #94a3b8;
+      font-weight: 500;
+    }
+
+    .profile-dropdown-icon {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+    }
+
+    .org-switcher {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #162032;
+    }
+
+    .org-switcher-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      color: var(--text-gray-muted);
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: block;
+    }
+
+    .org-dropdown-trigger {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #111827;
+      border: 1px solid #1f2937;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 11px;
+      color: var(--text-gray-light);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .org-dropdown-trigger:hover {
+      border-color: #374151;
+      background: #1f2937;
+    }
+
+    /* Org Switch Dropdown menu */
+    .dropdown-menu {
+      position: absolute;
+      bottom: 75px;
+      left: 16px;
+      right: 16px;
+      background: #111827;
+      border: 1px solid #1f2937;
+      border-radius: 8px;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.5);
+      z-index: 200;
+      display: none;
+      padding: 4px 0;
+    }
+
+    .dropdown-menu.active {
+      display: block;
+      animation: slideUp 0.2s ease-out;
+    }
+
+    .dropdown-item {
+      padding: 8px 12px;
+      font-size: 11px;
+      color: var(--text-gray-light);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+
+    .dropdown-item:hover {
+      background: #1f2937;
+      color: var(--text-white);
+    }
+
+    .dropdown-item.selected {
+      background: var(--accent-blue-light);
+      color: var(--accent-blue);
+      font-weight: 600;
+    }
+
+    /* ===== MAIN CONTENT AREA ===== */
+    .main-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header Bar */
+    .top-header {
+      height: 70px;
+      padding: 0 24px;
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #ffffff;
+      flex-shrink: 0;
+      z-index: 10;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .welcome-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .welcome-desc {
+      font-size: 11px;
+      color: var(--text-gray-muted);
+      margin-top: 1px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    /* Search Input */
+    .search-wrapper {
+      position: relative;
+      width: 280px;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      font-size: 11.5px;
+      color: var(--text-gray-dark);
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+      color: var(--text-gray-muted);
+    }
+
+    /* Notification Bell / Help Buttons */
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .icon-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .icon-badge {
+      position: absolute;
+      top: -4px;
+      right: -4px;
+      width: 16px;
+      height: 16px;
+      background: var(--accent-red);
+      color: white;
+      font-size: 9px;
+      font-weight: 800;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid #ffffff;
+    }
+
+    /* Host logo badge */
+    .host-logo-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 8px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+    }
+
+    .host-logo-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-white);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .host-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .host-name {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      line-height: 1.2;
+    }
+
+    .host-desc {
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+      line-height: 1;
+    }
+
+    /* ===== TRIPLE COLUMN WORKSPACE ===== */
+    .workspace-pane {
+      flex: 1;
+      display: flex;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    /* ===== COLUMN 1: CHAT LIST ===== */
+    .chat-list-column {
+      width: 320px;
+      min-width: 320px;
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      background: #ffffff;
+    }
+
+    .search-filter-row {
+      padding: 16px;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    .chat-search-wrapper {
+      position: relative;
+      flex: 1;
+    }
+
+    .chat-search-input {
+      width: 100%;
+      padding: 8px 12px 8px 32px;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      font-size: 11px;
+      color: var(--text-gray-dark);
+      background: #f8fafc;
+      transition: all 0.2s;
+    }
+
+    .chat-search-input:focus {
+      outline: none;
+      border-color: var(--accent-blue);
+      background: #ffffff;
+    }
+
+    .filter-icon-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .filter-icon-btn:hover {
+      border-color: #cbd5e1;
+      background: #f8fafc;
+      color: var(--text-gray-dark);
+    }
+
+    /* Tabs list header */
+    .chat-tabs-bar {
+      display: flex;
+      border-bottom: 1px solid var(--border-color);
+      padding: 0 16px;
+    }
+
+    .chat-tab-btn {
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-muted);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .chat-tab-btn:hover {
+      color: var(--text-gray-dark);
+    }
+
+    .chat-tab-btn.active {
+      color: var(--accent-blue);
+      border-bottom-color: var(--accent-blue);
+    }
+
+    /* Category list scroll area */
+    .chat-channels-scroll {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .category-group-header {
+      padding: 12px 16px 6px;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--text-gray-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Chat item row */
+    .chat-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      border-bottom: 1px solid #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .chat-item:hover {
+      background: #f8fafc;
+    }
+
+    .chat-item.active {
+      background: #f0f6ff;
+      border-left: 3px solid var(--accent-blue);
+      padding-left: 13px;
+    }
+
+    .chat-item-avatar-box {
+      position: relative;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: #cbd5e1;
+      color: white;
+      font-size: 12px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .status-dot-indicator {
+      position: absolute;
+      bottom: -1px;
+      right: -1px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      border: 2px solid #ffffff;
+      background: #94a3b8;
+    }
+
+    .status-dot-indicator.active-online {
+      background: var(--accent-green);
+    }
+
+    .chat-item-body {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .chat-item-top-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 2px;
+    }
+
+    .chat-item-name {
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-item-time {
+      font-size: 9px;
+      color: var(--text-gray-muted);
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    .chat-item-role {
+      font-size: 9px;
+      color: var(--text-gray-muted);
+      margin-bottom: 2px;
+      font-weight: 500;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-item-snippet {
+      font-size: 10.5px;
+      color: var(--text-gray-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .chat-item.active .chat-item-snippet {
+      color: #334155;
+    }
+
+    /* Badges & Icons indicators */
+    .chat-item-indicators {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+      margin-left: 6px;
+    }
+
+    .chat-unread-badge {
+      font-size: 9.5px;
+      font-weight: 700;
+      background: var(--accent-blue);
+      color: white;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .chat-attach-icon {
+      font-size: 10px;
+      color: var(--text-gray-muted);
+    }
+
+    /* ===== COLUMN 2: ACTIVE CHAT PANEL ===== */
+    .active-chat-column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: #f8fafc;
+      border-right: 1px solid var(--border-color);
+      height: 100%;
+    }
+
+    /* Chat Pane Header */
+    .chat-pane-header {
+      height: 60px;
+      border-bottom: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 0 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-shrink: 0;
+    }
+
+    .header-contact-details {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .header-contact-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .header-contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .header-contact-name {
+      font-size: 12.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-pill-tag {
+      font-size: 8.5px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 8px;
+      background: #f1f5f9;
+      color: var(--text-gray-muted);
+      border: 1px solid var(--border-color);
+    }
+
+    .status-pill-tag.tag-internal {
+      background: #eff6ff;
+      color: #1e40af;
+      border-color: #dbeafe;
+    }
+
+    .header-contact-role {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .header-contact-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-action-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .header-action-btn:hover {
+      border-color: #cbd5e1;
+      color: var(--text-gray-dark);
+      background: #f8fafc;
+    }
+
+    /* Message List Pane */
+    .message-timeline-pane {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Message Group Row */
+    .message-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      max-width: 75%;
+    }
+
+    .message-row-left {
+      align-self: flex-start;
+    }
+
+    .message-row-right {
+      align-self: flex-end;
+      flex-direction: row-reverse;
+      max-width: 75%;
+    }
+
+    .msg-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 10px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .msg-bubble-box {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .msg-bubble-content {
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 11.5px;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+
+    .message-row-left .msg-bubble-content {
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      border-top-left-radius: 2px;
+      border: 1px solid var(--border-color);
+    }
+
+    .message-row-right .msg-bubble-content {
+      background: var(--accent-blue-light);
+      color: #1e3a8a;
+      border-top-right-radius: 2px;
+      border: 1px solid #dbeafe;
+    }
+
+    .msg-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+      margin-top: 2px;
+      padding: 0 4px;
+    }
+
+    .message-row-right .msg-meta-row {
+      justify-content: flex-end;
+    }
+
+    .msg-status-checks {
+      font-size: 10px;
+      color: var(--accent-blue);
+    }
+
+    /* Attachment Document Card */
+    .attachment-doc-card {
+      margin-top: 8px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      width: 280px;
+      box-shadow: var(--card-shadow);
+    }
+
+    .attachment-doc-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .doc-icon-box {
+      width: 32px;
+      height: 32px;
+      border-radius: 6px;
+      background: #fef2f2;
+      color: #ef4444;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .doc-details {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .doc-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 160px;
+    }
+
+    .doc-size {
+      font-size: 9px;
+      color: var(--text-gray-muted);
+    }
+
+    .attachment-doc-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .doc-action-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 9.5px;
+    }
+
+    .doc-action-btn:hover {
+      background: #f8fafc;
+      color: var(--text-gray-dark);
+      border-color: #cbd5e1;
+    }
+
+    /* Unread messages divider */
+    .unread-messages-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 8px 0;
+      position: relative;
+    }
+
+    .unread-line-track {
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: #dbeafe;
+      z-index: 1;
+    }
+
+    .unread-badge-text {
+      background: #eff6ff;
+      color: var(--accent-blue);
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 2px 12px;
+      border-radius: 12px;
+      position: relative;
+      z-index: 2;
+      border: 1px solid #dbeafe;
+    }
+
+    /* Typing Bouncing Animation */
+    .typing-dots-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      padding: 6px 12px;
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      border-top-left-radius: 2px;
+      width: fit-content;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.02);
+    }
+
+    .bouncing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--text-gray-muted);
+      border-radius: 50%;
+      animation: bouncingDot 1.4s infinite ease-in-out both;
+    }
+
+    .bouncing-dot:nth-child(1) { animation-delay: -0.32s; }
+    .bouncing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+    @keyframes bouncingDot {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+
+    /* Bottom Input Panel */
+    .chat-bottom-input-bar {
+      border-top: 1px solid var(--border-color);
+      background: #ffffff;
+      padding: 16px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .chat-input-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #f8fafc;
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 6px 12px;
+      transition: all 0.2s;
+    }
+
+    .chat-input-row:focus-within {
+      border-color: var(--accent-blue);
+      background: #ffffff;
+      box-shadow: 0 0 0 3px var(--accent-blue-glow);
+    }
+
+    .chat-pane-textarea {
+      flex: 1;
+      border: none;
+      background: transparent;
+      resize: none;
+      outline: none;
+      font-family: inherit;
+      font-size: 11.5px;
+      color: var(--text-gray-dark);
+      padding: 4px 0;
+      height: 24px;
+      max-height: 80px;
+      line-height: 1.4;
+    }
+
+    .chat-send-circle-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent-blue);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      transition: all 0.15s;
+      flex-shrink: 0;
+    }
+
+    .chat-send-circle-btn:hover {
+      background: var(--accent-blue-hover);
+      transform: scale(1.05);
+    }
+
+    .input-actions-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .input-action-left-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-gray-muted);
+    }
+
+    .input-action-left-group i {
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+
+    .input-action-left-group i:hover {
+      color: var(--text-gray-dark);
+    }
+
+    /* ===== COLUMN 3: ABOUT / INSPECTOR PANEL ===== */
+    .profile-inspector-column {
+      width: 280px;
+      min-width: 280px;
+      background: #ffffff;
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+      padding: 20px;
+    }
+
+    .inspector-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      margin-bottom: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .inspector-header-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .inspector-avatar {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 20px;
+      margin-bottom: 12px;
+      border: 3px solid #f1f5f9;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    }
+
+    .inspector-name {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-gray-dark);
+    }
+
+    .inspector-role {
+      font-size: 9.5px;
+      color: var(--text-gray-muted);
+      margin-top: 2px;
+      font-weight: 500;
+    }
+
+    .inspector-company {
+      font-size: 9.5px;
+      color: var(--accent-blue);
+      font-weight: 600;
+      margin-top: 2px;
+    }
+
+    /* Details List Rows */
+    .inspector-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border-color);
+      margin-bottom: 20px;
+    }
+
+    .details-row {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .details-lbl {
+      font-size: 8.5px;
+      text-transform: uppercase;
+      color: var(--text-gray-muted);
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    .details-val {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-gray-dark);
+      word-break: break-all;
+    }
+
+    /* Shared Files Block */
+    .shared-files-section {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      flex: 1;
+      padding-bottom: 20px;
+    }
+
+    .shared-files-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .shared-files-title {
+      font-size: 10.5px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+    }
+
+    .shared-files-link {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--accent-blue);
+      text-decoration: none;
+    }
+
+    .shared-file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      border: 1px solid #f1f5f9;
+      background: #f8fafc;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .shared-file-item:hover {
+      border-color: #cbd5e1;
+      background: #ffffff;
+    }
+
+    .shared-file-icon-box {
+      width: 24px;
+      height: 24px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      flex-shrink: 0;
+    }
+
+    .icon-box-pdf { background: #fef2f2; color: #ef4444; }
+    .icon-box-word { background: #eff6ff; color: #3b82f6; }
+    .icon-box-excel { background: #f0fdf4; color: #22c55e; }
+
+    .shared-file-info {
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .shared-file-name {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--text-gray-dark);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .shared-file-date {
+      font-size: 8.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .inspector-action-btn {
+      width: 100%;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid var(--border-color);
+      background: #ffffff;
+      color: var(--text-gray-dark);
+      font-size: 11px;
+      font-weight: 700;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-top: auto;
+    }
+
+    .inspector-action-btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    /* ===== TOAST NOTIFICATIONS FEED ===== */
+    .toast-container {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 2000;
+    }
+
+    .toast {
+      background: #0f172a;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 11.5px;
+      font-weight: 600;
+      box-shadow: 0 10px 15px -3px rgba(0,0,0,0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      animation: slideInLeft 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+      border-left: 4px solid var(--accent-blue);
+    }
+
+    .toast-success { border-left-color: var(--accent-green); }
+    .toast-info { border-left-color: var(--accent-blue); }
+
+    /* ===== KEYFRAME ANIMATIONS ===== */
+    @keyframes slideUp {
+      from { transform: translateY(10px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    @keyframes slideInLeft {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- ===== LEFT SIDEBAR ===== -->
+    <aside class="sidebar">
+      <div class="sidebar-top">
+        <!-- Logo -->
+        <div class="brand-section">
+          <div class="logo-container">
+            <div class="logo-icon">
+              <svg width="28" height="20" viewBox="0 0 34 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="11" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
+                <circle cx="23" cy="12" r="7" stroke="#2563eb" stroke-width="3" />
+              </svg>
+            </div>
+            <span class="logo-text" contenteditable="true">Aashita Intelligence</span>
+          </div>
+          <div class="logo-tagline" contenteditable="true">Connect. Collaborate. Deliver.</div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <nav class="sidebar-menu">
+          <a class="nav-item" onclick="navigateToDashboard()">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span contenteditable="true">Dashboard</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-file-invoice"></i>
+              <span contenteditable="true">Requirements (RFQ)</span>
+            </div>
+            <i class="fa-solid fa-chevron-right" style="font-size: 9px; color: var(--text-gray-muted);"></i>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-folder"></i>
+              <span contenteditable="true">My Projects</span>
+            </div>
+          </a>
+          <a class="nav-item active" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-message"></i>
+              <span contenteditable="true">Chats</span>
+            </div>
+            <span class="nav-badge" id="sidebar-chats-badge" contenteditable="true">6</span>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-users"></i>
+              <span contenteditable="true">Suppliers</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-file-shield"></i>
+              <span contenteditable="true">Process Documents</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-compass-drafting"></i>
+              <span contenteditable="true">Drawing Integration</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-map-location-dot"></i>
+              <span contenteditable="true">Production Tracking</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-circle-check"></i>
+              <span contenteditable="true">Quality Management</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-truck-ramp-box"></i>
+              <span contenteditable="true">Deliveries & Logistics</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-hand-holding-dollar"></i>
+              <span contenteditable="true">Accounts & Finance</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-chart-column"></i>
+              <span contenteditable="true">Reports & Analytics</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-robot"></i>
+              <span contenteditable="true">AI Assistant</span>
+            </div>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-bell"></i>
+              <span contenteditable="true">Notifications</span>
+            </div>
+            <span class="nav-badge badge-blue" contenteditable="true">12</span>
+          </a>
+          <a class="nav-item" onclick="switchNav(this)">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-gear"></i>
+              <span contenteditable="true">Settings</span>
+            </div>
+          </a>
+        </nav>
+      </div>
+
+      <!-- Sidebar Profile & Org Switcher -->
+      <div class="sidebar-bottom">
+        <div class="profile-card" onclick="toggleDropdownMenu(event)">
+          <div class="profile-avatar" contenteditable="true">PS</div>
+          <div class="profile-info">
+            <div class="profile-name" id="user-display-name" contenteditable="true">Prashant Sagar</div>
+            <div class="profile-role" id="user-display-role" contenteditable="true">Engineering Manager</div>
+            <div class="profile-company" contenteditable="true">Bajaj Auto Ltd.</div>
+          </div>
+          <i class="fa-solid fa-chevron-up profile-dropdown-icon"></i>
+
+          <!-- Dropdown switcher menu -->
+          <div class="dropdown-menu" id="profile-dropdown">
+            <div class="dropdown-item selected" onclick="selectProfileOption('manager', 'Prashant Sagar', 'Engineering Manager')">Prashant (Manager)</div>
+            <div class="dropdown-item" onclick="selectProfileOption('admin', 'Neha Sharma', 'Procurement Officer')">Neha (Procurement)</div>
+            <div class="dropdown-item" onclick="selectProfileOption('head', 'Vivek Joshi', 'Plant Head Chakan')">Vivek (Plant Head)</div>
+          </div>
+        </div>
+
+        <div class="org-switcher">
+          <span class="org-switcher-label">Switch Organization</span>
+          <div class="org-dropdown-trigger" onclick="toggleOrgDropdown(event)">
+            <span id="org-selected-name" contenteditable="true">Bajaj Auto Ltd. (Plant: Chakan)</span>
+            <i class="fa-solid fa-chevron-down" style="font-size: 8px;"></i>
+          </div>
+          <div class="dropdown-menu" id="org-dropdown" style="bottom: 30px;">
+            <div class="dropdown-item selected" onclick="selectOrg('Bajaj Auto Ltd. (Plant: Chakan)')">Bajaj Auto Ltd. (Chakan)</div>
+            <div class="dropdown-item" onclick="selectOrg('Bajaj Auto Ltd. (Plant: Akurdi)')">Bajaj Auto Ltd. (Akurdi)</div>
+            <div class="dropdown-item" onclick="selectOrg('Bajaj Auto Ltd. (HQ: Pune)')">Bajaj Auto Ltd. (HQ Pune)</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <main class="main-content">
+      
+      <!-- Top header bar -->
+      <header class="top-header">
+        <div class="header-left">
+          <h1 class="welcome-title" id="chats-header-title">Individual Chats</h1>
+          <span class="welcome-desc" id="chats-header-desc" contenteditable="true">Connect and collaborate with Bajaj & Aashita team members</span>
+        </div>
+
+        <div class="header-right">
+          <!-- Search input box -->
+          <div class="search-wrapper">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" class="search-input" placeholder="Search chats, users, messages...">
+          </div>
+
+          <!-- Top-bar Actions buttons -->
+          <div class="icon-btn" onclick="alert('Help documentation opened...');"><i class="fa-regular fa-question-circle"></i></div>
+          <div class="icon-btn" onclick="alert('Notifications panel toggled...');">
+            <i class="fa-regular fa-bell"></i>
+            <span class="icon-badge">8</span>
+          </div>
+
+          <!-- Bajaj Brand Logo -->
+          <div class="host-logo-badge">
+            <div class="host-logo-icon"><i class="fa-solid fa-motorcycle"></i></div>
+            <div class="host-info">
+              <span class="host-name" contenteditable="true">BAJAJ</span>
+              <span class="host-desc" contenteditable="true">Be Ahead</span>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Three-column chats workspace -->
+      <div class="workspace-pane">
+        
+        <!-- Column 1: Chat list -->
+        <div class="chat-list-column">
+          <div class="search-filter-row">
+            <div class="chat-search-wrapper">
+              <i class="fa-solid fa-magnifying-glass search-icon" style="font-size: 11px;"></i>
+              <input type="text" class="chat-search-input" id="search-contacts-input" placeholder="Search users or chats..." oninput="handleSearchContacts()">
+            </div>
+            <div class="filter-icon-btn"><i class="fa-solid fa-sliders"></i></div>
+          </div>
+
+          <div class="chat-tabs-bar">
+            <span class="chat-tab-btn active" onclick="switchChatTab(this, 'all')">All Chats</span>
+            <span class="chat-tab-btn" onclick="switchChatTab(this, 'recent')">Recent</span>
+          </div>
+
+          <div class="chat-channels-scroll">
+            <div class="category-group-header" contenteditable="true">BAJAJ AUTO LTD. (Internal)</div>
+            <div id="chat-list-items-container">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 2: Active chat timeline -->
+        <div class="active-chat-column">
+          <!-- Active user title header -->
+          <div class="chat-pane-header">
+            <div class="header-contact-details">
+              <div class="header-contact-avatar" id="pane-header-avatar" style="background: var(--avatar-color-1);">RD</div>
+              <div class="header-contact-info">
+                <span class="header-contact-name">
+                  <span id="pane-header-name">Rohit Deshmukh</span>
+                  <span class="status-dot-indicator active-online" id="pane-header-status-dot" style="position: static; display: inline-block; width: 8px; height: 8px;"></span>
+                  <span class="status-pill-tag tag-internal" id="pane-header-type-tag">Internal</span>
+                </span>
+                <span class="header-contact-role" id="pane-header-role">Senior Design Engineer, Bajaj Auto Ltd.</span>
+              </div>
+            </div>
+
+            <div class="header-contact-actions">
+              <div class="header-action-btn" onclick="triggerCall('audio')"><i class="fa-solid fa-phone"></i></div>
+              <div class="header-action-btn" onclick="triggerCall('video')"><i class="fa-solid fa-video"></i></div>
+              <div class="header-action-btn" onclick="toggleRightPanel()"><i class="fa-solid fa-circle-info"></i></div>
+              <div class="header-action-btn" onclick="alert('Menu options toggled...');"><i class="fa-solid fa-ellipsis-vertical"></i></div>
+            </div>
+          </div>
+
+          <!-- Message scroll pane -->
+          <div class="message-timeline-pane" id="chat-messages-timeline">
+            <!-- Messages rendered dynamically via JS -->
+          </div>
+
+          <!-- Bottom Text input bar area -->
+          <div class="chat-bottom-input-bar">
+            <div class="chat-input-row">
+              <textarea class="chat-pane-textarea" id="chat-box-textbox" placeholder="Type a message..." onkeypress="handleMessageKeyPress(event)"></textarea>
+              <button class="chat-send-circle-btn" onclick="sendMessage()"><i class="fa-solid fa-paper-plane" style="font-size: 11px;"></i></button>
+            </div>
+            
+            <div class="input-actions-bar">
+              <div class="input-action-left-group">
+                <i class="fa-solid fa-paperclip" title="Attach Document" onclick="triggerAttachmentSim()"></i>
+                <i class="fa-regular fa-face-smile" title="Emojis" onclick="showToast('Emojis panel coming soon!', 'info')"></i>
+                <i class="fa-solid fa-at" title="Mention Team Member" onclick="showToast('Use @ to mention teammates', 'info')"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Column 3: About profile inspector -->
+        <div class="profile-inspector-column" id="right-about-pane">
+          <div class="inspector-title" contenteditable="true">About Rohit Deshmukh</div>
+          
+          <div class="inspector-header-card">
+            <div class="inspector-avatar" id="about-card-avatar" style="background: var(--avatar-color-1);">RD</div>
+            <div class="inspector-name" id="about-card-name" contenteditable="true">Rohit Deshmukh</div>
+            <div class="inspector-role" id="about-card-role" contenteditable="true">Senior Design Engineer</div>
+            <div class="inspector-company" id="about-card-company" contenteditable="true">Bajaj Auto Ltd.</div>
+          </div>
+
+          <div class="inspector-details-list">
+            <div class="details-row">
+              <span class="details-lbl">Department</span>
+              <span class="details-val" id="about-card-dept" contenteditable="true">Engineering - Design</span>
+            </div>
+            <div class="details-row">
+              <span class="details-lbl">Employee ID</span>
+              <span class="details-val" id="about-card-empid" contenteditable="true">BAJ-ENG-12567</span>
+            </div>
+            <div class="details-row">
+              <span class="details-lbl">Email</span>
+              <span class="details-val" id="about-card-email" contenteditable="true">rohit.deshmukh@bajajauto.co.in</span>
+            </div>
+            <div class="details-row">
+              <span class="details-lbl">Phone</span>
+              <span class="details-val" id="about-card-phone" contenteditable="true">+91 98765 43210</span>
+            </div>
+            <div class="details-row">
+              <span class="details-lbl">Reporting Manager</span>
+              <span class="details-val" id="about-card-manager" contenteditable="true">Manoj Kumar</span>
+            </div>
+          </div>
+
+          <!-- Shared files list section -->
+          <div class="shared-files-section">
+            <div class="shared-files-header">
+              <span class="shared-files-title" contenteditable="true">Shared Files</span>
+              <a href="#" class="shared-files-link" onclick="event.preventDefault(); showToast('Loading all shared documents...', 'info');">View All</a>
+            </div>
+            
+            <div id="shared-files-list-box" style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Shared files populated dynamically via JS -->
+            </div>
+          </div>
+
+          <button class="inspector-action-btn" onclick="showToast('Opening full HR profile...', 'info')">View Full Profile</button>
+        </div>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Toast notification feed -->
+  <div class="toast-container" id="toast-notifications-container"></div>
+
+  <!-- ===== JAVASCRIPT LOGIC ===== -->
+  <script>
+    // In-memory Database for all 9 chat contacts
+    const contactsDatabase = {
+      rohit: {
+        id: 'rohit',
+        name: 'Rohit Deshmukh',
+        initials: 'RD',
+        role: 'Senior Design Engineer',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Engineering - Design',
+        employeeId: 'BAJ-ENG-12567',
+        email: 'rohit.deshmukh@bajajauto.co.in',
+        phone: '+91 98765 43210',
+        manager: 'Manoj Kumar',
+        tag: 'Internal',
+        status: 'online',
+        avatarBg: 'var(--avatar-color-1)',
+        unread: 2,
+        time: '10:30 AM',
+        hasAttachment: false,
+        snippet: "Sure, I'll share the updated drawing.",
+        sharedFiles: [
+          { name: 'Engine_Bracket_RevC.pdf', date: '2 Aug 2026', size: '2.8 MB', type: 'pdf' },
+          { name: 'Design_Notes.docx', date: '1 Aug 2026', size: '540 KB', type: 'word' },
+          { name: 'DFMEA_Engine_Bracket.xlsx', date: '28 Jul 2026', size: '1.2 MB', type: 'excel' }
+        ],
+        messages: [
+          { sender: 'them', text: 'Hi Prashant,', time: '10:15 AM' },
+          { sender: 'them', text: 'Can you please share the latest drawing of the Engine Bracket (Part No. REQ-250801)?', time: '10:15 AM' },
+          { sender: 'me', text: 'Hi Rohit, Attaching the latest revision (Rev D). Please check and let me know if any changes are required.\nPart No: REQ-250801_RevD.pdf', time: '10:16 AM', status: 'read' },
+          { sender: 'me', text: 'attachment', attachmentName: 'REQ-250801_RevD.pdf', attachmentSize: '2.4 MB', time: '10:16 AM', status: 'read' },
+          { sender: 'them', text: 'Thanks Prashant. I\'ll review and revert by EOD.', time: '10:18 AM' },
+          { sender: 'unread-divider', text: '2 Unread Messages' },
+          { sender: 'them', text: 'Sure, I\'ll share the updated drawing. Please confirm once you\'ve reviewed.', time: '10:30 AM' },
+          { sender: 'typing-indicator' }
+        ]
+      },
+      anjali: {
+        id: 'anjali',
+        name: 'Anjali Mehra',
+        initials: 'AM',
+        role: 'Deputy Manager - Quality',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Plant Quality Assurance',
+        employeeId: 'BAJ-QA-43289',
+        email: 'anjali.mehra@bajajauto.co.in',
+        phone: '+91 98867 54312',
+        manager: 'Manoj Kumar',
+        tag: 'Internal',
+        status: 'online',
+        avatarBg: 'var(--avatar-color-2)',
+        unread: 1,
+        time: '10:18 AM',
+        hasAttachment: false,
+        snippet: 'Please review the inspection report.',
+        sharedFiles: [
+          { name: 'Inspection_Report_Valves.pdf', date: '5 Aug 2026', size: '3.1 MB', type: 'pdf' },
+          { name: 'Quality_QA_Checklist.docx', date: '3 Aug 2026', size: '210 KB', type: 'word' }
+        ],
+        messages: [
+          { sender: 'me', text: 'Hi Anjali, did we finish the casting inspection for the crankcase cover plate?', time: '09:00 AM', status: 'read' },
+          { sender: 'them', text: 'Yes Prashant, the laboratory has completed the non-destructive testing.', time: '09:12 AM' },
+          { sender: 'them', text: 'Please review the inspection report.', time: '10:18 AM' }
+        ]
+      },
+      vikram: {
+        id: 'vikram',
+        name: 'Vikram Patil',
+        initials: 'VP',
+        role: 'Purchase Manager',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Strategic Sourcing',
+        employeeId: 'BAJ-PUR-98712',
+        email: 'vikram.patil@bajajauto.co.in',
+        phone: '+91 97654 32109',
+        manager: 'Arun Singh',
+        tag: 'Internal',
+        status: 'offline',
+        avatarBg: 'var(--avatar-color-3)',
+        unread: 0,
+        time: '09:45 AM',
+        hasAttachment: false,
+        snippet: 'Can you confirm the delivery timeline?',
+        sharedFiles: [
+          { name: 'PO_REQ_260401_Approved.pdf', date: '31 Jul 2026', size: '1.4 MB', type: 'pdf' }
+        ],
+        messages: [
+          { sender: 'them', text: 'Hi Prashant, the Purchase Order for the input shaft has been approved by finance.', time: '09:40 AM' },
+          { sender: 'them', text: 'Can you confirm the delivery timeline?', time: '09:45 AM' }
+        ]
+      },
+      neha: {
+        id: 'neha',
+        name: 'Neha Joshi',
+        initials: 'NJ',
+        role: 'Assistant Manager - Production',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Production - Chakan',
+        employeeId: 'BAJ-PROD-26154',
+        email: 'neha.joshi@bajajauto.co.in',
+        phone: '+91 99887 76655',
+        manager: 'Arun Singh',
+        tag: 'Internal',
+        status: 'offline',
+        avatarBg: 'var(--avatar-color-4)',
+        unread: 0,
+        time: '09:30 AM',
+        hasAttachment: true,
+        snippet: 'Production plan for next week attached.',
+        sharedFiles: [
+          { name: 'Production_Schedule_W33.xlsx', date: '6 Aug 2026', size: '920 KB', type: 'excel' }
+        ],
+        messages: [
+          { sender: 'them', text: 'Good Morning Prashant. Attached is the assembly line scheduling details.', time: '09:28 AM' },
+          { sender: 'them', text: 'attachment', attachmentName: 'Production_Schedule_W33.xlsx', attachmentSize: '920 KB', time: '09:29 AM' },
+          { sender: 'them', text: 'Production plan for next week attached.', time: '09:30 AM' }
+        ]
+      },
+      saurabh: {
+        id: 'saurabh',
+        name: 'Saurabh Kulkarni',
+        initials: 'SK',
+        role: 'Manager - Tooling',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Tooling & Die Design',
+        employeeId: 'BAJ-TOOL-88123',
+        email: 'saurabh.kulkarni@bajajauto.co.in',
+        phone: '+91 96543 12389',
+        manager: 'Manoj Kumar',
+        tag: 'Internal',
+        status: 'online',
+        avatarBg: 'var(--avatar-color-5)',
+        unread: 0,
+        time: 'Yesterday',
+        hasAttachment: false,
+        snippet: 'Tool trial results look good.',
+        sharedFiles: [
+          { name: 'Tool_Trial_Report_v2.pdf', date: '30 Jul 2026', size: '4.8 MB', type: 'pdf' }
+        ],
+        messages: [
+          { sender: 'me', text: 'Saurabh, how was the first sample inspection from the casting mold?', time: 'Yesterday', status: 'read' },
+          { sender: 'them', text: 'First trial is completed. Surface finish is consistent and dimension tolerances are within limits. Tool trial results look good.', time: 'Yesterday' }
+        ]
+      },
+      priyanka: {
+        id: 'priyanka',
+        name: 'Priyanka Sharma',
+        initials: 'PS',
+        role: 'Accounts Executive',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Finance & Accounts',
+        employeeId: 'BAJ-FIN-77123',
+        email: 'priyanka.sharma@bajajauto.co.in',
+        phone: '+91 95432 10987',
+        manager: 'Manoj Kumar',
+        tag: 'Internal',
+        status: 'online',
+        avatarBg: 'var(--avatar-color-6)',
+        unread: 0,
+        time: 'Yesterday',
+        hasAttachment: false,
+        snippet: 'Invoice for REQ-250435 processed.',
+        sharedFiles: [],
+        messages: [
+          { sender: 'them', text: 'Hi Prashant, the vendor payment verification has succeeded. Invoice for REQ-250435 processed.', time: 'Yesterday' }
+        ]
+      },
+      amit: {
+        id: 'amit',
+        name: 'Amit Verma',
+        initials: 'AV',
+        role: 'Senior Manager - Supply Chain',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Supply Chain & Logistics',
+        employeeId: 'BAJ-SCM-11234',
+        email: 'amit.verma@bajajauto.co.in',
+        phone: '+91 98989 89898',
+        manager: 'Arun Singh',
+        tag: 'Internal',
+        status: 'offline',
+        avatarBg: 'var(--avatar-color-1)',
+        unread: 0,
+        time: '2 Aug',
+        hasAttachment: false,
+        snippet: 'Logistics partner has been updated.',
+        sharedFiles: [],
+        messages: [
+          { sender: 'them', text: 'Hi Prashant, the road freight carrier schedule has been synchronized with the dispatch team. Logistics partner has been updated.', time: '2 Aug' }
+        ]
+      },
+      manoj: {
+        id: 'manoj',
+        name: 'Manoj Kumar',
+        initials: 'MK',
+        role: 'DGM - Engineering',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Corporate Engineering',
+        employeeId: 'BAJ-ENG-00124',
+        email: 'manoj.kumar@bajajauto.co.in',
+        phone: '+91 99999 88888',
+        manager: 'Arun Singh',
+        tag: 'Internal',
+        status: 'online',
+        avatarBg: 'var(--avatar-color-2)',
+        unread: 0,
+        time: '1 Aug',
+        hasAttachment: false,
+        snippet: 'Weekly engineering review at 3 PM.',
+        sharedFiles: [],
+        messages: [
+          { sender: 'them', text: 'Please ensure the engine assembly layouts are exported in STEP format before our team meet. Weekly engineering review at 3 PM.', time: '1 Aug' }
+        ]
+      },
+      arun: {
+        id: 'arun',
+        name: 'Arun Singh',
+        initials: 'AS',
+        role: 'Plant Head - Chakan',
+        company: 'Bajaj Auto Ltd.',
+        dept: 'Plant Operations',
+        employeeId: 'BAJ-EXE-00001',
+        email: 'arun.singh@bajajauto.co.in',
+        phone: '+91 99000 99000',
+        manager: 'Executive Committee',
+        tag: 'Internal',
+        status: 'offline',
+        avatarBg: 'var(--avatar-color-3)',
+        unread: 0,
+        time: '1 Aug',
+        hasAttachment: false,
+        snippet: 'Please prepare the monthly report.',
+        sharedFiles: [],
+        messages: [
+          { sender: 'them', text: 'We have an executive review coming up on Tuesday. Please prepare the monthly report.', time: '1 Aug' }
+        ]
+      }
+    };
+
+    let activeContactId = 'rohit';
+    let rightPanelOpen = true;
+
+    // Initialization
+    window.addEventListener('DOMContentLoaded', () => {
+      renderChatList();
+      loadChatConversation(activeContactId);
+
+      // Outside dropdown clicks bindings
+      window.addEventListener('click', (e) => {
+        if (!e.target.closest('.profile-card')) {
+          document.getElementById('profile-dropdown').classList.remove('active');
+        }
+        if (!e.target.closest('.org-switcher')) {
+          document.getElementById('org-dropdown').classList.remove('active');
+        }
+      });
+    });
+
+    // Populate Sidebar Chat Channels list
+    function renderChatList(filterQuery = '') {
+      const container = document.getElementById('chat-list-items-container');
+      container.innerHTML = '';
+
+      Object.values(contactsDatabase).forEach(contact => {
+        // Apply search filter if query is supplied
+        if (filterQuery && !contact.name.toLowerCase().includes(filterQuery.toLowerCase()) && !contact.role.toLowerCase().includes(filterQuery.toLowerCase())) {
+          return;
+        }
+
+        const itemDiv = document.createElement('div');
+        itemDiv.className = `chat-item ${contact.id === activeContactId ? 'active' : ''}`;
+        itemDiv.onclick = () => selectContact(contact.id);
+
+        let unreadBadge = contact.unread > 0 ? `<span class="chat-unread-badge">${contact.unread}</span>` : '';
+        let attachmentIcon = contact.hasAttachment ? `<i class="fa-solid fa-paperclip chat-attach-icon"></i>` : '';
+        
+        let onlineClass = contact.status === 'online' ? 'active-online' : '';
+
+        itemDiv.innerHTML = `
+          <div class="chat-item-avatar-box" style="background: ${contact.avatarBg};">
+            ${contact.initials}
+            <span class="status-dot-indicator ${onlineClass}"></span>
+          </div>
+          <div class="chat-item-body">
+            <div class="chat-item-top-row">
+              <span class="chat-item-name" contenteditable="true">${contact.name}</span>
+              <span class="chat-item-time" contenteditable="true">${contact.time}</span>
+            </div>
+            <div class="chat-item-role" contenteditable="true">${contact.role}</div>
+            <div class="chat-item-snippet" contenteditable="true">${contact.snippet}</div>
+          </div>
+          <div class="chat-item-indicators">
+            ${attachmentIcon}
+            ${unreadBadge}
+          </div>
+        `;
+        container.appendChild(itemDiv);
+      });
+    }
+
+    // Load active conversation details into message timeline and about panel
+    function loadChatConversation(id) {
+      activeContactId = id;
+      const contact = contactsDatabase[id];
+      if (!contact) return;
+
+      // Update active contact header panel
+      document.getElementById('pane-header-avatar').innerText = contact.initials;
+      document.getElementById('pane-header-avatar').style.background = contact.avatarBg;
+      document.getElementById('pane-header-name').innerText = contact.name;
+      document.getElementById('pane-header-role').innerText = `${contact.role}, ${contact.company}`;
+      
+      const statusDot = document.getElementById('pane-header-status-dot');
+      if (contact.status === 'online') {
+        statusDot.className = 'status-dot-indicator active-online';
+      } else {
+        statusDot.className = 'status-dot-indicator';
+      }
+
+      // Update right-side "About" panel inspector
+      document.getElementById('right-about-pane').querySelector('.inspector-title').innerText = `About ${contact.name}`;
+      document.getElementById('about-card-avatar').innerText = contact.initials;
+      document.getElementById('about-card-avatar').style.background = contact.avatarBg;
+      document.getElementById('about-card-name').innerText = contact.name;
+      document.getElementById('about-card-role').innerText = contact.role;
+      document.getElementById('about-card-company').innerText = contact.company;
+      document.getElementById('about-card-dept').innerText = contact.dept;
+      document.getElementById('about-card-empid').innerText = contact.employeeId;
+      document.getElementById('about-card-email').innerText = contact.email;
+      document.getElementById('about-card-phone').innerText = contact.phone;
+      document.getElementById('about-card-manager').innerText = contact.manager;
+
+      // Render shared files
+      const filesBox = document.getElementById('shared-files-list-box');
+      filesBox.innerHTML = '';
+      if (contact.sharedFiles && contact.sharedFiles.length > 0) {
+        contact.sharedFiles.forEach(file => {
+          let iconClass = 'fa-file-pdf';
+          let boxClass = 'icon-box-pdf';
+          if (file.type === 'word') { iconClass = 'fa-file-word'; boxClass = 'icon-box-word'; }
+          if (file.type === 'excel') { iconClass = 'fa-file-excel'; boxClass = 'icon-box-excel'; }
+
+          const fileDiv = document.createElement('div');
+          fileDiv.className = 'shared-file-item';
+          fileDiv.onclick = () => showToast(`Opening shared file: ${file.name}`, 'info');
+          fileDiv.innerHTML = `
+            <div class="shared-file-icon-box ${boxClass}"><i class="fa-solid ${iconClass}"></i></div>
+            <div class="shared-file-info">
+              <span class="shared-file-name">${file.name}</span>
+              <span class="shared-file-date">${file.date}</span>
+            </div>
+          `;
+          filesBox.appendChild(fileDiv);
+        });
+      } else {
+        filesBox.innerHTML = '<span style="font-size: 10px; color: var(--text-gray-muted);">No shared files yet.</span>';
+      }
+
+      // Render messages timeline
+      const timeline = document.getElementById('chat-messages-timeline');
+      timeline.innerHTML = '';
+
+      contact.messages.forEach(msg => {
+        if (msg.sender === 'unread-divider') {
+          const div = document.createElement('div');
+          div.className = 'unread-messages-divider';
+          div.innerHTML = `<div class="unread-line-track"></div><span class="unread-badge-text">${msg.text}</span>`;
+          timeline.appendChild(div);
+          return;
+        }
+
+        if (msg.sender === 'typing-indicator') {
+          const row = document.createElement('div');
+          row.className = 'message-row message-row-left';
+          row.id = 'typing-indicator-row';
+          row.innerHTML = `
+            <div class="msg-avatar" style="background: ${contact.avatarBg};">${contact.initials}</div>
+            <div class="msg-bubble-box">
+              <div class="typing-dots-wrapper">
+                <span class="bouncing-dot"></span>
+                <span class="bouncing-dot"></span>
+                <span class="bouncing-dot"></span>
+              </div>
+            </div>
+          `;
+          timeline.appendChild(row);
+          return;
+        }
+
+        const isMe = msg.sender === 'me';
+        const row = document.createElement('div');
+        row.className = `message-row ${isMe ? 'message-row-right' : 'message-row-left'}`;
+
+        let checkmark = (isMe && msg.status === 'read') ? '<i class="fa-solid fa-check-double msg-status-checks"></i>' : '';
+
+        // If it is an attachment card message type
+        if (msg.text === 'attachment') {
+          row.innerHTML = `
+            <div class="msg-avatar" style="background: ${isMe ? 'var(--accent-blue)' : contact.avatarBg};">${isMe ? 'PS' : contact.initials}</div>
+            <div class="msg-bubble-box">
+              <div class="attachment-doc-card">
+                <div class="attachment-doc-left">
+                  <div class="doc-icon-box"><i class="fa-solid fa-file-pdf"></i></div>
+                  <div class="doc-details">
+                    <span class="doc-title">${msg.attachmentName}</span>
+                    <span class="doc-size">${msg.attachmentSize} • PDF</span>
+                  </div>
+                </div>
+                <div class="attachment-doc-actions">
+                  <div class="doc-action-btn" onclick="showToast('Downloading ${msg.attachmentName}...', 'success')"><i class="fa-solid fa-download"></i></div>
+                  <div class="doc-action-btn" onclick="showToast('Opening Document Preview...', 'info')"><i class="fa-solid fa-eye"></i></div>
+                </div>
+              </div>
+              <div class="msg-meta-row">
+                <span>${msg.time}</span>
+                ${checkmark}
+              </div>
+            </div>
+          `;
+        } else {
+          row.innerHTML = `
+            <div class="msg-avatar" style="background: ${isMe ? 'var(--accent-blue)' : contact.avatarBg};">${isMe ? 'PS' : contact.initials}</div>
+            <div class="msg-bubble-box">
+              <div class="msg-bubble-content" contenteditable="true">${msg.text.replace(/\n/g, '<br>')}</div>
+              <div class="msg-meta-row">
+                <span>${msg.time}</span>
+                ${checkmark}
+              </div>
+            </div>
+          `;
+        }
+
+        timeline.appendChild(row);
+      });
+
+      // Scroll timeline to bottom
+      setTimeout(() => {
+        timeline.scrollTop = timeline.scrollHeight;
+      }, 50);
+    }
+
+    // Click contact item from list
+    function selectContact(id) {
+      // Clear unread count on selection
+      contactsDatabase[id].unread = 0;
+      
+      // Clear sidebar total chat badge count if we've read it
+      let totalUnreads = Object.values(contactsDatabase).reduce((sum, item) => sum + item.unread, 0);
+      const sideBadge = document.getElementById('sidebar-chats-badge');
+      if (totalUnreads > 0) {
+        sideBadge.innerText = totalUnreads;
+      } else {
+        sideBadge.style.display = 'none';
+      }
+
+      loadChatConversation(id);
+      renderChatList();
+    }
+
+    // Send chat text message
+    function sendMessage() {
+      const textarea = document.getElementById('chat-box-textbox');
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      const contact = contactsDatabase[activeContactId];
+      if (!contact) return;
+
+      // Current formatted time
+      const now = new Date();
+      let hours = now.getHours();
+      let minutes = now.getMinutes();
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12;
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      const timeStr = `${hours}:${minutes} ${ampm}`;
+
+      // Insert message above typing indicator if present
+      let insertIndex = contact.messages.findIndex(m => m.sender === 'typing-indicator');
+      if (insertIndex === -1) {
+        contact.messages.push({ sender: 'me', text: text, time: timeStr, status: 'read' });
+      } else {
+        contact.messages.splice(insertIndex, 0, { sender: 'me', text: text, time: timeStr, status: 'read' });
+      }
+
+      // Update last activity text in list item
+      contact.time = timeStr;
+      contact.snippet = text;
+
+      // Reload layout
+      loadChatConversation(activeContactId);
+      renderChatList();
+
+      textarea.value = '';
+      textarea.style.height = '24px'; // Reset height
+      textarea.focus();
+
+      // Trigger automatic simulated reply
+      triggerSimulatedReply(activeContactId);
+    }
+
+    function handleMessageKeyPress(event) {
+      if (event.key === 'Enter' && !event.shiftKey) {
+        event.preventDefault();
+        sendMessage();
+      }
+    }
+
+    // Simulate drawing attachment upload
+    function triggerAttachmentSim() {
+      showToast('Simulating drawing attachment upload...', 'info');
+      setTimeout(() => {
+        const contact = contactsDatabase[activeContactId];
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        const timeStr = `${hours}:${minutes} ${ampm}`;
+
+        let insertIndex = contact.messages.findIndex(m => m.sender === 'typing-indicator');
+        const attachMsg = { 
+          sender: 'me', 
+          text: 'attachment', 
+          attachmentName: 'REQ-250801_RevE_Drawing.pdf', 
+          attachmentSize: '3.1 MB', 
+          time: timeStr, 
+          status: 'read' 
+        };
+
+        if (insertIndex === -1) {
+          contact.messages.push(attachMsg);
+        } else {
+          contact.messages.splice(insertIndex, 0, attachMsg);
+        }
+
+        contact.time = timeStr;
+        contact.snippet = 'Sent drawing attachment: REQ-250801_RevE_Drawing.pdf';
+        
+        loadChatConversation(activeContactId);
+        renderChatList();
+        showToast('Attachment uploaded successfully!', 'success');
+      }, 1000);
+    }
+
+    // Auto-chatbot answer logic simulated
+    function triggerSimulatedReply(contactId) {
+      const contact = contactsDatabase[contactId];
+      if (!contact) return;
+
+      // Add typing indicator if not present
+      let typingIndex = contact.messages.findIndex(m => m.sender === 'typing-indicator');
+      if (typingIndex === -1) {
+        contact.messages.push({ sender: 'typing-indicator' });
+        loadChatConversation(contactId);
+      }
+
+      setTimeout(() => {
+        // Remove typing indicator
+        let idx = contact.messages.findIndex(m => m.sender === 'typing-indicator');
+        if (idx !== -1) contact.messages.splice(idx, 1);
+
+        const now = new Date();
+        let hours = now.getHours();
+        let minutes = now.getMinutes();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12;
+        hours = hours ? hours : 12;
+        minutes = minutes < 10 ? '0'+minutes : minutes;
+        const timeStr = `${hours}:${minutes} ${ampm}`;
+
+        let replyText = `Thanks for the response, Prashant. Let me check with the quality team and update you.`;
+        if (contactId === 'anjali') replyText = `I have received the updated tolerances. Will check and let you know.`;
+        if (contactId === 'vikram') replyText = `Received. Let me process this schedule with purchasing departments.`;
+
+        contact.messages.push({ sender: 'them', text: replyText, time: timeStr });
+        contact.time = timeStr;
+        contact.snippet = replyText;
+
+        // If we are currently looking at this active conversation
+        if (activeContactId === contactId) {
+          loadChatConversation(contactId);
+        } else {
+          // Increment unread count if we are on a different tab
+          contact.unread += 1;
+        }
+
+        renderChatList();
+      }, 2500);
+    }
+
+    // Search contacts list logic
+    function handleSearchContacts() {
+      const query = document.getElementById('search-contacts-input').value;
+      renderChatList(query);
+    }
+
+    // Switch between all chats / recent tabs
+    function switchChatTab(btnEl, tabKey) {
+      document.querySelectorAll('.chat-tab-btn').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+      showToast(`Filter applied: ${tabKey === 'all' ? 'All Chats' : 'Recent Chats'}`, 'info');
+    }
+
+    // Switch Left Sidebar active menu items
+    function switchNav(btnEl) {
+      document.querySelectorAll('.nav-item').forEach(b => b.classList.remove('active'));
+      btnEl.classList.add('active');
+    }
+
+    // Toggle Left Profile options menu
+    function toggleDropdownMenu(e) {
+      e.stopPropagation();
+      document.getElementById('profile-dropdown').classList.toggle('active');
+      document.getElementById('org-dropdown').classList.remove('active');
+    }
+
+    // Toggle Org switcher dropdown
+    function toggleOrgDropdown(e) {
+      e.stopPropagation();
+      document.getElementById('org-dropdown').classList.toggle('active');
+      document.getElementById('profile-dropdown').classList.remove('active');
+    }
+
+    function selectProfileOption(roleKey, name, roleTitle) {
+      document.getElementById('user-display-name').innerText = name;
+      document.getElementById('user-display-role').innerText = roleTitle;
+      
+      document.querySelectorAll('#profile-dropdown .dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+        if (name.includes(item.innerText.split(' ')[0])) {
+          item.classList.add('selected');
+        }
+      });
+      showToast(`Switched active user profile to ${name}`, 'info');
+    }
+
+    function selectOrg(orgName) {
+      document.getElementById('org-selected-name').innerText = orgName;
+      document.querySelectorAll('#org-dropdown .dropdown-item').forEach(item => {
+        item.classList.remove('selected');
+        if (item.innerText.includes(orgName.split(' ')[0])) {
+          item.classList.add('selected');
+        }
+      });
+      showToast(`Switched active organization to ${orgName}`, 'info');
+    }
+
+    // Toggle Profile inspector panel
+    function toggleRightPanel() {
+      const pane = document.getElementById('right-about-pane');
+      rightPanelOpen = !rightPanelOpen;
+      pane.style.display = rightPanelOpen ? 'flex' : 'none';
+    }
+
+    // Trigger video/audio call simulation
+    function triggerCall(type) {
+      showToast(`Initiating simulated ${type} call to ${contactsDatabase[activeContactId].name}...`, 'info');
+    }
+
+    // Navigate to dashboard
+    function navigateToDashboard() {
+      window.location.href = 'supplylink_dashboard.html';
+    }
+
+    // Toast Notifications Feed manager
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-notifications-container');
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      
+      let icon = '<i class="fa-solid fa-circle-check" style="color: var(--accent-green);"></i>';
+      if (type === 'info') icon = '<i class="fa-solid fa-circle-info" style="color: var(--accent-blue);"></i>';
+      if (type === 'error') icon = '<i class="fa-solid fa-triangle-exclamation" style="color: var(--accent-red);"></i>';
+
+      toast.innerHTML = `${icon} <span>${message}</span>`;
+      container.appendChild(toast);
+
+      // Slide out and remove toast after 3.5s
+      setTimeout(() => {
+        toast.style.transition = 'all 0.3s ease';
+        toast.style.transform = 'translateX(-120%)';
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
