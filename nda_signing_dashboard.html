@@ -1753,19 +1753,19 @@
                   <!-- Two Columns for Parties -->
                   <div class="parties-grid">
                     <div class="party-card">
-                      <div class="party-name" contenteditable="true" id="p1-name">AASHITA ENTERPRISES</div>
+                      <div class="party-name" contenteditable="true" id="p1-name">BAJAJ AUTO LIMITED</div>
                       <div class="party-address" contenteditable="true" id="p1-address">
-                        Jothwara Industrial Area,<br>
-                        Jaipur, Rajasthan, India
+                        Registered Address:<br>
+                        Akurdi, Pune, Maharashtra - 411035, India
                       </div>
                       <div class="party-role-label">(Hereinafter referred to as “Disclosing Party”)</div>
                     </div>
 
                     <div class="party-card">
-                      <div class="party-name" contenteditable="true" id="p2-name">BAJAJ AUTO LIMITED</div>
+                      <div class="party-name" contenteditable="true" id="p2-name">AASHITA ENTERPRISES</div>
                       <div class="party-address" contenteditable="true" id="p2-address">
-                        Registered Address:<br>
-                        Akurdi, Pune, Maharashtra - 411035, India
+                        Jothwara Industrial Area,<br>
+                        Jaipur, Rajasthan, India
                       </div>
                       <div class="party-role-label">(Hereinafter referred to as “Receiving Party”)</div>
                     </div>
@@ -1779,40 +1779,7 @@
                   <!-- Signatures section -->
                   <div class="signatures-container">
                     <div class="signatures-grid">
-                      <!-- Column 1: Aashita -->
-                      <div class="sig-column" id="aashita-sig-col">
-                        <div class="sig-party-title">For Aashita Enterprises</div>
-
-                        <!-- Initial state is Awaiting, updates to Signed -->
-                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
-                          <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
-                          <div class="sig-awaiting-text">eSign using Aadhaar</div>
-                        </div>
-
-                        <div class="sig-box" id="aashita-signed-sig" style="display: none;">
-                          <span class="sig-badge signed">SIGNED</span>
-                          <div class="sig-handwritten" id="aashita-cursive-sig">Jasneek Singh</div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Name:</span>
-                            <span class="sig-details-val" id="aashita-val-name">Jasneek Singh</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Designation:</span>
-                            <span class="sig-details-val" id="aashita-val-des">Authorized Signatory</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Date & Time:</span>
-                            <span class="sig-details-val" id="aashita-val-date">11 May 2026 | 10:42 AM IST</span>
-                          </div>
-                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
-                            <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
-                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Column 2: Bajaj -->
+                      <!-- Column 1: Bajaj -->
                       <div class="sig-column" id="bajaj-sig-col">
                         <div class="sig-party-title">For Bajaj Auto Limited</div>
 
@@ -1844,6 +1811,39 @@
                           </div>
                           <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
                             <button class="btn-link" onclick="retractSignature('bajaj')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
+                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Column 2: Aashita -->
+                      <div class="sig-column" id="aashita-sig-col">
+                        <div class="sig-party-title">For Aashita Enterprises</div>
+
+                        <!-- Initial state is Awaiting, updates to Signed -->
+                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
+                          <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
+                          <div class="sig-awaiting-text">eSign using Aadhaar</div>
+                        </div>
+
+                        <div class="sig-box" id="aashita-signed-sig" style="display: none;">
+                          <span class="sig-badge signed">SIGNED</span>
+                          <div class="sig-handwritten" id="aashita-cursive-sig">Jasneek Singh</div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Name:</span>
+                            <span class="sig-details-val" id="aashita-val-name">Jasneek Singh</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Designation:</span>
+                            <span class="sig-details-val" id="aashita-val-des">Authorized Signatory</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Date & Time:</span>
+                            <span class="sig-details-val" id="aashita-val-date">11 May 2026 | 10:42 AM IST</span>
+                          </div>
+                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
+                            <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
                               <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
                             </button>
                           </div>
@@ -2235,9 +2235,9 @@
           <h4 style="text-align: center; margin-bottom: 14px; font-size: 12.5px; font-weight: 800; color: #0f172a;">
             MUTUAL NON-DISCLOSURE AGREEMENT
           </h4>
-          <p>This Mutual Non-Disclosure Agreement (this "Agreement") is entered into as of May 11, 2026 (the "Effective Date"), by and between Aashita Enterprises ("Disclosing Party") and Bajaj Auto Limited ("Receiving Party").</p>
+          <p>This Mutual Non-Disclosure Agreement (this "Agreement") is entered into as of May 11, 2026 (the "Effective Date"), by and between Bajaj Auto Limited ("Disclosing Party") and Aashita Enterprises ("Receiving Party").</p>
           <br>
-          <p><strong>1. Purpose.</strong> The parties wish to explore a business opportunity in connection with RFQ: BAJ-2026-0578 (the "Opportunity"). In connection with the Opportunity, Aashita Enterprises may disclose proprietary or confidential technical and business information to Bajaj Auto Limited.</p>
+          <p><strong>1. Purpose.</strong> The parties wish to explore a business opportunity in connection with RFQ: BAJ-2026-0578 (the "Opportunity"). In connection with the Opportunity, Bajaj Auto Limited may disclose proprietary or confidential technical and business information to Aashita Enterprises.</p>
           <br>
           <p><strong>2. Confidential Information.</strong> "Confidential Information" means any and all technical and non-technical information provided by either party, including but not limited to CAD drawings, process sheets, cost estimations, and supplier networks, which is marked as confidential or should reasonably be understood to be confidential.</p>
           <br>
@@ -2504,7 +2504,7 @@
     // Trigger Review Modal
     function openReviewModal() {
       if (currentSignState === 2) {
-        alert("Signature Audit:\n1. Aashita Enterprises (Signed via Aadhaar OTP on " + document.getElementById("aashita-val-date").innerText + ")\n2. Bajaj Auto Limited (Signed on " + document.getElementById("bajaj-val-date").innerText + ")\nStatus: Securely Executed");
+        alert("Signature Audit:\n1. Bajaj Auto Limited (Signed on " + document.getElementById("bajaj-val-date").innerText + ")\n2. Aashita Enterprises (Signed via Aadhaar OTP on " + document.getElementById("aashita-val-date").innerText + ")\nStatus: Securely Executed");
       } else {
         openModal("reviewNdaModal");
       }
