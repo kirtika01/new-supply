@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -51,13 +51,13 @@
       list-style: none;
     }
 
-    []:focus {
+    [contenteditable]:focus {
       outline: 2px solid #3b82f6;
       outline-offset: 1px;
       border-radius: 3px;
     }
 
-    []:hover {
+    [contenteditable]:hover {
       background: rgba(59, 130, 246, 0.06);
       border-radius: 3px;
     }
@@ -8095,7 +8095,7 @@
 
         step.addEventListener('click', function (e) {
           // Don't hijack clicks meant for editing the label text
-          if (e.target.closest('[]')) return;
+          if (e.target.closest('[contenteditable]')) return;
 
           const targetTab = this.dataset.tab;
           const tabItem = targetTab && document.querySelector('.tabs-row .tab-item[data-tab="' + targetTab + '"]');

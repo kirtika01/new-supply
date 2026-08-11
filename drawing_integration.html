@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -53,20 +53,20 @@
     }
 
     /* ===== CONTENTEDITABLE INTERACTION STYLES ===== */
-    [] {
+    [contenteditable] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    []:hover {
+    [contenteditable]:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    []:focus {
+    [contenteditable]:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -75,12 +75,12 @@
     }
 
     /* Sidebar items should have white dashed borders */
-    .sidebar []:hover {
+    .sidebar [contenteditable]:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .sidebar []:focus {
+    .sidebar [contenteditable]:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
@@ -2050,7 +2050,7 @@
     // Page load setup
     document.addEventListener("DOMContentLoaded", () => {
       // Prevent broken layout linebreaks in headings / links on contenteditable keypress
-      const editableElements = document.querySelectorAll('[]');
+      const editableElements = document.querySelectorAll('[contenteditable]');
       editableElements.forEach(el => {
         el.addEventListener('keydown', (e) => {
           if (e.key === 'Enter' && (el.tagName.startsWith('H') || el.classList.contains('menu-badge') || el.classList.contains('step-label') || el.classList.contains('completed-badge'))) {

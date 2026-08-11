@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -65,20 +65,20 @@
     }
 
     /* ===== CONTENTEDITABLE FOCUS STYLES ===== */
-    [] {
+    [contenteditable] {
       position: relative;
       cursor: pointer;
       transition: all 0.2s ease;
     }
 
-    []:hover {
+    [contenteditable]:hover {
       outline: 1px dashed rgba(37, 99, 235, 0.4);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.03);
       border-radius: 4px;
     }
 
-    []:focus {
+    [contenteditable]:focus {
       outline: 2px solid var(--accent-blue);
       outline-offset: 2px;
       background: rgba(37, 99, 235, 0.06);
@@ -86,12 +86,12 @@
       color: var(--text-gray-dark);
     }
 
-    .sidebar []:hover {
+    .sidebar [contenteditable]:hover {
       outline: 1px dashed rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
-    .sidebar []:focus {
+    .sidebar [contenteditable]:focus {
       outline: 2px solid var(--text-white);
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-white);
