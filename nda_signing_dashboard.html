@@ -1779,7 +1779,40 @@
                   <!-- Signatures section -->
                   <div class="signatures-container">
                     <div class="signatures-grid">
-                      <!-- Column 1: Bajaj -->
+                      <!-- Column 1: Aashita -->
+                      <div class="sig-column" id="aashita-sig-col">
+                        <div class="sig-party-title">For Aashita Enterprises</div>
+
+                        <!-- Initial state is Awaiting, updates to Signed -->
+                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
+                          <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
+                          <div class="sig-awaiting-text">eSign using Aadhaar</div>
+                        </div>
+
+                        <div class="sig-box" id="aashita-signed-sig" style="display: none;">
+                          <span class="sig-badge signed">SIGNED</span>
+                          <div class="sig-handwritten" id="aashita-cursive-sig">Jasneek Singh</div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Name:</span>
+                            <span class="sig-details-val" id="aashita-val-name">Jasneek Singh</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Designation:</span>
+                            <span class="sig-details-val" id="aashita-val-des">Authorized Signatory</span>
+                          </div>
+                          <div class="sig-details-row">
+                            <span class="sig-details-label">Date & Time:</span>
+                            <span class="sig-details-val" id="aashita-val-date">11 May 2026 | 10:42 AM IST</span>
+                          </div>
+                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
+                            <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
+                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Column 2: Bajaj -->
                       <div class="sig-column" id="bajaj-sig-col">
                         <div class="sig-party-title">For Bajaj Auto Limited</div>
 
@@ -1811,39 +1844,6 @@
                           </div>
                           <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
                             <button class="btn-link" onclick="retractSignature('bajaj')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
-                              <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-
-                      <!-- Column 2: Aashita -->
-                      <div class="sig-column" id="aashita-sig-col">
-                        <div class="sig-party-title">For Aashita Enterprises</div>
-
-                        <!-- Initial state is Awaiting, updates to Signed -->
-                        <div class="sig-awaiting-box" id="aashita-awaiting-sig" onclick="openEsignModal()">
-                          <i class="fa-solid fa-file-pen sig-awaiting-icon"></i>
-                          <div class="sig-awaiting-text">eSign using Aadhaar</div>
-                        </div>
-
-                        <div class="sig-box" id="aashita-signed-sig" style="display: none;">
-                          <span class="sig-badge signed">SIGNED</span>
-                          <div class="sig-handwritten" id="aashita-cursive-sig">Jasneek Singh</div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Name:</span>
-                            <span class="sig-details-val" id="aashita-val-name">Jasneek Singh</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Designation:</span>
-                            <span class="sig-details-val" id="aashita-val-des">Authorized Signatory</span>
-                          </div>
-                          <div class="sig-details-row">
-                            <span class="sig-details-label">Date & Time:</span>
-                            <span class="sig-details-val" id="aashita-val-date">11 May 2026 | 10:42 AM IST</span>
-                          </div>
-                          <div class="sig-retract-row" style="margin-top: 10px; border-top: 1px dashed #e2e8f0; padding-top: 8px; display: flex; justify-content: flex-end;">
-                            <button class="btn-link" onclick="retractSignature('aashita')" style="color: var(--accent-red); font-size: 10.5px; font-weight: 600; display: flex; align-items: center; gap: 4px; border: none; background: none; cursor: pointer; padding: 0;">
                               <i class="fa-solid fa-arrow-rotate-left"></i> Retract Signature
                             </button>
                           </div>
