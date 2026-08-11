@@ -2902,6 +2902,7 @@
       const partyName = party === 'aashita' ? 'Aashita Enterprises' : 'Bajaj Auto Limited';
       if (confirm(`Are you sure you want to retract the signature? This will reset the signing process back to the beginning.`)) {
         currentSignState = 0; // back to initial (Bajaj active)
+        isStampDutyPaid = false; // reset stamp duty payment status
         
         // Reset Aashita signature elements
         document.getElementById("aashita-val-name").innerText = "";
