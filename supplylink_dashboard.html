@@ -1715,7 +1715,20 @@
 
         <!-- Navigation Menu -->
         <nav class="sidebar-menu">
-          <a class="nav-item active" onclick="switchTab(this)">
+          <a class="nav-item active" href="supplylink_dashboard.html">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-chart-pie"></i>
+              <span>Dashboard</span>
+            </div>
+          </a>
+          <a class="nav-item" href="supplylink_chats.html">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-comments"></i>
+              <span>Chat Section</span>
+            </div>
+            <span class="nav-badge" id="sidebar-chats-badge">6</span>
+          </a>
+          <a class="nav-item" href="supplylink_360.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-invoice"></i>
               <span>Requirements (RFQ)</span>
@@ -1734,65 +1747,16 @@
               <span>Suppliers</span>
             </div>
           </a>
-          <a class="nav-item" onclick="switchTab(this)">
+          <a class="nav-item" href="process_documents.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-shield"></i>
               <span>Process Documents</span>
             </div>
           </a>
-          <a class="nav-item" onclick="switchTab(this)">
+          <a class="nav-item" href="drawing_integration.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-compass-drafting"></i>
               <span>Drawing Integration</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span>Production Tracking</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-shield-check"></i>
-              <span>Quality Management</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-truck"></i>
-              <span>Deliveries & Logistics</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-wallet"></i>
-              <span>Accounts & Finance</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-chart-line"></i>
-              <span>Reports & Analytics</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="toggleChatDrawer()">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-robot"></i>
-              <span>AI Assistant</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-bell"></i>
-              <span>Notifications</span>
-            </div>
-            <span class="nav-badge">12</span>
-          </a>
-          <a class="nav-item" onclick="switchTab(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-gear"></i>
-              <span>Settings</span>
             </div>
           </a>
         </nav>
@@ -1842,11 +1806,16 @@
 
       <!-- Top header bar -->
       <header class="top-header">
-        <div class="header-left">
-          <h2 class="welcome-title" id="dashboard-welcome-msg">Good Morning, Prashant Sagar <span
-              class="wave-hand">👋</span></h2>
-          <p class="welcome-desc">Here's what's happening with your projects and suppliers today.
-          </p>
+        <div class="header-left" style="display: flex; align-items: center; gap: 16px;">
+          <a href="#" onclick="if(document.referrer) { window.history.back(); } else { window.location.href='supplylink.html'; } return false;" class="icon-btn" title="Back" style="flex-shrink: 0; text-decoration: none;">
+            <i class="fa-solid fa-arrow-left"></i>
+          </a>
+          <div>
+            <h2 class="welcome-title" id="dashboard-welcome-msg">Good Morning, Prashant Sagar <span
+                class="wave-hand">👋</span></h2>
+            <p class="welcome-desc">Here's what's happening with your projects and suppliers today.
+            </p>
+          </div>
         </div>
 
         <div class="header-right">
@@ -1879,9 +1848,560 @@
         </div>
       </header>
 
-      <!-- The Dashboard and Chats modules now live on supplylink.html,
-           reachable from the Dashboard / Chats items in its sidebar. -->
-      <div class="dashboard-viewport"></div>
+      <!-- Scrollable dashboard viewport -->
+      <div class="dashboard-viewport">
+
+        <!-- Meta Row (Date / Customize) -->
+        <div class="viewport-top-meta">
+          <span class="date-timestamp" id="live-time-stamp" contenteditable="true">09 Aug 2026 | 10:30 AM IST</span>
+          <button class="customize-btn" onclick="alert('Loading Customization panel...')">
+            <i class="fa-solid fa-sliders"></i>
+            <span contenteditable="true">Customize</span>
+          </button>
+        </div>
+
+        <!-- Metrics cards row -->
+        <div class="metrics-row">
+          <!-- Card 1 -->
+          <div class="metric-card card-rfq" onclick="highlightMetricTab('rfq')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Active RFQs</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-file-lines"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-active-rfq" contenteditable="true">28</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">12% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="metric-card card-quote" onclick="highlightMetricTab('quote')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Pending Quotations</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-clock-rotate-left"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-pending-quote" contenteditable="true">17</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">8% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="metric-card card-progress" onclick="highlightMetricTab('progress')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Projects In Progress</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-bars-progress"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-projects-progress" contenteditable="true">36</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">15% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="metric-card card-po" onclick="highlightMetricTab('po')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">POs Issued</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-receipt"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-po-issued" contenteditable="true">22</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">10% vs last month</span>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="metric-card card-spend" onclick="highlightMetricTab('spend')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Total Spend (YTD)</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-indian-rupee-sign"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-total-spend" contenteditable="true">₹ 124.5 Cr</span>
+            </div>
+            <div class="metric-trend trend-down">
+              <i class="fa-solid fa-arrow-down"></i>
+              <span contenteditable="true">5% vs last year</span>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div class="metric-card card-savings" onclick="highlightMetricTab('savings')">
+            <div class="metric-top-info">
+              <span class="metric-label" contenteditable="true">Savings Achieved (YTD)</span>
+              <div class="metric-icon-box"><i class="fa-solid fa-piggy-bank"></i></div>
+            </div>
+            <div class="metric-value-container">
+              <span class="metric-value" id="val-savings-achieved" contenteditable="true">₹ 8.7 Cr</span>
+            </div>
+            <div class="metric-trend trend-up">
+              <i class="fa-solid fa-arrow-up"></i>
+              <span contenteditable="true">18% vs last year</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Middle widgets grid -->
+        <div class="widgets-grid">
+          <!-- Widget 1: RFQ Status Donut -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">RFQ Status Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="donut-chart-layout">
+              <div class="donut-svg-wrapper">
+                <svg id="rfq-donut-svg" width="120" height="120" viewBox="0 0 100 100"></svg>
+                <div class="donut-center-text">
+                  <div class="donut-center-num" id="rfq-chart-center-val">28</div>
+                  <div class="donut-center-lbl" contenteditable="true">Total RFQs</div>
+                </div>
+              </div>
+              <div class="donut-legend" id="rfq-legend-box"></div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to full RFQ list...');">
+              <span contenteditable="true">View All RFQs</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 2: Spend Analytics Line Chart -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" id="spend-title" contenteditable="true">Spend Analytics (YTD)</span>
+              <div class="widget-header-actions">
+                <select id="spend-period-select" onchange="handleSpendPeriodChange()" style="font-size: 11px; font-weight: 600; padding: 2px 6px; border-radius: 4px; border: 1px solid var(--border-color); background: #ffffff; color: var(--text-gray-dark); cursor: pointer; outline: none; transition: border-color 0.2s;">
+                  <option value="ytd" selected>YTD (Year to Date)</option>
+                  <option value="monthly">Monthly View</option>
+                  <option value="yearly">Yearly View</option>
+                </select>
+              </div>
+            </div>
+            <div class="spend-chart-layout">
+              <div class="chart-meta-row">
+                <div class="meta-stat">
+                  <span class="meta-lbl" contenteditable="true">Total Spend</span>
+                  <span class="meta-val" id="meta-total-spend" contenteditable="true">₹124.5 Cr</span>
+                </div>
+                <div class="meta-stat">
+                  <span class="meta-lbl" contenteditable="true">Savings Achieved</span>
+                  <span class="meta-val" id="meta-savings-achieved" contenteditable="true">₹8.7 Cr</span>
+                </div>
+              </div>
+              <div class="line-svg-wrapper">
+                <svg id="spend-line-svg" width="100%" height="130" viewBox="0 0 320 130"
+                  preserveAspectRatio="none"></svg>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link" onclick="openReportsModal()">
+              <span contenteditable="true">View Detailed Report</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 3: Top Suppliers table -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Top Suppliers by Performance</span>
+              <div class="widget-header-actions" style="display: flex; gap: 8px; align-items: center; cursor: pointer;">
+                <i class="fa-solid fa-plus-circle" onclick="openAddSupplierModal()" style="color: var(--accent-blue);" title="Add Supplier"></i>
+                <i class="fa-solid fa-trash-can" id="toggle-delete-supplier-btn" onclick="toggleSupplierDeleteMode()" style="color: var(--text-gray-muted); transition: color 0.2s;" title="Toggle Delete Mode"></i>
+              </div>
+            </div>
+            <table class="widget-table" id="suppliers-perf-table">
+              <thead>
+                <tr>
+                  <th contenteditable="true">Supplier</th>
+                  <th contenteditable="true">Quality</th>
+                  <th contenteditable="true">Delivery</th>
+                  <th contenteditable="true">Response</th>
+                  <th contenteditable="true">Overall</th>
+                  <th class="delete-col">Action</th>
+                </tr>
+              </thead>
+              <tbody id="suppliers-table-body">
+                <tr>
+                  <td contenteditable="true">Aashita Enterprises</td>
+                  <td contenteditable="true">4.8</td>
+                  <td contenteditable="true">4.7</td>
+                  <td contenteditable="true">4.9</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.8</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                  <td contenteditable="true">4.6</td>
+                  <td contenteditable="true">4.5</td>
+                  <td contenteditable="true">4.6</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.6</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">XYZ Forgings Ltd.</td>
+                  <td contenteditable="true">4.4</td>
+                  <td contenteditable="true">4.3</td>
+                  <td contenteditable="true">4.5</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.4</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">Precision Machining</td>
+                  <td contenteditable="true">4.3</td>
+                  <td contenteditable="true">4.2</td>
+                  <td contenteditable="true">4.4</td>
+                  <td><span class="rating-pill rating-green" contenteditable="true">4.3</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+                <tr>
+                  <td contenteditable="true">Reliable Industries</td>
+                  <td contenteditable="true">4.1</td>
+                  <td contenteditable="true">4.0</td>
+                  <td contenteditable="true">4.2</td>
+                  <td><span class="rating-pill rating-yellow" contenteditable="true">4.1</span></td>
+                  <td class="delete-col"><i class="fa-solid fa-trash delete-row-btn" onclick="deleteSupplierRow(this)" title="Delete Supplier"></i></td>
+                </tr>
+              </tbody>
+            </table>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Opening full Supplier Directory...');">
+              <span contenteditable="true">View Supplier Performance</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Active Projects & Upcoming Milestones Row -->
+        <div class="projects-row">
+          <!-- Active Projects Panel -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">My Active Projects</span>
+              <div class="widget-header-actions" onclick="openCreateRFQModal()"><i class="fa-solid fa-folder-plus"
+                  style="color: var(--accent-blue);"></i></div>
+            </div>
+            <div class="project-table-wrapper">
+              <table class="widget-table" id="active-projects-table">
+                <thead>
+                  <tr>
+                    <th contenteditable="true">Project / RFQ No.</th>
+                    <th contenteditable="true">Part Name</th>
+                    <th contenteditable="true">Supplier</th>
+                    <th contenteditable="true">Status</th>
+                    <th contenteditable="true">Progress</th>
+                    <th contenteditable="true">Next Milestone</th>
+                    <th contenteditable="true">Due Date</th>
+                    <th style="width: 20px;"></th>
+                  </tr>
+                </thead>
+                <tbody id="projects-table-body">
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260801')">REQ-260801</a></td>
+                    <td contenteditable="true">Engine Bracket - Casting</td>
+                    <td contenteditable="true">Aashita Enterprises</td>
+                    <td><span class="project-status-badge status-in-progress" contenteditable="true">In Progress</span>
+                    </td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-casting" style="width: 65%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">65%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">First Article Approval</td>
+                    <td contenteditable="true" style="font-weight: 700;">12 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260742')">REQ-260742</a></td>
+                    <td contenteditable="true">Gear Housing</td>
+                    <td contenteditable="true">ABC Castings Pvt. Ltd.</td>
+                    <td><span class="project-status-badge status-in-evaluation" contenteditable="true">In
+                        Evaluation</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-housing" style="width: 40%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">40%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Quotation Analysis</td>
+                    <td contenteditable="true" style="font-weight: 700;">14 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260615')">REQ-260615</a></td>
+                    <td contenteditable="true">Shift Fork</td>
+                    <td contenteditable="true">XYZ Forgings Ltd.</td>
+                    <td><span class="project-status-badge status-po-issued" contenteditable="true">PO Issued</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-fork" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">80%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Production Start</td>
+                    <td contenteditable="true" style="font-weight: 700;">10 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260512')">REQ-260512</a></td>
+                    <td contenteditable="true">Cover Plate</td>
+                    <td contenteditable="true">Precision Machining</td>
+                    <td><span class="project-status-badge status-in-progress" contenteditable="true">In Progress</span>
+                    </td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-cover" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">30%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">PPAP Submission</td>
+                    <td contenteditable="true" style="font-weight: 700;">18 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                  <tr>
+                    <td><a href="#" style="color: var(--accent-blue); font-weight: 700;" contenteditable="true"
+                        onclick="event.preventDefault(); openProjectDetails('REQ-260401')">REQ-260401</a></td>
+                    <td contenteditable="true">Shaft - Input</td>
+                    <td contenteditable="true">Reliable Industries</td>
+                    <td><span class="project-status-badge status-in-production" contenteditable="true">In
+                        Production</span></td>
+                    <td>
+                      <div class="progress-bar-container">
+                        <div class="progress-track">
+                          <div class="progress-fill progress-fill-shaft" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-pct" contenteditable="true">75%</span>
+                      </div>
+                    </td>
+                    <td contenteditable="true">Dispatch</td>
+                    <td contenteditable="true" style="font-weight: 700;">16 Aug 2026</td>
+                    <td><i class="fa-solid fa-ellipsis-vertical"
+                        style="color: var(--text-gray-muted); cursor: pointer;"></i></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Navigating to projects dashboard...');">
+              <span contenteditable="true">View All Projects</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Upcoming Milestones Panel -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Upcoming Milestones</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="milestones-list">
+              <!-- Item 1 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-blue"><i class="fa-solid fa-clipboard-check"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">First Article Approval</span>
+                    <span class="milestone-desc" contenteditable="true">Engine Bracket - Casting</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">12 Aug 2026</span>
+                  <span class="milestone-countdown countdown-blue" contenteditable="true">3 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 2 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-orange"><i class="fa-solid fa-file-signature"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">Quotation Submission Deadline</span>
+                    <span class="milestone-desc" contenteditable="true">Gear Housing</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">14 Aug 2026</span>
+                  <span class="milestone-countdown countdown-orange" contenteditable="true">5 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 3 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-purple"><i class="fa-solid fa-upload"></i></div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">PPAP Submission</span>
+                    <span class="milestone-desc" contenteditable="true">Cover Plate</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">18 Aug 2026</span>
+                  <span class="milestone-countdown countdown-purple" contenteditable="true">9 Days Left</span>
+                </div>
+              </div>
+              <!-- Item 4 -->
+              <div class="milestone-item">
+                <div class="milestone-left">
+                  <div class="milestone-icon-circle milestone-icon-green"><i class="fa-solid fa-truck-ramp-box"></i>
+                  </div>
+                  <div class="milestone-info">
+                    <span class="milestone-title" contenteditable="true">Dispatch</span>
+                    <span class="milestone-desc" contenteditable="true">Shaft - Input</span>
+                  </div>
+                </div>
+                <div class="milestone-right">
+                  <span class="milestone-date" contenteditable="true">16 Aug 2026</span>
+                  <span class="milestone-countdown countdown-green" contenteditable="true">7 Days Left</span>
+                </div>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Opening Milestones Timeline Gantt...');">
+              <span contenteditable="true">View All Milestones</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Footer widgets row (Document Overview, Production Overview, Quick Actions) -->
+        <div class="footer-row">
+          <!-- Widget 1: Document Overview -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Document Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="docs-grid">
+              <div class="doc-overview-card" onclick="alert('Viewing Drawings...')">
+                <div class="doc-icon-wrapper doc-icon-blue"><i class="fa-solid fa-compass-drafting"></i></div>
+                <span class="doc-count" id="doc-drawings-count">512</span>
+                <span class="doc-label" contenteditable="true">Drawings</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing PPAPs...')">
+                <div class="doc-icon-wrapper doc-icon-green"><i class="fa-solid fa-clipboard-check"></i></div>
+                <span class="doc-count" id="doc-ppaps-count">126</span>
+                <span class="doc-label" contenteditable="true">PPAPs</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing SOPs...')">
+                <div class="doc-icon-wrapper doc-icon-orange"><i class="fa-solid fa-book"></i></div>
+                <span class="doc-count">342</span>
+                <span class="doc-label" contenteditable="true">SOPs</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing Control Plans...')">
+                <div class="doc-icon-wrapper doc-icon-purple"><i class="fa-solid fa-route"></i></div>
+                <span class="doc-count">189</span>
+                <span class="doc-label" contenteditable="true">Control Plans</span>
+              </div>
+              <div class="doc-overview-card" onclick="alert('Viewing Inspection Standards...')">
+                <div class="doc-icon-wrapper doc-icon-teal"><i class="fa-solid fa-microscope"></i></div>
+                <span class="doc-count">390</span>
+                <span class="doc-label" contenteditable="true">Inspection Std.</span>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to Documents Hub...');">
+              <span contenteditable="true">View All Documents</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 2: Production Overview Chart -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Production Overview</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="donut-chart-layout">
+              <div class="donut-svg-wrapper">
+                <svg id="prod-donut-svg" width="120" height="120" viewBox="0 0 100 100"></svg>
+                <div class="donut-center-text">
+                  <div class="donut-center-num" id="prod-chart-center-val">36</div>
+                  <div class="donut-center-lbl" contenteditable="true">Projects</div>
+                </div>
+              </div>
+              <div class="donut-legend" id="prod-legend-box"></div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Redirecting to full Production Track...');">
+              <span contenteditable="true">View All Production</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+
+          <!-- Widget 3: Quick Actions -->
+          <div class="widget-panel">
+            <div class="widget-header">
+              <span class="widget-title" contenteditable="true">Quick Actions</span>
+              <div class="widget-header-actions"><i class="fa-solid fa-ellipsis"></i></div>
+            </div>
+            <div class="quick-actions-grid">
+              <div class="action-card" onclick="openCreateRFQModal()">
+                <i class="fa-solid fa-file-circle-plus action-icon"></i>
+                <span class="action-title" contenteditable="true">Create New RFQ</span>
+              </div>
+              <div class="action-card" onclick="openUploadDrawingModal()">
+                <i class="fa-solid fa-cloud-arrow-up action-icon"></i>
+                <span class="action-title" contenteditable="true">Upload Drawing</span>
+              </div>
+              <div class="action-card" onclick="openAddSupplierModal()">
+                <i class="fa-solid fa-user-plus action-icon"></i>
+                <span class="action-title" contenteditable="true">Add New Supplier</span>
+              </div>
+              <div class="action-card" onclick="toggleChatDrawer()">
+                <i class="fa-regular fa-comments action-icon"></i>
+                <span class="action-title" contenteditable="true">Start Chat</span>
+              </div>
+              <div class="action-card" onclick="openRequestApprovalModal()">
+                <i class="fa-solid fa-signature action-icon"></i>
+                <span class="action-title" contenteditable="true">Request Approval</span>
+              </div>
+              <div class="action-card" onclick="openReportsModal()">
+                <i class="fa-solid fa-chart-column action-icon"></i>
+                <span class="action-title" contenteditable="true">View Reports</span>
+              </div>
+            </div>
+            <a href="#" class="widget-footer-link"
+              onclick="event.preventDefault(); alert('Managing custom action links...');">
+              <span contenteditable="true">Manage Actions</span>
+              <i class="fa-solid fa-arrow-right-long"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Dashboard Footer -->
+        <footer class="dashboard-footer">
+          <span contenteditable="true">© 2026 Aashita Intelligence. All rights reserved.</span>
+          <div class="footer-links">
+            <a href="#" contenteditable="true">Privacy Policy</a>
+            <a href="#" contenteditable="true">Terms of Use</a>
+            <a href="#" contenteditable="true">Support</a>
+          </div>
+        </footer>
+
+      </div>
 
     </main>
 
@@ -2261,8 +2781,16 @@
 
     // Initializer
     window.addEventListener('DOMContentLoaded', () => {
-      // The donut / line charts moved to index.html along with the Dashboard
-      // module, so there is nothing to draw on this page any more.
+      // Draw SVG Donut charts
+      drawDonutChart('rfq-donut-svg', rfqData, 'rfq-chart-center-val');
+      drawDonutChart('prod-donut-svg', prodData, 'prod-chart-center-val');
+
+      // Draw SVG line chart
+      drawLineChart();
+
+      // Setup legend box render
+      renderDonutLegend('rfq-legend-box', rfqData);
+      renderDonutLegend('prod-legend-box', prodData);
 
       // Listen to editable profile / org switcher clicks to close on outside click
       window.addEventListener('click', (e) => {

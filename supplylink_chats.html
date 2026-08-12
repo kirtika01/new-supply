@@ -1433,13 +1433,20 @@
 
         <!-- Navigation Menu -->
         <nav class="sidebar-menu">
-          <a class="nav-item" onclick="navigateToDashboard()">
+          <a class="nav-item" href="supplylink_dashboard.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-chart-pie"></i>
               <span contenteditable="true">Dashboard</span>
             </div>
           </a>
-          <a class="nav-item" onclick="switchNav(this)">
+          <a class="nav-item active" href="supplylink_chats.html">
+            <div class="nav-item-left">
+              <i class="fa-solid fa-comments"></i>
+              <span contenteditable="true">Chat Section</span>
+            </div>
+            <span class="nav-badge" id="sidebar-chats-badge" contenteditable="true">6</span>
+          </a>
+          <a class="nav-item" href="supplylink_360.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-invoice"></i>
               <span contenteditable="true">Requirements (RFQ)</span>
@@ -1452,78 +1459,22 @@
               <span contenteditable="true">My Projects</span>
             </div>
           </a>
-          <a class="nav-item active" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-message"></i>
-              <span contenteditable="true">Chats</span>
-            </div>
-            <span class="nav-badge" id="sidebar-chats-badge" contenteditable="true">6</span>
-          </a>
           <a class="nav-item" onclick="switchNav(this)">
             <div class="nav-item-left">
               <i class="fa-solid fa-users"></i>
               <span contenteditable="true">Suppliers</span>
             </div>
           </a>
-          <a class="nav-item" onclick="switchNav(this)">
+          <a class="nav-item" href="process_documents.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-file-shield"></i>
               <span contenteditable="true">Process Documents</span>
             </div>
           </a>
-          <a class="nav-item" onclick="switchNav(this)">
+          <a class="nav-item" href="drawing_integration.html">
             <div class="nav-item-left">
               <i class="fa-solid fa-compass-drafting"></i>
               <span contenteditable="true">Drawing Integration</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-map-location-dot"></i>
-              <span contenteditable="true">Production Tracking</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-circle-check"></i>
-              <span contenteditable="true">Quality Management</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-truck-ramp-box"></i>
-              <span contenteditable="true">Deliveries & Logistics</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-hand-holding-dollar"></i>
-              <span contenteditable="true">Accounts & Finance</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-chart-column"></i>
-              <span contenteditable="true">Reports & Analytics</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-robot"></i>
-              <span contenteditable="true">AI Assistant</span>
-            </div>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-bell"></i>
-              <span contenteditable="true">Notifications</span>
-            </div>
-            <span class="nav-badge badge-blue" contenteditable="true">12</span>
-          </a>
-          <a class="nav-item" onclick="switchNav(this)">
-            <div class="nav-item-left">
-              <i class="fa-solid fa-gear"></i>
-              <span contenteditable="true">Settings</span>
             </div>
           </a>
         </nav>
