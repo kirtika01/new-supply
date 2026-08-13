@@ -417,6 +417,11 @@
       align-items: start;
     }
 
+    /* Phase 2 runs on two columns: Contact Details + Review Summary */
+    .form-grid-layout.two-col-layout {
+      grid-template-columns: 1.3fr 1.1fr;
+    }
+
     .phase-content {
       display: none;
       opacity: 0;
@@ -833,6 +838,86 @@
       font-size: 11.5px;
       color: #475569;
       font-weight: 500;
+    }
+
+    /* Business authentication toggle */
+    .auth-toggle-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-top: 4px;
+      padding: 12px 14px;
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      background: #f8fafc;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .auth-toggle-row.authenticated {
+      border-color: var(--accent-green);
+      background: var(--accent-green-light);
+    }
+
+    .auth-toggle-switch {
+      flex-shrink: 0;
+      width: 38px;
+      height: 21px;
+      border-radius: 999px;
+      background: #cbd5e1;
+      padding: 3px;
+      transition: background 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-switch {
+      background: var(--accent-green);
+    }
+
+    .auth-toggle-knob {
+      display: block;
+      width: 15px;
+      height: 15px;
+      border-radius: 50%;
+      background: #ffffff;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+      transition: transform 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-knob {
+      transform: translateX(17px);
+    }
+
+    .auth-toggle-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .auth-toggle-title {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-gray-dark);
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-title {
+      color: #047857;
+    }
+
+    .auth-toggle-desc {
+      font-size: 10.5px;
+      color: var(--text-gray-muted);
+    }
+
+    .auth-toggle-check {
+      margin-left: auto;
+      font-size: 14px;
+      color: var(--accent-green);
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+
+    .auth-toggle-row.authenticated .auth-toggle-check {
+      opacity: 1;
     }
 
     /* Categories Adder widget */
@@ -1401,11 +1486,6 @@
 
           <div class="step-node" id="step-node-5" onclick="navigateToStep(5)">
             <div class="step-circle">5</div>
-            <div class="step-label" contenteditable="true">Documents</div>
-          </div>
-
-          <div class="step-node" id="step-node-6" onclick="navigateToStep(6)">
-            <div class="step-circle">6</div>
             <div class="step-label" contenteditable="true">Review & Submit</div>
           </div>
         </nav>
@@ -1622,44 +1702,27 @@
                   <input type="text" class="form-input" id="input-website" placeholder="https://www.company.com">
                 </div>
               </div>
-
-              <!-- Address details -->
-              <div class="form-card-subtitle" contenteditable="true">Business Address</div>
-
               <div class="form-group-row">
-                <div class="form-item full-width">
-                  <label class="form-label" contenteditable="true">Registered Address <span
-                      class="required-star">*</span></label>
-                  <textarea class="form-textarea" id="input-address"
-                    placeholder="Enter complete registered address"></textarea>
+                <div class="form-item">
+                  <label class="form-label" contenteditable="true">IEC Number</label>
+                  <input type="text" class="form-input" id="input-iec" placeholder="Enter 10-digit IEC number">
+                  <span class="input-desc" contenteditable="true">10-character Import Export Code, if applicable</span>
+                </div>
+                <div class="form-item">
+                  <!-- Empty for alignment -->
                 </div>
               </div>
 
-              <div class="form-group-row">
-                <div class="form-item">
-                  <label class="form-label" contenteditable="true">Pin Code <span class="required-star">*</span></label>
-                  <input type="text" class="form-input" id="input-pincode" placeholder="Enter pin code">
+
+
+              <!-- Business authentication toggle -->
+              <div class="auth-toggle-row" id="business-auth-toggle" onclick="toggleBusinessAuth(this)">
+                <div class="auth-toggle-switch"><span class="auth-toggle-knob"></span></div>
+                <div class="auth-toggle-text">
+                  <span class="auth-toggle-title" id="business-auth-label">Authenticate business details</span>
+                  <span class="auth-toggle-desc" id="business-auth-desc">Turn on to verify GSTIN, PAN &amp; Udyam records</span>
                 </div>
-                <div class="form-item">
-                  <label class="form-label" contenteditable="true">Address Proof <span
-                      class="required-star">*</span></label>
-                  <div class="upload-box-area" onclick="triggerFileInput('file-address-proof')">
-                    <input type="file" id="file-address-proof" style="display: none;"
-                      onchange="handleFileSelect(this, 'uploaded-address-proof')">
-                    <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
-                    <span class="upload-title" contenteditable="true">Upload Address Proof</span>
-                    <span class="upload-desc" contenteditable="true">PDF, JPG, PNG (Max 5MB)</span>
-                  </div>
-                  <!-- Uploaded state -->
-                  <div class="file-uploaded-state" id="uploaded-address-proof">
-                    <div class="file-uploaded-info">
-                      <i class="fa-solid fa-circle-check"></i>
-                      <span class="file-name-span">address_proof.pdf</span>
-                    </div>
-                    <span class="remove-file-btn"
-                      onclick="removeUploadedFile('file-address-proof', 'uploaded-address-proof')">Remove</span>
-                  </div>
-                </div>
+                <i class="fa-solid fa-circle-check auth-toggle-check"></i>
               </div>
             </div>
 
@@ -1753,6 +1816,21 @@
                   </div>
                 </div>
 
+                <!-- Annual purchase -->
+                <div class="form-item full-width">
+                  <label class="form-label" contenteditable="true">Annual Purchase (Approx.) <span class="required-star">*</span></label>
+                  <div class="select-dropdown-container" id="dropdown-purchase" onclick="toggleCustomSelect(this)">
+                    <div class="select-trigger"><span class="placeholder">Select purchase range</span><i class="fa-solid fa-chevron-down"></i></div>
+                    <div class="select-menu-options">
+                      <div class="select-option" data-val="U1C">Under ₹1 Crore</div>
+                      <div class="select-option" data-val="1C5C">₹1 Crore - ₹5 Crores</div>
+                      <div class="select-option" data-val="5C20C">₹5 Crores - ₹20 Crores</div>
+                      <div class="select-option" data-val="20C100C">₹20 Crores - ₹100 Crores</div>
+                      <div class="select-option" data-val="O100C">Above ₹100 Crores</div>
+                    </div>
+                  </div>
+                </div>
+
                 <!-- Number of employees -->
                 <div class="form-item full-width">
                   <label class="form-label" contenteditable="true">Number of Employees</label>
@@ -1798,7 +1876,7 @@
           </div>
 
           <!-- PHASE 2: Step 4, 5, 6 Grid (Hidden by Default) -->
-          <div class="phase-content form-grid-layout" id="onboarding-phase-2">
+          <div class="phase-content form-grid-layout two-col-layout" id="onboarding-phase-2">
 
             <!-- COLUMN 1: Contact Details -->
             <div class="form-card">
@@ -1841,76 +1919,7 @@
                 Contact</button>
             </div>
 
-            <!-- COLUMN 2: Documents Upload Checklist -->
-            <div class="form-card">
-              <div class="form-card-title" contenteditable="true">Business Documents</div>
-              <div style="font-size: 10px; color: var(--text-gray-muted); margin-top: -12px;" contenteditable="true">
-                Upload verified copies of compliance files</div>
-
-              <div class="document-upload-grid">
-                <!-- GST Copy -->
-                <div class="form-item">
-                  <label class="form-label" contenteditable="true">GST Registration Copy <span
-                      class="required-star">*</span></label>
-                  <div class="upload-box-area" onclick="triggerFileInput('file-gst')">
-                    <input type="file" id="file-gst" style="display: none;"
-                      onchange="handleFileSelect(this, 'uploaded-gst')">
-                    <i class="fa-solid fa-file-pdf upload-icon"></i>
-                    <span class="upload-title" contenteditable="true">Upload GST Certificate</span>
-                    <span class="upload-desc" contenteditable="true">PDF (Max 5MB)</span>
-                  </div>
-                  <div class="file-uploaded-state" id="uploaded-gst">
-                    <div class="file-uploaded-info">
-                      <i class="fa-solid fa-circle-check"></i>
-                      <span class="file-name-span">gst_certificate.pdf</span>
-                    </div>
-                    <span class="remove-file-btn" onclick="removeUploadedFile('file-gst', 'uploaded-gst')">Remove</span>
-                  </div>
-                </div>
-
-                <!-- PAN Card Copy -->
-                <div class="form-item">
-                  <label class="form-label" contenteditable="true">PAN Card Copy <span
-                      class="required-star">*</span></label>
-                  <div class="upload-box-area" onclick="triggerFileInput('file-pan')">
-                    <input type="file" id="file-pan" style="display: none;"
-                      onchange="handleFileSelect(this, 'uploaded-pan')">
-                    <i class="fa-solid fa-file-pdf upload-icon"></i>
-                    <span class="upload-title" contenteditable="true">Upload PAN Copy</span>
-                    <span class="upload-desc" contenteditable="true">PDF or JPEG (Max 5MB)</span>
-                  </div>
-                  <div class="file-uploaded-state" id="uploaded-pan">
-                    <div class="file-uploaded-info">
-                      <i class="fa-solid fa-circle-check"></i>
-                      <span class="file-name-span">pan_card_copy.jpg</span>
-                    </div>
-                    <span class="remove-file-btn" onclick="removeUploadedFile('file-pan', 'uploaded-pan')">Remove</span>
-                  </div>
-                </div>
-
-                <!-- MSME Certificate -->
-                <div class="form-item">
-                  <label class="form-label" contenteditable="true">MSME Udyam Registration (Optional)</label>
-                  <div class="upload-box-area" onclick="triggerFileInput('file-msme')">
-                    <input type="file" id="file-msme" style="display: none;"
-                      onchange="handleFileSelect(this, 'uploaded-msme')">
-                    <i class="fa-solid fa-file-pdf upload-icon"></i>
-                    <span class="upload-title" contenteditable="true">Upload Udyam Certificate</span>
-                    <span class="upload-desc" contenteditable="true">PDF (Max 5MB)</span>
-                  </div>
-                  <div class="file-uploaded-state" id="uploaded-msme">
-                    <div class="file-uploaded-info">
-                      <i class="fa-solid fa-circle-check"></i>
-                      <span class="file-name-span">msme_udyam_cert.pdf</span>
-                    </div>
-                    <span class="remove-file-btn"
-                      onclick="removeUploadedFile('file-msme', 'uploaded-msme')">Remove</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- COLUMN 3: Review & Submit Summary details -->
+            <!-- COLUMN 2: Review & Submit Summary details -->
             <div style="display: flex; flex-direction: column; gap: 20px;">
               <div class="form-card">
                 <div class="form-card-title" contenteditable="true">Review Summary</div>
@@ -1952,6 +1961,10 @@
                       <div class="summary-field-row">
                         <span class="summary-field-label" contenteditable="true">Turnover:</span>
                         <span class="summary-field-value" id="summary-org-turnover">--</span>
+                      </div>
+                      <div class="summary-field-row">
+                        <span class="summary-field-label" contenteditable="true">Annual Purchase:</span>
+                        <span class="summary-field-value" id="summary-org-purchase">--</span>
                       </div>
                     </div>
                   </div>
@@ -2027,7 +2040,7 @@
   <script>
     // Global State management
     let activeStep = 1;
-    const maxSteps = 6;
+    const maxSteps = 5;
 
     // Initializer
     window.addEventListener('DOMContentLoaded', () => {
@@ -2061,6 +2074,21 @@
     // Toggle Selection Checkboxes
     function toggleCheckboxItem(element) {
       element.classList.toggle('checked');
+    }
+
+    // Business authentication toggle (Organization Info step)
+    function toggleBusinessAuth(element) {
+      const isOn = element.classList.toggle('authenticated');
+      const label = document.getElementById('business-auth-label');
+      const desc = document.getElementById('business-auth-desc');
+
+      if (isOn) {
+        label.textContent = 'Business Authentication Successful';
+        desc.textContent = 'GSTIN, PAN & Udyam records verified';
+      } else {
+        label.textContent = 'Authenticate business details';
+        desc.textContent = 'Turn on to verify GSTIN, PAN & Udyam records';
+      }
     }
 
     // Custom select dropdown overlay toggler
@@ -2237,6 +2265,10 @@
       const turnoverText = dropdownTurnover.querySelector('.select-trigger span').innerText;
       const turnoverVal = dropdownTurnover.dataset.val ? turnoverText : '--';
 
+      const dropdownPurchase = document.getElementById('dropdown-purchase');
+      const purchaseText = dropdownPurchase.querySelector('.select-trigger span').innerText;
+      const purchaseVal = dropdownPurchase.dataset.val ? purchaseText : '--';
+
       const contactVal = document.querySelector('.input-contact-name').value || '--';
 
       // Get category list
@@ -2250,6 +2282,7 @@
       document.getElementById('summary-org-gstin').innerText = gstinVal;
       document.getElementById('summary-org-type').innerText = entityVal;
       document.getElementById('summary-org-turnover').innerText = turnoverVal;
+      document.getElementById('summary-org-purchase').innerText = purchaseVal;
       document.getElementById('summary-org-categories').innerText = categoriesText;
       document.getElementById('summary-org-contact').innerText = contactVal;
     }
@@ -2278,15 +2311,15 @@
 
         btnBack.classList.add('visible');
 
-        if (step === 6) {
+        if (step === 5) {
           btnContinue.innerHTML = 'Submit Registration <i class="fa-solid fa-circle-check"></i>';
         } else {
           btnContinue.innerHTML = 'Save & Continue <i class="fa-solid fa-arrow-right"></i>';
         }
       }
 
-      // Update review summary when opening step 6
-      if (step === 6) {
+      // Update review summary when opening step 5
+      if (step === 5) {
         updateReviewSummary();
       }
     }
@@ -2310,7 +2343,7 @@
 
     // Continue Phase logic (Save & Continue button click)
     function navigateContinuePhase() {
-      if (activeStep < 6) {
+      if (activeStep < 5) {
         // Save state values, move to next logical step / phase
         if (activeStep <= 3) {
           navigateToStep(4);
@@ -2318,7 +2351,7 @@
           navigateToStep(activeStep + 1);
         }
       } else {
-        // Step 6: Validate declaration check before final submission
+        // Step 5: Validate declaration check before final submission
         const agreeCheck = document.getElementById('declaration-agree-check');
         if (!agreeCheck.classList.contains('checked')) {
           alert('Please declare that all details are authentic by checking the declaration statement.');
